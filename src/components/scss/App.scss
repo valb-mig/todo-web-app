@@ -1,0 +1,71 @@
+.App {
+
+  width:   100%;
+  height:  100vh;
+
+  .header-bar {
+
+    display:   flex;
+    font-size: 1.2em;
+    padding:   10px;
+
+    .header-item {
+
+      display: flex;
+      width:  100%;
+
+      .header-start{
+
+        display: flex;
+        justify-content: start;
+        width:  100%;
+
+        .header-logo {
+
+          text-align:    center;
+          width:         40px;
+          border-radius: 5px;
+          margin-right:  10px;
+        }
+
+        .search-bar {
+
+          display: flex;
+          
+          i{
+            text-align:    center;
+            border-radius: 5px 0px 0px 5px;
+            padding:       5px 10px 0px 10px;
+            font-size:     0.9em;
+          }
+
+          .search {
+            outline: none;
+            width:   120px;
+            padding: 0px 0px 0px 5px;
+            border:  none;
+            border-radius: 0px 5px 5px 0px;
+          }
+        }
+      }
+
+      .header-end
+      {
+        display: flex;
+        justify-content: end;
+        width:  100%;
+
+        .header-account {
+
+          text-align:    center;
+          width:         40px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .sidebar {
+    
+  }
+}
