@@ -10,6 +10,7 @@ module.exports = {
         'foreground': '#393939',
         'light-gray': '#2F2F2F',
         'gray':       '#242424',
+        'gray-alt':   '#212121',
         'dark':       '#171717',
       },
       radius: {
