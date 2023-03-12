@@ -1,0 +1,34 @@
+@import './colors/Colors.scss';
+
+.task-content {
+
+    display:       flex;
+    justify-content: center;
+    border-radius: 5px;
+    margin-top:    5px;
+    
+    .task-box {
+
+        display:          flex;
+        justify-content: center;
+        flex-direction:  column;
+
+        border-radius: 5px;
+        min-width:  100%;
+        min-height: 20px;
+        background-color: $gray-alt;
+    
+        .task {
+    
+            display:    flex;
+            width:      60vw;
+            padding:    20px;
+            margin-bottom: 5px;
+            word-break: break-all;
+            border-radius: 5px;
+            color:            $white;
+            background-color: $gray;
+        }
+    }
+}
+

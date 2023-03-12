@@ -1,0 +1,12 @@
+@import './colors/Colors.scss';
+
+.input-task {
+    
+    display: flex;
+}
+
+input::placeholder
+{
+    opacity: 0.5;
+    color: $light-foreground;
+}

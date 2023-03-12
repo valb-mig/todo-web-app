@@ -1,6 +1,100 @@
-.App {
-  width:   100%;
-  height:  100%;
+@import './colors/Colors.scss';
 
+.App {
   font-family: 'Varela Round';
+
+  width:  100%;
+  height: 100%;
+
+  .header-box {
+    display: flex;
+    width:   100%;
+  }
+
+  .main-box {
+
+    display: flex;
+
+    width:  100%;
+    height: 100vh;
+
+    .sidebar-box {
+
+      display: flex;
+
+      height:  100%;
+      width:   220px;
+    }
+  
+    .content-box {
+
+      display: flex;
+      padding-top: 48px;
+      width: 100%;
+
+      .content {
+
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px 0px 20px;
+        width: 100%;
+
+        .input-bar {
+  
+          display: flex;
+          justify-content: center;
+          width:     100%;
+          min-width: 100px;
+          height:    60px;
+        
+          .button {
+            
+              text-align:    center;
+              color:         $light-gray;
+              background-color: $gray;
+              border-radius: 5px;
+              font-size:     2.6em;
+              margin:        0px;
+              padding:       0px 10px 0px 10px;
+              cursor:        pointer;
+              
+              i{
+                border-radius: 5px;
+                background-color: transparent;
+              }
+
+              :hover {
+                color: $foreground;
+                background-color: $light-gray;
+              }
+          }
+    
+          .input {
+              
+            font-size:     15px;
+            color:         $white;
+            background-color: $gray-alt;
+            padding:       5px 5px 5px 15px;
+            border-radius: 5px;
+            margin-left:   5px;
+            width:         60vw;
+            outline:       none;
+            border:        none;
+            transition: all 0.2s ;
+          }
+
+          .error {
+            transition: all 0.2s ;
+            background-color: #361c1c;
+            border: 1px solid #502727;
+          }
+
+        }
+        .task-box {
+          
+        }
+      }
+    }
+  }
 }
+
