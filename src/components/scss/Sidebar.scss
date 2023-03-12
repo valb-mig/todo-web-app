@@ -2,45 +2,51 @@
 
 .sidebar {
     
-    display: flex;
     flex-direction: column;
-    width:   220px;
-    padding: 10px;
-    height:  100vh;
+    width:          220px;
+    height:         100%;
+    padding:        10px;
 
-    .sidebar-buttons {
-        text-align: center;
-        background-color: $gray;
-        border-radius: $radius;
-        width:      100%;
-        padding:    5px;
+    .sidebar-content
+    {
+        padding-top: 48px;
+       
+        .sidebar-buttons {
 
-        i{
-            margin-right: 4px;
+            text-align: center;
+            background-color: $gray;
+            border-radius: $radius;
+            width:      100%;
+            padding:    5px;
+
+            i{
+                margin-right: 4px;
+            }
+
+            .comming-soon {
+                color: $light-foreground;
+            }
         }
 
-        .comming-soon {
-            color: $light-foreground;
-        }
-    }
-    .sidebar-projects {
+        .sidebar-projects {
 
-        text-align: center;
-        color: $white;
-        background-color: $gray;
-        border-radius: $radius;
-        width:      100%;
-        margin-top: 10px;
-        padding:    5px;
+            text-align: center;
+            color: $white;
+            background-color: $gray;
+            border-radius: $radius;
+            width:      100%;
+            margin-top: 10px;
+            padding:    5px;
 
-        i{
-            margin-right: 4px;
-        }
+            i{
+                margin-right: 4px;
+            }
 
-        .add-button{
-            
-            .button{
-                background-color: transparent !important;
+            .add-button{
+                
+                .button{
+                    background-color: transparent !important;
+                }
             }
         }
     }

@@ -1,0 +1,29 @@
+@import './colors/Colors.scss';
+
+.input-bar {
+
+    display: flex;
+    
+    i{
+        text-align:    center;
+        border-radius: 5px 0px 0px 5px;
+        padding:       5px 10px 0px 10px;
+        font-size:     0.9em;
+    }
+
+    .input {
+        font-size: 15px;
+        color: $white;
+        outline: none;
+        width:   120px;
+        padding: 0px 0px 0px 5px;
+        border:  none;
+        border-radius: 0px 5px 5px 0px;
+    }
+}
+
+input::placeholder
+{
+    opacity: 0.5;
+    color: $light-foreground;
+}

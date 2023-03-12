@@ -1,5 +1,8 @@
 import React from 'react';
+import Input from './Input';
+
 import './scss/Header.scss';
+
 
 const Header = (props) => {
     return(
@@ -8,9 +11,11 @@ const Header = (props) => {
           <div className='header-start'>
             <div className='header-logo bg-light-gray'><i className='fa fa-window-restore '></i></div>
             
-            <div className='search-bar'>
-              <i className='fa fa-search bg-foreground'></i><input type='text' id='search' className='search bg-light-gray text-white' placeholder='Search'/>
-            </div>
+            <Input
+              id='search'
+              icon='search'
+              placeholder='Search'
+            />
 
           </div>
 
