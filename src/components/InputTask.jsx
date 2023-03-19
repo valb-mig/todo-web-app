@@ -4,13 +4,15 @@ import './scss/InputTask.scss'
 
 const InputTask = (props) => {
     return(
-        <div className='input-task'>
+        <div className='input-content'>
             <input type='text' 
                    id={props.id} 
-                   className={'input text-white '+props.class} 
+                   className={'task-input text-white '+props.class} 
                    placeholder={props.placeholder} 
                    onChange={props.onchange}
                    value={props.value}/>
+
+            {props.children}
         </div>
     );
 }

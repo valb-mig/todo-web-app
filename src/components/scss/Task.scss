@@ -2,32 +2,50 @@
 
 .task-content {
 
-    display:       flex;
+    display:         flex;
     justify-content: center;
-    border-radius: 5px;
-    margin-top:    5px;
+    overflow-y:      scroll;
+    border-radius:   5px;
+    margin-top:      5px;
+    height:          100%;
     
     .task-box {
 
-        display:          flex;
-        justify-content: center;
+        display:         flex;
         flex-direction:  column;
+        overflow-y:      scroll;
 
-        border-radius: 5px;
-        min-width:  100%;
-        min-height: 20px;
+        padding:         20px;
+        border-radius:   5px;
+        width:           100%;
         background-color: $gray-alt;
-    
+
         .task {
     
-            display:    flex;
-            width:      60vw;
-            padding:    20px;
-            margin-bottom: 5px;
-            word-break: break-all;
-            border-radius: 5px;
+            display:          flex;
+            word-break:       break-all;
+            font-size:        20px;
+            width:            100%;
+            padding:          20px;
+            margin-bottom:    5px;
+            border-radius:    5px;
+            border:           1px solid $light-gray;
             color:            $white;
             background-color: $gray;
+        }
+
+        .task-content
+        {
+            display: flex;
+            justify-content: start;
+            flex-direction: column;
+
+            .task-desc
+            {
+                display: flex;
+                font-size: 12px;
+                font-style: italic;
+            }
         }
     }
 }
