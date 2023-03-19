@@ -1,7 +1,7 @@
 # ✔️ To-do based, React aplication
 
 ## ⏱️ Current state of the project
-<img src='assets/img/project.png' width='500px'></img>
+<img src='assets/img/project.png' width='1000px'></img>
 
 # ✏️ About
 
