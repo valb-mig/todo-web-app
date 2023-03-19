@@ -9,6 +9,10 @@ const Task = (props) => {
 
             <div className='task-content'>
                 {props.title}
+    
+                <div className='task-desc'>
+                    {props.desc}
+                </div>
             </div>
 
             <div className='task-desc'></div>
