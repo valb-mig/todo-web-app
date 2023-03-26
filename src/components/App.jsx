@@ -14,7 +14,7 @@ import '../main.css';
 const App = () => {
 
   const [input, setInputValue] = useState("");
-  const [desc, setDescValue]   = useState("");
+  const [desc,  setDescValue]  = useState("");
   const [tasks, setTasks]      = useState([]);
   const [error, setError]      = useState('');
 
@@ -39,6 +39,10 @@ const App = () => {
 
   const handleChangeInput = (event) => {
     setInputValue(event.target.value);
+  };
+
+  function handleTaskRemove(task) {
+    setTasks(tasks.slice(0,task).concat(tasks.slice(task + 1)));
   };
 
   return (
@@ -78,14 +82,18 @@ const App = () => {
                   onchange={handleChangeDesc}
                 />
               </div>
-
             </div>
 
             <div className='task-content'>
               <div className='task-box'>
+
                 {tasks.map((task, index) => (
-                  <Task key={index} title={task[0]} desc={task[1]}/>
+                  <Task key={index} 
+                        title={task[0]} 
+                        desc={task[1]}
+                        remove={(e) => (handleTaskRemove(index))}/>
                 ))}
+                
               </div>
             </div>
             

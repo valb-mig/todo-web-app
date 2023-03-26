@@ -6,6 +6,7 @@
     width:          220px;
     height:         100%;
     padding:        10px;
+    border-right:   1px solid $gray;
 
     .sidebar-content
     {
@@ -15,6 +16,7 @@
 
             text-align: center;
             background-color: $gray;
+            border:     1px solid $light-gray;
             border-radius: $radius;
             width:      100%;
             padding:    5px;
@@ -33,6 +35,7 @@
             text-align: center;
             color: $white;
             background-color: $gray;
+            border:     1px solid $light-gray;
             border-radius: $radius;
             width:      100%;
             margin-top: 10px;

@@ -14,16 +14,17 @@
         display:         flex;
         flex-direction:  column;
         overflow-y:      scroll;
-
         padding:         20px;
         border-radius:   5px;
         width:           100%;
         background-color: $gray-alt;
+        border:        1px solid $gray;
 
         .task {
     
             display:          flex;
             word-break:       break-all;
+            flex-direction:   column;
             font-size:        20px;
             width:            100%;
             padding:          20px;
@@ -32,19 +33,46 @@
             border:           1px solid $light-gray;
             color:            $white;
             background-color: $gray;
-        }
 
-        .task-content
-        {
-            display: flex;
-            justify-content: start;
-            flex-direction: column;
+            .task-header {
 
-            .task-desc
-            {
+                display:         flex;
+                justify-content: end;
+                width:           100%;
+
+                .remove-button {
+
+                    cursor:        pointer;
+                    padding:       6px 10px 6px 10px;
+                    border-radius: 5px;
+                    color:         $light-foreground;
+                    background-color: $light-gray;
+                    transition: all 0.2s;                    
+                }
+
+                .remove-button:hover {
+                    background-color: $foreground;
+                }
+            }
+
+            .task-bottom {
+
                 display: flex;
-                font-size: 12px;
-                font-style: italic;
+                width:   100%;
+
+                .task-content
+                {
+                    display: flex;
+                    justify-content: start;
+                    flex-direction: column;
+        
+                    .task-desc
+                    {
+                        display: flex;
+                        font-size: 12px;
+                        font-style: italic;
+                    }
+                }
             }
         }
     }
