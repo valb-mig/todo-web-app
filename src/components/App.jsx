@@ -16,20 +16,28 @@ const App = () => {
   const [input, setInputValue] = useState("");
   const [desc,  setDescValue]  = useState("");
   const [tasks, setTasks]      = useState([]);
-  const [error, setError]      = useState('');
+  const [done,  setTaskDone]   = useState(false);
+  const [error, setError]      = useState("");
 
   const handleTaskAdd = (event) => {
     event.preventDefault();
 
-    if(input !== '' && desc !== '')
-    {
-      setError('');
-      setTasks([...tasks, [input,desc]]);
+    if(input !== '' && desc !== '') {
+      setTasks([...tasks, 
+        {
+          title:  input,
+          desc:   desc,
+          status: false
+        }
+      ]);
+
+      setError("");
       setInputValue("");
       setDescValue("");
+      setTaskDone(false);
     }
-    else{
-      setError('error');
+    else {
+      setError("error");
     }
   }
 
@@ -41,8 +49,19 @@ const App = () => {
     setInputValue(event.target.value);
   };
 
-  function handleTaskRemove(task) {
-    setTasks(tasks.slice(0,task).concat(tasks.slice(task + 1)));
+  function handleTaskRemove(id) {
+    setTasks(tasks.filter((task, i) => i !== id));
+  };
+
+  function handleTaskDone(id) {
+    setTasks(
+      tasks.map((task,i) => {
+        if(i === id) 
+        { return { ...task, status:!task.status };}
+        else 
+        { return task; }
+      })
+    );
   };
 
   return (
@@ -88,10 +107,13 @@ const App = () => {
               <div className='task-box'>
 
                 {tasks.map((task, index) => (
-                  <Task key={index} 
-                        title={task[0]} 
-                        desc={task[1]}
-                        remove={(e) => (handleTaskRemove(index))}/>
+                  <Task id={index}
+                        key={index} 
+                        title={task.title} 
+                        desc={task.desc}
+                        remove={()=>(handleTaskRemove(index))}
+                        done={()=>{handleTaskDone(index)}}
+                        class={task.status ? 'task-done' : 'not-done'}/>
                 ))}
                 
               </div>

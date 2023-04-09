@@ -66,9 +66,9 @@
           }
 
           .button:hover {
-
-            color: $foreground;
-            background-color: $light-gray;
+            border:           1px solid $green !important;
+            color:            $green;
+            background-color: $bg-green;
           }
     
           .input {
@@ -93,4 +93,3 @@
     }
   }
 }
-
