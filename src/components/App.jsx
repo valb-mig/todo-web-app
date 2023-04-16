@@ -9,15 +9,13 @@ import Task      from './Task';
 import './scss/App.scss';
 import '../main.css';
 
-
-
 const App = () => {
 
   const [input, setInputValue] = useState("");
   const [desc,  setDescValue]  = useState("");
+  const [error, setError]      = useState("");
   const [tasks, setTasks]      = useState([]);
   const [done,  setTaskDone]   = useState(false);
-  const [error, setError]      = useState("");
 
   const handleTaskAdd = (event) => {
     event.preventDefault();

@@ -2,6 +2,7 @@
 
 .button
 {
+    cursor: pointer;
     color: white;
     text-align: center;
     font-weight: bold;
@@ -9,4 +10,17 @@
     padding: 5px;
     border-radius: $radius;
     background-color: $light-gray;
+    border: 1px solid $light-gray;
+    transition: all 0.2s;
+}
+
+.selected
+{
+    background-color: $foreground;
+    border: 1px solid $light-foreground;
+}
+
+.button:hover
+{
+    background-color: $foreground;
 }
