@@ -1,0 +1,35 @@
+@import './colors/Colors.scss';
+
+.button-cancel {
+    cursor: pointer;
+    word-break: break-all;
+    justify-content: center;
+    width:   100px;
+    margin:  0px;
+    padding: 0px;
+    background-color: $light-gray;
+    border: solid 1px $foreground;
+    border-radius: $radius;
+    
+    :hover {
+        background-color: $foreground;
+        border: solid 1px $light-foreground;
+    }
+}
+
+.button-add {
+    cursor: pointer;
+    word-break: break-all;
+    justify-content: center;
+    width:   100px;
+    margin:  0px 0px 0px 5px;
+    padding: 0px;
+    background-color: $light-gray;
+    border: solid 1px $foreground;
+    border-radius: $radius;
+
+    :hover {
+        background-color: $foreground;
+        border: solid 1px $light-foreground;
+    }
+}

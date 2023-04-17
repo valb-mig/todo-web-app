@@ -10,9 +10,20 @@
   height:   100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  
-  .modal-content {
+  animation: fadeInModal 0.2s ease-in-out forwards;
 
+  @keyframes fadeInModal {
+    from {
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .modal-content {
     display:         flex;
     justify-content: center;
     position:        relative;
@@ -47,27 +58,16 @@
 
         display: flex;
         width:   100%;
-        margin: 5px 0px 0px 0px;
+        margin:  5px 0px 0px 0px;
         justify-content: end;
 
-        .button-cancel {
-          justify-content: center;
-          width:  10%;
-          margin: 0px;
-        }
 
-        .button-add {
-          justify-content: center;
-          width:  10%;
-          margin: 0px 0px 0px 5px;
-        }
       }
     }
   }
 }
 
 .close-modal {
-
   position:      absolute;
   cursor:        pointer;
   top:           190px;
