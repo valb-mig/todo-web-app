@@ -2,14 +2,14 @@ import React from 'react';
 import './scss/Modal.scss'
 
 import InputModal  from './InputModal';
-import Button from './Button';
+import ButtonModal from './ButtonModal';
 
 const Modal = (props) => {
     return(
         <div className='modal'>
             <div className='modal-content'>
-                    <div class='close-modal'>
-                        <i className='fa fa-close' onClick={props.cancelClick}></i>
+                    <div class='close-modal' onClick={props.cancelClick}>
+                        <i className='fa fa-close'></i>
                     </div>
                 <div className='modal-project'>
                     <div className='title-input'>
@@ -19,12 +19,12 @@ const Modal = (props) => {
                         />
                     </div>
                     <div className='buttons'>
-                        <Button 
+                        <ButtonModal 
                             title='Cancel'
                             class='button-cancel'
                             onclick={props.cancelClick}
                         />
-                        <Button 
+                        <ButtonModal 
                             title='Add'
                             class='button-add'
                             onclick={props.addClick}/>
