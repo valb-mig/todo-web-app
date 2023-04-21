@@ -15,28 +15,7 @@ const Sidebar = (props) => {
     let home = 'selected';
 
     const handleProjectAdd = () => {
-
-        let selected = 'selected';
-
-        let project_title;
-        let project_select;
-
-        if(projects.length === 0)
-        {
-            project_title = 'Todo';
-            project_select = selected;
-
-            setProjects ([...projects,
-                {
-                    title:  project_title,
-                    select: project_select
-                }
-            ]);
-        }
-        else
-        {
-            showModalProject();
-        }
+        showModalProject();
     }
     
     const showModalProject = () => {
@@ -47,16 +26,32 @@ const Sidebar = (props) => {
         setModalInput(event.target.value);
     }
 
-    const submitProject = () => {
+    const submitProject = (index) => {
     
         setProjects([...projects, 
             {
-                title:   modalInput,
-                select: 'selected'
+                id:     projects.length,
+                title:  modalInput,
+                select: ''
             }
         ]);
-    
+        
         showModal(false);
+    }
+
+    const handleSelectProject = (id,title) => {
+
+        props.project(projects);
+        props.selectedProject(id);
+        props.selectedProjectName(title);
+
+        projects.map((project, index) => {
+            project.select = ''
+        });
+
+        projects.filter(project => project.id === id).map((project, index) => {
+            project.select = 'selected'
+        });
     }
 
     return(
@@ -81,6 +76,7 @@ const Sidebar = (props) => {
                             title={project.title}
                             icon='list'
                             class={'todo-sidebar '+project.select}
+                            onclick={() => {handleSelectProject(index,project.title)}}
                         />
                     ))}
 

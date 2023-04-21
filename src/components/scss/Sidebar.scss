@@ -54,3 +54,8 @@
         }
     }
 }
+
+.selected {
+    background-color: $foreground;
+    border: solid 1px $light-foreground;
+}

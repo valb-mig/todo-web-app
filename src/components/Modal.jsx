@@ -5,10 +5,25 @@ import InputModal  from './InputModal';
 import ButtonModal from './ButtonModal';
 
 const Modal = (props) => {
+
+    // function indetifyButton(event){
+    //     if(event.key === "Enter"){
+    //         if (document.getElementById('input-modal') !== null)
+    //         {
+    //             if(document.getElementById('input-modal').value !== '')
+    //             {
+    //                 props.addClick();
+    //             }
+    //         }
+    //     }
+    // }
+
+    //document.addEventListener('keydown', indetifyButton);
+
     return(
         <div className='modal'>
             <div className='modal-content'>
-                    <div class='close-modal' onClick={props.cancelClick}>
+                    <div className='close-modal' onClick={props.cancelClick}>
                         <i className='fa fa-close'></i>
                     </div>
                 <div className='modal-project'>

@@ -10,11 +10,7 @@
     background-color: $light-gray;
     border: solid 1px $foreground;
     border-radius: $radius;
-    
-    :hover {
-        background-color: $foreground;
-        border: solid 1px $light-foreground;
-    }
+    transition: all 0.2s;
 }
 
 .button-add {
@@ -27,9 +23,10 @@
     background-color: $light-gray;
     border: solid 1px $foreground;
     border-radius: $radius;
+    transition: all 0.2s;
+}
 
-    :hover {
-        background-color: $foreground;
-        border: solid 1px $light-foreground;
-    }
+.button-add:hover,.button-cancel:hover {
+    background-color: $foreground;
+    border: solid 1px $light-foreground;
 }
