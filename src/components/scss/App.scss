@@ -39,6 +39,18 @@
         padding: 20px 20px 0px 20px;
         width: 100%;
 
+        .project-name{
+          display:          inline;
+          text-align:       center;
+          color:            $white;
+          background-color: $gray;
+          word-break:       break-all;
+          border-radius:    $radius;
+          font-size:        1.6em;
+          border:           1px solid $light-gray;
+          margin-bottom:    5px;
+        }
+
         .input-bar {
           
           display: flex;
@@ -47,20 +59,20 @@
         
           .button {
             
-              text-align:    center;
-              color:         $light-gray;
+              text-align:       center;
+              color:            $light-gray;
               background-color: $gray;
               border:           1px solid $light-gray;
-              border-radius: 5px;
-              font-size:     2.6em;
-              margin:        0px;
-              padding:       0px 10px 0px 10px;
-              cursor:        pointer;
+              border-radius:    $radius;
+              font-size:        2.6em;
+              margin:           0px;
+              padding:          0px 10px 0px 10px;
+              cursor:           pointer;
               
               transition: all 0.2s;
 
               i{
-                border-radius: 5px;
+                border-radius: $radius;
                 background-color: transparent;
               }
           }
@@ -77,7 +89,7 @@
             color:         $white;
             background-color: $gray-alt;
             padding:       5px 5px 5px 15px;
-            border-radius: 5px;
+            border-radius: $radius;
             margin-left:   5px;
             width:         100%;
             transition: all 0.2s ;

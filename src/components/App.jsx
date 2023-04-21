@@ -11,21 +11,30 @@ import '../main.css';
 
 const App = () => {
 
-  const [input, setInputValue] = useState("");
-  const [desc,  setDescValue]  = useState("");
-  const [error, setError]      = useState("");
-  const [tasks, setTasks]      = useState([]);
-  const [done,  setTaskDone]   = useState(false);
+  const [input,    setInputValue] = useState("");
+  const [desc,     setDescValue]  = useState("");
+  const [error,    setError]      = useState("");
+  const [tasks,    setTasks]      = useState([]);
+  const [done,     setTaskDone]   = useState(false);
+  const [projects, setProjects]   = useState([]);
+  
+  const [selectedProject, setSelectedProject]         = useState("");
+  const [selectedProjectName, setSelectedProjectName] = useState("");
+  const [taskBox, showTaskBox]                        = useState(false);
 
   const handleTaskAdd = (event) => {
     event.preventDefault();
 
     if(input !== '' && desc !== '') {
+
+      showTaskBox(true);
+
       setTasks([...tasks, 
         {
-          title:  input,
-          desc:   desc,
-          status: false
+          project: selectedProject,
+          title:   input,
+          desc:    desc,
+          status:  false
         }
       ]);
 
@@ -47,20 +56,26 @@ const App = () => {
     setInputValue(event.target.value);
   };
 
-  function handleTaskRemove(id) {
-    setTasks(tasks.filter((task, i) => i !== id));
+  function handleTaskRemove(taskId,project) {
+
+    const projectTasks = tasks.filter(task => task.project === project);
+    const currentTask  = projectTasks.filter((task,index) => index !== taskId);
+
+    setTasks([...tasks.filter(task => task.project !== project), ...currentTask]);
   };
 
-  function handleTaskDone(id) {
-    setTasks(
-      tasks.map((task,i) => {
-        if(i === id) 
-        { return { ...task, status:!task.status };}
-        else 
-        { return task; }
-      })
-    );
-  };
+  function handleTaskDone(taskId, project) {
+    
+    const projectTasks = tasks.filter(task => task.project === project);
+    const updatedTasks = projectTasks.map((task, index) => {
+      if (index === taskId) {
+        return { ...task, status: !task.status };
+      } else {
+        return task;
+      }
+    });
+    setTasks([...tasks.filter(task => task.project !== project), ...updatedTasks]);
+  }
 
   return (
     <div className="App bg-dark">
@@ -71,52 +86,62 @@ const App = () => {
 
       <div className='main-box'>
         <div className='sidebar-box'>
-          <Sidebar/>
+          <Sidebar
+            project={setProjects}
+            selectedProject={setSelectedProject}
+            selectedProjectName={setSelectedProjectName}
+          />
         </div>
 
         <div className='content-box'>
           <div className='content'>
 
-            <div className='input-bar'>
-              <Button
-                icon='plus'
-                onclick={handleTaskAdd}
-              />
-
-              <div className='input-area'>
-                <InputTask
-                  id='add-task'
-                  placeholder='Task name'
-                  class={error}
-                  value={input}
-                  onchange={handleChangeInput}
-                />
-                <InputTask
-                  id='desc-task'
-                  placeholder='Description'
-                  class={error}
-                  value={desc}
-                  onchange={handleChangeDesc}
-                />
+          {projects.length > 0 &&(
+            <>
+              <div className='project-name'>
+                <i className='fa fa-list'></i> {selectedProjectName}
               </div>
-            </div>
 
-            <div className='task-content'>
-              <div className='task-box'>
+              <div className='input-bar'>
+                <Button
+                  icon='plus'
+                  onclick={handleTaskAdd}
+                />
 
-                {tasks.map((task, index) => (
-                  <Task id={index}
-                        key={index} 
-                        title={task.title} 
-                        desc={task.desc}
-                        remove={()=>(handleTaskRemove(index))}
-                        done={()=>{handleTaskDone(index)}}
-                        class={task.status ? 'task-done' : 'not-done'}/>
-                ))}
-                
+                <div className='input-area'>
+                  <InputTask
+                    id='add-task'
+                    placeholder='Task name'
+                    class={error}
+                    value={input}
+                    onchange={handleChangeInput}
+                  />
+                  <InputTask
+                    id='desc-task'
+                    placeholder='Description'
+                    class={error}
+                    value={desc}
+                    onchange={handleChangeDesc}
+                  />
+                </div>
               </div>
-            </div>
-            
+
+                <div className='task-content'>
+                  <div className='task-box'>
+
+                    {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+                      <Task key={index} 
+                            title={task.title} 
+                            desc={task.desc}
+                            remove={()=>(handleTaskRemove(index,task.project))}
+                            done={()=>{handleTaskDone(index,task.project)}}
+                            class={task.status ? 'task-done' : 'not-done'}/>
+                    ))}
+                    
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
