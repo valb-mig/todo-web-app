@@ -98,8 +98,10 @@ const App = () => {
 
           {projects.length > 0 &&(
             <>
-              <div className='project-name'>
-                <i className='fa fa-list'></i> {selectedProjectName}
+              <div className='project-header'>
+                <div className='project-name'>
+                  <i className='fa fa-list'></i> {selectedProjectName}
+                </div>
               </div>
 
               <div className='input-bar'>
@@ -126,20 +128,23 @@ const App = () => {
                 </div>
               </div>
 
-                <div className='task-content'>
-                  <div className='task-box'>
+                {tasks.filter(task => task.project === selectedProject).length > 0 &&(
+                  <div className='task-content'>
+                    <div className='task-box'>
 
-                    {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-                      <Task key={index} 
-                            title={task.title} 
-                            desc={task.desc}
-                            remove={()=>(handleTaskRemove(index,task.project))}
-                            done={()=>{handleTaskDone(index,task.project)}}
-                            class={task.status ? 'task-done' : 'not-done'}/>
-                    ))}
-                    
+                      {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+                        <Task key={index} 
+                              title={task.title} 
+                              desc={task.desc}
+                              remove={()=>(handleTaskRemove(index,task.project))}
+                              done={()=>{handleTaskDone(index,task.project)}}
+                              class={task.status ? 'task-done' : 'not-done'}/>
+                      ))}
+                      
+                    </div>
                   </div>
-                </div>
+                )}
+                
               </>
             )}
           </div>

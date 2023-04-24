@@ -67,33 +67,33 @@ const Sidebar = (props) => {
                     <div className='comming-soon'>Comming soon</div>
                 </div>
                 <div className='sidebar-projects'>
-                    Projects
+                    <div className='projects-header'>Projects</div>
+                        <div className='projects-content'>
+                            {projects.map((project, index)=>(
+                                <Button
+                                    id={index}
+                                    key={index}
+                                    title={project.title}
+                                    icon='list'
+                                    class={'todo-sidebar '+project.select}
+                                    onclick={() => {handleSelectProject(index,project.title)}}
+                                />
+                            ))}
 
-                    {projects.map((project, index)=>(
-                        <Button
-                            id={index}
-                            key={index}
-                            title={project.title}
-                            icon='list'
-                            class={'todo-sidebar '+project.select}
-                            onclick={() => {handleSelectProject(index,project.title)}}
-                        />
-                    ))}
-
-                    {modal && (
-                        <Modal
-                            onchange={getModalInput}
-                            addClick={submitProject}
-                            cancelClick={()=>{showModal(false)}}
-                        />
-                    )}
-                    
-                    <div className='add-button'>
-                        <Button
-                            icon='plus'
-                            onclick={handleProjectAdd}
-                        />
+                            {modal && (
+                                <Modal
+                                    onchange={getModalInput}
+                                    addClick={submitProject}
+                                    cancelClick={()=>{showModal(false)}}
+                                />
+                            )}
+                        </div>
                     </div>
+                <div className='add-button'>
+                    <Button
+                        icon='plus'
+                        onclick={handleProjectAdd}
+                    />
                 </div>
             </div>
             

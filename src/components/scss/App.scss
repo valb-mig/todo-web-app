@@ -39,16 +39,25 @@
         padding: 20px 20px 0px 20px;
         width: 100%;
 
-        .project-name{
-          display:          inline;
-          text-align:       center;
-          color:            $white;
-          background-color: $gray;
-          word-break:       break-all;
-          border-radius:    $radius;
-          font-size:        1.6em;
-          border:           1px solid $light-gray;
-          margin-bottom:    5px;
+        .project-header{
+
+          display:       flex;
+          width:         100%;
+          color:         $white;
+          word-break:    break-all;
+          margin-bottom: 5px;
+
+          .project-name{
+            
+            font-size:        1.6em;
+            border-radius:    $radius;
+            background-color: $gray;
+            border:           1px solid $light-gray;
+            padding:          2px 10px 2px 10px;
+            max-height:       100px;
+            overflow-y:       scroll;
+
+          }
         }
 
         .input-bar {
