@@ -33,6 +33,7 @@
         .sidebar-projects {
 
             text-align: center;
+            word-break: break-all;
             color: $white;
             background-color: $gray;
             border:     1px solid $light-gray;
@@ -41,15 +42,20 @@
             margin-top: 10px;
             padding:    5px;
 
+            .projects-content {
+                max-height: 400px;
+                overflow-y: scroll;
+
+            }
+
             i{
                 margin-right: 4px;
             }
-
-            .add-button{
-                
-                .button{
-                    background-color: transparent;
-                }
+        }
+        .add-button{
+            .button{
+                margin: 10px 0px 0px 0px;
+                background-color: transparent;
             }
         }
     }

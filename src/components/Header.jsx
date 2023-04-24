@@ -1,5 +1,6 @@
-import React from 'react';
-import Input from './Input';
+import React  from 'react';
+import Input  from './Input';
+import Button from './Button';
 
 import './scss/Header.scss';
 
@@ -20,6 +21,11 @@ const Header = (props) => {
           </div>
 
           <div className='header-end'>
+            <Button
+                icon='sun'
+                class={'switch-color'}
+                //onclick={''}
+              />
             <div className='header-account bg-light-gray'><i className='fa fa-user'></i></div>
           </div>
         </div>
