@@ -1,5 +1,5 @@
 import React from 'react';
-import './scss/ButtonModal.scss'
+import '../scss/utils/ButtonModal.scss'
 
 const ButtonModal = (props) => {
 

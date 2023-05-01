@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import Sidebar   from './Sidebar';
-import InputTask from './InputTask';
-import Header    from './Header';
-import Button    from './Button'; 
-import Task      from './Task';
+import Sidebar   from './main/Sidebar';
+import InputTask from './utils/InputTask';
+import Header    from './main/Header';
+import Button    from './utils/Button'; 
+import Task      from './main/Task';
 
 import './scss/App.scss';
 import '../main.css';
@@ -15,19 +15,15 @@ const App = () => {
   const [desc,     setDescValue]  = useState("");
   const [error,    setError]      = useState("");
   const [tasks,    setTasks]      = useState([]);
-  const [done,     setTaskDone]   = useState(false);
   const [projects, setProjects]   = useState([]);
   
   const [selectedProject, setSelectedProject]         = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [taskBox, showTaskBox]                        = useState(false);
 
   const handleTaskAdd = (event) => {
     event.preventDefault();
 
     if(input !== '' && desc !== '') {
-
-      showTaskBox(true);
 
       setTasks([...tasks, 
         {
@@ -41,7 +37,6 @@ const App = () => {
       setError("");
       setInputValue("");
       setDescValue("");
-      setTaskDone(false);
     }
     else {
       setError("error");
@@ -78,7 +73,7 @@ const App = () => {
   }
 
   return (
-    <div className="App bg-dark">
+    <div className="App">
 
       <div className='header-box'>
         <Header/>

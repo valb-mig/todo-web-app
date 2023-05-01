@@ -1,0 +1,274 @@
+@import '../colors/Colors.scss';
+
+.header-bar {
+
+    display:   flex;
+    position:  fixed;
+    font-size: 1.2em;
+    padding:   10px;
+    width:     100%;
+    height:    48px;
+    border-bottom:   1px solid $light-gray;
+    background-color: $gray-alt;
+
+    .header-item {
+
+        display: flex;
+        width:  100%;
+
+        .header-start{
+
+            display: flex;
+            justify-content: start;
+            width:  100%;
+            color: $white;
+
+            .header-logo {
+
+                display:          flex;
+                justify-content:  start;
+                width:            200px;
+                min-width:        120px;
+                border-radius:    5px;
+                margin-right:     10px;
+                background-color: $light-gray;
+
+                .site-title {
+                    margin:  0px 5px;
+                }
+
+                p{
+                    animation: typing 2s steps(14, end);
+                    overflow: hidden;
+                }
+
+                p:nth-child(2) {
+                    animation: typingtwo 2s steps(14, end);
+
+                }
+
+                @keyframes typingtwo {
+                    0%{
+                        width: 0;
+                    }
+                    50%{
+                        width: 0;
+                    }
+                    100%{
+                        width: 50%;
+                    }
+                }
+
+                @keyframes typing {
+                    from {
+                        width: 0;
+                    }
+                }
+
+                img {
+                    padding: 2px;
+                }
+
+                .title-cursor {
+                    font-weight: bold;
+                    animation: blink .6s infinite;
+                }
+
+                @keyframes blink {
+                    to {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            .input-bar {
+
+                border: 1px solid $foreground;
+                border-radius: 7px;
+
+                i {
+                    cursor: pointer;
+                    padding: 4px 10px 0px 10px;
+                    background-color: $foreground;
+                    transition: all 0.2s;
+                }
+                i:hover {
+                    background-color: $light-foreground;
+                }
+
+                .input {
+                    color: $white;
+                    background-color: $light-gray;
+                }
+            }
+        }
+
+        .header-end
+        {
+            display: flex;
+            justify-content: end;
+            width:  100%;
+
+            .switch-color{
+
+                display: flex;
+                justify-content: center;
+                margin: 0px 5px 0px 0px;
+                padding: 3px 4px 0px 4px;
+                border-radius:    160px;
+            }
+
+            .switch-color:hover {
+                color: $orange;
+            }
+
+            .header-account {
+
+                color:            $white;
+                text-align:       center;
+                padding:          0px 5px;
+                border-radius:    160px;
+                background-color: $light-gray;
+                border: 1px solid $foreground;
+            }
+        }
+    }
+}
+
+body.light {
+
+    .header-bar {
+
+        display:   flex;
+        position:  fixed;
+        font-size: 1.2em;
+        padding:   10px;
+        width:     100%;
+        height:    48px;
+        border-bottom:   1px solid $white-light;
+        background-color: $foreground-light;
+    
+        .header-item {
+    
+            display: flex;
+            width:  100%;
+    
+            .header-start{
+    
+                display: flex;
+                justify-content: start;
+                width:  100%;
+    
+                .header-logo {
+    
+                    display:          flex;
+                    justify-content:  start;
+                    width:            200px;
+                    min-width:        120px;
+                    border-radius:    5px;
+                    margin-right:     10px;
+                    color:            $black;
+                    background-color: $light-gray-light;
+    
+                    .site-title {
+                        margin:  0px 5px;
+                    }
+    
+                    p{
+                        animation: typing 2s steps(14, end);
+                        overflow: hidden;
+                    }
+    
+                    p:nth-child(2) {
+                        animation: typingtwo 2s steps(14, end);
+    
+                    }
+    
+                    @keyframes typingtwo {
+                        0%{
+                            width: 0;
+                        }
+                        50%{
+                            width: 0;
+                        }
+                        100%{
+                            width: 50%;
+                        }
+                    }
+    
+                    @keyframes typing {
+                        from {
+                            width: 0;
+                        }
+                    }
+    
+                    img {
+                        padding: 2px;
+                    }
+    
+                    .title-cursor {
+                        font-weight: bold;
+                        animation: blink .6s infinite;
+                    }
+    
+                    @keyframes blink {
+                        to {
+                            opacity: 0;
+                        }
+                    }
+                }
+    
+                .input-bar {
+    
+                    border: 1px solid $foreground-light;
+                    border-radius: 7px;
+    
+                    i{
+                        cursor: pointer;
+                        padding: 4px 10px 0px 10px;
+                        background-color: $light-gray-light;
+                        transition: all 0.2s;
+                    }
+                    i:hover{
+                        background-color: $light-foreground-light;
+                    }
+    
+                    .input {
+                        color: $black;
+                        background-color: $gray-light;
+                    }
+                }
+            }
+    
+            .header-end
+            {
+                display: flex;
+                justify-content: end;
+                width:  100%;
+    
+                .switch-color{
+                    
+                    display: flex;
+                    justify-content: center;
+                    margin: 0px 5px 0px 0px;
+                    padding: 3px 4px 0px 4px;
+                    border-radius:    160px;
+                }
+    
+                .switch-color:hover {
+                    color: $dark-purple;
+                }
+
+                .header-account {
+                    
+                    color:            $black;
+                    text-align:       center;
+                    padding:          0px 5px;
+                    border-radius:    160px;
+                    background-color: $light-gray-light;
+                    border: 1px solid $light-foreground-light;
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './scss/Input.scss'
+import '../scss/utils/Input.scss'
 
 const Input = (props) => {
     return(

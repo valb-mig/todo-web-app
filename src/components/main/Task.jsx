@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './scss/Task.scss';
+import '../scss/main/Task.scss';
 
 const Task = (props) => {
     return(
