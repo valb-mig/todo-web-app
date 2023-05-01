@@ -1,0 +1,184 @@
+@import '../colors/Colors.scss';
+
+.modal {
+
+  position: fixed;
+  z-index:  9999;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: fadeInModal 0.2s ease-in-out forwards;
+
+  @keyframes fadeInModal {
+    from {
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .modal-content {
+    display:         flex;
+    justify-content: center;
+    position:        relative;
+
+    .modal-project {
+      padding:          10px;
+      border:           1px solid $gray;
+      border-radius:    $radius;
+      width:            60%;
+      margin-top:       200px;
+      background-color: $gray-alt;
+
+      .title-input {
+
+        .input-content{
+
+          border-radius:    $radius;
+          background-color: $gray;
+
+          .modal-input{
+            width:   100%;
+            padding: 5px;
+            border:  1px solid $light-gray;
+            border-radius: $radius;
+            background-color: $gray;
+          }
+        }
+      }
+
+      .buttons {
+
+        display: flex;
+        width:   100%;
+        margin:  10px 0px 0px 0px;
+        justify-content: end;
+
+
+      }
+    }
+  }
+}
+
+.close-modal {
+  position:      absolute;
+  cursor:        pointer;
+  top:           190px;
+  right:         19vw;
+  padding:       5px 12px 5px 12px;
+  border-radius: 160px;
+  background-color: $red;
+  transition: all 0.2s;
+  color: $white;
+
+  i{
+    margin-right: 0px !important;
+  }
+}
+
+.close-modal:hover {
+  transform: scale(1.2);
+}
+
+.close-modal:active {
+  background-color: $light-red;
+}
+
+body.light {
+
+  .modal {
+
+    position: fixed;
+    z-index:  9999;
+    left:     0;
+    top:      0;
+    width:    100%;
+    height:   100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: fadeInModal 0.2s ease-in-out forwards;
+
+    @keyframes fadeInModal {
+      from {
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0);
+      }
+      to {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    .modal-content {
+      display:         flex;
+      justify-content: center;
+      position:        relative;
+
+      .modal-project {
+        padding:          10px;
+        border:           1px solid $light-foreground-light;
+        border-radius:    $radius;
+        width:            60%;
+        margin-top:       200px;
+        background-color: $foreground-light;
+
+        .title-input {
+
+          .input-content{
+
+            border-radius:    $radius;
+            background-color: $light-gray-light;
+
+            .modal-input{
+              width:   100%;
+              padding: 5px;
+              border:  1px solid $light-foreground-light;
+              border-radius: $radius;
+              background-color: $light-gray-light;
+            }
+          }
+        }
+
+        .buttons {
+
+          display: flex;
+          width:   100%;
+          margin:  10px 0px 0px 0px;
+          justify-content: end;
+
+
+        }
+      }
+    }
+  }
+
+  .close-modal {
+    position:      absolute;
+    cursor:        pointer;
+    top:           190px;
+    right:         19vw;
+    padding:       5px 12px 5px 12px;
+    border-radius: 160px;
+    background-color: $red;
+    transition: all 0.2s;
+    color: $white;
+
+    i{
+      margin-right: 0px !important;
+    }
+  }
+
+  .close-modal:hover {
+    transform: scale(1.2);
+  }
+
+  .close-modal:active {
+    background-color: $light-red;
+  }
+}

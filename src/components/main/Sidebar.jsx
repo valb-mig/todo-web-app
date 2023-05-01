@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
-import Button from './Button';
+import Button from '../utils/Button';
 import Modal  from './Modal';
 
-import './scss/Sidebar.scss';
+import '../scss/main/Sidebar.scss';
 
 const Sidebar = (props) => {
 
     const [projects,   setProjects]   = useState([]);   
-    const [title,      setTitleInput] = useState('');
     const [modal,      showModal]     = useState(false);
     const [modalInput, setModalInput] = useState('');
 
@@ -55,7 +54,7 @@ const Sidebar = (props) => {
     }
 
     return(
-        <div className='sidebar bg-gray-alt'>
+        <div className='sidebar'>
 
             <div className='sidebar-content'>
                 <div className='sidebar-buttons'>

@@ -1,17 +1,19 @@
 import React from 'react';
 
-import './scss/InputModal.scss'
+import '../scss/utils/InputTask.scss'
 
-const InputModal = (props) => {
+const InputTask = (props) => {
     return(
         <div className='input-content'>
             <input type='text' 
                    id={props.id} 
-                   className={'modal-input '+props.class} 
+                   className={'task-input '+props.class} 
                    placeholder={props.placeholder} 
                    onChange={props.onchange}
                    value={props.value}/>
+
+            {props.children}
         </div>
     );
 }
-export default InputModal;
+export default InputTask;
