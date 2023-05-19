@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Button from '../utils/Button';
+import { faHouseChimney,
+          faList, 
+          faPlus } from '@fortawesome/free-solid-svg-icons';
+
+import Button from '../Button';
 import Modal  from './Modal';
 
-import '../scss/main/Sidebar.scss';
+import '../styles/Sidebar.scss';
 
 const Sidebar = (props) => {
 
@@ -60,7 +65,7 @@ const Sidebar = (props) => {
                 <div className='sidebar-buttons'>
                     <Button
                         title='Home'
-                        icon='home'
+                        icon={faHouseChimney}
                         class={'todo-sidebar '+home}
                     />
                     <div className='comming-soon'>Comming soon</div>
@@ -73,7 +78,7 @@ const Sidebar = (props) => {
                                     id={index}
                                     key={index}
                                     title={project.title}
-                                    icon='list'
+                                    icon={faList}
                                     class={'todo-sidebar '+project.select}
                                     onclick={() => {handleSelectProject(index,project.title)}}
                                 />
@@ -90,7 +95,7 @@ const Sidebar = (props) => {
                     </div>
                 <div className='add-button'>
                     <Button
-                        icon='plus'
+                        icon={faPlus}
                         onclick={handleProjectAdd}
                     />
                 </div>

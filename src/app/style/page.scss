@@ -1,0 +1,176 @@
+@import '../../components/styles/colors/Colors.scss';
+
+.App {
+  
+  background-color: $black;
+
+  width:  100%;
+  height: 100%;
+
+  .header-box {
+    display: flex;
+    width:   100%;
+  }
+
+  .main-box {
+
+    display: flex;
+
+    width:  100%;
+    height: 100vh;
+    max-height: 100vh;
+
+    .sidebar-box {
+
+      display: flex;
+      height:  100%;
+      width:   220px;
+    }
+  
+    .content-box {
+
+      display: flex;
+      padding-top: 48px;
+      width: 100%;
+
+      .content {
+
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px 0px 20px;
+        width: 100%;
+
+        .project-header{
+
+          display:       flex;
+          width:         100%;
+          color:         $white;
+          word-break:    break-all;
+          margin-bottom: 5px;
+
+          .project-name{
+            
+            font-size:        1.6em;
+            border-radius:    $radius;
+            background-color: $gray;
+            border:           1px solid $light-gray;
+            padding:          2px 10px 2px 10px;
+            max-height:       100px;
+            overflow-y:       scroll;
+
+          }
+        }
+
+        .input-bar {
+          
+          display: flex;
+          width:   100%;
+          height:  60px;
+        
+          .button {
+            
+              text-align:       center;
+              color:            $light-gray;
+              background-color: $gray;
+              border:           1px solid $light-gray;
+              border-radius:    $radius;
+              font-size:        2.6em;
+              margin:           0px;
+              padding:          0px 10px 0px 10px;
+              cursor:           pointer;
+              
+              transition: all 0.2s;
+
+              i{
+                border-radius: $radius;
+                background-color: transparent;
+              }
+          }
+
+          .button:hover {
+            border:           1px solid $green !important;
+            color:            $green;
+            background-color: $bg-green;
+          }
+    
+          .input {
+            display:       flex;
+            font-size:     15px;
+            color:         $white;
+            background-color: $gray-alt;
+            padding:       5px 5px 5px 15px;
+            border-radius: $radius;
+            margin-left:   5px;
+            width:         100%;
+            transition: all 0.2s ;
+          }
+
+          .error {
+            transition: all 0.2s ;
+            background-color: #361c1c;
+            border: 1px solid #502727;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.light {
+
+  .App {
+
+    background-color: $light-foreground-light;
+
+    .main-box {
+    
+      .content-box {
+
+        .content {
+
+          .project-header{
+
+            color: $black;
+
+            .project-name {
+              
+              background-color: $foreground-light;
+              border:           1px solid $white-light;
+            }
+
+          }
+
+          .input-bar {
+            
+            .button {
+
+                color:            $dark-light;
+                background-color: $foreground-light;
+                border:           1px solid $white-light;
+                
+                i{
+                  background-color: transparent;
+                }
+            }
+
+            .button:hover {
+              border:           1px solid $green !important;
+              color:            $green;
+              background-color: $bg-green;
+            }
+      
+            .input {
+              color:         $black;
+              background-color: $light-foreground-light;
+            }
+
+            .error {
+              background-color: $bg-red;
+              border: 1px solid $red;
+            }
+          }
+        }
+      }
+    }
+  }
+}
