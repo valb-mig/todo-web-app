@@ -18,16 +18,12 @@
             text-align: center;
             background-color: $gray;
             border:     1px solid $light-gray;
-            border-radius: $radius;
             width:      100%;
             padding:    5px;
+            border-radius: $radius;
 
-            i{
-                margin-right: 4px;
-            }
-
-            .comming-soon {
-                color: $light-foreground;
+            svg {
+                margin-right: 2px;
             }
         }
 
@@ -38,23 +34,26 @@
             color: $white;
             background-color: $gray;
             border:     1px solid $light-gray;
-            border-radius: $radius;
             width:      100%;
             margin-top: 10px;
             padding:    5px;
+            border-radius: $radius;
 
             .projects-content {
+                
                 max-height: 400px;
                 overflow-y: scroll;
 
-            }
-
-            i{
-                margin-right: 4px;
+                ::-webkit-scrollbar {
+        
+                    display: none;
+                }
             }
         }
-        .add-button{
+        .add-button {
+
             .button{
+                border-radius: $radius;
                 margin: 10px 0px 0px 0px;
                 background-color: transparent;
             }

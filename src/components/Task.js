@@ -16,10 +16,10 @@ const Task = (props) => {
                     </div>
                 </div>
                 <div className='done-button' onClick={props.done}>
-                    <i><FontAwesomeIcon icon={faCheck} /></i>
+                    <FontAwesomeIcon icon={faCheck} />
                 </div>
                 <div className='remove-button' onClick={props.remove}>
-                    <i><FontAwesomeIcon icon={faTrash} /></i>
+                    <FontAwesomeIcon icon={faTrash} />
                 </div>
             </div>
             <div className='task-desc'>

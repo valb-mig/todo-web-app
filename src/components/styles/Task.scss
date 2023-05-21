@@ -1,11 +1,12 @@
 @import './colors/Colors.scss';
 
-.not-done 
-{
+.not-done {
+    
     transition: ease-in-out 0.1s;
 }
 
 .task-done {
+
     transition:       ease-in-out 0.2s;
     text-decoration:  line-through !important;
     border:           1px solid $green !important;
@@ -17,19 +18,24 @@
     display:         flex;
     justify-content: center;
     overflow-y:      scroll;
-    border-radius:   5px;
     margin-top:      5px;
     
+    ::-webkit-scrollbar {
+        
+        display: none;
+    }
+    
+
     .task-box {
 
         display:          flex;
         flex-direction:   column;
         overflow-y:       scroll;
         padding:          20px;
-        border-radius:    5px;
         width:            100%;
         border:           1px solid $gray;
         background-color: $gray-alt;
+        border-radius:    $radius;
         
         .task {
 
@@ -41,15 +47,15 @@
             width:            100%;
             padding:          20px;
             margin-bottom:    5px;
-            border-radius:    5px;
             border:           1px solid $light-gray;
             color:            $white;
             background-color: $gray;
+            border-radius:    $radius;
 
             .task-header {
 
                 display:         flex;
-                justify-content: end;
+                justify-content: flex-end;
                 width:           100%;
 
                 .remove-button {
@@ -57,11 +63,11 @@
                     cursor:        pointer;
                     border:        1px solid $foreground;
                     padding:       6px 12px 6px 12px;
-                    border-radius: 5px;
                     margin:        0px 2px 0px 2px;
                     color:         $light-foreground;
                     background-color: $light-gray;
-                    transition: all 0.2s;                    
+                    transition: all 0.2s;
+                    border-radius:    $radius;                    
                 }
 
                 .remove-button:hover {
@@ -75,11 +81,11 @@
                     cursor:        pointer;
                     border:        1px solid $foreground;
                     padding:       6px 10px 6px 10px;
-                    border-radius: 5px;
                     margin:        0px 2px 0px 2px;
                     color:         $light-foreground;
                     background-color: $light-gray;
-                    transition: all 0.2s;                    
+                    transition: all 0.2s;
+                    border-radius:    $radius;                    
                 }
 
                 .done-button:hover {
@@ -98,7 +104,7 @@
                 .task-content
                 {
                     display: flex;
-                    justify-content: start;
+                    justify-content: flex-start;
                     flex-direction: column;
                 }
             }
@@ -115,68 +121,31 @@
 
 body.light {
 
-    .not-done 
-    {
-        transition: ease-in-out 0.1s;
-    }
-
     .task-done {
-        transition:       ease-in-out 0.2s;
-        text-decoration:  line-through !important;
         border:           1px solid $green !important;
         background-color: $bg-green !important;
     }
 
     .task-content {
 
-        display:         flex;
-        justify-content: center;
-        overflow-y:      scroll;
-        border-radius:   5px;
-        margin-top:      5px;
-        
         .task-box {
 
-            display:          flex;
-            flex-direction:   column;
-            overflow-y:       scroll;
-            padding:          20px;
-            border-radius:    5px;
-            width:            100%;
             border:           1px solid $white-light;
             background-color: $foreground-light;
             
             .task {
 
-                display:          flex;
-                word-break:       break-all;
-                flex-direction:   column;
-                position:         relative;
-                font-size:        20px;
-                width:            100%;
-                padding:          20px;
-                margin-bottom:    5px;
-                border-radius:    5px;
                 border:           1px solid $light-foreground-light;
                 color:            $black;
                 background-color: $light-gray-light;
 
                 .task-header {
 
-                    display:         flex;
-                    justify-content: end;
-                    width:           100%;
-
                     .remove-button {
 
-                        cursor:        pointer;
                         border:        1px solid $white-light;
-                        padding:       6px 12px 6px 12px;
-                        border-radius: 5px;
-                        margin:        0px 2px 0px 2px;
                         color:         $light-foreground-light;
                         background-color: $foreground-light;
-                        transition: all 0.2s;                    
                     }
 
                     .remove-button:hover {
@@ -187,14 +156,9 @@ body.light {
 
                     .done-button {
 
-                        cursor:        pointer;
                         border:        1px solid $white-light;
-                        padding:       6px 10px 6px 10px;
-                        border-radius: 5px;
-                        margin:        0px 2px 0px 2px;
                         color:         $light-foreground-light;
                         background-color: $foreground-light;
-                        transition: all 0.2s;                    
                     }
 
                     .done-button:hover {
@@ -203,26 +167,6 @@ body.light {
                         color:            $green;
                         background-color: $bg-green;
                     }
-                }
-
-                .task-bottom {
-
-                    display: flex;
-                    width:   100%;
-
-                    .task-content
-                    {
-                        display: flex;
-                        justify-content: start;
-                        flex-direction: column;
-                    }
-                }
-
-                .task-desc
-                {
-                    display: flex;
-                    font-size: 12px;
-                    font-style: italic;
                 }
             }
         }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faHouseChimney,
-          faList, 
-          faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSitemap,
+         faList, 
+         faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '../Button';
 import Modal  from './Modal';
@@ -64,11 +64,15 @@ const Sidebar = (props) => {
             <div className='sidebar-content'>
                 <div className='sidebar-buttons'>
                     <Button
-                        title='Home'
-                        icon={faHouseChimney}
+                        title='List'
+                        icon={faList}
                         class={'todo-sidebar '+home}
                     />
-                    <div className='comming-soon'>Comming soon</div>
+                    <Button
+                        title='Kanban'
+                        icon={faSitemap}
+                        class={'todo-sidebar mt-[5px] '+home}
+                    />
                 </div>
                 <div className='sidebar-projects'>
                     <div className='projects-header'>Projects</div>
@@ -79,7 +83,7 @@ const Sidebar = (props) => {
                                     key={index}
                                     title={project.title}
                                     icon={faList}
-                                    class={'todo-sidebar '+project.select}
+                                    class={'todo-sidebar mt-[5px] '+project.select}
                                     onclick={() => {handleSelectProject(index,project.title)}}
                                 />
                             ))}

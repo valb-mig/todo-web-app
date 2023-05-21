@@ -5,9 +5,19 @@ import './styles/Input.scss'
 
 const Input = (props) => {
     return(
-        <div className='input-bar'>
-            <i><FontAwesomeIcon icon={props.icon}/></i>
-            <input type='text' id={props.id} className='input text-white' placeholder={props.placeholder} onChange={props.onchange}/>
+        <div className={'input-bar '+props.class}>
+            
+            <FontAwesomeIcon icon={props.icon} />
+
+            <input type='text' 
+                   id={props.id} 
+                   className={'input '+props.class} 
+                   placeholder={props.placeholder} 
+                   onChange={props.onchange}
+                   value={props.value}/>
+
+            {props.children}
+
         </div>
     );
 }

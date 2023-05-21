@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import './style/page.scss';
+import 'src/app/style/page.scss';
 
-import Sidebar   from '../components/main/Sidebar';
-import InputTask from '../components/InputTask';
-import Header    from '../components/main/Header';
-import Button    from '../components/Button'; 
-import Task      from '../components/Task';
+import Header    from 'src/components/main/Header';
+import Sidebar   from 'src/components/main/Sidebar';
+import Input     from 'src/components/Input';
+import Button    from 'src/components/Button'; 
+import Task      from 'src/components/Task';
 
 export default function Home(){
 
@@ -104,26 +104,27 @@ export default function Home(){
               </div>
 
               <div className='input-bar'>
+
                 <Button
                   icon={faPlus}
                   onclick={handleTaskAdd}
                 />
 
-                <div className='input-area'>
-                  <InputTask
+                <div className={'task-inputs '+error}>
+
+                  <Input
                     id='add-task'
                     placeholder='Task name'
-                    class={error}
                     value={input}
                     onchange={handleChangeInput}
                   />
-                  <InputTask
+                  <Input
                     id='desc-task'
                     placeholder='Description'
-                    class={error}
                     value={desc}
                     onchange={handleChangeDesc}
                   />
+
                 </div>
               </div>
 

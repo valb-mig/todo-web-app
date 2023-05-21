@@ -15,12 +15,8 @@ module.exports = {
       'dark':       '#171717',
     },
     extend: {
-      spacing: {
-        '8xl': '96rem',
-        '9xl': '128rem',
-      },
       borderRadius: {
-        '4xl': '2rem',
+        'br-d': '5px',
       }
     }
   },

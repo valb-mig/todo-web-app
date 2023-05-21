@@ -6,10 +6,10 @@ import { faMoon,
          faUser,
          faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-import Input  from '../Input';
-import Button from '../Button';
+import Input  from 'src/components/Input';
+import Button from 'src/components/Button';
 
-import '../styles/Header.scss';
+import 'src/components/styles/Header.scss';
 
 const Header = (props) => {
 
@@ -33,31 +33,38 @@ const Header = (props) => {
     }
     return(
         <div className='header-bar'>
-        <div className='header-item'>
-          <div className='header-start'>
-            <img src='./assets/logo-todo-sh.png' width='25px'/>
-            <div className='header-logo'>
-              <p className='site-title'>./Todo.sh<span className='title-cursor'>|</span></p>
-            </div>
-            
-            <Input
-              id='search'
-              icon={faMagnifyingGlass}
-              placeholder='Search'
-            />
+          <div className='header-item'>
+            <div className='header-start'>
+              <div className='header-logo'>
 
-          </div>
-
-          <div className='header-end'>
-            <Button
-                icon={icon}
-                class={'switch-color'}
-                onclick={() => {darkTheme()}}
+                <p className='site-title'>./Todo.sh
+                  <span className='title-cursor'>|</span>
+                </p>
+                
+              </div>
+              
+              <Input
+                id='search'
+                icon={faMagnifyingGlass}
+                placeholder='Search'
+                class={'rounded-[160px]'}
               />
-            <div className='header-account'><i><FontAwesomeIcon icon={faUser} /></i></div>
+
+            </div>
+
+            <div className='header-end'>
+              <Button
+                  icon={icon}
+                  class="switch-color mr-[5px] rounded-[100%]"
+                  onclick={() => {darkTheme()}}
+              />
+              <Button
+                  icon={faUser}
+                  class="header-account rounded-[100%]"
+              />
+            </div>
           </div>
         </div>
-      </div>
     );
 }
 export default Header;
