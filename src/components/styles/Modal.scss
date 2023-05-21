@@ -40,21 +40,21 @@
       .modal-project {
         padding:          10px;
         border:           1px solid $gray;
-        border-radius:    $radius;
         width:            100%;
         background-color: $gray-alt;
 
         .title-input {
 
+          border-radius:  $radius;
+
           .input-content{
-            border-radius:    $radius;
             background-color: $gray;
 
             .modal-input{
               width:   100%;
               padding: 5px;
+              border-radius:  $radius;
               border:  1px solid $light-gray;
-              border-radius: $radius;
               background-color: $gray;
             }
           }
@@ -65,7 +65,7 @@
           display: flex;
           width:   100%;
           margin:  10px 0px 0px 0px;
-          justify-content: end;
+          justify-content: flex-end;
         }
       }
     }
@@ -105,7 +105,6 @@ body.light {
   position:         absolute;
   cursor:           pointer;
   padding:          5px 12px 5px 12px;
-  border-radius:    100%;
   top:   0;
   right: 0;
   transition:       all 0.2s;

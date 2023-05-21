@@ -6,7 +6,7 @@ import './styles/Button.scss'
 const Button = (props) => {
     return(
         <div id={props.id} className={'button '+props.class} onClick={props.onclick}>
-            <i><FontAwesomeIcon icon={props.icon} /></i>{props.title}
+            <FontAwesomeIcon icon={props.icon} />{props.title}
         </div>
     );
 }

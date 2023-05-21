@@ -1,5 +1,9 @@
 @import './colors/Colors.scss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .header-bar {
 
     display:   flex;
@@ -16,10 +20,10 @@
         display: flex;
         width:  100%;
 
-        .header-start{
+        .header-start {
 
             display: flex;
-            justify-content: start;
+            justify-content: flex-start;
             width:  100%;
             color: $white;
 
@@ -30,11 +34,11 @@
             .header-logo {
 
                 display:          flex;
-                justify-content:  start;
+                justify-content:  flex-start;
                 min-width:        120px;
-                border-radius:    160px;
                 margin-right:     10px;
                 padding:          0px 10px;
+                border-radius:    160px;
                 background-color: $light-gray;
 
                 .site-title {
@@ -46,31 +50,19 @@
                     overflow: hidden;
                 }
 
-                p:nth-child(2) {
-                    animation: typingtwo 2s steps(14, end);
+                @keyframes typing {
 
-                }
-
-                @keyframes typingtwo {
                     0%{
                         width: 0;
                     }
+
                     50%{
                         width: 0;
                     }
+
                     100%{
-                        width: 50%;
+                        width: 100%;
                     }
-                }
-
-                @keyframes typing {
-                    from {
-                        width: 0;
-                    }
-                }
-
-                img {
-                    padding: 2px;
                 }
 
                 .title-cursor {
@@ -87,53 +79,40 @@
 
             .input-bar {
 
-                border: 1px solid $foreground;
-                border-radius: 160px;
+                border: 1px solid $light-gray;
+                background-color: $gray;
 
-                i {
-                    cursor: pointer;
-                    background-color: $foreground;
-                    transition: all 0.2s;
-                }
-                i:hover {
-                    background-color: $light-foreground;
+                svg {
+                    display:   flex;
+                    font-size: 0px;
+                    width:     20px;
+                    height:    100%;
+                    padding:   0 10px;
+                    border-radius: 160px;
+                    background-color: $light-gray;
                 }
 
                 .input {
                     color: $white;
-                    background-color: $light-gray;
+                    background-color: transparent;
                 }
             }
         }
 
-        .header-end
-        {
+        .header-end {
+
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
             width:  100%;
 
-            .switch-color{
+            .switch-color {
 
-                display: flex;
-                justify-content: center;
-                margin:  0px 5px 0px 0px;
-                padding: 0 4px;
-                border-radius:    160px;
+                width: 28px;
+
+                :hover {color: $orange;}
             }
 
-            .switch-color:hover {
-                color: $orange;
-            }
-
-            .header-account {
-
-                color:            $white;
-                text-align:       center;
-                padding:          0px 5px;
-                border-radius:    160px;
-                background-color: $light-gray;
-                border:           1px solid $foreground;
-            }
+            .header-account {width: 28px;}
         }
     }
 }
@@ -158,11 +137,9 @@ body.light {
                 .input-bar {
     
                     border: 1px solid $foreground-light;
-                    border-radius: 7px;
     
                     i{
                         background-color: $light-gray-light;
-                        transition: all 0.2s;
                     }
                     i:hover{
                         background-color: $light-foreground-light;
@@ -175,16 +152,13 @@ body.light {
                 }
             }
     
-            .header-end
-            {
+            .header-end {
 
                 .switch-color{
-
-                    padding: 0 6px;
-                }
-
-                .switch-color:hover {
-                    color: $dark-purple;
+                    
+                    :hover {
+                        color: $dark-purple;
+                    }
                 }
 
                 .header-account {

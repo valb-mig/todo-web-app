@@ -2489,13 +2489,6 @@ self.__RSC_MANIFEST={
         "static/css/app/page.css"
       ]
     },
-    "/home/mig/Github/Projetos/todo-web-app/src/components/styles/ButtonModal.scss#": {
-      "id": "null",
-      "name": "default",
-      "chunks": [
-        "static/css/app/page.css"
-      ]
-    },
     "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Header.scss#": {
       "id": "null",
       "name": "default",
@@ -2504,20 +2497,6 @@ self.__RSC_MANIFEST={
       ]
     },
     "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Input.scss#": {
-      "id": "null",
-      "name": "default",
-      "chunks": [
-        "static/css/app/page.css"
-      ]
-    },
-    "/home/mig/Github/Projetos/todo-web-app/src/components/styles/InputModal.scss#": {
-      "id": "null",
-      "name": "default",
-      "chunks": [
-        "static/css/app/page.css"
-      ]
-    },
-    "/home/mig/Github/Projetos/todo-web-app/src/components/styles/InputTask.scss#": {
       "id": "null",
       "name": "default",
       "chunks": [
