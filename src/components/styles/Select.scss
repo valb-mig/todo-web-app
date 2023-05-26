@@ -1,0 +1,20 @@
+@import './colors/Colors.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.select-content {
+
+    display: flex;
+    width:   100%;
+
+    .input-select {
+
+        font-size:        15px;
+        color:            $white;
+        border-radius:    5px;
+        background-color: $gray;
+        border: 1px solid $light-gray;
+    }
+}

@@ -12,19 +12,21 @@ import Sidebar   from 'src/components/main/Sidebar';
 import Input     from 'src/components/Input';
 import Button    from 'src/components/Button'; 
 import Task      from 'src/components/Task';
+import Modal     from 'src/components/main/Modal';
 
 export default function Home(){
 
-  const [input,    setInputValue] = useState("");
-  const [desc,     setDescValue]  = useState("");
-  const [error,    setError]      = useState("");
-  const [tasks,    setTasks]      = useState([]);
-  const [projects, setProjects]   = useState([]);
-  
-  const [selectedProject, setSelectedProject]         = useState("");
-  const [selectedProjectName, setSelectedProjectName] = useState("");
+  const [input,    setInputValue]    = useState("");
+  const [desc,     setDescValue]     = useState("");
+  const [error,    setError]         = useState("");
+  const [tasks,    setTasks]         = useState([]);
+  const [projects, setProjects]      = useState([]);
 
+  const [selectedProject,     setSelectedProject]     = useState("");
+  const [selectedProjectName, setSelectedProjectName] = useState("");
+  
   const handleTaskAdd = (event) => {
+
     event.preventDefault();
 
     if(input !== '' && desc !== '') {
@@ -35,7 +37,6 @@ export default function Home(){
           title:   input,
           desc:    desc,
           status:  false
-        
       }]);
 
       setError("");
@@ -65,7 +66,10 @@ export default function Home(){
 
   function handleTaskDone(taskId, project) {
     
+    console.log(projects);
+
     const projectTasks = tasks.filter(task => task.project === project);
+
     const updatedTasks = projectTasks.map((task, index) => {
       if (index === taskId) {
         return { ...task, status: !task.status };
@@ -73,10 +77,12 @@ export default function Home(){
         return task;
       }
     });
+
     setTasks([...tasks.filter(task => task.project !== project), ...updatedTasks]);
   }
 
   return (
+
     <div className="App">
 
       <div className='header-box'>
@@ -85,68 +91,81 @@ export default function Home(){
 
       <div className='main-box'>
         <div className='sidebar-box'>
+
           <Sidebar
             project={setProjects}
             selectedProject={setSelectedProject}
             selectedProjectName={setSelectedProjectName}
           />
+
         </div>
 
         <div className='content-box'>
           <div className='content'>
 
-          {projects.length > 0 &&(
-            <>
-              <div className='project-header'>
-                <div className='project-name'>
-                  {selectedProjectName}
-                </div>
-              </div>
+            {projects.length > 0 ?
+              // With a selected project
 
-              <div className='input-bar'>
-
-                <Button
-                  icon={faPlus}
-                  onclick={handleTaskAdd}
-                />
-
-                <div className={'task-inputs '+error}>
-
-                  <Input
-                    id='add-task'
-                    placeholder='Task name'
-                    value={input}
-                    onchange={handleChangeInput}
-                  />
-                  <Input
-                    id='desc-task'
-                    placeholder='Description'
-                    value={desc}
-                    onchange={handleChangeDesc}
-                  />
-
-                </div>
-              </div>
-
-                {tasks.filter(task => task.project === selectedProject).length > 0 &&(
-                  <div className='task-content'>
-                    <div className='task-box'>
-
-                      {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-                        <Task key={index} 
-                              title={task.title} 
-                              desc={task.desc}
-                              remove={()=>(handleTaskRemove(index,task.project))}
-                              done={()=>{handleTaskDone(index,task.project)}}
-                              class={task.status ? 'task-done' : 'not-done'}/>
-                      ))}
-                      
-                    </div>
+              <>
+                <div className='project-header'>
+                  <div className='project-name'>
+                    {selectedProjectName}
                   </div>
-                )}
-                
-              </>
-            )}
+                </div>
+
+                <div className='input-bar'>
+
+                  <Button
+                    icon={faPlus}
+                    onclick={handleTaskAdd}
+                  />
+
+                  <div className={'task-inputs '+error}>
+
+                    <Input
+                      id='add-task'
+                      placeholder='Task name'
+                      value={input}
+                      onchange={handleChangeInput}
+                    />
+                    <Input
+                      id='desc-task'
+                      placeholder='Description'
+                      value={desc}
+                      onchange={handleChangeDesc}
+                    />
+
+                  </div>
+                </div>
+
+                  {tasks.filter(task => task.project === selectedProject).length > 0 &&(
+                    <div className='task-content'>
+                      <div className='task-box'>
+
+                        {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+                          <Task key={index} 
+                                title={task.title} 
+                                desc={task.desc}
+                                remove={()=>(handleTaskRemove(index,task.project))}
+                                done={()=>{handleTaskDone(index,task.project)}}
+                                class={task.status ? 'task-done' : 'not-done'}/>
+                        ))}
+                        
+                      </div>
+                    </div>
+                  )}
+                  
+                </>
+
+                :
+
+                // No project
+
+                <div className='start-page'>
+                  You don't have any projects created yet.
+                  click to start a new project
+                </div>
+            }
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const Input = (props) => {
             
             <FontAwesomeIcon icon={props.icon} />
 
-            <input type='text' 
+            <input type={props.type} 
                    id={props.id} 
                    className={'input '+props.class} 
                    placeholder={props.placeholder} 

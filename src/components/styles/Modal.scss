@@ -24,12 +24,14 @@
   }
 
   .modal-content {
+
     display:         flex;
     justify-content: center;
     margin-top:      35vh;
     width:           100%;
 
     .modal-area {
+
       display:         flex;
       justify-content: center;
       position:        relative;
@@ -38,24 +40,56 @@
       margin:          0 30%;
 
       .modal-project {
+
         padding:          10px;
         border:           1px solid $gray;
         width:            100%;
         background-color: $gray-alt;
+        border-radius:   5px;
 
         .title-input {
 
-          border-radius:  $radius;
+          display: flex;
+          width:   100%;
+          flex-direction: column;
 
-          .input-content{
-            background-color: $gray;
+          .input-bar {
 
-            .modal-input{
-              width:   100%;
-              padding: 5px;
-              border-radius:  $radius;
-              border:  1px solid $light-gray;
+            width:   100%;
+            height:  auto;
+
+            margin-top: 5px;
+
+            .input {
+              width: 100%;
+              border-radius: 5px;
               background-color: $gray;
+              border: 1px solid $light-gray;
+            }
+          }
+        }
+
+        .select-area {
+
+          display:         flex;
+          justify-content: space-between;
+          flex-direction:  column;
+          width:           100%;
+
+          .select-content {
+
+            display:   flex;
+            width:     100%;
+            flex-wrap: nowrap;
+
+
+            label {
+              display:      flex;
+              margin-right: 5px;
+            }
+
+            .input-select {
+              display: flex;
             }
           }
         }
@@ -66,6 +100,27 @@
           width:   100%;
           margin:  10px 0px 0px 0px;
           justify-content: flex-end;
+
+          .button-cancel, .button-add {
+            padding: 5px;
+            margin:  0 0 0 4px;
+          }
+
+          .button-add {
+            
+          }
+
+          .button-cancel {
+
+            background-color: $gray;
+            border: 1px solid $light-gray;
+          }
+
+          .button-cancel:hover {
+
+            background-color: $light-gray;
+            border: 1px solid $foreground;
+          }
         }
       }
     }

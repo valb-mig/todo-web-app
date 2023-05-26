@@ -1,18 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import './styles/InputModal.scss'
+import './styles/Select.scss'
 
-const InputModal = (props) => {
+const Select = (props) => {
     return(
-        <div className='input-content'>
-            <input type='text' 
-                   id={props.id} 
-                   className={'modal-input '+props.class} 
-                   placeholder={props.placeholder} 
-                   onChange={props.onchange}
-                   value={props.value}/>
+        <div className={"select-content "+props.class}>
+            <label>{props.label}</label>
+            <select className='input-select' id={props.id} onChange={props.onchange}>
+                {props.children}
+            </select>
         </div>
     );
 }
-export default InputModal;
+
+export default Select;

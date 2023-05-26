@@ -6,6 +6,7 @@ self.__RSC_CSS_MANIFEST={
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Button.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Header.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Modal.scss",
+      "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Select.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Sidebar.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Task.scss"
     ],
@@ -23,6 +24,7 @@ self.__RSC_CSS_MANIFEST={
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Button.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Header.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Modal.scss",
+      "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Select.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Sidebar.scss",
       "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Task.scss"
     ]
