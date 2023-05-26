@@ -2510,6 +2510,13 @@ self.__RSC_MANIFEST={
         "static/css/app/page.css"
       ]
     },
+    "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Select.scss#": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/app/page.css"
+      ]
+    },
     "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Sidebar.scss#": {
       "id": "null",
       "name": "default",

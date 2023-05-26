@@ -5,18 +5,34 @@ import { faSitemap,
          faList, 
          faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import Button from '../Button';
-import Modal  from './Modal';
+import Button from 'src/components/Button';
+import Modal  from 'src/components/main/Modal';
 
 import '../styles/Sidebar.scss';
 
 const Sidebar = (props) => {
 
-    const [projects,   setProjects]   = useState([]);   
-    const [modal,      showModal]     = useState(false);
-    const [modalInput, setModalInput] = useState('');
+    const [projects,    setProjects]    = useState([]);   
+    const [modal,       showModal]      = useState(false);
+    const [modalInput,  setModalInput]  = useState('');
+    const [projectType, setProjectType] = useState('todo');
 
-    let home = 'selected';
+    const [todo,   setTodo]   = useState('selected');
+    const [kanban, setKanban] = useState('');
+
+    const checkProjectType = (type) => {
+
+        if(type === 'kanban'){
+            setKanban('selected');
+            setTodo('');
+            setProjectType('kanban');
+        }
+        else if(type === 'todo'){
+            setKanban('');
+            setTodo('selected');
+            setProjectType('todo');
+        }
+    }
 
     const handleProjectAdd = () => {
         showModalProject();
@@ -36,7 +52,8 @@ const Sidebar = (props) => {
             {
                 id:     projects.length,
                 title:  modalInput,
-                select: ''
+                select: '',
+                type:  projectType
             }
         ]);
         
@@ -64,37 +81,51 @@ const Sidebar = (props) => {
             <div className='sidebar-content'>
                 <div className='sidebar-buttons'>
                     <Button
-                        title='List'
+                        title='To-do'
                         icon={faList}
-                        class={'todo-sidebar '+home}
+                        class={'todo-sidebar '+todo}
+                        onclick={() => {checkProjectType('todo')}}
                     />
                     <Button
                         title='Kanban'
                         icon={faSitemap}
-                        class={'todo-sidebar mt-[5px] '+home}
+                        class={'todo-sidebar mt-[5px] '+kanban}
+                        onclick={() => {checkProjectType('kanban')}}
                     />
                 </div>
                 <div className='sidebar-projects'>
                     <div className='projects-header'>Projects</div>
                         <div className='projects-content'>
-                            {projects.map((project, index)=>(
-                                <Button
-                                    id={index}
-                                    key={index}
-                                    title={project.title}
-                                    icon={faList}
-                                    class={'todo-sidebar mt-[5px] '+project.select}
-                                    onclick={() => {handleSelectProject(index,project.title)}}
-                                />
-                            ))}
 
-                            {modal && (
+                            {projects.map((project, index) => {
+                                if (project.type === projectType) {
+                                    return (
+                                    <Button
+                                        id={index}
+                                        key={index}
+                                        title={project.title}
+                                        icon={faList} // Todo - user select icon
+                                        class={'todo-sidebar mt-[5px] ' + project.select}
+                                        onclick={() => {
+                                        handleSelectProject(index, project.title);
+                                        }}
+                                    />
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            })}
+
+                            {modal &&
+
                                 <Modal
                                     onchange={getModalInput}
                                     addClick={submitProject}
                                     cancelClick={()=>{showModal(false)}}
                                 />
-                            )}
+
+                            }
+                            
                         </div>
                     </div>
                 <div className='add-button'>

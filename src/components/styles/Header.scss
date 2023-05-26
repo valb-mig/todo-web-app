@@ -121,52 +121,46 @@ body.light {
 
     .header-bar {
 
-        border-bottom:   1px solid $white-light;
-        background-color: $foreground-light;
+        border-bottom:    1px solid $foreground-light;
+        background-color: $light-gray-light;
     
         .header-item {
     
-            .header-start{
+            .header-start {
+    
+                color: $white;
     
                 .header-logo {
     
-                    color:            $black;
-                    background-color: $light-gray-light;
+                    color: $black;
+                    background-color: $foreground-light;
+                    border: 1px solid $light-foreground-light;
                 }
     
                 .input-bar {
+
+                    color: $black;
+                    border: 1px solid $light-foreground-light;
+                    background-color: $foreground-light;
     
-                    border: 1px solid $foreground-light;
-    
-                    i{
-                        background-color: $light-gray-light;
-                    }
-                    i:hover{
+                    svg {
                         background-color: $light-foreground-light;
                     }
     
                     .input {
                         color: $black;
-                        background-color: $gray-light;
                     }
                 }
             }
     
             .header-end {
-
-                .switch-color{
-                    
-                    :hover {
-                        color: $dark-purple;
-                    }
+    
+                .switch-color {
+    
+                    :hover {color: $dark-purple;}
                 }
-
-                .header-account {
-                    
-                    color:            $black;
-                    background-color: $light-gray-light;
-                    border: 1px solid $light-foreground-light;
-                }
+    
+                .header-account {width: 28px;}
             }
         }
     }
