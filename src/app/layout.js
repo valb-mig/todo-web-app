@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './style/globals.scss'
 
 const varela_round = Varela_Round({ 
-  
   weight:  '400',
   subsets: ['latin'] 
 });
 
 export const metadata = {
-
   title:       'Todo.sh',
   description: 'Your todo management web page',
   icons: {
