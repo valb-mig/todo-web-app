@@ -524,8 +524,14 @@ video {
 .mr-\[5px\] {
   margin-right: 5px !important;
 }
+.mt-\[10px\] {
+  margin-top: 10px !important;
+}
 .mt-\[5px\] {
   margin-top: 5px !important;
+}
+.ml-\[5px\] {
+  margin-left: 5px !important;
 }
 .rounded-\[100\%\] {
   border-radius: 100% !important;

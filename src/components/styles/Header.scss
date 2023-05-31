@@ -112,6 +112,17 @@
                 :hover {color: $orange;}
             }
 
+            .user-name {
+                
+                display:          flex;
+                color:            $white;
+                font-size:        .9em;
+                padding:          0 10px;
+                border-radius:    160px;
+                border:           1px solid $foreground;
+                background-color: $light-gray;
+            }
+
             .header-account {width: 28px;}
         }
     }

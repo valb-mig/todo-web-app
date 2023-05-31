@@ -3,8 +3,8 @@
 import { React, useState } from 'react';
 import { useRouter }       from 'next/navigation';
 
-import darkTheme from '/src/helper/darkTheme';
-import handleChangeUrl from '/src/helper/handleChangeUrl';
+import darkTheme       from '/src/utils/functions/darkTheme';
+import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
 
 import { faMagnifyingGlass, 
          faSun, 
@@ -23,6 +23,8 @@ import 'src/app/style/page.scss';
 export default function Home() {
 
   const router = useRouter();
+
+  const loginStorage = sessionStorage.getItem('login') ? sessionStorage.getItem('login') : {};
 
   const [input,    setInputValue] = useState("");
   const [desc,     setDescValue]  = useState("");
@@ -111,9 +113,16 @@ export default function Home() {
                   class="switch-color mr-[5px] rounded-[100%]"
                   onclick={() => {darkTheme(setIcon,setTheme,theme)}}
               />
+
+              {loginStorage &&
+              
+                <p className='user-name'>{JSON.parse(loginStorage).username}</p>
+              
+              }
+
               <Button
                   icon={faUser}
-                  class="header-account rounded-[100%]"
+                  class="header-account ml-[5px] rounded-[100%]"
                   onclick={(e) => {handleChangeUrl(e,"/login",router)}}
               />
             </div>

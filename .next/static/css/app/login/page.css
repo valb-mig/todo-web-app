@@ -444,8 +444,14 @@ video {
 .mr-\[5px\] {
   margin-right: 5px !important;
 }
+.mt-\[10px\] {
+  margin-top: 10px !important;
+}
 .mt-\[5px\] {
   margin-top: 5px !important;
+}
+.ml-\[5px\] {
+  margin-left: 5px !important;
 }
 .rounded-\[100\%\] {
   border-radius: 100% !important;
@@ -902,8 +908,14 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.ml-\[5px\] {
+  margin-left: 5px !important;
+}
 .mr-\[5px\] {
   margin-right: 5px !important;
+}
+.mt-\[10px\] {
+  margin-top: 10px !important;
 }
 .mt-\[5px\] {
   margin-top: 5px !important;
@@ -1004,6 +1016,15 @@ video {
 .header-bar .header-item .header-end .switch-color :hover {
   color: #fabb46;
 }
+.header-bar .header-item .header-end .user-name {
+  display: flex;
+  color: #ffffff;
+  font-size: 0.9em;
+  padding: 0 10px;
+  border-radius: 160px;
+  border: 1px solid #393939;
+  background-color: #2F2F2F;
+}
 .header-bar .header-item .header-end .header-account {
   width: 28px;
 }
@@ -1041,6 +1062,10 @@ body.light .header-bar .header-item .header-end .header-account {
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[2].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[2].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[2].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[2].oneOf[13].use[5]!./src/app/login/style/page.scss ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /* Colors */
+a {
+  cursor: pointer;
+}
+
 .content {
   height: 100vh;
   width: 100vw;

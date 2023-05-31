@@ -281,6 +281,32 @@ self.__RSC_MANIFEST={
         ],
         "async": false
       }
+    },
+    "(app-client)/./src/app/register/page.js": {
+      "*": {
+        "id": "(sc_client)/./src/app/register/page.js",
+        "name": "*",
+        "chunks": [
+          "app/register/page:static/chunks/app/register/page.js"
+        ],
+        "async": false
+      },
+      "": {
+        "id": "(sc_client)/./src/app/register/page.js",
+        "name": "",
+        "chunks": [
+          "app/register/page:static/chunks/app/register/page.js"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./src/app/register/page.js",
+        "name": "default",
+        "chunks": [
+          "app/register/page:static/chunks/app/register/page.js"
+        ],
+        "async": false
+      }
     }
   },
   "edgeSSRModuleMapping": {},
@@ -293,6 +319,9 @@ self.__RSC_MANIFEST={
     ],
     "/home/mig/Github/Projetos/todo-web-app/src/app/login/page": [
       "static/css/app/login/page.css"
+    ],
+    "/home/mig/Github/Projetos/todo-web-app/src/app/register/page": [
+      "static/css/app/register/page.css"
     ]
   },
   "clientModules": {
@@ -980,7 +1009,8 @@ self.__RSC_MANIFEST={
       "name": "default",
       "chunks": [
         "static/css/app/page.css",
-        "static/css/app/login/page.css"
+        "static/css/app/login/page.css",
+        "static/css/app/register/page.css"
       ]
     },
     "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Header.scss#": {
@@ -988,7 +1018,8 @@ self.__RSC_MANIFEST={
       "name": "default",
       "chunks": [
         "static/css/app/page.css",
-        "static/css/app/login/page.css"
+        "static/css/app/login/page.css",
+        "static/css/app/register/page.css"
       ]
     },
     "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Input.scss#": {
@@ -996,7 +1027,8 @@ self.__RSC_MANIFEST={
       "name": "default",
       "chunks": [
         "static/css/app/page.css",
-        "static/css/app/login/page.css"
+        "static/css/app/login/page.css",
+        "static/css/app/register/page.css"
       ]
     },
     "/home/mig/Github/Projetos/todo-web-app/src/components/styles/Modal.scss#": {
@@ -1093,6 +1125,37 @@ self.__RSC_MANIFEST={
       "name": "default",
       "chunks": [
         "app/login/page:static/chunks/app/login/page.js"
+      ],
+      "async": false
+    },
+    "/home/mig/Github/Projetos/todo-web-app/src/app/register/style/page.scss#": {
+      "id": "null",
+      "name": "default",
+      "chunks": [
+        "static/css/app/register/page.css"
+      ]
+    },
+    "/home/mig/Github/Projetos/todo-web-app/src/app/register/page.js": {
+      "id": "(app-client)/./src/app/register/page.js",
+      "name": "*",
+      "chunks": [
+        "app/register/page:static/chunks/app/register/page.js"
+      ],
+      "async": false
+    },
+    "/home/mig/Github/Projetos/todo-web-app/src/app/register/page.js#": {
+      "id": "(app-client)/./src/app/register/page.js",
+      "name": "",
+      "chunks": [
+        "app/register/page:static/chunks/app/register/page.js"
+      ],
+      "async": false
+    },
+    "/home/mig/Github/Projetos/todo-web-app/src/app/register/page.js#default": {
+      "id": "(app-client)/./src/app/register/page.js",
+      "name": "default",
+      "chunks": [
+        "app/register/page:static/chunks/app/register/page.js"
       ],
       "async": false
     }

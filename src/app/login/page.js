@@ -3,11 +3,11 @@
 import { React, useState, useEffect } from 'react';
 import { useRouter }       from 'next/navigation';
 
-import sendData        from '/src/api/data.js';
-import login           from '/src/api/login.js';
+import sendData from '/src/utils/api/data.js';
+import login    from '/src/utils/api/login.js';
 
-import darkTheme       from '/src/helper/darkTheme';
-import handleChangeUrl from '/src/helper/handleChangeUrl';
+import darkTheme       from '/src/utils/functions/darkTheme';
+import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
 
 import { faUser,
          faLock,
@@ -63,14 +63,12 @@ export default function Login() {
 
     useEffect(() => {
 
-      console.log(data);
-
       if (data.verify) {
 
         let userData = {
-          "username":data.value[0].username,
-          "crate_date":data.value[0].crate_date,
-          "last_access":data.value[0].last_access
+          "username":data.value.username,
+          "crate_date":data.value.crate_date,
+          "last_access":data.value.last_access
         }
 
         sessionStorage.setItem('login',JSON.stringify(userData));
@@ -81,8 +79,8 @@ export default function Login() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            user_id:  data.value[0].user_id,
-            username: data.value[0].username,
+            user_id:  data.value.user_id,
+            username: data.value.username,
           }),
         })
 
@@ -137,11 +135,11 @@ export default function Login() {
                 </div>
                 
               <div className='under-text'>
-                <p>You don't have a account yet? <a href='/register'><u>register</u></a></p>
+                <p>You don't have a account yet? <a onClick={(e) => {handleChangeUrl(e,"/register",router)}}><u>register</u></a></p>
               </div>
 
               <div className='buttons mt-[5px]'>
-
+                
                 <Button
                   onclick={submitLogin}
                   title="Login"
