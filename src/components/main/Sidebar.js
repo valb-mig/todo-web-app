@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { React,  useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faSitemap,
@@ -22,6 +22,8 @@ const Sidebar = (props) => {
     const [kanban, setKanban] = useState('');
 
     const [home, setHomeSelected] = useState('home-selected');
+
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
 
     const setHome = (bool) => {
 
@@ -99,74 +101,90 @@ const Sidebar = (props) => {
         });
     }
 
+    useEffect(() => {
+
+        const handleResize = () => {
+            setIsSmallScreen(window.innerWidth < 768);
+        };
+    
+        handleResize();
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+    }, [])
+
     return(
-        <div className='sidebar'>
+        <>
+            {modal &&
 
-            <div className='sidebar-content'>
-                    <Button
-                        title='Home'
-                        icon={faHouse}
-                        class={'todo-home mb-[5px] '+home}
-                        onclick={() => {setHome(true)}}
-                    />
-                <div className='sidebar-buttons'>
-                    <Button
-                        title='To-do'
-                        icon={faList}
-                        class={'todo-sidebar '+todo}
-                        onclick={() => {checkProjectType('todo')}}
-                    />
-                    <Button
-                        title='Kanban'
-                        icon={faSitemap}
-                        class={'todo-sidebar mt-[5px] '+kanban}
-                        onclick={() => {checkProjectType('kanban')}}
-                    />
-                </div>
-                <div className='sidebar-projects'>
-                    <div className='projects-header'>Projects</div>
-                        <div className='projects-content'>
+                <Modal
+                    onchange={getModalInput}
+                    addClick={submitProject}
+                    cancelClick={()=>{showModal(false)}}
+                />
 
-                            {projects.map((project, index) => {
-                                if (project.type === projectType) {
-                                    return (
-                                    <Button
-                                        id={index}
-                                        key={index}
-                                        title={project.title}
-                                        icon={faList} // Todo - user select icon
-                                        class={'todo-sidebar mt-[5px] ' + project.select}
-                                        onclick={() => {
-                                        handleSelectProject(index, project.title);
-                                        }}
-                                    />
-                                    );
-                                } else {
-                                    return null;
-                                }
-                            })}
+            }
+            <div className={props.sidebarClass}>
 
-                            {modal &&
-
-                                <Modal
-                                    onchange={getModalInput}
-                                    addClick={submitProject}
-                                    cancelClick={()=>{showModal(false)}}
-                                />
-
-                            }
-                            
-                        </div>
+                <div className='sidebar-content'>
+                        <Button
+                            title={props.sidebarState && isSmallScreen === false ? 'Home' : ''}
+                            icon={faHouse}
+                            class={'todo-home mb-[5px] '+home}
+                            onclick={() => {setHome(true)}}
+                        />
+                    <div className='sidebar-buttons'>
+                        <Button
+                            title={props.sidebarState && isSmallScreen === false ? 'To-do' : ''}
+                            icon={faList}
+                            class={'todo-sidebar '+todo}
+                            onclick={() => {checkProjectType('todo')}}
+                        />
+                        <Button
+                            title={props.sidebarState && isSmallScreen === false ? 'Kanban' : ''}
+                            icon={faSitemap}
+                            class={'todo-sidebar mt-[5px] '+kanban}
+                            onclick={() => {checkProjectType('kanban')}}
+                        />
                     </div>
-                <div className='add-button'>
-                    <Button
-                        icon={faPlus}
-                        onclick={handleProjectAdd}
-                    />
+                    <div className='sidebar-projects'>
+
+                        {props.sidebarState && isSmallScreen === false ? <div className='projects-header'>Projects</div> : <div></div>}
+
+                            <div className='projects-content'>
+
+                                {projects.map((project, index) => {
+                                    if (project.type === projectType) {
+                                        return (
+                                        <Button
+                                            id={index}
+                                            key={index}
+                                            title={props.sidebarState && isSmallScreen === false ? project.title : ''}
+                                            icon={faList} // Todo - user select icon
+                                            class={'todo-sidebar mt-[5px] ' + project.select}
+                                            onclick={() => {
+                                            handleSelectProject(index, project.title);
+                                            }}
+                                        />
+                                        );
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+                            </div>
+                        </div>
+                    <div className='add-button'>
+                        <Button
+                            icon={faPlus}
+                            onclick={handleProjectAdd}
+                        />
+                    </div>
                 </div>
             </div>
-            
-        </div>
+        </>
     );
 }
 export default Sidebar;

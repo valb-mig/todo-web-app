@@ -25,6 +25,13 @@
       height:  100%;
       width:   220px;
     }
+
+    .sidebar-box-mini {
+
+      display: flex;
+      height:  100%;
+      width:   60px;
+    }
   
     .content-box {
 
@@ -158,8 +165,8 @@
   }
 }
 .selected {
-  background-color: $foreground;
-  border: solid 1px $light-foreground;
+  background-color: $foreground !important;
+  border: solid 1px $light-foreground !important;
 }
 
 body.light {

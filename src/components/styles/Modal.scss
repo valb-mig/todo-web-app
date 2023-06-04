@@ -37,7 +37,7 @@
       position:        relative;
       padding:         10px;
       width:           100%;
-      margin:          0 30%;
+      margin:          0 25%;
 
       .modal-project {
 
@@ -57,14 +57,14 @@
 
             width:   100%;
             height:  auto;
-
             margin-top: 5px;
 
             .input {
               width: 100%;
               border-radius: 5px;
               background-color: $gray;
-              border: 1px solid $light-gray;
+              border:  1px solid $light-gray;
+              padding: 10px;
             }
           }
         }
@@ -84,12 +84,21 @@
 
 
             label {
+              color:        $white;
               display:      flex;
               margin-right: 5px;
+              padding:      10px;
+              background-color: $light-gray;
+              border: 1px solid $foreground;
+              border-radius: 5px;
+              width: 100px;
+              min-width: 100px;
             }
 
             .input-select {
+              width:   100%;
               display: flex;
+              padding: 10px;
             }
           }
         }
@@ -102,6 +111,7 @@
           justify-content: flex-end;
 
           .button-cancel, .button-add {
+            font-size: 1.3em;
             padding: 5px;
             margin:  0 0 0 4px;
           }

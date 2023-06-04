@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     switch($data['type']) {
 
-        case "user-verify":
+        case "verify":
 
             $user = clean($data['data']['username']);
             $pass = clean($data['data']['password']);
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         break;
         
-        case "user-register":
+        case "register":
 
             $user = clean($data['data']['username']);
             $pass = clean($data['data']['password']);
