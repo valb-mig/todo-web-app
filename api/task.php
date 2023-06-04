@@ -24,58 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     switch($data['type']) {
 
-        case "verify":
-
-            $user = clean($data['data']['username']);
-            $pass = clean($data['data']['password']);
-        
-            $query = "SELECT * FROM todo_users_tb WHERE username = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('s', $user);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = $result->fetch_assoc();
-        
-            if ($data) {
-
-                $id   = $data['id_user'];
-                $hash = $data['hash'];
-                $salt = $data['salt'];
-
-                if (password_verify($pass, $hash)) {
-
-                    $update = "UPDATE todo_users_tb SET last_access = ? WHERE id_user = ?";
-                    $stmt = $conn->prepare($update);
-                    $stmt->bind_param('si', $date, $id);
-                    $stmt->execute();
-                    echo json_encode(["value" => $data, "verify" => true]);
-
-                } else {
-                    echo json_encode(false);
-                }
-            } else {
-                echo json_encode(false);
-            }
+        case "task-get":
 
         break;
         
-        case "register":
-
-            $user = clean($data['data']['username']);
-            $pass = clean($data['data']['password']);
-            $salt = bin2hex(random_bytes(16));
-            $hash = password_hash($pass, PASSWORD_DEFAULT);
-        
-            $insert = $conn->prepare("INSERT INTO todo_users_tb (username, hash, salt, create_date, last_access) VALUES (?, ?, ?, ?, ?)");
-            $insert->bind_param('sssss', $user, $hash, $salt, $date, $date);
-        
-            if ($insert->execute()) {
-                echo json_encode(["value" => $data, "submit" => true]);
-            } else {
-                echo json_encode(false);
-            }
-        break;
-
         default;
         break;
     }
