@@ -22,9 +22,7 @@ $date = date('Y-m-d H:i:s');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    $type = $data['type'];
-
-    switch($type) {
+    switch($data['type']) {
 
         case "verify":
 
