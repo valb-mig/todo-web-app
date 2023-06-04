@@ -1,9 +1,23 @@
-const API_URL = 'http://localhost:4000/users.php';
-
-// import axios from 'axios';
-
 async function sendData(data, type, setResult) {
   
+  let NORMAL_URL = 'http://localhost:4000/';
+  let API_URL    = '';
+  let request    = type.split('-');
+
+  console.log(request);
+
+  switch(request[0])
+  {
+    case "user":
+      API_URL = NORMAL_URL + 'users.php'
+    break;
+    case "task":
+      API_URL = NORMAL_URL + 'task.php'
+    break;
+    default:
+    break;
+  }
+
   try {
     const requestBody = {
       type: type,
@@ -24,11 +38,6 @@ async function sendData(data, type, setResult) {
     } else {
       console.error('Error:', response.status);
     }
-
-    // axios.post(API_URL,JSON.stringify(requestBody))
-    // .then(response => console.log(response))
-    // .catch(err => console.log(err));
-
   } catch (error) {
     console.error('Error fetching data:', error);
   }

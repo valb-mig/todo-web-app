@@ -2,6 +2,8 @@ import { React,useState }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark }         from '@fortawesome/free-solid-svg-icons';
 
+import {BsFillFolderFill} from 'react-icons/bs';
+
 import 'src/components/styles/Modal.scss';
 
 import Input  from 'src/components/Input';
@@ -45,7 +47,7 @@ const Modal = (props) => {
                                     class="select-icons mt-[5px]"
                                     onchange={props.onchange} 
                                     id="select-icons"
-                                    label="Icon:"
+                                    iconLabel={<BsFillFolderFill/>}
                                 >
 
                                     {icons.map((e,index) => (
@@ -60,7 +62,7 @@ const Modal = (props) => {
                                     class="select-days mt-[5px]"
                                     onchange={props.onchange} 
                                     id="select-days"
-                                    label="Days:"
+                                    label="+1 Days"
                                 >
 
                                     {days.map((e,index) => (

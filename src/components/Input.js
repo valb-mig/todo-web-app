@@ -5,8 +5,6 @@ import './styles/Input.scss'
 
 const Input = (props) => {
 
-
-
     return(
         <div className={'input-bar '+props.class}>
             

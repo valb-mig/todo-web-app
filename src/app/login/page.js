@@ -35,7 +35,6 @@ export default function Login() {
     const setText = (e,setValue) => {
 
       setValue(e.target.value);
-      console.log(e.target.value);
     }
 
     const submitLogin = async () => {
@@ -52,7 +51,7 @@ export default function Login() {
             "username":username,
             "password":password
           },
-          "verify",
+          "user-verify",
           setData
         );
       }

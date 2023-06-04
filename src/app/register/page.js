@@ -50,7 +50,7 @@ export default function Register() {
             "username":username,
             "password":password
           },
-          "register",
+          "user-register",
           setData
         );
 

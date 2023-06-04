@@ -13,8 +13,8 @@
         margin-right: 2px;
     }
 
-    .sidebar-content
-    {
+    .sidebar-content {
+
         padding-top: 48px;
        
         .todo-home {
@@ -71,6 +71,81 @@
             .button{
                 border-radius: $radius;
                 margin: 10px 0px 0px 0px;
+                background-color: transparent;
+            }
+        }
+    }
+}
+.sidebar-mini {
+    
+    flex-direction:   column;
+    width:            60px;
+    height:           100%;
+    padding:          10px;
+    border-right:     1px solid $gray;
+    background-color: $dark;
+
+     svg {
+        margin-right: 0px;
+    }
+
+    .sidebar-content {
+        
+        padding-top: 48px;
+       
+        .todo-home {
+            background-color: $gray-alt;
+            border: 1px solid $light-gray;
+        }
+
+        .todo-home:hover {
+            background-color: $dark-purple;
+            border: 2px solid $light-purple;
+            box-shadow: inset 0px 0px 2px black;
+        }
+
+        .home-selected {
+            background-color: $gray;
+            border: 2px solid $dark-purple;
+        }
+
+        .sidebar-buttons {
+
+            text-align: center;
+            background-color: $gray;
+            border:     1px solid $light-gray;
+            width:      100%;
+            padding:    5px;
+            border-radius: $radius;
+        }
+
+        .sidebar-projects {
+
+            text-align:       center;
+            word-break:       break-all;
+            color:            transparent;
+            background-color: $gray;
+            border:           1px solid $light-gray;
+            width:            100%;
+            margin-top:       5px;
+            padding:          5px;
+            border-radius:    5px;
+
+            .projects-content {
+                
+                max-height: 400px;
+
+                ::-webkit-scrollbar {
+        
+                    display: none;
+                }
+            }
+        }
+        .add-button {
+
+            .button {
+                border-radius: $radius;
+                margin: 5px 0;
                 background-color: transparent;
             }
         }

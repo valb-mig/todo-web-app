@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    /* ..code */
-}
-
-module.exports = nextConfig
+    // experimental: {
+    //   reactRefresh: true,
+    // },
+    // // other configuration options
+};
+  
+module.exports = nextConfig;
