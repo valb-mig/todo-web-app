@@ -1,13 +1,5 @@
 @import './colors/Colors.scss';
 
-@media screen and (max-width: 700px) {
-    .sidebar {
-        
-    }
-    .sidebar a {}
-    div.content {}
-}
-
 .sidebar {
     
     flex-direction:   column;
@@ -17,10 +9,30 @@
     border-right:     1px solid $gray;
     background-color: $dark;
 
+    svg {
+        margin-right: 2px;
+    }
+
     .sidebar-content
     {
         padding-top: 48px;
        
+        .todo-home {
+            background-color: $gray-alt;
+            border: 1px solid $light-gray;
+        }
+
+        .todo-home:hover {
+            background-color: $dark-purple;
+            border: 2px solid $light-purple;
+            box-shadow: inset 0px 0px 2px black;
+        }
+
+        .home-selected {
+            background-color: $gray;
+            border: 2px solid $dark-purple;
+        }
+
         .sidebar-buttons {
 
             text-align: center;
@@ -29,10 +41,6 @@
             width:      100%;
             padding:    5px;
             border-radius: $radius;
-
-            svg {
-                margin-right: 2px;
-            }
         }
 
         .sidebar-projects {

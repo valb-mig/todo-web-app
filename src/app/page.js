@@ -1,15 +1,18 @@
 "use client";
 
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useRouter }       from 'next/navigation';
 
-import darkTheme       from '/src/utils/functions/darkTheme';
-import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
+import darkTheme         from '/src/utils/functions/darkTheme';
+import handleChangeUrl   from '/src/utils/functions/handleChangeUrl';
 
 import { faMagnifyingGlass, 
          faSun, 
-         faMoon,
+         faPlus,
          faUser } from '@fortawesome/free-solid-svg-icons';
+
+import Lottie from 'react-lottie';
+import animationData from 'public/assets/lottie/58949-person-calmzen';
 
 import Header  from 'src/components/main/Header';
 import Sidebar from 'src/components/main/Sidebar';
@@ -24,14 +27,13 @@ export default function Home() {
 
   const router = useRouter();
 
-  const loginStorage = sessionStorage.getItem('login') ? sessionStorage.getItem('login') : {};
-
   const [input,    setInputValue] = useState("");
   const [desc,     setDescValue]  = useState("");
   const [error,    setError]      = useState("");
   const [tasks,    setTasks]      = useState([]);
   const [projects, setProjects]   = useState([]);
 
+  const [home, setHome] = useState(true);
   const [selectedProject,     setSelectedProject]     = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
   
@@ -114,9 +116,9 @@ export default function Home() {
                   onclick={() => {darkTheme(setIcon,setTheme,theme)}}
               />
 
-              {loginStorage &&
+              {sessionStorage.length > 0 && sessionStorage.getItem('login') != undefined &&
               
-                <p className='user-name'>{JSON.parse(loginStorage).username}</p>
+                <p className='user-name'>{JSON.parse(sessionStorage.getItem('login')).username}</p>
               
               }
 
@@ -138,6 +140,7 @@ export default function Home() {
             project={setProjects}
             selectedProject={setSelectedProject}
             selectedProjectName={setSelectedProjectName}
+            home={setHome}
           />
 
         </section>
@@ -145,71 +148,87 @@ export default function Home() {
         <div className='content-box'>
           <div className='content'>
 
-            {projects.length > 0 ? // Todo
-
-              // With a selected project
-
-              <section>
-                <div className='project-header'>
-                  <div className='project-name'>
-                    {selectedProjectName}
-                  </div>
-                </div>
-
-                <div className='input-bar'>
-
-                  <Button
-                    icon={faPlus}
-                    onclick={handleTaskAdd}
-                  />
-
-                  <div className={'task-inputs '+error}>
-
-                    <Input
-                      id='add-task'
-                      placeholder='Task name'
-                      value={input}
-                      onchange={(e) => {setInputValue(e.target.value)}}
-                    />
-                    <Input
-                      id='desc-task'
-                      placeholder='Description'
-                      value={desc}
-                      onchange={(e) => {setDescValue(e.target.value)}}
-                    />
-
-                  </div>
-                </div>
-
-                  {tasks.filter(task => task.project === selectedProject).length > 0 &&(
-
-                    <div className='task-content'>
-                      <div className='task-box'>
-
-                        {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-
-                          <Task key={index} 
-                                title={task.title} 
-                                desc={task.desc}
-                                remove={()=>(handleTaskRemove(index,task.project))}
-                                done={()=>{handleTaskDone(index,task.project)}}
-                                class={task.status ? 'task-done' : 'not-done'}/>
-                        ))}
-                        
-                      </div>
+            {projects.length > 0 && home == false ?
+              <>
+                <section>
+                  <div className='project-header'>
+                    <div className='project-name'>
+                      {selectedProjectName}
                     </div>
-                  )}
-                  
+                  </div>
+
+                  <div className='input-bar'>
+
+                    <Button
+                      icon={faPlus}
+                      onclick={handleTaskAdd}
+                    />
+
+                    <div className={'task-inputs '+error}>
+
+                      <Input
+                        id='add-task'
+                        placeholder='Task name'
+                        value={input}
+                        onchange={(e) => {setInputValue(e.target.value)}}
+                      />
+                      <Input
+                        id='desc-task'
+                        placeholder='Description'
+                        value={desc}
+                        onchange={(e) => {setDescValue(e.target.value)}}
+                      />
+
+                    </div>
+                  </div>
                 </section>
+                <section>
+                    {tasks.filter(task => task.project === selectedProject).length > 0 &&(
 
-                :
+                      <div className='task-content'>
+                        <div className='task-box'>
 
-                // No project
+                          {tasks.filter(task => task.project === selectedProject).map((task, index) => (
 
-                <div className='start-page'>
-                  You don't have any projects created yet.
-                  click to start a new project
+                            <Task key={index} 
+                                  title={task.title} 
+                                  desc={task.desc}
+                                  remove={()=>(handleTaskRemove(index,task.project))}
+                                  done={()=>{handleTaskDone(index,task.project)}}
+                                  class={task.status ? 'task-done' : 'not-done'}/>
+                          ))}
+                          
+                        </div>
+                      </div>
+                    )}
+                </section>
+              </>
+
+              :
+
+              // No project - Login
+
+              <div className='start-page mt-[6vh]'>
+                <div className='start-content'>
+                  <div className='center-image'>
+                    <Lottie 
+                      options={
+                        {
+                          loop: true,
+                          autoplay: true,
+                          animationData: animationData,
+                          rendererSettings: {
+                            preserveAspectRatio: "xMidYMid slice"
+                          }
+                        }
+                      }
+                      height={400}
+                      width={400}
+                    />
+                  </div>
+                  <p>Wellcome to your <u><b className='ml-[10px]'>Homepage</b></u> </p>
                 </div>
+              </div>
             }
           </div>
         </div>

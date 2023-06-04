@@ -39,7 +39,35 @@
         padding: 20px 20px 0px 20px;
         width: 100%;
 
-        .project-header{
+        .start-page {
+
+          display: flex;
+          justify-content: center;
+
+          .start-content {
+
+            display: flex;
+            flex-direction: column;
+            color: $white;
+
+            .center-image {
+              display: flex;
+              justify-content: center;
+            }
+
+            p {
+              display: flex;
+              justify-content: center;
+              font-size: 2em;
+            }
+
+            u {
+              color: $dark-purple;
+            }
+          }
+        }
+
+        .project-header {
 
           display:       flex;
           width:         100%;
@@ -47,7 +75,7 @@
           word-break:    break-all;
           margin-bottom: 5px;
 
-          .project-name{
+          .project-name {
             
             display:          flex;
             justify-content:  center;

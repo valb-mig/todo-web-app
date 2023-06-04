@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faSitemap,
          faList, 
-         faPlus } from '@fortawesome/free-solid-svg-icons';
+         faPlus,
+         faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import Button from 'src/components/Button';
 import Modal  from 'src/components/main/Modal';
@@ -19,6 +20,26 @@ const Sidebar = (props) => {
 
     const [todo,   setTodo]   = useState('selected');
     const [kanban, setKanban] = useState('');
+
+    const [home, setHomeSelected] = useState('home-selected');
+
+    const setHome = (bool) => {
+
+        props.home(bool);
+        
+        if(bool)
+        {
+            setHomeSelected('home-selected');
+
+            projects.map((project, index) => {
+                project.select = ''
+            });
+        }
+        else
+        {
+            setHomeSelected('');
+        }
+    }
 
     const checkProjectType = (type) => {
 
@@ -62,6 +83,9 @@ const Sidebar = (props) => {
 
     const handleSelectProject = (id,title) => {
 
+        setHome(false);
+        setHomeSelected('');
+
         props.project(projects);
         props.selectedProject(id);
         props.selectedProjectName(title);
@@ -79,6 +103,12 @@ const Sidebar = (props) => {
         <div className='sidebar'>
 
             <div className='sidebar-content'>
+                    <Button
+                        title='Home'
+                        icon={faHouse}
+                        class={'todo-home mb-[5px] '+home}
+                        onclick={() => {setHome(true)}}
+                    />
                 <div className='sidebar-buttons'>
                     <Button
                         title='To-do'
