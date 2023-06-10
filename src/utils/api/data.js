@@ -14,6 +14,9 @@ async function sendData(data, type, setResult) {
     case "task":
       API_URL = NORMAL_URL + 'task.php'
     break;
+    case "project":
+      API_URL = NORMAL_URL + 'project.php'
+    break;
     default:
     break;
   }
@@ -34,6 +37,9 @@ async function sendData(data, type, setResult) {
 
     if (response.ok) {
       const responseData = await response.json();
+
+      console.log(responseData);
+
       setResult(responseData);
     } else {
       console.error('Error:', response.status);

@@ -45,20 +45,29 @@
 
         .sidebar-projects {
 
-            text-align: center;
-            word-break: break-all;
-            color: $white;
             background-color: $gray;
             border:     1px solid $light-gray;
-            width:      100%;
-            margin-top: 10px;
-            padding:    5px;
             border-radius: $radius;
+
+            .projects-header {
+
+                text-align: center;
+                word-break: break-all;
+                color: $white;
+                width:      100%;
+                padding:    5px;
+            }
 
             .projects-content {
                 
+                margin:     0 5px;
                 max-height: 400px;
                 overflow-y: scroll;
+
+                .button {
+                    display: flex !important;
+                    margin: 5px 0;
+                }
 
                 ::-webkit-scrollbar {
         
@@ -69,8 +78,8 @@
         .add-button {
 
             .button{
-                border-radius: $radius;
-                margin: 10px 0px 0px 0px;
+                border-radius:    $radius;
+                margin-top:       5px;
                 background-color: transparent;
             }
         }
@@ -121,19 +130,30 @@
 
         .sidebar-projects {
 
-            text-align:       center;
-            word-break:       break-all;
-            color:            transparent;
-            background-color: $gray;
-            border:           1px solid $light-gray;
-            width:            100%;
-            margin-top:       5px;
-            padding:          5px;
-            border-radius:    5px;
+            .projects-header {
+
+                text-align: center;
+                word-break: break-all;
+                color:      transparent;
+                width:      0;
+                padding:    0;
+            }
 
             .projects-content {
                 
-                max-height: 400px;
+                max-height:       400px;
+                overflow-y:       scroll;
+                background-color: $gray;
+                border-radius:    $radius;
+                margin:           5px 0;
+
+                .button {
+
+                    display: flex !important;
+                    justify-content: center;
+                    padding: 4px 0;
+                    margin:  5px;
+                }
 
                 ::-webkit-scrollbar {
         
@@ -144,8 +164,8 @@
         .add-button {
 
             .button {
+
                 border-radius: $radius;
-                margin: 5px 0;
                 background-color: transparent;
             }
         }

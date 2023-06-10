@@ -65,12 +65,15 @@ export default function Login() {
       if (data.verify) {
 
         let userData = {
+          "id_user":data.value.id_user,
           "username":data.value.username,
           "crate_date":data.value.crate_date,
           "last_access":data.value.last_access
         }
 
         sessionStorage.setItem('login',JSON.stringify(userData));
+
+        console.log(true);
 
         fetch('/', {
           method: 'POST',
@@ -84,6 +87,10 @@ export default function Login() {
         })
 
         handleChangeUrl(null,"/",router)
+      }
+      else
+      {
+        console.log(false);
       }
     }, [data]);
 
@@ -103,7 +110,7 @@ export default function Login() {
                 
                 <Button
                     icon={icon}
-                    class="switch-color mr-[5px] rounded-[100%]"
+                    class="switch-color mr-[5px] rounded-[5px]"
                     onclick={() => {darkTheme(setIcon,setTheme,theme)}}
                 />
               </div>
@@ -118,7 +125,7 @@ export default function Login() {
                       id='username'
                       icon={faUser}
                       placeholder='Username'
-                      class={error + ' rounded-[160px]'}
+                      class={error + ' rounded-[5px]'}
                       onchange={(e) => {setText(e,setUsername)}}
                   />
                 </div>
@@ -128,7 +135,7 @@ export default function Login() {
                       type='password'
                       icon={faLock}
                       placeholder='Password'
-                      class={error + ' rounded-[160px]'}
+                      class={error + ' rounded-[5px]'}
                       onchange={(e) => {setText(e,setPassword)}}
                   />
                 </div>
