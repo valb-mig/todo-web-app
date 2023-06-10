@@ -2,8 +2,6 @@ import { React,useState }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark }         from '@fortawesome/free-solid-svg-icons';
 
-import {BsFillFolderFill} from 'react-icons/bs';
-
 import 'src/components/styles/Modal.scss';
 
 import Input  from 'src/components/Input';
@@ -14,14 +12,13 @@ const Modal = (props) => {
 
     const [icons, setIcons] = useState([
 
-        {'nome':'folder',    'icone': ''},
-        {'nome':'house',     'icone': ''},
-        {'nome':'user',      'icone': ''},
-        {'nome':'star',      'icone': ''},
-        {'nome':'cloud',     'icone': ''},
-        {'nome':'hippo',     'icone': ''},
-        {'nome':'magnifying','icone': ''}
-
+        {'name':'folder'},
+        {'name':'house'},
+        {'name':'user'},
+        {'name':'star'},
+        {'name':'cloud'},
+        {'name':'hippo'},
+        {'name':'magnifying'}
     ]);
 
     let days = [1,2,3,4,5,6,7,8,9,10];
@@ -38,21 +35,21 @@ const Modal = (props) => {
                             <Input
                                 type='text'
                                 id='input-modal'
-                                onchange={props.onchange}
+                                onchange={props.onChangeInput}
                             />
 
                             <div className="select-area">
 
                                 <Select 
                                     class="select-icons mt-[5px]"
-                                    onchange={props.onchange} 
+                                    onchange={props.onChangeIcon} 
                                     id="select-icons"
-                                    iconLabel={<BsFillFolderFill/>}
+                                    iconLabel={props.getSelectedIcon}
                                 >
 
-                                    {icons.map((e,index) => (
+                                    {icons.map((e) => (
 
-                                        <option value={index + 1}>{e.nome}</option>
+                                        <option value={e.name}>{e.name}</option>
 
                                     ))}
 
@@ -60,14 +57,14 @@ const Modal = (props) => {
 
                                 <Select 
                                     class="select-days mt-[5px]"
-                                    onchange={props.onchange} 
+                                    onchange={props.onChangeDay} 
                                     id="select-days"
-                                    label="+1 Days"
+                                    label={"+"+props.getSelectedDays+" Days"}
                                 >
 
-                                    {days.map((e,index) => (
+                                    {days.map((e) => (
 
-                                        <option value={index + 1}>{e}</option>
+                                        <option value={e}>{e}</option>
 
                                     ))}
 

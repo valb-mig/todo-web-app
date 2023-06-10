@@ -27,7 +27,7 @@ a {
         border:           1px solid $light-gray;
         background-color: $gray-alt;
         padding:          10px;
-        border-radius:    5px;
+        border-radius:    $radius;
 
         .input-bar {
 
@@ -42,7 +42,7 @@ a {
             background-color: $foreground;
             width:            25px;
             height:           25px;
-            border-radius:    100%;
+            border-radius:    $radius;
             padding:          5px 7px;
           }
 

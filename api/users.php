@@ -1,22 +1,6 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
-header("Access-Control-Allow-Headers: Origin, Content-Type");
-header('Content-Type: application/json');
 
-$host     = 'localhost:5000';
-$username = 'root';
-$password = '';
-$database = 'todo_base';
-
-$conn = new mysqli($host, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die('Database connection failed: ' . $conn->connect_error);
-}
-
-$requestBody = file_get_contents('php://input');
-$data        = json_decode($requestBody, true);
+require './connection/index.php';
 
 $date = date('Y-m-d H:i:s');
 
@@ -40,20 +24,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $id   = $data['id_user'];
                 $hash = $data['hash'];
-                $salt = $data['salt'];
 
-                if (password_verify($pass, $hash)) {
-
+                if (password_verify($pass, $hash)) 
+                {
                     $update = "UPDATE todo_users_tb SET last_access = ? WHERE id_user = ?";
                     $stmt = $conn->prepare($update);
                     $stmt->bind_param('si', $date, $id);
                     $stmt->execute();
                     echo json_encode(["value" => $data, "verify" => true]);
 
-                } else {
+                } 
+                else 
+                {
                     echo json_encode(false);
                 }
-            } else {
+
+            } 
+            else 
+            {
                 echo json_encode(false);
             }
 
@@ -63,17 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $user = clean($data['data']['username']);
             $pass = clean($data['data']['password']);
-            $salt = bin2hex(random_bytes(16));
             $hash = password_hash($pass, PASSWORD_DEFAULT);
         
-            $insert = $conn->prepare("INSERT INTO todo_users_tb (username, hash, salt, create_date, last_access) VALUES (?, ?, ?, ?, ?)");
-            $insert->bind_param('sssss', $user, $hash, $salt, $date, $date);
+            $insert = $conn->prepare("INSERT INTO todo_users_tb (username, hash, create_date, last_access) VALUES (?, ?, ?, ?)");
+            $insert->bind_param('ssss', $user, $hash, $date, $date);
         
-            if ($insert->execute()) {
+            if ($insert->execute()) 
+            {
                 echo json_encode(["value" => $data, "submit" => true]);
-            } else {
+            } 
+            else 
+            {
                 echo json_encode(false);
             }
+
         break;
 
         default;

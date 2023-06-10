@@ -12,8 +12,6 @@ import { faMagnifyingGlass,
          faPlus,
          faUser } from '@fortawesome/free-solid-svg-icons';
 
-import { VscLayoutSidebarLeft } from 'react-icons/vsc';
-
 import Lottie from 'react-lottie';
 import animationData from 'public/assets/lottie/58949-person-calmzen';
 
@@ -22,6 +20,7 @@ import Sidebar from 'src/components/main/Sidebar';
 import Input   from 'src/components/Input';
 import Button  from 'src/components/Button'; 
 import Task    from 'src/components/Task';
+import Popup   from 'src/components/Popup';
 
 import 'src/app/style/page.scss';
 
@@ -34,30 +33,30 @@ export default function Home() {
   const [error,    setError]      = useState("");
   const [tasks,    setTasks]      = useState([]);
   const [projects, setProjects]   = useState([]);
-  const [sessionTasks, setSessionTasks] = useState([]);
 
+  const [sessionTasks,        setSessionTasks]        = useState([]);
+  const [selectedProject,     setSelectedProject]     = useState("");
+  const [selectedProjectName, setSelectedProjectName] = useState("");
+  const [sidebarClass,        setSidebarClass]        = useState("sidebar");
+  const [projectType,         setProjectType]         = useState('todo');
+  
+  const [icon,   setIcon]   = useState(faSun);
+  const [popup,  setPopup]  = useState(false);
   const [home,   setHome]   = useState(true);
   const [logged, setLogged] = useState(false);
+  const [theme,  setTheme]  = useState(false);
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [sidebar,       setSidebarState]  = useState(true);
-  const [sidebarClass,  setSidebarClass]  = useState("sidebar");
 
-  const [selectedProject,     setSelectedProject]     = useState("");
-  const [selectedProjectName, setSelectedProjectName] = useState("");
+  const handleSidebar = (state) => {
 
-  const [theme, setTheme] = useState(false);
-  const [icon,  setIcon]  = useState(faSun);
-
-  const handleSidebar = () => {
-    if(sidebar)
-    {
+    if(state) {
       setSidebarClass("sidebar-mini");
       setSidebarState(false)
       setIsSmallScreen(true);
     }
-    else
-    {
+    else {
       setSidebarClass("sidebar");
       setSidebarState(true)
       setIsSmallScreen(false);
@@ -137,7 +136,7 @@ export default function Home() {
   useEffect(() => {
 
     const handleResize = () => {
-        setIsSmallScreen(window.innerWidth < 768);
+        handleSidebar(window.innerWidth < 768);
     };
 
     handleResize();
@@ -156,11 +155,6 @@ export default function Home() {
 
         <Header>
           <div className='header-start'>
-              <Button
-                  reactIcon={<VscLayoutSidebarLeft/>}
-                  class="change-sidebar mr-[5px] rounded-[100%]"
-                  onclick={() => {handleSidebar()}}
-              />
               <div className='header-logo'>
 
                 <div className='site-title'>./Todo.sh
@@ -173,7 +167,7 @@ export default function Home() {
                 id='search'
                 icon={faMagnifyingGlass}
                 placeholder='Search'
-                class={'rounded-[160px]'}
+                class={'rounded-[5px]'}
               />
 
           </div>
@@ -193,16 +187,31 @@ export default function Home() {
                 <Button
                   icon={faUser}
                   class="header-account ml-[5px] rounded-[100%]"
-                  onclick={(e) => {handleChangeUrl(e,"/login",router)}}
                 />
               </>
               ):(
               <Button
                 icon={faUser}
                 class="header-account ml-[5px] rounded-[100%]"
-                onclick={(e) => {handleChangeUrl(e,"/login",router)}}
+                onclick={() => {setPopup(!popup)}}
               />
-              )}
+            )}
+
+            {popup ? (
+              <Popup>
+                <Button
+                    title="Login"
+                    onclick={(e) => {handleChangeUrl(e,"/login",router) && setPopup(!popup)}}
+                />
+                <Button
+                    title="Register"
+                    class="mt-[5px]"
+                    onclick={(e) => {handleChangeUrl(e,"/register",router) && setPopup(!popup)}}
+                />
+              </Popup>
+            ):(
+              <></>
+            )}
               
           </div>
         </Header>
@@ -211,7 +220,7 @@ export default function Home() {
 
       <div className='main-box'>
 
-        <section className={sidebar && isSmallScreen === false ? 'sidebar-box' : 'sidebar-box-mini'}>
+        <section className={!isSmallScreen ? 'sidebar-box' : 'sidebar-box-mini'}>
 
           <Sidebar
             project={setProjects}
@@ -220,6 +229,7 @@ export default function Home() {
             home={setHome}
             sidebarClass={sidebarClass}
             sidebarState={sidebar}
+            projectType={setProjectType}
           />
 
         </section>
@@ -227,87 +237,93 @@ export default function Home() {
         <div className='content-box'>
           <div className='content'>
 
-            {projects.length > 0 && home == false ?
-              <>
-                <section>
-                  <div className='project-header'>
-                    <div className='project-name'>
-                      {selectedProjectName}
-                    </div>
-                  </div>
+            {projects.length > 0 && selectedProject !== "" && selectedProjectName !== "" && home == false ? (
 
-                  <div className='input-bar'>
+                projectType === 'todo' ? (
 
-                    <Button
-                      icon={faPlus}
-                      onclick={handleTaskAdd}
-                    />
-
-                    <div className={'task-inputs '+error}>
-
-                      <Input
-                        id='add-task'
-                        placeholder='Task name'
-                        value={input}
-                        onchange={(e) => {setInputValue(e.target.value)}}
-                      />
-                      <Input
-                        id='desc-task'
-                        placeholder='Description'
-                        value={desc}
-                        onchange={(e) => {setDescValue(e.target.value)}}
-                      />
-
-                    </div>
-                  </div>
-                </section>
-                <section>
-                    <div className='task-content'>
-                      {tasks.filter(task => task.project === selectedProject).length > 0 &&(
-
-                          <div className='task-box'>
-
-                            {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-
-                              <Task key={index} 
-                                    title={task.title} 
-                                    desc={task.desc}
-                                    remove={()=>(handleTaskRemove(index,task.project))}
-                                    done={()=>{handleTaskDone(index,task.project)}}
-                                    class={task.status ? 'task-done' : 'not-done'}/>
-                            ))}
-                            
+                  <>
+                    <section>
+                      <div className='project-header'>
+                        <div className='project-name'>
+                          {selectedProjectName}
                         </div>
-                      )}
-                    </div>
-                </section>
-              </>
+                      </div>
 
-              :
+                      <div className='input-bar'>
 
-              // No project - Login
+                        <Button
+                          icon={faPlus}
+                          onclick={handleTaskAdd}
+                        />
 
-              <div className='start-page mt-[6vh]'>
-                <div className='start-content'>
-                  <div className='center-image'>
-                    <Lottie 
-                      options={
-                        {
-                          loop: true,
-                          autoplay: true,
-                          animationData: animationData,
-                          rendererSettings: {
-                            preserveAspectRatio: "xMidYMid slice"
+                        <div className={'task-inputs '+error}>
+
+                          <Input
+                            id='add-task'
+                            placeholder='Task name'
+                            value={input}
+                            onchange={(e) => {setInputValue(e.target.value)}}
+                          />
+                          <Input
+                            id='desc-task'
+                            placeholder='Description'
+                            value={desc}
+                            onchange={(e) => {setDescValue(e.target.value)}}
+                          />
+
+                        </div>
+                      </div>
+                    </section>
+                    <section>
+                        <div className='task-content'>
+                          {tasks.filter(task => task.project === selectedProject).length > 0 &&(
+
+                              <div className='task-box'>
+
+                                {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+
+                                  <Task key={index} 
+                                        title={task.title} 
+                                        desc={task.desc}
+                                        remove={()=>(handleTaskRemove(index,task.project))}
+                                        done={()=>{handleTaskDone(index,task.project)}}
+                                        class={task.status ? 'task-done' : 'not-done'}/>
+                                ))}
+                                
+                            </div>
+                          )}
+                        </div>
+                    </section>
+                  </>
+                ):(
+                  <></>
+                )
+
+              ) : (
+                // No project - Login
+
+                <div className='start-page mt-[6vh]'>
+                  <div className='start-content'>
+                    <div className='center-image'>
+                      <Lottie 
+                        options={
+                          {
+                            loop: true,
+                            autoplay: true,
+                            animationData: animationData,
+                            rendererSettings: {
+                              preserveAspectRatio: "xMidYMid slice"
+                            }
                           }
                         }
-                      }
-                      height={210}
-                      width={210}
-                    />
+                        height={210}
+                        width={210}
+                      />
+                    </div>
+                    <p>Wellcome to your <u><b className='ml-[10px]'>Homepage</b></u> </p>
                   </div>
-                  <p>Wellcome to your <u><b className='ml-[10px]'>Homepage</b></u> </p>
                 </div>
-              </div>
+              )
             }
           </div>
         </div>
