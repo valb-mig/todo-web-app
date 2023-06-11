@@ -6,9 +6,9 @@ import './styles/Button.scss';
 const Button = (props) => {
 
     return(
-        <div id={props.id} className={'button '+props.class} onClick={props.onclick}>
+        <button id={props.id} type={props.type} className={'button '+props.class} onClick={props.onclick}>
             <FontAwesomeIcon icon={props.icon}/>{props.reactIcon}{props.title}
-        </div>
+        </button>
     );
 }
 export default Button;

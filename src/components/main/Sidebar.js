@@ -34,6 +34,7 @@ const Sidebar = (props) => {
     const [home,            setHomeSelected]  = useState('home-selected');
     const [projects,        setProjects]      = useState([]);   
     const [modalInput,      setModalInput]    = useState('');
+    const [projectError,    setProjectError]  = useState('');
     const [getSelectedDays, setSelectedDays]  = useState(1);
     const [getSelectedIcon, setSelectedIcon]  = useState(AiFillFolder);
     const [createProject,   setCreateProject] = useState();
@@ -42,15 +43,12 @@ const Sidebar = (props) => {
     const [getSelectedIconText, setSelectedIconText] = useState('folder');
 
     const getModalInput = (event) => setModalInput(event.target.value);
-        
-    const getModalDay = (event) => setSelectedDays(event.target.value);
+    const getModalDay   = (event) => setSelectedDays(event.target.value);
 
     const checkProjectType = (type) => {
 
-        projects.map((project, index) => {
-            project.select = ''
-        });
-
+        projects.map((project, index) => project.select = '' );
+        
         props.selectedProject('');
         props.selectedProjectName('');
 
@@ -131,33 +129,46 @@ const Sidebar = (props) => {
 
     const submitProject = (index) => {
     
-        sendData(
-            {
-                "id_user":JSON.parse(sessionStorage.getItem('login')).id_user,
-                "username":JSON.parse(sessionStorage.getItem('login')).username,
-                "title_project":modalInput,
-                "days_project":getSelectedDays,
-                "icon_project":getSelectedIconText,
-                "project_type":projectType === 'todo' ? 'T' : 'K',
-                "color_project":'#FF0000' // TODO
-            },
-            "project-set",
-            setCreateProject
-        );
+        if(modalInput != "")
+        {
+            setProjectError('');
 
-        setProjects([...projects, 
-            {
-                id:     projects.length,
-                title:  modalInput,
-                icon:   getSelectedIcon,
-                days:   getSelectedDays,
-                type:   projectType,
-                color:  '#FF0000', // TODO
-                select: ''
-            }
-        ]);
-            
-        showModal(false);
+            sendData(
+                {
+                    "id_user":JSON.parse(sessionStorage.getItem('login')).id_user,
+                    "username":JSON.parse(sessionStorage.getItem('login')).username,
+                    "title_project":modalInput,
+                    "days_project":getSelectedDays,
+                    "icon_project":getSelectedIconText,
+                    "project_type":projectType === 'todo' ? 'T' : 'K',
+                    "color_project":'#FF0000' // TODO
+                },
+                "project-set",
+                setCreateProject
+            );
+
+            setProjects([...projects, 
+                {
+                    id:     projects.length,
+                    title:  modalInput,
+                    icon:   getSelectedIcon,
+                    days:   getSelectedDays,
+                    type:   projectType,
+                    color:  '#FF0000', // TODO
+                    select: ''
+                }
+            ]);
+                
+            setModalInput('');
+            setSelectedDays('');
+            setSelectedIcon(AiFillFolder);
+
+            showModal(false);
+        }
+        else
+        {
+            setProjectError('error');
+        }
     }
 
     const handleSelectProject = (id,title) => {
@@ -205,6 +216,7 @@ const Sidebar = (props) => {
                     getSelectedIcon={getSelectedIcon}
                     getSelectedDays={getSelectedDays}
                     addClick={submitProject}
+                    projectError={projectError}
                     cancelClick={()=>{showModal(false)}}
                 />
 

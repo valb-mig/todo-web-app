@@ -15,6 +15,11 @@
 
     .sidebar-content {
 
+        display: flex;
+        width:   100%;
+        justify-content: center;
+        flex-direction:  column;
+
         padding-top: 48px;
        
         .todo-home {
@@ -35,16 +40,21 @@
 
         .sidebar-buttons {
 
+            display: flex;
+            width:   100%;
+            flex-direction: column;
             text-align: center;
             background-color: $gray;
             border:     1px solid $light-gray;
-            width:      100%;
             padding:    5px;
             border-radius: $radius;
         }
 
         .sidebar-projects {
 
+            display: flex;
+            width:   100%;
+            flex-direction: column;
             background-color: $gray;
             border:     1px solid $light-gray;
             border-radius: $radius;
@@ -77,14 +87,30 @@
         }
         .add-button {
 
-            .button{
-                border-radius:    $radius;
-                margin-top:       5px;
+            display: flex;
+            width:   100%;
+            justify-content: center;
+
+            .button {
+
+                margin-top:    5px;
+                border-radius: $radius;
+                width:         30px;
+                height:        30px;
                 background-color: transparent;
+            }
+
+            .button:hover {
+                transform: scale(1.1);
+            }
+
+            svg {
+                margin-top: 5px;
             }
         }
     }
 }
+
 .sidebar-mini {
     
     flex-direction:   column;
@@ -100,6 +126,9 @@
 
     .sidebar-content {
         
+        display: flex;
+        width:   100%;
+        flex-direction: column;
         padding-top: 48px;
        
         .todo-home {
@@ -120,15 +149,21 @@
 
         .sidebar-buttons {
 
+            display: flex;
+            width:   100%;
+            flex-direction: column;
             text-align: center;
             background-color: $gray;
             border:     1px solid $light-gray;
-            width:      100%;
             padding:    5px;
             border-radius: $radius;
         }
 
         .sidebar-projects {
+
+            display: flex;
+            width:   100%;
+            flex-direction: column;
 
             .projects-header {
 
@@ -150,6 +185,8 @@
                 .button {
 
                     display: flex !important;
+                    width:   100%;
+                    flex-direction: column;
                     justify-content: center;
                     padding: 4px 0;
                     margin:  5px;
@@ -162,6 +199,9 @@
             }
         }
         .add-button {
+            
+            display: flex;
+            justify-content: center;
 
             .button {
 

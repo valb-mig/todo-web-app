@@ -1,12 +1,15 @@
 import { React,useState }  from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark }         from '@fortawesome/free-solid-svg-icons';
+import { MdDateRange } from 'react-icons/md';
 
 import 'src/components/styles/Modal.scss';
 
 import Input  from 'src/components/Input';
 import Button from 'src/components/Button';
 import Select from 'src/components/Select';
+
+import capitalize from '@/utils/functions/capitalize';
 
 const Modal = (props) => {
 
@@ -19,6 +22,7 @@ const Modal = (props) => {
         {'name':'cloud'},
         {'name':'hippo'},
         {'name':'magnifying'}
+
     ]);
 
     let days = [1,2,3,4,5,6,7,8,9,10];
@@ -32,34 +36,39 @@ const Modal = (props) => {
                     </div>
                     <div className='modal-project'>
                         <div className='title-input'>
+
                             <Input
+                                label="Name"
                                 type='text'
                                 id='input-modal'
+                                class={props.projectError}
                                 onchange={props.onChangeInput}
                             />
 
-                            <div className="select-area">
+                            <div className="select-area mt-[5px]">
 
                                 <Select 
-                                    class="select-icons mt-[5px]"
+                                    class="select-icons"
                                     onchange={props.onChangeIcon} 
                                     id="select-icons"
+                                    label={"Icon"}
                                     iconLabel={props.getSelectedIcon}
                                 >
 
                                     {icons.map((e) => (
 
-                                        <option value={e.name}>{e.name}</option>
+                                        <option value={e.name}>{capitalize(e.name)}</option>
 
                                     ))}
 
                                 </Select>
 
                                 <Select 
-                                    class="select-days mt-[5px]"
+                                    class="select-days ml-[5px]"
                                     onchange={props.onChangeDay} 
                                     id="select-days"
-                                    label={"+"+props.getSelectedDays+" Days"}
+                                    label={"Days"}
+                                    iconLabel={<MdDateRange/>}
                                 >
 
                                     {days.map((e) => (

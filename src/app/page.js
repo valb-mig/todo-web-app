@@ -1,19 +1,20 @@
 "use client";
 
 import { React, useState, useEffect } from 'react';
-import { useRouter }       from 'next/navigation';
-
-import darkTheme       from '/src/utils/functions/darkTheme';
-import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
-import sendData        from '/src/utils/api/data.js';
-
-import { faMagnifyingGlass, 
-         faSun, 
-         faPlus,
-         faUser } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
+import { setCookie, getCookies } from 'cookies-next';
 
 import Lottie from 'react-lottie';
 import animationData from 'public/assets/lottie/58949-person-calmzen';
+
+import { faMagnifyingGlass, 
+        faSun, 
+        faPlus,
+        faUser } from '@fortawesome/free-solid-svg-icons';
+
+import darkTheme       from '/src/utils/functions/darkTheme';
+import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
+import getTokenVerify  from '/src/utils/service/handleLogin';
 
 import Header  from 'src/components/main/Header';
 import Sidebar from 'src/components/main/Sidebar';
@@ -24,7 +25,30 @@ import Popup   from 'src/components/Popup';
 
 import 'src/app/style/page.scss';
 
-export default function Home() {
+const withSessionValidation = (WrappedComponent) => {
+    
+  const Wrapper = (props) => {
+    const router = useRouter();
+
+    useEffect(() => {
+
+        const cookies = getCookies();
+        const token   = cookies.authorization;
+
+        if (!token) {
+            
+            router.push('/login');
+        }
+
+    }, []);
+
+    return <WrappedComponent {...props} />;
+  };
+
+  return Wrapper;
+}
+
+const Home = () => {
 
   const router = useRouter();
 
@@ -34,7 +58,6 @@ export default function Home() {
   const [tasks,    setTasks]      = useState([]);
   const [projects, setProjects]   = useState([]);
 
-  const [sessionTasks,        setSessionTasks]        = useState([]);
   const [selectedProject,     setSelectedProject]     = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
   const [sidebarClass,        setSidebarClass]        = useState("sidebar");
@@ -80,6 +103,7 @@ export default function Home() {
       setDescValue("");
     }
     else {
+
       setError("error");
     }
   }
@@ -96,60 +120,24 @@ export default function Home() {
     
     const projectTasks = tasks.filter(task => task.project === project);
 
-    const updatedTasks = projectTasks.map((task, index) => {
-      if (index === taskId) {
-        return { ...task, status: !task.status };
-      } else {
-        return task;
-      }
-    });
+    const updatedTasks = projectTasks.map((task, index) => index === taskId ? { ...task, status: !task.status } : task );
 
     setTasks([...tasks.filter(task => task.project !== project), ...updatedTasks]);
   }
 
   useEffect(() => {
 
-    const handleTaskSession = () => {
-
-      if( typeof sessionStorage !== 'undefined' && sessionStorage.length > 0 && sessionStorage.getItem('login'))
-      {
-        setLogged(true);
-
-        sendData(
-          {
-            "id_user":JSON.parse(sessionStorage.getItem('login')).id_user,
-            "username":JSON.parse(sessionStorage.getItem('login')).username,
-          },
-          "task-get",
-          setSessionTasks
-        );
-      }
-      else
-      {
-        console.log('no session');
-      }
-    };
-
-    handleTaskSession();
-  }, []);
-
-  useEffect(() => {
-
-    const handleResize = () => {
-        handleSidebar(window.innerWidth < 768);
-    };
+    const handleResize = () => handleSidebar(window.innerWidth < 768);
 
     handleResize();
 
     window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [])
+    return () => window.removeEventListener('resize', handleResize);
+
+  },[])
 
   return (
-
     <div className="App">
       <section className='header-box'>
 
@@ -300,7 +288,6 @@ export default function Home() {
                 )
 
               ) : (
-                // No project - Login
 
                 <div className='start-page mt-[6vh]'>
                   <div className='start-content'>
@@ -332,3 +319,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default withSessionValidation(Home);

@@ -10,6 +10,8 @@ const Input = (props) => {
             
             <FontAwesomeIcon icon={props.icon} />
 
+            <label>{props.label}</label>
+
             <input type={props.type} 
                    id={props.id} 
                    className={'input '+props.class} 

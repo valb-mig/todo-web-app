@@ -6,10 +6,13 @@ import './styles/Select.scss'
 const Select = (props) => {
     return(
         <div className={"select-content "+props.class}>
-            <label>{props.iconLabel}{props.label}</label>
-            <select className='input-select' id={props.id} onChange={props.onchange}>
-                {props.children}
-            </select>
+            <lable>{props.label}</lable>
+            <div className='select-group'>
+                <p>{props.iconLabel}</p>
+                <select className='input-select' id={props.id} onChange={props.onchange}>
+                    {props.children}
+                </select>
+            </div>
         </div>
     );
 }
