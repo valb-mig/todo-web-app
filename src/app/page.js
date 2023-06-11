@@ -2,7 +2,7 @@
 
 import { React, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { setCookie, getCookies } from 'cookies-next';
+import { getCookies } from 'cookies-next';
 
 import Lottie from 'react-lottie';
 import animationData from 'public/assets/lottie/58949-person-calmzen';
@@ -14,7 +14,6 @@ import { faMagnifyingGlass,
 
 import darkTheme       from '/src/utils/functions/darkTheme';
 import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
-import getTokenVerify  from '/src/utils/service/handleLogin';
 
 import Header  from 'src/components/main/Header';
 import Sidebar from 'src/components/main/Sidebar';
@@ -60,6 +59,7 @@ const Home = () => {
 
   const [selectedProject,     setSelectedProject]     = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
+  const [selectedProjectIcon, setSelectedProjectIcon] = useState("");
   const [sidebarClass,        setSidebarClass]        = useState("sidebar");
   const [projectType,         setProjectType]         = useState('todo');
   
@@ -87,6 +87,8 @@ const Home = () => {
   }
 
   const handleTaskAdd = (event) => {
+
+    event.preventDefault();
 
     if(input !== '' && desc !== '') {
 
@@ -214,6 +216,7 @@ const Home = () => {
             project={setProjects}
             selectedProject={setSelectedProject}
             selectedProjectName={setSelectedProjectName}
+            selectedProjectIcon={setSelectedProjectIcon}
             home={setHome}
             sidebarClass={sidebarClass}
             sidebarState={sidebar}
@@ -231,60 +234,172 @@ const Home = () => {
 
                   <>
                     <section>
+
                       <div className='project-header'>
                         <div className='project-name'>
-                          {selectedProjectName}
+                          <div className='icon-project-name'>{selectedProjectIcon}</div>
+                          <p className='ml-[5px]'>{selectedProjectName}</p>
                         </div>
                       </div>
 
-                      <div className='input-bar'>
+                      <form onSubmit={(e) => {handleTaskAdd(e)}}>
+                        <div className='input-bar'>
 
-                        <Button
-                          icon={faPlus}
-                          onclick={handleTaskAdd}
-                        />
+                          <div className={'task-inputs '+error}>
 
-                        <div className={'task-inputs '+error}>
+                            <Input
+                              id='add-task'
+                              placeholder='Task name'
+                              value={input}
+                              onchange={(e) => {setInputValue(e.target.value)}}
+                            />
+                            <Input
+                              id='desc-task'
+                              placeholder='Description'
+                              value={desc}
+                              onchange={(e) => {setDescValue(e.target.value)}}
+                            />
 
-                          <Input
-                            id='add-task'
-                            placeholder='Task name'
-                            value={input}
-                            onchange={(e) => {setInputValue(e.target.value)}}
-                          />
-                          <Input
-                            id='desc-task'
-                            placeholder='Description'
-                            value={desc}
-                            onchange={(e) => {setDescValue(e.target.value)}}
+                          </div>
+
+                          <Button
+                            icon={faPlus}
+                            onclick={(e) => {handleTaskAdd(e)}}
+                            class="ml-[5px]"
+                            type="submit"
                           />
 
                         </div>
-                      </div>
+                      </form>
+
                     </section>
                     <section>
+                      <div className='task-content'>
+
+                        {tasks.filter(task => task.project === selectedProject).length > 0 &&(
+
+                            <div className='task-box'>
+
+                              {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+
+                                <Task key={index} 
+                                      title={task.title} 
+                                      desc={task.desc}
+                                      remove={()=>(handleTaskRemove(index,task.project))}
+                                      done={()=>{handleTaskDone(index,task.project)}}
+                                      class={task.status ? 'task-done' : 'not-done'}/>
+                              ))}
+                              
+                          </div>
+                          
+                        )}
+
+                      </div>
+                    </section>
+                  </>
+
+                ):( // Kanban
+
+                  <>
+                    <section>
+
+                      <div className='project-header'>
+                        <div className='project-name'>
+                          <div className='icon-project-name'>{selectedProjectIcon}</div>
+                          <p className='ml-[5px]'>{selectedProjectName}</p>
+                        </div>
+                      </div>
+
+                      <form onSubmit={(e) => {handleTaskAdd(e)}}>
+                        <div className='input-bar'>
+
+                          <div className={'task-inputs '+error}>
+
+                            <Input
+                              id='add-task'
+                              placeholder='Task name'
+                              value={input}
+                              onchange={(e) => {setInputValue(e.target.value)}}
+                            />
+                            <Input
+                              id='desc-task'
+                              placeholder='Description'
+                              value={desc}
+                              onchange={(e) => {setDescValue(e.target.value)}}
+                            />
+
+                          </div>
+
+                          <Button
+                            icon={faPlus}
+                            onclick={(e) => {handleTaskAdd(e)}}
+                            class="ml-[5px]"
+                            type="submit"
+                          />
+
+                        </div>
+                      </form>
+
+                    </section>
+                    <section className='kanban mt-[5px]'>
                         <div className='task-content'>
-                          {tasks.filter(task => task.project === selectedProject).length > 0 &&(
+                            <section className='kanban-area'>
 
-                              <div className='task-box'>
+                              <div className="kanban-box">
+                                <div className='kanban-title'>To Do</div>
+                                <div className='task-box'>
 
-                                {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+                                  {tasks.filter(task => task.project === selectedProject).map((task, index) => (
 
-                                  <Task key={index} 
-                                        title={task.title} 
-                                        desc={task.desc}
-                                        remove={()=>(handleTaskRemove(index,task.project))}
-                                        done={()=>{handleTaskDone(index,task.project)}}
-                                        class={task.status ? 'task-done' : 'not-done'}/>
-                                ))}
-                                
-                            </div>
-                          )}
+                                    <Task key={index} 
+                                          title={task.title} 
+                                          desc={task.desc}
+                                          remove={()=>(handleTaskRemove(index,task.project))}
+                                          done={()=>{handleTaskDone(index,task.project)}}
+                                          class={task.status ? 'task-done' : 'not-done'}/>
+                                  ))}
+                                  
+                                </div>
+                              </div>
+
+                              <div className="kanban-box">
+                                <div className='kanban-title'>Doing</div>
+                                <div className='task-box'>
+
+                                  {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+
+                                    <Task key={index} 
+                                          title={task.title} 
+                                          desc={task.desc}
+                                          remove={()=>(handleTaskRemove(index,task.project))}
+                                          done={()=>{handleTaskDone(index,task.project)}}
+                                          class={task.status ? 'task-done' : 'not-done'}/>
+                                  ))}
+                                  
+                                </div>
+                              </div>
+
+                              <div className="kanban-box">
+                                <div className='kanban-title'>Done</div>
+                                <div className='task-box'>
+
+                                  {tasks.filter(task => task.project === selectedProject).map((task, index) => (
+
+                                    <Task key={index} 
+                                          title={task.title} 
+                                          desc={task.desc}
+                                          remove={()=>(handleTaskRemove(index,task.project))}
+                                          done={()=>{handleTaskDone(index,task.project)}}
+                                          class={task.status ? 'task-done' : 'not-done'}/>
+                                  ))}
+                                  
+                                </div>
+                              </div>
+
+                            </section>
                         </div>
                     </section>
                   </>
-                ):(
-                  <></>
                 )
 
               ) : (

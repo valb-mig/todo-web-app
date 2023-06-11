@@ -28,9 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $rows   = $result->fetch_assoc();
 
             if($rows) {
+                
                 $insert = $conn->prepare("INSERT INTO todo_projects_tb (title_project,color_project,icon_project,project_type,create_date,id_user,days_project) VALUES (? ,? ,? ,? ,? ,? ,?)");
                 $insert->bind_param('sssssii', $title_project,$color_project,$icon_project,$project_type,$date,$id_user,$days_project);
                 $insert->execute();
+
+                echo json_encode(true);
             }
             else {
                 echo json_encode(false);

@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button   from 'src/components/Button';
 import Modal    from 'src/components/main/Modal';
 
-import sendData from '/src/utils/api/data.js';
+import handleProjectAdd from '/src/utils/service/handleProjectAdd.js';
 
 import '../styles/Sidebar.scss';
-
-// Icons
 
 import { faSitemap,
          faList, 
@@ -22,7 +20,7 @@ import { AiFillFolder,
 import { FaHippo,
          FaUserAlt }  from 'react-icons/fa';
 
-import {BsHouseFill} from 'react-icons/bs';
+import { BsHouseFill } from 'react-icons/bs';
 
 import { RxMagnifyingGlass }  from 'react-icons/rx';
 
@@ -127,25 +125,22 @@ const Sidebar = (props) => {
         }
     }
 
-    const submitProject = (index) => {
+    const submitProject = (e,index) => {
     
         if(modalInput != "")
         {
             setProjectError('');
 
-            sendData(
-                {
-                    "id_user":JSON.parse(sessionStorage.getItem('login')).id_user,
-                    "username":JSON.parse(sessionStorage.getItem('login')).username,
-                    "title_project":modalInput,
-                    "days_project":getSelectedDays,
-                    "icon_project":getSelectedIconText,
-                    "project_type":projectType === 'todo' ? 'T' : 'K',
-                    "color_project":'#FF0000' // TODO
-                },
-                "project-set",
-                setCreateProject
-            );
+            let projectData = {
+                
+                "title_project":modalInput,
+                "days_project":getSelectedDays,
+                "icon_project":getSelectedIconText,
+                "project_type":projectType === 'todo' ? 'T' : 'K',
+                "color_project":'#FF0000' // TODO
+            };
+
+            handleProjectAdd(e,projectData,setProjectError);
 
             setProjects([...projects, 
                 {
@@ -171,7 +166,7 @@ const Sidebar = (props) => {
         }
     }
 
-    const handleSelectProject = (id,title) => {
+    const handleSelectProject = (id,title,icon) => {
 
         setHome(false);
         setHomeSelected('');
@@ -179,6 +174,7 @@ const Sidebar = (props) => {
         props.project(projects);
         props.selectedProject(id);
         props.selectedProjectName(title);
+        props.selectedProjectIcon(icon);
 
         projects.map((project, index) => {
             project.select = ''
@@ -215,7 +211,7 @@ const Sidebar = (props) => {
                     onChangeDay={getModalDay}
                     getSelectedIcon={getSelectedIcon}
                     getSelectedDays={getSelectedDays}
-                    addClick={submitProject}
+                    addClick={(e) => {submitProject(e)}}
                     projectError={projectError}
                     cancelClick={()=>{showModal(false)}}
                 />
@@ -261,7 +257,7 @@ const Sidebar = (props) => {
                                                 reactIcon={project.icon}
                                                 class={'todo-sidebar ' + project.select}
                                                 onclick={() => {
-                                                handleSelectProject(index, project.title);
+                                                handleSelectProject(index, project.title, project.icon);
                                                 }}
                                             />
                                         );
