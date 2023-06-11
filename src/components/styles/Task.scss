@@ -25,7 +25,6 @@
         display: none;
     }
     
-
     .task-box {
 
         display:          flex;
@@ -58,34 +57,30 @@
                 justify-content: flex-end;
                 width:           100%;
 
-                .remove-button {
+                .remove-button,.done-button {
 
+                    display:       flex;
+                    justify-content: center;
                     cursor:        pointer;
                     border:        1px solid $foreground;
-                    padding:       6px 12px 6px 12px;
-                    margin:        0px 2px 0px 2px;
+                    width:         45px;
+                    height:        40px;
+                    margin:        0 2px;
                     color:         $light-foreground;
                     background-color: $light-gray;
-                    transition: all 0.2s;
-                    border-radius:    $radius;                    
+                    transition:     all 0.2s;
+                    border-radius:  $radius;   
+                    
+                    svg {
+                        margin-top: 8px;
+                    }
                 }
 
                 .remove-button:hover {
+
                     border: 1px solid $red;
                     color:            $red;
                     background-color: $bg-red;
-                }
-
-                .done-button {
-
-                    cursor:        pointer;
-                    border:        1px solid $foreground;
-                    padding:       6px 10px 6px 10px;
-                    margin:        0px 2px 0px 2px;
-                    color:         $light-foreground;
-                    background-color: $light-gray;
-                    transition: all 0.2s;
-                    border-radius:    $radius;                    
                 }
 
                 .done-button:hover {
@@ -118,6 +113,80 @@
         }
     }
 }
+
+.kanban {
+
+    display:    flex;
+    height:     100%;
+    width:      100%;
+    max-height: 100%;
+    max-width:  100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    .task-content {
+
+        display:    flex;
+        width:      100%;
+        margin:     0 !important;
+
+        .kanban-area {
+
+            display: flex;
+            width:   100%;
+            height:  100%;
+            padding: 10px;
+            border:  1px solid $gray-alt;
+            gap: 5px;
+            border-radius: $radius;
+            background-color: $dark;
+        
+            .kanban-box {
+        
+                display:        flex;
+                flex-direction: column;
+                width:          100%;
+                overflow-y:     scroll;
+
+                .kanban-title {
+
+                    color: $white;
+                    border-radius: $radius;
+                    margin-bottom: 5px;
+                }
+        
+                .task-box {
+
+                    display:          flex;
+                    flex-direction:   column;
+                    overflow-y:       scroll;
+                    padding:          20px;
+                    width:            100%;
+                    height:           100%;
+                    border:           1px solid $gray;
+                    background-color: $gray-alt;
+                    border-radius:    $radius;
+
+                    .task-header {
+
+                        display:         flex;
+                        justify-content: flex-end;
+                        width:           100%;
+        
+                        .remove-button,.done-button {
+        
+                            width:         75px;
+                            height:        40px;
+                        }
+                       
+                    }
+                }
+        
+            }
+        }
+    }
+}
+
 
 body.light {
 

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->bind_param('si', $date, $id);
                     $stmt->execute();
 
-                    echo json_encode(true);
+                    echo json_encode( ["user_id" => $data['id_user'] ] );
                 } 
                 else 
                 {

@@ -13,9 +13,12 @@ export default function handleLogin(event, body, setError, router) {
     setError('');
 
     login(body)
-      .then((verify) => {
-        if (verify) {
-          let token = createToken({ username: body.username }, JWT_SECRET);
+      .then((data) => {
+
+        console.log(data);
+
+        if (data) {
+          let token = createToken({ user_id: data.user_id, username: body.username }, JWT_SECRET);
           setCookie('authorization', token);
 
           console.log(getTokenVerify(token));
