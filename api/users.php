@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $conn->prepare($update);
                     $stmt->bind_param('si', $date, $id);
                     $stmt->execute();
-                    echo json_encode(["value" => $data, "verify" => true]);
 
+                    echo json_encode(true);
                 } 
                 else 
                 {

@@ -1,4 +1,4 @@
-async function sendData(data, type, setResult) {
+async function sendData(data, type, setResult = null) {
   
   let NORMAL_URL = 'http://localhost:4000/';
   let API_URL    = '';
@@ -36,11 +36,13 @@ async function sendData(data, type, setResult) {
     });
 
     if (response.ok) {
+
       const responseData = await response.json();
 
-      console.log(responseData);
-
-      setResult(responseData);
+      if(setResult){
+        setResult(responseData);
+      }
+      
     } else {
       console.error('Error:', response.status);
     }
