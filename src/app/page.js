@@ -1,438 +1,81 @@
 "use client";
 
-import { React, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { getCookies } from 'cookies-next';
+import { React, useState, useEffect } from 'react'
 
-import Lottie from 'react-lottie';
-import animationData from 'public/assets/lottie/58949-person-calmzen';
+import Lottie from 'lottie-react';
+import LottieData from '/public/assets/lottie/desktop-person.json';
 
-import { faMagnifyingGlass, 
-        faSun, 
-        faPlus,
-        faUser } from '@fortawesome/free-solid-svg-icons';
+import Header  from '@/components/home/Header'
+import Sidebar from '@/components/home/Sidebar'
 
-import darkTheme       from '/src/utils/functions/darkTheme';
-import handleChangeUrl from '/src/utils/functions/handleChangeUrl';
+export default function Home() {
 
-import Header  from 'src/components/main/Header';
-import Sidebar from 'src/components/main/Sidebar';
-import Input   from 'src/components/Input';
-import Button  from 'src/components/Button'; 
-import Task    from 'src/components/Task';
-import Popup   from 'src/components/Popup';
-
-import 'src/app/style/page.scss';
-
-const withSessionValidation = (WrappedComponent) => {
-    
-  const Wrapper = (props) => {
-    const router = useRouter();
-
-    useEffect(() => {
-
-        const cookies = getCookies();
-        const token   = cookies.authorization;
-
-        if (!token) {
-            
-            router.push('/login');
-        }
-
-    }, []);
-
-    return <WrappedComponent {...props} />;
-  };
-
-  return Wrapper;
-}
-
-const Home = () => {
-
-  const router = useRouter();
-
-  const [input,    setInputValue] = useState("");
-  const [desc,     setDescValue]  = useState("");
-  const [error,    setError]      = useState("");
-  const [tasks,    setTasks]      = useState([]);
-  const [projects, setProjects]   = useState([]);
-
-  const [selectedProject,     setSelectedProject]     = useState("");
-  const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [selectedProjectIcon, setSelectedProjectIcon] = useState("");
-  const [sidebarClass,        setSidebarClass]        = useState("sidebar");
-  const [projectType,         setProjectType]         = useState('todo');
-  
-  const [icon,   setIcon]   = useState(faSun);
-  const [popup,  setPopup]  = useState(false);
-  const [home,   setHome]   = useState(true);
-  const [logged, setLogged] = useState(false);
-  const [theme,  setTheme]  = useState(false);
-
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [sidebar,       setSidebarState]  = useState(true);
-
-  const handleSidebar = (state) => {
-
-    if(state) {
-      setSidebarClass("sidebar-mini");
-      setSidebarState(false)
-      setIsSmallScreen(true);
-    }
-    else {
-      setSidebarClass("sidebar");
-      setSidebarState(true)
-      setIsSmallScreen(false);
-    }
-  }
-
-  const handleTaskAdd = (event) => {
-
-    event.preventDefault();
-
-    if(input !== '' && desc !== '') {
-
-      setTasks([...tasks, {
-        
-          project: selectedProject,
-          title:   input,
-          desc:    desc,
-          status:  false
-      }]);
-
-      setError("");
-      setInputValue("");
-      setDescValue("");
-    }
-    else {
-
-      setError("error");
-    }
-  }
-
-  const handleTaskRemove = (taskId,project) => {
-
-    const projectTasks = tasks.filter(task => task.project === project);
-    const currentTask  = projectTasks.filter((task,index) => index !== taskId);
-
-    setTasks([...tasks.filter(task => task.project !== project), ...currentTask]);
-  };
-
-  function handleTaskDone(taskId, project) {
-    
-    const projectTasks = tasks.filter(task => task.project === project);
-
-    const updatedTasks = projectTasks.map((task, index) => index === taskId ? { ...task, status: !task.status } : task );
-
-    setTasks([...tasks.filter(task => task.project !== project), ...updatedTasks]);
-  }
+  const [smallSidebar, setSmallSidebar] = useState(false);
+  const [inHome, setUserInHome] = useState(true);
 
   useEffect(() => {
 
-    const handleResize = () => handleSidebar(window.innerWidth < 768);
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-
-  },[])
-
+      const handleResize = () => setSmallSidebar(window.innerWidth < 768);
+  
+      handleResize();
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    },
+  ) 
   return (
-    <div className="App">
-      <section className='header-box'>
+    <div className='Home'>
 
-        <Header>
-          <div className='header-start'>
-              <div className='header-logo'>
-
-                <div className='site-title'>./Todo.sh
-                  <span className='title-cursor'>|</span>
-                </div>
-                
-              </div>
-              
-              <Input
-                id='search'
-                icon={faMagnifyingGlass}
-                placeholder='Search'
-                class={'rounded-[5px]'}
-              />
-
-          </div>
-
-          <div className='header-end'>
-              
-            <Button
-                icon={icon}
-                class="switch-color mr-[5px] rounded-[100%]"
-                onclick={() => {darkTheme(setIcon,setTheme,theme)}}
-            />
-
-            {logged ? (
-              <>
-                <p className='user-name'>{JSON.parse(sessionStorage.getItem('login')).username}</p>
-              
-                <Button
-                  icon={faUser}
-                  class="header-account ml-[5px] rounded-[100%]"
-                />
-              </>
-              ):(
-              <Button
-                icon={faUser}
-                class="header-account ml-[5px] rounded-[100%]"
-                onclick={() => {setPopup(!popup)}}
-              />
-            )}
-
-            {popup ? (
-              <Popup>
-                <Button
-                    title="Login"
-                    onclick={(e) => {handleChangeUrl(e,"/login",router) && setPopup(!popup)}}
-                />
-                <Button
-                    title="Register"
-                    class="mt-[5px]"
-                    onclick={(e) => {handleChangeUrl(e,"/register",router) && setPopup(!popup)}}
-                />
-              </Popup>
-            ):(
-              <></>
-            )}
-              
-          </div>
-        </Header>
-
-      </section>
+      <div className='header-box'>
+        <Header/>
+      </div>
 
       <div className='main-box'>
 
-        <section className={!isSmallScreen ? 'sidebar-box' : 'sidebar-box-mini'}>
-
+        <div className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
           <Sidebar
-            project={setProjects}
-            selectedProject={setSelectedProject}
-            selectedProjectName={setSelectedProjectName}
-            selectedProjectIcon={setSelectedProjectIcon}
-            home={setHome}
-            sidebarClass={sidebarClass}
-            sidebarState={sidebar}
-            projectType={setProjectType}
+            userInHome={setUserInHome}
           />
-
-        </section>
-
-        <div className='content-box'>
-          <div className='content'>
-
-            {projects.length > 0 && selectedProject !== "" && selectedProjectName !== "" && home == false ? (
-
-                projectType === 'todo' ? (
-
-                  <>
-                    <section>
-
-                      <div className='project-header'>
-                        <div className='project-name'>
-                          <div className='icon-project-name'>{selectedProjectIcon}</div>
-                          <p className='ml-[5px]'>{selectedProjectName}</p>
-                        </div>
-                      </div>
-
-                      <form onSubmit={(e) => {handleTaskAdd(e)}}>
-                        <div className='input-bar'>
-
-                          <div className={'task-inputs '+error}>
-
-                            <Input
-                              id='add-task'
-                              placeholder='Task name'
-                              value={input}
-                              onchange={(e) => {setInputValue(e.target.value)}}
-                            />
-                            <Input
-                              id='desc-task'
-                              placeholder='Description'
-                              value={desc}
-                              onchange={(e) => {setDescValue(e.target.value)}}
-                            />
-
-                          </div>
-
-                          <Button
-                            icon={faPlus}
-                            onclick={(e) => {handleTaskAdd(e)}}
-                            class="ml-[5px]"
-                            type="submit"
-                          />
-
-                        </div>
-                      </form>
-
-                    </section>
-                    <section>
-                      <div className='task-content'>
-
-                        {tasks.filter(task => task.project === selectedProject).length > 0 &&(
-
-                            <div className='task-box'>
-
-                              {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-
-                                <Task key={index} 
-                                      title={task.title} 
-                                      desc={task.desc}
-                                      remove={()=>(handleTaskRemove(index,task.project))}
-                                      done={()=>{handleTaskDone(index,task.project)}}
-                                      class={task.status ? 'task-done' : 'not-done'}/>
-                              ))}
-                              
-                          </div>
-                          
-                        )}
-
-                      </div>
-                    </section>
-                  </>
-
-                ):( // Kanban
-
-                  <>
-                    <section>
-
-                      <div className='project-header'>
-                        <div className='project-name'>
-                          <div className='icon-project-name'>{selectedProjectIcon}</div>
-                          <p className='ml-[5px]'>{selectedProjectName}</p>
-                        </div>
-                      </div>
-
-                      <form onSubmit={(e) => {handleTaskAdd(e)}}>
-                        <div className='input-bar'>
-
-                          <div className={'task-inputs '+error}>
-
-                            <Input
-                              id='add-task'
-                              placeholder='Task name'
-                              value={input}
-                              onchange={(e) => {setInputValue(e.target.value)}}
-                            />
-                            <Input
-                              id='desc-task'
-                              placeholder='Description'
-                              value={desc}
-                              onchange={(e) => {setDescValue(e.target.value)}}
-                            />
-
-                          </div>
-
-                          <Button
-                            icon={faPlus}
-                            onclick={(e) => {handleTaskAdd(e)}}
-                            class="ml-[5px]"
-                            type="submit"
-                          />
-
-                        </div>
-                      </form>
-
-                    </section>
-                    <section className='kanban mt-[5px]'>
-                        <div className='task-content'>
-                            <section className='kanban-area'>
-
-                              <div className="kanban-box">
-                                <div className='kanban-title'>To Do</div>
-                                <div className='task-box'>
-
-                                  {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-
-                                    <Task key={index} 
-                                          title={task.title} 
-                                          desc={task.desc}
-                                          remove={()=>(handleTaskRemove(index,task.project))}
-                                          done={()=>{handleTaskDone(index,task.project)}}
-                                          class={task.status ? 'task-done' : 'not-done'}/>
-                                  ))}
-                                  
-                                </div>
-                              </div>
-
-                              <div className="kanban-box">
-                                <div className='kanban-title'>Doing</div>
-                                <div className='task-box'>
-
-                                  {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-
-                                    <Task key={index} 
-                                          title={task.title} 
-                                          desc={task.desc}
-                                          remove={()=>(handleTaskRemove(index,task.project))}
-                                          done={()=>{handleTaskDone(index,task.project)}}
-                                          class={task.status ? 'task-done' : 'not-done'}/>
-                                  ))}
-                                  
-                                </div>
-                              </div>
-
-                              <div className="kanban-box">
-                                <div className='kanban-title'>Done</div>
-                                <div className='task-box'>
-
-                                  {tasks.filter(task => task.project === selectedProject).map((task, index) => (
-
-                                    <Task key={index} 
-                                          title={task.title} 
-                                          desc={task.desc}
-                                          remove={()=>(handleTaskRemove(index,task.project))}
-                                          done={()=>{handleTaskDone(index,task.project)}}
-                                          class={task.status ? 'task-done' : 'not-done'}/>
-                                  ))}
-                                  
-                                </div>
-                              </div>
-
-                            </section>
-                        </div>
-                    </section>
-                  </>
-                )
-
-              ) : (
-
-                <div className='start-page mt-[6vh]'>
-                  <div className='start-content'>
-                    <div className='center-image'>
-                      <Lottie 
-                        options={
-                          {
-                            loop: true,
-                            autoplay: true,
-                            animationData: animationData,
-                            rendererSettings: {
-                              preserveAspectRatio: "xMidYMid slice"
-                            }
-                          }
-                        }
-                        height={210}
-                        width={210}
-                      />
-                    </div>
-                    <p>Wellcome to your <u><b className='ml-[10px]'>Homepage</b></u> </p>
-                  </div>
-                </div>
-              )
-            }
-          </div>
         </div>
+
+        {inHome &&(
+            <div className='content'>
+
+              <div className='greetings'>
+                <div className='center-image'>
+                  <Lottie
+                    loop={true}
+                    animationData={LottieData}
+                  />
+                </div>
+                <p>Wellcome to your <u>homepage</u></p>
+              </div>
+
+              <div className='info-title'>Your week status</div>
+
+              <div className='task-info'>
+
+                <section>
+                  <p>Empty</p>
+                </section>
+
+                <section>
+                  <p>Empty</p>
+                </section>
+
+                <section>
+                  <p>Empty</p>
+                </section>
+
+              </div>
+            </div>
+          )}
+
       </div>
 
     </div>
-  );
+  )
 }
-
-export default withSessionValidation(Home);

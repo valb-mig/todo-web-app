@@ -1,25 +1,22 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {React, useState } from 'react';
 
 import './styles/Input.scss'
 
-const Input = (props) => {
+const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, children}) => {
 
     return(
-        <div className={'input-bar '+props.class}>
+        <div className={'input-bar '+Error}>
             
-            <FontAwesomeIcon icon={props.icon} />
+            <label>{Label}</label>
 
-            <label>{props.label}</label>
+            <input type={Type} 
+                   id={Id} 
+                   className={'input'} 
+                   placeholder={Placeholder} 
+                   onChange={OnChange}
+                   value={Value}/>
 
-            <input type={props.type} 
-                   id={props.id} 
-                   className={'input '+props.class} 
-                   placeholder={props.placeholder} 
-                   onChange={props.onchange}
-                   value={props.value}/>
-
-            {props.children}
+            {children}
 
         </div>
     );

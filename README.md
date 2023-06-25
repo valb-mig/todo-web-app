@@ -1,6 +1,6 @@
 # 👽 Current state of the project
 
-<img src="./repo/img/project.png"></img>
+<img src="./repo/project.png"></img>
 
 # 📋 About the project
 

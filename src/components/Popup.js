@@ -1,16 +1,13 @@
-import { React,useState }  from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { React }  from 'react';
 
-import 'src/components/styles/Popup.scss';
+import './styles/Popup.scss';
 
-import Button from 'src/components/Button';
-
-const Popup = (props) => {
+const Popup = ({Class, children}) => {
 
     return(
         <div className='popup-area'>
-            <div className={'popup-content '+props.class}>
-                {props.children}
+            <div className={'popup-content '+Class}>
+                {children}
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-@import './colors/Colors.scss';
+@import '../colors/Colors.scss';
 
 .select-content {
 
@@ -8,7 +8,12 @@
 
     .select-group {
 
-        display: flex;
+        display:       flex;
+        width:         100%;
+        height:        39px;
+        align-items:   center;
+        align-content: center;
+        align-self:    center;
 
         .input-select {
 
