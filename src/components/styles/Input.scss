@@ -1,4 +1,4 @@
-@import './colors/Colors.scss';
+@import '../colors/Colors.scss';
 
 .input-bar {
 
@@ -11,12 +11,22 @@
     }
 
     .input {
-        font-size: 15px;
+        font-size: .9em;
         color: $white;
         outline: none;
-        width:   120px;
-        padding: 0px 0px 0px 5px;
+        padding-right: 5px;
         border:  none;
+    }
+}
+
+.error {
+
+    transition: all .2s;
+
+    input {
+
+        background-color: $bg-red    !important;
+        border: 1px solid $light-red !important;
     }
 }
 

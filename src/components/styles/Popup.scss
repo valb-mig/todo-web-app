@@ -1,11 +1,11 @@
-@import './colors/Colors.scss';
+@import '../colors/Colors.scss';
 
 .popup-area {
 
     position: fixed;
     z-index:  9999;
     left:     1;
-    top:      60px;
+    top:      53px;
     width:    100px;
     background-color: rgba(0, 0, 0, 0.4);
 
@@ -13,12 +13,13 @@
 
         display:  flex;
         flex-direction: column;
-        padding:  10px;
         position: absolute;
+        gap:      5px;
+        padding:  10px;
         z-index:  999;
         top:      90;
         border-radius: 5px;
-        background-color: $gray-alt;
+        background-color: $gray-alt !important;
         border: 1px solid $light-gray;
         animation: fadeInModal 0.2s ease-in-out forwards;
 

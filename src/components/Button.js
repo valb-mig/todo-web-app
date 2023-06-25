@@ -1,14 +1,12 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './styles/Button.scss';
 
-const Button = (props) => {
+export default function Button({ Id, Type, Class, OnClick, Icon, Title }){
 
     return(
-        <button id={props.id} type={props.type} className={'button '+props.class} onClick={props.onclick}>
-            <FontAwesomeIcon icon={props.icon}/>{props.reactIcon}{props.title}
+        <button id={Id} type={Type} className={'button '+Class} onClick={OnClick}>
+            {Icon}{Title}
         </button>
     );
 }
-export default Button;

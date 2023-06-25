@@ -1,16 +1,17 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './styles/Select.scss'
 
-const Select = (props) => {
+const Select = ({Class, Label, Icon, Id, OnChange, Options}) => {
     return(
-        <div className={"select-content "+props.class}>
-            <lable>{props.label}</lable>
+        <div className={"select-content "+Class}>
+            <label>{Label}</label>
             <div className='select-group'>
-                <p>{props.iconLabel}</p>
-                <select className='input-select' id={props.id} onChange={props.onchange}>
-                    {props.children}
+                <p>{Icon}</p>
+                <select className='input-select' id={Id} onChange={OnChange}>
+
+                    {Options.map((index,value) => (<option key={value} value={value}>{index}</option>) )}
+
                 </select>
             </div>
         </div>

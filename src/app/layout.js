@@ -1,7 +1,7 @@
-import { Varela_Round }    from 'next/font/google'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Varela_Round} from 'next/font/google'
 
-import './style/globals.scss'
+import 'src/app/styles/page.scss';
+import 'src/app/styles/global.scss';
 
 const varela_round = Varela_Round({ 
   weight:  '400',
@@ -18,15 +18,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-br">
-      <head>
-        <link href="https://use.fontawesome.com/releases/v6.4.0/css/svg-with-js.css" rel="stylesheet"></link>
-      </head>
-      <body>
+    <html lang="en">
+      <body className="dark">
         <main className={varela_round.className}>
           {children}
         </main>
       </body>
     </html>
-  )
+  );
 }
