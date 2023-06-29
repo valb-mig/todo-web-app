@@ -11,11 +11,14 @@
     }
 
     .input {
+        
         font-size: .9em;
-        color: $white;
+        color:  $white;
         outline: none;
-        padding-right: 5px;
-        border:  none;
+        padding: 10px;
+        border-radius: $radius;
+        background-color: $gray;
+        border: 1px solid $light-gray;
     }
 }
 

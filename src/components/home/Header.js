@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { 
   MdClose 
@@ -25,6 +26,8 @@ export default function Header() {
 
   const [popup,     setPopup]     = useState(false);
   const [darkTheme, setDarkTheme] = useState(true);
+
+  const router = useRouter();
 
   return (
     <header className='header-bar'>
@@ -59,11 +62,11 @@ export default function Header() {
               <Popup>
                   <Button
                       Title="Login"
-                      OnClick={(e) => {handleChangeUrl(e,"/login",router) && setPopup(!popup)}}
+                      OnClick={() => {router.push("/login") && setPopup(!popup)}}
                   />
                   <Button
                       Title="Register"
-                      OnClick={(e) => {handleChangeUrl(e,"/register",router) && setPopup(!popup)}}
+                      OnClick={() => {router.push("/register") && setPopup(!popup)}}
                   />
               </Popup>
           ):(
