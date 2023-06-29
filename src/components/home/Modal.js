@@ -18,7 +18,6 @@ import Input  from '@/components/Input';
 import Select from '@/components/Select';
 
 import './styles/Modal.scss';
-import { FALSE } from 'sass';
 
 export default function Modal({Modal, ShowModal, SubmitModal}){
 

@@ -84,14 +84,6 @@
             display: flex;
             width:   100%;
             flex-direction: column;
-
-            .input {
-
-              padding: 10px;
-              border-radius: $radius;
-              background-color: $gray;
-              border: 1px solid $light-gray;
-            }
           }
         }
 

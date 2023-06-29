@@ -23,15 +23,23 @@ export default function Sidebar({userInHome}){
         {
             'todo':{
                 'selected':false,
-                'tasks':[
-    
+                'projects':[
+                    {
+                        // 'tasks':[
+        
+                        // ]
+                    }
                 ]
             },
 
             'kanban':{
                 'selected':false,
-                'tasks':[
-                    
+                'projects':[
+                    {
+                        // 'tasks':[
+        
+                        // ]
+                    }
                 ]
             }
         }
@@ -74,13 +82,17 @@ export default function Sidebar({userInHome}){
         }
     }
 
+    const insertProject = (data) => {
+        console.log(data);
+    }
+
     return(
         <>
             {modal && (
                 <Modal
                     Modal={modal}
                     ShowModal={showModal}
-                    SubmitModal={() => {console.log(projects)}}
+                    SubmitModal={(data) => {insertProject(data)}}
                 />
             )}
 
