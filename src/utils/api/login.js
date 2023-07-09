@@ -1,20 +1,38 @@
-async function login(data) {
+async function handleLogin(data) {
 
-    const API_URL_USERS = process.env.NEXT_PUBLIC_API_URL_USERS;
+    const API = process.env.NEXT_PUBLIC_API_LOGIN;
+
+    if(data.username.value === '' || data.password.value === ''){
+        return false;
+    }
 
     try {
-        const requestBody = { type: 'user-verify', data: data };
 
-        const response = await fetch(API_URL_USERS, {
+        const requestBody = { 
+            username: data.username.value, 
+            password: data.password.value 
+        };
+
+        const response = await fetch(API, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json' 
+            },
             body: JSON.stringify(requestBody),
         });
 
         if (response.ok) {
 
-            const responseData = await response.json();
-            return responseData;
+            let res =  await response.json();
+
+            if(res.success) {
+
+                localStorage.setItem('laravelSessionToken', res.token);
+            }
+            else
+            {
+                return false;
+            }
 
         } else {
 
@@ -26,5 +44,5 @@ async function login(data) {
         throw new Error('Error fetching data: ' + error);
     }
 }
-  
-export default login;
+
+export default handleLogin;

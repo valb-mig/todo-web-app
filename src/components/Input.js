@@ -2,19 +2,22 @@ import {React, useState } from 'react';
 
 import './styles/Input.scss'
 
-const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, children}) => {
+const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, Icon, children}) => {
 
     return(
-        <div className={'input-bar '+Error}>
+        <div className={'input-bar '+(Error ? "error" : "")}>
             
             <label>{Label}</label>
 
+            <div className='inner-input'>
+                {Icon}
             <input type={Type} 
                    id={Id} 
-                   className={'input'} 
+                   className={'input '+Class} 
                    placeholder={Placeholder} 
                    onChange={OnChange}
                    value={Value}/>
+            </div>
 
             {children}
 

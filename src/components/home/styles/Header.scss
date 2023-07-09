@@ -81,25 +81,15 @@
             }
 
             .input-bar {
+                .inner-input {
 
-                border-radius:    $radius;
-                border: 1px solid $light-gray;
-                background-color: $gray;
+                    padding: 0 !important;
 
-                svg {
-                    display:   flex;
-                    font-size: 0px;
-                    width:     20px;
-                    height:    100%;
-                    padding:   0 10px;
-                    border-radius: 3px;
-                    background-color: $light-gray;
-                }
-
-                input {
-                    color: $white;
-                    background-color: transparent;
-                    width: 140px;
+                    input {
+                        color: $white;
+                        width: 140px;
+                        padding-left: 5px;
+                    }
                 }
             }
         }
