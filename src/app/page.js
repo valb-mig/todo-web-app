@@ -4,6 +4,7 @@ import { React, useState, useEffect } from 'react'
 
 import Lottie from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
+import handleUser from '@/utils/api/user';
 
 import Header  from '@/components/home/Header'
 import Sidebar from '@/components/home/Sidebar'
@@ -11,7 +12,17 @@ import Sidebar from '@/components/home/Sidebar'
 export default function Home() {
 
   const [smallSidebar, setSmallSidebar] = useState(false);
-  const [inHome, setUserInHome] = useState(true);
+  const [inHome, setUserInHome]   = useState(true);
+  const [userData,  setUserData]  = useState({
+    'username':'',
+    'logged':false
+  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.localStorage.getItem('laravelSessionToken') && !userData.logged) {
+      getUserData(window.localStorage.getItem('laravelSessionToken'));
+    }
+  },[]);
 
   useEffect(() => {
 
@@ -24,13 +35,28 @@ export default function Home() {
       return () => {
         window.removeEventListener('resize', handleResize);
       };
-    },
-  ) 
+  },[]);
+
+  async function getUserData(token){
+        
+    let response = await handleUser(token);
+
+    if (response && response.success && (response.username !== userData.username || !userData.logged)) {
+      setUserData({
+        ...userData,
+        username: response.username,
+        logged: true
+      });
+    }
+  }
+
   return (
     <div className='Home'>
 
       <div className='header-box'>
-        <Header/>
+        <Header
+          UserData={userData}
+        />
       </div>
 
       <div className='main-box'>

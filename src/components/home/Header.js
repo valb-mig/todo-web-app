@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { 
@@ -22,7 +22,7 @@ import changeTheme from '@/utils/functions/changeTheme.js';
 
 import './styles/Header.scss';
 
-export default function Header() {
+export default function Header({UserData}) {
 
   const [popup,     setPopup]     = useState(false);
   const [darkTheme, setDarkTheme] = useState(true);
@@ -48,6 +48,9 @@ export default function Header() {
         </div>
 
         <div className='header-end'>
+          <div className='user-name'>
+            {UserData ? UserData.username : ''}
+          </div>
           <Button
               Class="switch-color"
               Icon={ darkTheme ? <BsFillSunFill/> : <BsFillMoonFill/> }

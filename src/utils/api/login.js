@@ -26,18 +26,15 @@ async function handleLogin(data) {
             let res =  await response.json();
 
             if(res.success) {
-
                 localStorage.setItem('laravelSessionToken', res.token);
+                return true;
             }
-            else
-            {
+            else {
                 return false;
             }
 
         } else {
-
             throw new Error('Error: ' + response.status);
-            
         }
 
     } catch (error) {

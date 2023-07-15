@@ -20,6 +20,8 @@ import './styles/page.scss';
 
 export default function Login() {
 
+    const router = useRouter();
+
     const [loginFormData, setLoginFormData] = useState({
         'username':{
             'value':'',
@@ -45,9 +47,9 @@ export default function Login() {
     }
 
     async function postFormData(event){
-
-        event.preventDefault();
         
+        event.preventDefault();
+
         let response = await handleLogin(loginFormData);
 
         if(!response){
@@ -63,8 +65,10 @@ export default function Login() {
                 }
             })
         }
-
-        console.log(loginFormData);
+        else {
+            cleanFormData();
+            router.push("/");
+        }
     }
 
     return (
@@ -77,7 +81,7 @@ export default function Login() {
             <div className='content'>
 
                 <section className='box-container'>
-                    <form onSubmit={(e) => {e.preventDefault() && postFormData(e)}}>
+                    <form onSubmit={(e) => postFormData(e)}>
                         <Input
                             Type="text"
                             Error={loginFormData.username.error}
@@ -89,7 +93,6 @@ export default function Login() {
                                     error:false
                                 }
                             })}
-                            Label="Username"
                             Icon={<BiSolidUser/>}
                         />
                         <Input
@@ -103,14 +106,12 @@ export default function Login() {
                                     error:false
                                 }
                             })}
-                            Label="Password"
                             Icon={<BiSolidLockAlt/>}
                         />
                         <div className='buttons'>
                             <Button
                                 Type="submit"
                                 Title="Login"
-                                OnClick={(e) => postFormData(e)}
                             />
                         </div>
                         <p>Don't have an account yet ? <Link href={'/register'}><b><u> Register </u></b></Link></p>
