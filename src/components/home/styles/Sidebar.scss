@@ -107,6 +107,22 @@
                 }
             }
 
+            .projects {
+                
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                padding: 5px;
+
+                .button {
+
+                    background-color: $light-gray;
+                    border:           1px solid $gray;
+                    border-bottom:    3px solid $gray-alt;
+                    outline:          1px solid $foreground;
+                }
+            }
+
             .empty-content {
                 
                 display: flex;

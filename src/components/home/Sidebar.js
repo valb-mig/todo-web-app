@@ -25,29 +25,7 @@ export default function Sidebar({UserInHome}){
     const [inHome, setUserInHome] = useState(true);
     const [selectedProject, setSelectedProject] = useState(null);
 
-    const [projects, projectManager] = useState(
-        {
-            'todo':{
-                'projects':[
-                    {
-                        // 'tasks':[
-        
-                        // ]
-                    }
-                ]
-            },
-
-            'kanban':{
-                'projects':[
-                    {
-                        // 'tasks':[
-        
-                        // ]
-                    }
-                ]
-            }
-        }
-    );
+    const [projects, setProjects] = useState({});
 
     useEffect(() => {
 
@@ -69,7 +47,6 @@ export default function Sidebar({UserInHome}){
         if(bool){
             setSelectedProject(null);
         }
-
         setUserInHome(bool);
         UserInHome(bool);
     }
@@ -80,15 +57,14 @@ export default function Sidebar({UserInHome}){
     }
 
     async function handleGetProjects(){
-        let projects = await getProject();
+        let response = await getProject();
 
-        if(projects){
-            console.log(projects);
+        if(response){
+            setProjects(response.projects);
         }
     }
 
     async function insertProject(data,type) {
-
         let response = await addProject(data,type);
 
         if(response){
@@ -142,8 +118,7 @@ export default function Sidebar({UserInHome}){
                                     ) : null
                                 }
 
-
-                                {true && !smallSidebar ? (
+                                { projects.length < 1 && projects.filter(project => project.type === selectedProject).length > 0 && !smallSidebar ? (
                                     <div className='empty-content'>
                                         <div className='not-found'>
                                             <img src='assets/img/not-found.png'/>
@@ -152,6 +127,18 @@ export default function Sidebar({UserInHome}){
                                     </div>
                                     ) : null
                                 }
+
+                                {projects[selectedProject] && Object.values(projects[selectedProject]).length > 0 && (
+                                    <div className='projects'>
+                                        {Object.entries(projects[selectedProject]).map(([index, project], key) => (                                    
+                                            <Button
+                                                Key={key}
+                                                Title={index}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+
                             </div>
                         
                         

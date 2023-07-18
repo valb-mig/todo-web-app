@@ -21,7 +21,7 @@ async function getProject() {
         const response = await fetch(API_URL_PROJECT, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestBody),
+            body: JSON.stringify(requestBody)
         });
 
         if (response.ok) {
