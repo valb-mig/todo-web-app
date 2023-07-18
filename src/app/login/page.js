@@ -14,7 +14,7 @@ import Header from '@/components/home/Header';
 import Input  from '@/components/Input';
 import Button from '@/components/Button'; 
 
-import handleLogin from '@/utils/api/login'
+import handleLogin from '@/utils/api/user/login'
 
 import './styles/page.scss';
 

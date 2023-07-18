@@ -1,6 +1,11 @@
 import { React, useState, useEffect } from 'react';
 
-import { AiOutlinePlus } from 'react-icons/ai';
+import addProject from '@/utils/api/project/add';
+import getProject from '@/utils/api/project/get';
+
+import { 
+    AiOutlinePlus 
+} from 'react-icons/ai';
 
 import { 
     FaProjectDiagram, 
@@ -13,16 +18,16 @@ import Button from '@/components/Button';
 
 import './styles/Sidebar.scss';
 
-export default function Sidebar({userInHome}){
+export default function Sidebar({UserInHome}){
 
     const [modal, showModal] = useState(false);
     const [smallSidebar, setSmallSidebar] = useState(false);
     const [inHome, setUserInHome] = useState(true);
+    const [selectedProject, setSelectedProject] = useState(null);
 
     const [projects, projectManager] = useState(
         {
             'todo':{
-                'selected':false,
                 'projects':[
                     {
                         // 'tasks':[
@@ -33,7 +38,6 @@ export default function Sidebar({userInHome}){
             },
 
             'kanban':{
-                'selected':false,
                 'projects':[
                     {
                         // 'tasks':[
@@ -56,34 +60,40 @@ export default function Sidebar({userInHome}){
         return () => window.removeEventListener('resize', handleResize);
     }, [])
 
+    useEffect(() => {
+        handleGetProjects();
+    },[])
+
     const changeToHome = (bool) => {
 
         if(bool){
-            projectManager({...projects,todo:{...projects.todo,selected:false},kanban:{...projects.kanban,selected:false}});
+            setSelectedProject(null);
         }
 
         setUserInHome(bool);
-        userInHome(bool);
+        UserInHome(bool);
     }
 
     const changeProjectType = (type) => {
-
         changeToHome(false);
+        setSelectedProject(type);
+    }
 
-        switch(type){
+    async function handleGetProjects(){
+        let projects = await getProject();
 
-            case 'todo':
-                projectManager({...projects,todo:{...projects.todo,selected:true},kanban:{...projects.kanban,selected:false}});
-            break;
-
-            case 'kanban':
-                projectManager({...projects,todo:{...projects.todo,selected:false},kanban:{...projects.kanban,selected:true}});
-            break;
+        if(projects){
+            console.log(projects);
         }
     }
 
-    const insertProject = (data) => {
-        console.log(data);
+    async function insertProject(data,type) {
+
+        let response = await addProject(data,type);
+
+        if(response){
+            handleGetProjects();
+        }
     }
 
     return(
@@ -92,7 +102,7 @@ export default function Sidebar({userInHome}){
                 <Modal
                     Modal={modal}
                     ShowModal={showModal}
-                    SubmitModal={(data) => {insertProject(data)}}
+                    SubmitModal={(data) => {insertProject(data,selectedProject)}}
                 />
             )}
 
@@ -108,13 +118,13 @@ export default function Sidebar({userInHome}){
                         <Button
                             Title={!smallSidebar  ? 'To-do' : ''}
                             Icon={!smallSidebar   ? '' : <FaListUl/>}
-                            Class={projects.todo.selected ? 'selected' : ''}
+                            Class={selectedProject == 'todo' ? 'selected' : ''}
                             OnClick={() => {changeProjectType('todo') && changeToHome(false)}}
                         />
                         <Button
                             Title={!smallSidebar  ? 'Kanban' : ''}
                             Icon={!smallSidebar   ? '' : <FaProjectDiagram/>}
-                            Class={projects.kanban.selected ? 'selected' : ''}
+                            Class={selectedProject == 'kanban' ? 'selected' : ''}
                             OnClick={() => {changeProjectType('kanban') && changeToHome(false)}}
                         />
                     </div>
@@ -127,7 +137,7 @@ export default function Sidebar({userInHome}){
 
                                 { !smallSidebar && !inHome ? (
                                         <span>
-                                            <div className='porject-type-tag'>{projects.todo.selected ? 'to-do' : 'kanban'}</div>
+                                            <div className='porject-type-tag'>{selectedProject}</div>
                                         </span>
                                     ) : null
                                 }

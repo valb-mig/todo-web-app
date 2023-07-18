@@ -4,7 +4,8 @@ import { React, useState, useEffect } from 'react'
 
 import Lottie from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
-import handleUser from '@/utils/api/user';
+import handleUser from '@/utils/api/user/user';
+import getToken   from '@/utils/functions/getToken';
 
 import Header  from '@/components/home/Header'
 import Sidebar from '@/components/home/Sidebar'
@@ -15,13 +16,11 @@ export default function Home() {
   const [inHome, setUserInHome]   = useState(true);
   const [userData,  setUserData]  = useState({
     'username':'',
-    'logged':false
+    'logged'  :false
   });
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage.getItem('laravelSessionToken') && !userData.logged) {
-      getUserData(window.localStorage.getItem('laravelSessionToken'));
-    }
+      getUserData(getToken(userData.logged));
   },[]);
 
   useEffect(() => {
@@ -45,7 +44,7 @@ export default function Home() {
       setUserData({
         ...userData,
         username: response.username,
-        logged: true
+        logged:   true
       });
     }
   }
@@ -63,7 +62,7 @@ export default function Home() {
 
         <div className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
           <Sidebar
-            userInHome={setUserInHome}
+            UserInHome={setUserInHome}
           />
         </div>
 
