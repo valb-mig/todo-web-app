@@ -1,8 +1,8 @@
 import getToken from "@/utils/functions/getToken";
 
-async function getProject() {
+async function addTask(id_project,task) {
 
-    const API_URL_PROJECT = process.env.NEXT_PUBLIC_API_PROJECT;
+    const API_URL_TASK = process.env.NEXT_PUBLIC_API_TASK_ADD;
 
     let token = getToken();
     
@@ -12,12 +12,15 @@ async function getProject() {
     }
 
     try {
-        
+
         const requestBody = { 
             token: token,
+            id_project:id_project,
+            task_title:task.title,
+            task_desc:task.desc
         }
 
-        const response = await fetch(API_URL_PROJECT, {
+        const response = await fetch(API_URL_TASK, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody)
@@ -35,7 +38,6 @@ async function getProject() {
             }
 
         } else {
-
             return false        
         }
 
@@ -44,4 +46,4 @@ async function getProject() {
     }
 }
   
-export default getProject;
+export default addTask;

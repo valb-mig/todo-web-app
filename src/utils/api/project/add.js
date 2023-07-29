@@ -1,19 +1,18 @@
+import getToken from "@/utils/functions/getToken";
+
 async function addProject(project,type) {
 
     const API_URL_PROJECT_ADD = process.env.NEXT_PUBLIC_API_PROJECT_ADD;
 
-    let token = "";
+    let token = getToken();
     
-    if(window.localStorage.getItem('laravelSessionToken'))
-    {
-        token = window.localStorage.getItem('laravelSessionToken');
-    }
-    else
-    {
+    if(!token) {
+
         return false;
     }
 
     try {
+
         const requestBody = { 
             token: token,
             type: type,

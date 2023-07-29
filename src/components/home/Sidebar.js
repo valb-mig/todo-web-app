@@ -18,7 +18,7 @@ import Button from '@/components/Button';
 
 import './styles/Sidebar.scss';
 
-export default function Sidebar({UserInHome, GetProjects, SelectedProject}){
+export default function Sidebar({UserInHome, GetProjects, SelectedProject, SmallSidebar}){
 
     const [projects, setProjects] = useState({});
 
@@ -52,11 +52,16 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject}){
     }
 
     useEffect(() => {
-        const handleResize = () => setSmallSidebar(window.innerWidth < 768);
+        const handleResize = () => {
+            let smallSize = window.innerWidth < 768;
+
+            setSmallSidebar(smallSize)
+            SmallSidebar(smallSize)
+        };
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [])
+    }, [SmallSidebar])
 
     useEffect(() => {
         handleGetProjects();
@@ -94,7 +99,7 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject}){
 
         if(response){
             setProjects(response.projects);
-            GetProjects(response.projects);
+            // GetProjects(response.projects);
         }
     }
 
@@ -115,6 +120,7 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject}){
             icon:project.icon_name,
             id_project:project.id_project
         });
+
         SelectedProject({
             ...selectedProject,
             id:key,
