@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="dark">
         <main className={varela_round.className}>
-          {children}
+          { children }
         </main>
       </body>
     </html>

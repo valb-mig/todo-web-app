@@ -10,8 +10,9 @@ import getToken   from '@/utils/functions/getToken';
 import Header  from '@/components/home/Header';
 import Sidebar from '@/components/home/Sidebar';
 import Task    from '@/components/home/Task';
+import { useRouter } from 'next/navigation';
 
-export default function Home() {
+function Home({ userData }) {
 
   const [selectedProject, setSelectedProject] = useState({
     id:null,
@@ -20,27 +21,6 @@ export default function Home() {
 
   const [smallSidebar, setSmallSidebar] = useState(false);
   const [inHome, setUserInHome] = useState(true);
-  const [userData, setUserData] = useState({
-    'username':'',
-    'logged'  :false
-  });
-
-  useEffect(() => {
-      getUserData(getToken(userData.logged));
-  },[]);
-
-  async function getUserData(token) {
-        
-    let response = await handleUser(token);
-
-    if (response && response.success && (response.username !== userData.username || !userData.logged)) {
-      setUserData({
-        ...userData,
-        username: response.username,
-        logged:   true
-      });
-    }
-  }
 
   function LoadTasks(Project) {
     return(
@@ -107,4 +87,59 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+export default function WrappedComponent() {
+
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState({
+    username:'',
+    logged:false
+  });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+
+    const response = await handleUser(getToken());
+
+    if(response) {
+
+      try {
+
+        if (response?.success) {
+          setUserData({
+            username: response.username,
+            logged:   true
+          });
+        } else {
+          setUserData({
+            username: 'Jhon Doe',
+            logged:   false
+          });
+        }
+        
+      } catch (error) {
+        setUserData({
+          username: 'Jhon Doe',
+          logged:   false
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+    else {
+      router.push('/login');
+    }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return userData ? <Home userData={userData} /> : null;
 }

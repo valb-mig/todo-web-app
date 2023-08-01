@@ -5,6 +5,7 @@ import Input  from '@/components/Input';
 import Card   from '@/components/Card';
 
 import getTasks from '@/utils/api/task/get';
+import addTask  from '@/utils/api/task/add';
 
 import {
     FaListUl,
@@ -29,6 +30,14 @@ export default function Task({ Project }){
         error: false
     });
 
+    const clearFormData = () => {
+        setTaskFormData({
+            title: '',
+            desc: '',
+            error: false 
+        })
+    }
+
     async function updateTasks(id_project) {
 
         let response = await getTasks(id_project);
@@ -39,8 +48,21 @@ export default function Task({ Project }){
         }
     }
 
-    const submitTask = (event) => {
+    async function submitTask(event,id_project) {
+
         event.preventDefault();
+
+        let response = await addTask(id_project,taskFormData);
+
+        if(response) {
+
+            clearFormData();
+            updateTasks(id_project);
+        }
+        else {
+
+            setTaskFormData({...taskFormData,error:true})
+        }
     }
 
     return(
@@ -53,22 +75,24 @@ export default function Task({ Project }){
                     <p>{Project.title}</p>
                 </div>
             </div>
-            <form onSubmit={(e) => {submitTask(e)}}>
+            <form onSubmit={(e) => {submitTask(e,Project.id_project)}}>
                 <div className='input-bar'>
                     <div className={'task-inputs ' + (taskFormData.error ? 'error-task-input' : '')}>
                         <Input
                             Id='add-task'
                             Placeholder='Task name'
                             OnChange={(e) => {setTaskFormData({...taskFormData,title:e.target.value})}}
+                            Value={taskFormData.title}
                         />
                         <Input
                             Id='desc-task'
                             Placeholder='Description'
                             OnChange={(e) => {setTaskFormData({...taskFormData,desc:e.target.value})}}
+                            Value={taskFormData.desc}
                         />
                     </div>
                     <Button
-                        OnClick={(e) => {submitTask(e)}}
+                        OnClick={(e) => {submitTask(e,Project.id_project)}}
                         Type="submit"
                         Icon={<FaPlus/>}
                     />

@@ -22,7 +22,7 @@ import changeTheme from '@/utils/functions/changeTheme.js';
 
 import './styles/Header.scss';
 
-export default function Header({UserData}) {
+export default function Header({ UserData }) {
 
   const [popup,     setPopup]     = useState(false);
   const [darkTheme, setDarkTheme] = useState(true);
@@ -48,9 +48,12 @@ export default function Header({UserData}) {
         </div>
 
         <div className='header-end'>
-          <div className='user-name'>
-            {UserData ? UserData.username : ''}
-          </div>
+        
+          { UserData && UserData.username != '' && UserData.username != null ? (
+              <div className='user-name'>{UserData.username}</div>
+          ):null
+          }
+          
           <Button
               Class="switch-color"
               Icon={ darkTheme ? <BsFillSunFill/> : <BsFillMoonFill/> }

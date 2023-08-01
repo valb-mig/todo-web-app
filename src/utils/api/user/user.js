@@ -27,15 +27,15 @@ async function handleUser(token) {
               return res;
           }
           else {
-              return false;
+              return {success:false};
           }
 
       } else {
-          throw new Error('Error: ' + response.status);
+          return {success:false};
       }
 
   } catch (error) {
-      throw new Error('Error fetching data: ' + error);
+    return {success:false};
   }
 }
 
