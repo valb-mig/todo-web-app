@@ -26,6 +26,7 @@ function Home({ userData }) {
     return(
       <Task
         Project={Project}
+        Tasks={Project.tasks}
       />
     );
   }
@@ -138,7 +139,30 @@ export default function WrappedComponent() {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+
+    return (
+
+      <div className='Home'>
+        <div className='header-box'>
+          <header className='header-bar'>
+            <div className='header-item'>
+              <div className='header-start'>
+                <div className='header-logo'/>
+              </div>
+              <div className='header-end'/>
+            </div>
+          </header>
+        </div>
+        <div className='main-box'>
+          <div className='sidebar-box'>
+            <div className='sidebar'>
+              <div className='sidebar-content'>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return userData ? <Home userData={userData} /> : null;

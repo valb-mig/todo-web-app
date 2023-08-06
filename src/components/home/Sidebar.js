@@ -18,7 +18,7 @@ import Button from '@/components/Button';
 
 import './styles/Sidebar.scss';
 
-export default function Sidebar({UserInHome, GetProjects, SelectedProject, SmallSidebar}){
+export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
 
     const [projects, setProjects] = useState({});
 
@@ -31,7 +31,8 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
         type:  null,
         title: null,
         icon:  null,
-        id_project: null
+        id_project: null,
+        tasks: null
     });
 
     const clearSelectedProject = () => {
@@ -40,14 +41,16 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
             type:  null,
             title: null,
             icon:  null,
-            id_project: null
+            id_project: null,
+            tasks: null
         });
         SelectedProject({
             id:    null,
             type:  null,
             title: null,
             icon:  null,
-            id_project: null
+            id_project: null,
+            tasks: null
         });
     }
 
@@ -83,14 +86,16 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
             type:type,
             title:null,
             icon:null,
-            id_project:null
+            id_project:null,
+            tasks: null
         });
         SelectedProject({
             id:null,
             type:type,
             title:null,
             icon:null,
-            id_project:null
+            id_project:null,
+            tasks: null
         });
     }
 
@@ -99,7 +104,6 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
 
         if(response){
             setProjects(response.projects);
-            // GetProjects(response.projects);
         }
     }
 
@@ -118,7 +122,8 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
             id:key,
             title:title,
             icon:project.icon_name,
-            id_project:project.id_project
+            id_project:project.id_project,
+            tasks:project.tasks
         });
 
         SelectedProject({
@@ -126,7 +131,8 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
             id:key,
             title:title,
             icon:project.icon_name,
-            id_project:project.id_project
+            id_project:project.id_project,
+            tasks:project.tasks
         });
     }
 
@@ -191,9 +197,10 @@ export default function Sidebar({UserInHome, GetProjects, SelectedProject, Small
                                         {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
                                             <Button
                                                 Key={key}
-                                                Title={index}
+                                                Title={!smallSidebar ? index : ''}
                                                 OnClick={() => {handleSelectProject(key,index,project)}}
                                                 Class={selectedProject.id == key ? "selected" : ""}
+                                                Icon={<FaListUl/>}
                                             />
                                         ))}
                                     </div>

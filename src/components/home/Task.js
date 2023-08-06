@@ -14,15 +14,13 @@ import {
 
 import './styles/Task.scss';
 
-export default function Task({ Project }){
+export default function Task({ Project, Tasks }){
 
-    const [tasks, setTask] = useState({
-
-    });
+    const [tasks, setTask] = useState({});
 
     useEffect(() => {
-        updateTasks(Project.id_project);
-    },[Project]);
+        setTask(Tasks);
+    },[Tasks]);
 
     const [taskFormData, setTaskFormData] = useState({
         title: '',
@@ -38,16 +36,6 @@ export default function Task({ Project }){
         })
     }
 
-    async function updateTasks(id_project) {
-
-        let response = await getTasks(id_project);
-
-        if(response && response.success)
-        {
-            setTask(response.tasks);
-        }
-    }
-
     async function submitTask(event,id_project) {
 
         event.preventDefault();
@@ -55,12 +43,14 @@ export default function Task({ Project }){
         let response = await addTask(id_project,taskFormData);
 
         if(response) {
-
+            setTask({...tasks,
+                title: taskFormData.title,
+                desc:  taskFormData.desc,
+                error: false 
+            })
             clearFormData();
-            updateTasks(id_project);
         }
         else {
-
             setTaskFormData({...taskFormData,error:true})
         }
     }
@@ -114,7 +104,7 @@ const Todo = ({ Tasks }) => {
     if(Tasks.length > 0){
 
         return (
-            <div className='task-content'>
+            <div className='task-box-area'>
                 <div className='task-box'>
                 {Tasks.map((task, index) => (
                     <Card 
