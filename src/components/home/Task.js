@@ -35,13 +35,13 @@ export default function Task() {
 
     async function submitTask(event) {
 
-        event.preventDefault();
+        console.log(projects);
 
-        const tasks = projects[selectedProject.type][selectedProject.id_project].tasks;
+        event.preventDefault();
 
         let response = await addTask(selectedProject.id_project,taskFormData);
 
-        if(response) { // [todo] return task id
+        if(response) {
 
             setProjects({
                 ...projects,
@@ -53,11 +53,10 @@ export default function Task() {
                     [selectedProject.id_project]:{
     
                         ...projects[selectedProject.type][selectedProject.id_project],
-                        tasks:{
-                            ...tasks,
-                            id_project:selectedProject.id_project,
-
-                        },
+                        tasks:[
+                            ...projects[selectedProject.type][selectedProject.id_project].tasks,
+                            response.task
+                        ],
                     }
                 }
             });
@@ -120,18 +119,44 @@ const Todo = () => {
 
     const handleTaskRemove = (id_task) => {}
 
-    async function handleTaskDone(id_task) {
+    async function toggleTaskStatus(id_task, key, done) {
 
-        // console.log(Projects.tasks);
-
-        // let response = await editTask(id_task, Projects.id_project, 'done');
-
-        // if(response) {
-        // }
-        // else {
-        // }
-    }
+        const project_type = selectedProject.type;
+        const id_project   = selectedProject.id_project;
     
+        const action = done ? "not-done" : "done";
+
+        const updatedTasks = projects[project_type][id_project].tasks.map((task, index) => {
+            if (index === key) {
+                return { ...task, task_done: done ? "N" : "Y" };
+            }
+            return task;
+        });
+
+        const updatedProject = {
+            ...projects[project_type][id_project],
+            tasks: updatedTasks,
+        };
+
+        const updatedProjectType = {
+            ...projects[project_type],
+            [id_project]: updatedProject,
+        };
+
+        const updatedProjects = {
+            ...projects,
+            [project_type]: updatedProjectType,
+        };
+
+        let response = await editTask(id_task, id_project, action);
+    
+        if (response) {
+            setProjects(updatedProjects);
+        } else {
+            console.log('Error');
+        }
+    }
+
     if(projects[selectedProject.type][selectedProject.id_project].tasks.length > 0){
 
         return (
@@ -141,8 +166,8 @@ const Todo = () => {
                     <Card
                         key={index}
                         Task={task}
-                        RemoveTask={() => handleTaskRemove(task.id_task)}
-                        SetStatus={()  => handleTaskDone(task.id_task)}
+                        RemoveTask={() => handleTaskRemove(task.id_task, index)}
+                        SetStatus={()  => toggleTaskStatus(task.id_task, index, task.task_done === "Y")}
                         Class={task.task_done === "Y" ? 'task-done' : 'not-done'} 
                     />
                 ))}
