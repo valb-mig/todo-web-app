@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from 'react';
+import { useGlobalContext } from '@/app/Context/store';
 
 import addProject from '@/utils/api/project/add';
 import getProject from '@/utils/api/project/get';
@@ -18,59 +19,31 @@ import Button from '@/components/Button';
 
 import './styles/Sidebar.scss';
 
-export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
+export default function Sidebar({ UserInHome, SmallSidebar }){
 
-    const [projects, setProjects] = useState({});
+    const { projects, setProjects, selectedProject, setSelectedProject } = useGlobalContext();
 
     const [modal, showModal] = useState(false);
     const [inHome, setUserInHome] = useState(true);
     const [smallSidebar, setSmallSidebar] = useState(false);
 
-    const [selectedProject, setSelectedProject] = useState({
-        id:    null,
-        type:  null,
-        title: null,
-        icon:  null,
-        id_project: null,
-        tasks: null
-    });
+    useEffect(() => {
+        handleGetProjects();
+    },[])
 
     const clearSelectedProject = () => {
+        
         setSelectedProject({
             id:    null,
             type:  null,
             title: null,
             icon:  null,
-            id_project: null,
-            tasks: null
-        });
-        SelectedProject({
-            id:    null,
-            type:  null,
-            title: null,
-            icon:  null,
-            id_project: null,
-            tasks: null
+            id_project: null
         });
     }
 
-    useEffect(() => {
-        const handleResize = () => {
-            let smallSize = window.innerWidth < 768;
-
-            setSmallSidebar(smallSize)
-            SmallSidebar(smallSize)
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [SmallSidebar])
-
-    useEffect(() => {
-        handleGetProjects();
-    },[])
-
     const changeToHome = (bool) => {
+
         if(bool) {
             clearSelectedProject();
         }
@@ -79,23 +52,15 @@ export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
     }
 
     const changeProjectType = (type) => {
+
         changeToHome(false);
 
         setSelectedProject({
-            id:null,
-            type:type,
-            title:null,
-            icon:null,
-            id_project:null,
-            tasks: null
-        });
-        SelectedProject({
-            id:null,
-            type:type,
-            title:null,
-            icon:null,
-            id_project:null,
-            tasks: null
+            id:    null,
+            type:  type,
+            title: null,
+            icon:  null,
+            id_project: null
         });
     }
 
@@ -115,26 +80,28 @@ export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
         }
     }
 
-    const handleSelectProject = (key,title,project) => {
+    const handleSelectProject = (key,title,project,id) => {
 
         setSelectedProject({
             ...selectedProject,
             id:key,
             title:title,
             icon:project.icon_name,
-            id_project:project.id_project,
-            tasks:project.tasks
-        });
-
-        SelectedProject({
-            ...selectedProject,
-            id:key,
-            title:title,
-            icon:project.icon_name,
-            id_project:project.id_project,
-            tasks:project.tasks
+            id_project:id,
         });
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            let smallSize = window.innerWidth < 768;
+
+            setSmallSidebar(smallSize)
+            SmallSidebar(smallSize)
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [SmallSidebar])
 
     return(
         <>
@@ -149,6 +116,7 @@ export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
             <div className={smallSidebar ? 'sidebar-mini' : 'sidebar'}>
                 <div className='sidebar-content'>
                     <Button
+                        Key="home"
                         Title={!smallSidebar  ? 'Home' : ''}
                         Icon={!smallSidebar   ? '' : <FaHome/>}
                         Class={inHome ? 'todo-home home-selected' : 'todo-home'}
@@ -156,12 +124,14 @@ export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
                     />
                     <div className='sidebar-buttons'>
                         <Button
+                            key="todo"
                             Title={!smallSidebar  ? 'To-do' : ''}
                             Icon={!smallSidebar   ? '' : <FaListUl/>}
                             Class={selectedProject.type == 'todo' ? 'selected' : ''}
                             OnClick={() => {changeProjectType('todo') && changeToHome(false)}}
                         />
                         <Button
+                            Key="kanban"
                             Title={!smallSidebar  ? 'Kanban' : ''}
                             Icon={!smallSidebar   ? '' : <FaProjectDiagram/>}
                             Class={selectedProject.type == 'kanban' ? 'selected' : ''}
@@ -197,8 +167,8 @@ export default function Sidebar({UserInHome, SelectedProject, SmallSidebar}){
                                         {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
                                             <Button
                                                 Key={key}
-                                                Title={!smallSidebar ? index : ''}
-                                                OnClick={() => {handleSelectProject(key,index,project)}}
+                                                Title={!smallSidebar ? project.title_project : ''}
+                                                OnClick={() => { handleSelectProject(key,project.title_project,project,index) }}
                                                 Class={selectedProject.id == key ? "selected" : ""}
                                                 Icon={<FaListUl/>}
                                             />

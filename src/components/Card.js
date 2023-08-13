@@ -18,11 +18,11 @@ const Card = ({Task, Class, RemoveTask, SetStatus}) => {
                     </div>
                 </div>
 
-                <div className='done-button' onClick={() => {SetStatus('done')}}>
+                <div className='done-button' onClick={() => {SetStatus()}}>
                     <BsCheckLg/>
                 </div>
 
-                <div className='remove-button' onClick={() => {RemoveTask(Task.id_task)}}>
+                <div className='remove-button' onClick={() => {RemoveTask()}}>
                     <BsFillTrashFill/>
                 </div>
 

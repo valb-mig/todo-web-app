@@ -1,5 +1,6 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useGlobalContext } from '@/app/Context/store';
 
 import { 
   MdClose 
@@ -22,7 +23,9 @@ import changeTheme from '@/utils/functions/changeTheme.js';
 
 import './styles/Header.scss';
 
-export default function Header({ UserData }) {
+export default function Header() {
+
+  const { userData, setUserData } = useGlobalContext();
 
   const [popup,     setPopup]     = useState(false);
   const [darkTheme, setDarkTheme] = useState(true);
@@ -49,8 +52,8 @@ export default function Header({ UserData }) {
 
         <div className='header-end'>
         
-          { UserData && UserData.username != '' && UserData.username != null ? (
-              <div className='user-name'>{UserData.username}</div>
+          { userData && userData.username != '' && userData.username != null ? (
+              <div className='user-name'>{userData.username}</div>
           ):null
           }
           

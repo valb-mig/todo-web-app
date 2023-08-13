@@ -32,16 +32,6 @@ async function addTask(id_project,task) {
         if (response.ok) {
 
             return true;
-
-            // let res = await response.json();
-
-            // if(res.success) {
-            //     return res;
-            // }
-            // else {
-            //     return false;
-            // }
-
         } else {
             return false        
         }

@@ -1,11 +1,12 @@
 import {React, useState, useEffect} from 'react';
+import { useGlobalContext } from '@/app/Context/store';
 
 import Button from '@/components/Button';
 import Input  from '@/components/Input';
 import Card   from '@/components/Card';
 
-import getTasks from '@/utils/api/task/get';
 import addTask  from '@/utils/api/task/add';
+import editTask from '@/utils/api/task/edit';
 
 import {
     FaListUl,
@@ -14,13 +15,9 @@ import {
 
 import './styles/Task.scss';
 
-export default function Task({ Project, Tasks }){
+export default function Task() {
 
-    const [tasks, setTask] = useState({});
-
-    useEffect(() => {
-        setTask(Tasks);
-    },[Tasks]);
+    const { selectedProject, setSelectedProject, projects, setProjects } = useGlobalContext();
 
     const [taskFormData, setTaskFormData] = useState({
         title: '',
@@ -36,18 +33,35 @@ export default function Task({ Project, Tasks }){
         })
     }
 
-    async function submitTask(event,id_project) {
+    async function submitTask(event) {
 
         event.preventDefault();
 
-        let response = await addTask(id_project,taskFormData);
+        const tasks = projects[selectedProject.type][selectedProject.id_project].tasks;
 
-        if(response) {
-            setTask({...tasks,
-                title: taskFormData.title,
-                desc:  taskFormData.desc,
-                error: false 
-            })
+        let response = await addTask(selectedProject.id_project,taskFormData);
+
+        if(response) { // [todo] return task id
+
+            setProjects({
+                ...projects,
+    
+                [selectedProject.type]:{
+    
+                    ...projects[selectedProject.type],
+    
+                    [selectedProject.id_project]:{
+    
+                        ...projects[selectedProject.type][selectedProject.id_project],
+                        tasks:{
+                            ...tasks,
+                            id_project:selectedProject.id_project,
+
+                        },
+                    }
+                }
+            });
+
             clearFormData();
         }
         else {
@@ -56,16 +70,17 @@ export default function Task({ Project, Tasks }){
     }
 
     return(
+
         <div className='content'>
             <div className='project-header'>
                 <div className='project-name'>
                     <div className='icon-project-name'>
                         <FaListUl/>
                     </div>
-                    <p>{Project.title}</p>
+                    <p>{selectedProject.title}</p>
                 </div>
             </div>
-            <form onSubmit={(e) => {submitTask(e,Project.id_project)}}>
+            <form onSubmit={(e) => {submitTask(e)}}>
                 <div className='input-bar'>
                     <div className={'task-inputs ' + (taskFormData.error ? 'error-task-input' : '')}>
                         <Input
@@ -82,15 +97,15 @@ export default function Task({ Project, Tasks }){
                         />
                     </div>
                     <Button
-                        OnClick={(e) => {submitTask(e,Project.id_project)}}
+                        OnClick={(e) => {submitTask(e,selectedProject.id_project)}}
                         Type="submit"
                         Icon={<FaPlus/>}
                     />
                 </div>
             </form>
 
-            {Project.type === 'todo' ? (
-                <Todo Tasks={tasks} />
+            {selectedProject.type === 'todo' ? (
+                <Todo/>
             ):(
                 <></>
             )}
@@ -99,19 +114,35 @@ export default function Task({ Project, Tasks }){
     );
 }
 
-const Todo = ({ Tasks }) => {
+const Todo = () => {
 
-    if(Tasks.length > 0){
+    const { selectedProject, setSelectedProject, projects, setProjects } = useGlobalContext();
+
+    const handleTaskRemove = (id_task) => {}
+
+    async function handleTaskDone(id_task) {
+
+        // console.log(Projects.tasks);
+
+        // let response = await editTask(id_task, Projects.id_project, 'done');
+
+        // if(response) {
+        // }
+        // else {
+        // }
+    }
+    
+    if(projects[selectedProject.type][selectedProject.id_project].tasks.length > 0){
 
         return (
             <div className='task-box-area'>
                 <div className='task-box'>
-                {Tasks.map((task, index) => (
-                    <Card 
+                {projects[selectedProject.type][selectedProject.id_project].tasks.map((task, index) => (
+                    <Card
                         key={index}
                         Task={task}
-                        RemoveTask={(item) => handleTaskRemove(console.log(item))}
-                        SetStatus={(item) => handleTaskDone(console.log(item))}
+                        RemoveTask={() => handleTaskRemove(task.id_task)}
+                        SetStatus={()  => handleTaskDone(task.id_task)}
                         Class={task.task_done === "Y" ? 'task-done' : 'not-done'} 
                     />
                 ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { React, useState, useEffect } from 'react'
+import { useGlobalContext } from '@/app/Context/store';
 
 import Lottie     from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
@@ -12,22 +13,16 @@ import Sidebar from '@/components/home/Sidebar';
 import Task    from '@/components/home/Task';
 import { useRouter } from 'next/navigation';
 
-function Home({ userData }) {
+function Home() {
 
-  const [selectedProject, setSelectedProject] = useState({
-    id:null,
-    type:null
-  });
+  const { selectedProject, setSelectedProject } = useGlobalContext();
 
   const [smallSidebar, setSmallSidebar] = useState(false);
   const [inHome, setUserInHome] = useState(true);
 
-  function LoadTasks(Project) {
+  const LoadTasks = () => {
     return(
-      <Task
-        Project={Project}
-        Tasks={Project.tasks}
-      />
+      <Task/>
     );
   }
 
@@ -35,9 +30,7 @@ function Home({ userData }) {
     <div className='Home'>
 
       <div className='header-box'>
-        <Header
-          UserData={userData}
-        />
+        <Header/>
       </div>
 
       <div className='main-box'>
@@ -45,8 +38,7 @@ function Home({ userData }) {
         <div className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
           <Sidebar
             UserInHome={setUserInHome}
-            SelectedProject={(items) => setSelectedProject(items)}
-            SmallSidebar={(bool) => {setSmallSidebar(bool)}}
+            SmallSidebar={(bool) => setSmallSidebar(bool)}
           />
         </div>
 
@@ -82,7 +74,7 @@ function Home({ userData }) {
         )}
 
         {selectedProject != null && selectedProject.id != null && !inHome ? (
-          LoadTasks(selectedProject)
+          LoadTasks()
         ) : null}
 
       </div>
@@ -92,11 +84,9 @@ function Home({ userData }) {
 
 export default function WrappedComponent() {
 
+  const { userData, setUserData } = useGlobalContext();
+
   const [loading, setLoading] = useState(true);
-  const [userData, setUserData] = useState({
-    username:'',
-    logged:false
-  });
 
   const router = useRouter();
 
@@ -111,24 +101,20 @@ export default function WrappedComponent() {
     if(response) {
 
       try {
-
         if (response?.success) {
           setUserData({
             username: response.username,
             logged:   true
           });
         } else {
-          setUserData({
-            username: 'Jhon Doe',
-            logged:   false
-          });
+          router.push('/login');
         }
-        
       } catch (error) {
         setUserData({
           username: 'Jhon Doe',
           logged:   false
         });
+
       } finally {
         setLoading(false);
       }
@@ -165,5 +151,5 @@ export default function WrappedComponent() {
     );
   }
 
-  return userData ? <Home userData={userData} /> : null;
+  return userData ? <Home/> : null;
 }
