@@ -152,7 +152,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
                                     ) : null
                                 }
 
-                                { projects.length < 1 && projects.filter(project => project.type === selectedProject.type).length > 0 && !smallSidebar ? (
+                                { ( projects.length < 1 || projects[selectedProject.type].length < 1 ) && !smallSidebar ? (
                                     <div className='empty-content'>
                                         <div className='not-found'>
                                             <img src='assets/img/not-found.png'/>

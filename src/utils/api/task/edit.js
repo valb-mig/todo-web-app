@@ -2,6 +2,8 @@ import getToken from "@/utils/functions/getToken";
 
 async function editTask(id_task, id_project, action) {
 
+    console.log('Edit',id_task,id_project,action);
+
     const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
 
     let token = getToken();

@@ -5,8 +5,9 @@ import Button from '@/components/Button';
 import Input  from '@/components/Input';
 import Card   from '@/components/Card';
 
-import addTask  from '@/utils/api/task/add';
-import editTask from '@/utils/api/task/edit';
+import addTask    from '@/utils/api/task/add';
+import editTask   from '@/utils/api/task/edit';
+import removeTask from '@/utils/api/task/remove';
 
 import {
     FaListUl,
@@ -34,8 +35,6 @@ export default function Task() {
     }
 
     async function submitTask(event) {
-
-        console.log(projects);
 
         event.preventDefault();
 
@@ -115,9 +114,7 @@ export default function Task() {
 
 const Todo = () => {
 
-    const { selectedProject, setSelectedProject, projects, setProjects } = useGlobalContext();
-
-    const handleTaskRemove = (id_task) => {}
+    const { selectedProject, projects, setProjects } = useGlobalContext();
 
     async function toggleTaskStatus(id_task, key, done) {
 
@@ -149,6 +146,40 @@ const Todo = () => {
         };
 
         let response = await editTask(id_task, id_project, action);
+    
+        if (response) {
+            setProjects(updatedProjects);
+        } else {
+            console.log('Error');
+        }
+    }
+
+    async function handleTaskRemove(id_task, key) {
+
+        const project_type = selectedProject.type;
+        const id_project   = selectedProject.id_project;
+        const tasks        = projects[project_type][id_project].tasks;
+
+        const updatedTasks = tasks.filter((task, index) => {
+            return index !== key;
+        });
+
+        const updatedProject = {
+            ...projects[project_type][id_project],
+            tasks: updatedTasks,
+        };
+
+        const updatedProjectType = {
+            ...projects[project_type],
+            [id_project]: updatedProject,
+        };
+
+        const updatedProjects = {
+            ...projects,
+            [project_type]: updatedProjectType,
+        };
+
+        let response = await removeTask(id_task, id_project);
     
         if (response) {
             setProjects(updatedProjects);
