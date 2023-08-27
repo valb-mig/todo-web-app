@@ -14,7 +14,7 @@ import Header from '@/components/home/Header';
 import Input  from '@/components/Input';
 import Button from '@/components/Button'; 
 
-import handleLogin from '@/utils/api/user/login'
+import handleLogin from '@/utils/api/user/login';
 
 import './styles/page.scss';
 
@@ -52,7 +52,8 @@ export default function Login() {
 
         let response = await handleLogin(loginFormData);
 
-        if(!response){
+        if (!response) {
+
             setLoginFormData({
                 ...loginFormData,
                 username: {

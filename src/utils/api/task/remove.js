@@ -1,25 +1,26 @@
 import getToken from "@/utils/functions/getToken";
 
-async function removeTask(id_task, id_project) {
-
-    console.log('Remove');
+async function removeTask(task_id, project_id) {
 
     const API_URL_TASK_REMOVE = process.env.NEXT_PUBLIC_API_TASK_REMOVE;
 
     let token = getToken();
     
-    if(!token) {
+    if (!token) {
+
         return false;
     }
 
     try {
 
         const requestBody = { 
-            id_project:id_project,
-            id_task:id_task
+
+            project_id: project_id,
+            task_id:    task_id
         };
 
         const response = await fetch(API_URL_TASK_REMOVE, {
+
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -31,11 +32,14 @@ async function removeTask(id_task, id_project) {
         if (response.ok) {
 
             return true;
+
         } else {
+
             return false        
         }
 
     } catch (error) {
+
         throw new Error('Error fetching data: ' + error);
     }
 }

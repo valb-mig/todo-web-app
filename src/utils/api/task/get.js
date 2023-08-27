@@ -1,12 +1,12 @@
 import getToken from "@/utils/functions/getToken";
 
-async function getTasks(id_project) {
+async function getTasks(project_id) {
 
     const API_URL_TASK = process.env.NEXT_PUBLIC_API_TASK;
 
     let token = getToken();
     
-    if(!token) {
+    if (!token) {
 
         return false;
     }
@@ -14,13 +14,17 @@ async function getTasks(id_project) {
     try {
 
         const requestBody = { 
-            token: token,
-            id_project:id_project
+
+            project_id: project_id
         };
 
         const response = await fetch(API_URL_TASK, {
+
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
             body: JSON.stringify(requestBody)
         });
 
@@ -29,13 +33,17 @@ async function getTasks(id_project) {
             let res = await response.json();
 
             if(res.success) {
+
                 return res;
+
             }
             else {
+
                 return false;
             }
 
         } else {
+
             return false        
         }
 

@@ -6,21 +6,20 @@ async function getProject() {
 
     let token = getToken();
     
-    if(!token) {
+    if (!token) {
 
         return false;
     }
 
     try {
         
-        const requestBody = { 
-            token: token,
-        }
-
         const response = await fetch(API_URL_PROJECT, {
+
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestBody)
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
         });
 
         if (response.ok) {
@@ -28,9 +27,11 @@ async function getProject() {
             let res = await response.json();
 
             if(res.success) {
+
                 return res;
             }
             else {
+
                 return false;
             }
 
@@ -40,6 +41,7 @@ async function getProject() {
         }
 
     } catch (error) {
+
         throw new Error('Error fetching data: ' + error);
     }
 }

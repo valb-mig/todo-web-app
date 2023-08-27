@@ -25,7 +25,7 @@ import './styles/Header.scss';
 
 export default function Header() {
 
-  const { userData, setUserData } = useGlobalContext();
+  const { userData } = useGlobalContext();
 
   const [popup,     setPopup]     = useState(false);
   const [darkTheme, setDarkTheme] = useState(true);
@@ -33,7 +33,7 @@ export default function Header() {
   const router = useRouter();
 
   return (
-    <header className='header-bar'>
+    <div className='header-bar'>
       <div className='header-item'>
 
         <div className='header-start'>
@@ -83,6 +83,6 @@ export default function Header() {
           )}
         </div>
       </div>
-    </header>
+    </div>
   );
 }

@@ -29,21 +29,21 @@ function Home() {
   return (
     <div className='Home'>
 
-      <div className='header-box'>
+      <header className='header-box'>
         <Header/>
-      </div>
+      </header>
 
-      <div className='main-box'>
+      <main className='main-box'>
 
-        <div className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
+        <aside className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
           <Sidebar
             UserInHome={setUserInHome}
             SmallSidebar={(bool) => setSmallSidebar(bool)}
           />
-        </div>
+        </aside>
 
         { inHome && (
-          <div className='content'>
+          <section className='content'>
             <div className='greetings'>
               <div className='center-image'>
                 <Lottie
@@ -70,14 +70,14 @@ function Home() {
               </section>
 
             </div>
-          </div>
+          </section>
         )}
 
         {selectedProject != null && selectedProject.id != null && !inHome ? (
           LoadTasks()
         ) : null}
 
-      </div>
+      </main>
     </div>
   )
 }
@@ -103,7 +103,7 @@ export default function WrappedComponent() {
       try {
         if (response?.success) {
           setUserData({
-            username: response.username,
+            username: response.user.name,
             logged:   true
           });
         } else {

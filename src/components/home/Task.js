@@ -69,7 +69,7 @@ export default function Task() {
 
     return(
 
-        <div className='content'>
+        <section className='content'>
             <div className='project-header'>
                 <div className='project-name'>
                     <div className='icon-project-name'>
@@ -108,7 +108,7 @@ export default function Task() {
                 <></>
             )}
 
-        </div>
+        </section>
     );
 }
 

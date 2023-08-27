@@ -6,7 +6,7 @@ async function addProject(project,type) {
 
     let token = getToken();
     
-    if(!token) {
+    if (!token) {
 
         return false;
     }
@@ -14,16 +14,20 @@ async function addProject(project,type) {
     try {
 
         const requestBody = { 
-            token: token,
-            type: type,
-            title: project.title,
-            icon_name: project.icon_name,
-            days: project.days
+
+            project_type:  type,
+            project_title: project.title,
+            project_icon:  project.icon_name,
+            project_days:  project.days
         };
 
         const response = await fetch(API_URL_PROJECT_ADD, {
+
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
             body: JSON.stringify(requestBody),
         });
 
@@ -37,6 +41,7 @@ async function addProject(project,type) {
         }
 
     } catch (error) {
+        
         throw new Error('Error fetching data: ' + error);
     }
 }

@@ -1,31 +1,31 @@
 import getToken from "@/utils/functions/getToken";
 
-async function addTask(id_project,task) {
+async function addTask(project_id,task) {
 
     const API_URL_TASK_ADD = process.env.NEXT_PUBLIC_API_TASK_ADD;
 
     let token = getToken();
     
-    if(!token) {
-        return false;
-    }
+    if (!token || ( task.title === '' || task.desc === '' ) ) {
 
-    if( task.title === '' || task.desc === '' ){
         return false;
     }
 
     try {
 
         const requestBody = { 
-            token: token,
-            id_project:id_project,
-            task_title:task.title,
-            task_desc:task.desc
+
+            project_id: project_id,
+            task_title: task.title,
+            task_desc:  task.desc
         };
 
         const response = await fetch(API_URL_TASK_ADD, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
             body: JSON.stringify(requestBody)
         });
 
@@ -34,13 +34,17 @@ async function addTask(id_project,task) {
             let res = await response.json();
 
             if(res.success) {
+
                 return res;
+
             }
             else {
+
                 return false;
             }
             
         } else {
+            
             return false        
         }
 
