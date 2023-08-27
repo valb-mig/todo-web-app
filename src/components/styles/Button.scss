@@ -3,45 +3,52 @@
 .button
 {
     cursor: pointer;
-    color: white;
     text-align: center;
     font-weight: bold;
-    background-color: $light-gray;
-    border: 1px solid $light-gray;
     transition: all 0.2s;
     border-radius: $radius;
-
-    .selected
-    {
-        background-color: $foreground;
-        border: 1px solid $light-foreground;
-    }
 }
 
-.button:hover
-{
-    background-color: $foreground;
-    border: 1px solid $light-foreground;
+body.dark {
+
+    .button
+    {
+        color: $white;
+        background-color: $bg-d-1;
+        border: 1px solid $fg-d-3;
+    
+        .selected
+        {
+            background-color: $fg-d-3;
+            border: 1px solid $fg-d-2;
+        }
+    }
+    
+    .button:hover
+    {
+        background-color: $fg-d-3;
+        border: 1px solid $fg-d-2;
+    }
 }
 
 body.light {
 
     .button
     {
-        color: $black;
-        background-color: $light-gray-light;
-        border: 1px solid $light-foreground-light;
-
+        color: $white;
+        background-color: $bg-l-1;
+        border: 1px solid $fg-l-3;
+    
         .selected
         {
-            background-color: $light-gray-light;
-            border: 1px solid $light-foreground-light;
+            background-color: $fg-l-3;
+            border: 1px solid $fg-l-2;
         }
     }
-
+    
     .button:hover
     {
-        background-color: $foreground-light;
-        border: 1px solid $white;
+        background-color: $fg-l-3;
+        border: 1px solid $fg-l-2;
     }
 }

@@ -8,8 +8,6 @@
     width:     100%;
     height:    28px;
     padding:   10px 0;
-    border-bottom:   1px solid $light-gray;
-    background-color: $gray-alt;
 
     .header-item {
 
@@ -23,7 +21,6 @@
             padding-left: 10px;
             justify-content: flex-start;
             gap: 5px;
-            color: $white;
 
             img { margin-right: 10px;}
 
@@ -33,14 +30,15 @@
                 justify-content:  flex-start;
                 min-width:        100px;
                 border-radius:    $radius;
-                background-color: $light-gray;
 
                 .site-title {
+
                     display: flex;
                     margin: 0px 5px;
                 }
 
                 .site-title p {
+
                     display: flex; 
                     padding:0; 
                     margin:0; 
@@ -48,7 +46,7 @@
                     align-self: center;
                 }
 
-                p{
+                p {
                     animation: typing 2s steps(14, end);
                     overflow: hidden;
                 }
@@ -89,7 +87,7 @@
                     padding: 0 !important;
 
                     input {
-                        color: $white;
+
                         width: 140px;
                         padding-left: 5px;
                     }
@@ -114,8 +112,6 @@
                 align-content:   center;
                 align-self:      center;
                 align-items:     center;
-                
-                :hover {color: $orange;}
             }
 
             .user-name {
@@ -123,12 +119,9 @@
                 display:          flex;
                 align-items:      center;
                 align-content:    center;
-                color:            $white;
                 font-size:        .9em;
                 padding:          0 10px;
                 border-radius:    $radius;
-                border:           1px solid $foreground;
-                background-color: $light-gray;
             }
 
             .header-account {
@@ -145,6 +138,96 @@
     }
 }
 
+body.dark {
+
+    .header-bar {
+
+        border-bottom:   1px solid $bg-d-2;
+        background-color: $bg-d-3;
+    
+        .header-item {
+    
+            .header-start {
+    
+                color: $white;
+    
+                .header-logo {
+    
+                    background-color: $bg-d-2;
+                }
+    
+                .input-bar {
+    
+                    .inner-input {
+    
+                        input {
+                            color: $white;
+                        }
+                    }
+                }
+            }
+    
+            .header-end {
+    
+                .switch-color {
+                    
+                    :hover { color: $orange; }
+                }
+    
+                .user-name {
+                    
+                    color: $white;
+                    border: 1px solid $fg-d-2;
+                    background-color: $fg-d-3;
+                }
+            }
+        }
+    }
+}
+
 body.light {
 
+    .header-bar {
+
+        border-bottom:   1px solid $bg-l-2;
+        background-color: $bg-l-3;
+    
+        .header-item {
+    
+            .header-start {
+    
+                color: $black;
+    
+                .header-logo {
+    
+                    background-color: $bg-l-2;
+                }
+    
+                .input-bar {
+    
+                    .inner-input {
+    
+                        input {
+                            color: $black;
+                        }
+                    }
+                }
+            }
+    
+            .header-end {
+    
+                .switch-color {
+                    
+                    :hover { color: $orange; }
+                }
+    
+                .user-name {
+                    
+                    color: $black;
+                    border: 1px solid $fg-l-2;
+                    background-color: $fg-l-3;
+                }
+            }
+        }
+    }
 }

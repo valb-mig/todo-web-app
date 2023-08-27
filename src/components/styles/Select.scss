@@ -18,10 +18,39 @@
         .input-select {
 
             font-size:        15px;
-            color:            $white;
             border-radius:    5px;
-            background-color: $gray;
-            border: 1px solid $light-gray;
+        }
+    }
+}
+
+body.dark {
+
+    .select-content {
+
+        .select-group {
+    
+            .input-select {
+    
+                color:            $white;
+                background-color: $bg-d-4;
+                border: 1px solid $bg-d-3;
+            }
+        }
+    }
+}
+
+body.light {
+
+    .select-content {
+
+        .select-group {
+    
+            .input-select {
+    
+                color:            $black;
+                background-color: $bg-l-4;
+                border: 1px solid $bg-l-3;
+            }
         }
     }
 }

@@ -19,8 +19,6 @@
         z-index:  999;
         top:      90;
         border-radius: 5px;
-        background-color: $gray-alt !important;
-        border: 1px solid $light-gray;
         animation: fadeInModal 0.2s ease-in-out forwards;
 
         @keyframes fadeInModal {
@@ -39,3 +37,26 @@
     }
 }
 
+body.dark {
+
+    .popup-area {
+
+        .popup-content {
+    
+            background-color: $bg-d-4 !important;
+            border: 1px solid $bg-d-3;
+        }
+    }
+}
+
+body.light {
+
+    .popup-area {
+
+        .popup-content {
+    
+            background-color: $bg-l-4 !important;
+            border: 1px solid $bg-l-3;
+        }
+    }
+}
