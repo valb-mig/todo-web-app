@@ -37,12 +37,12 @@ async function getProject() {
 
         } else {
 
-            return false        
+            return false;      
         }
 
     } catch (error) {
 
-        throw new Error('Error fetching data: ' + error);
+        return false;
     }
 }
   

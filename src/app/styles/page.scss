@@ -1,6 +1,6 @@
-@import '../../components/colors/Colors.scss';
+@import '/src/app/styles/global.scss';
 
-.Home {
+.home-page {
   
   display: flex;
   width:  100%;
@@ -95,7 +95,7 @@
 
 body.dark {
 
-  .Home {
+  .home-page {
   
     background-color: $black;
   
@@ -133,7 +133,7 @@ body.dark {
 
 body.light {
 
-  .Home {
+  .home-page {
   
     background-color: $bg-l-5;
   

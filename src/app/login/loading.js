@@ -1,20 +1,21 @@
 export default function Loading(){
 
     return (
+      <section className='login-page'>
 
-        <div className='Home'>
-          <div className='header-box'>
-            <header className='header-bar'>
-              <div className='header-item'>
-                <div className='header-start'>
-                  <div className='header-logo'/>
+            <header className='header-box'/>
+
+            <main className='main-box'>
+                <div className='content'>
+                    <section className='box-container'>
+                        <form>
+                            <div className='buttons'/>
+                            <p/>
+                        </form>
+                    </section>
                 </div>
-                <div className='header-end'/>
-              </div>
-            </header>
-          </div>
-          <div className='main-box'>
-          </div>
-        </div>
+            </main>
+            
+        </section>
     );
 }

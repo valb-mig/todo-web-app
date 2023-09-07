@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { useGlobalContext } from '@/app/Context/store';
+import { useGlobalContext } from '@/app/context/store';
 
 import addProject from '@/utils/api/project/add';
 import getProject from '@/utils/api/project/get';
@@ -64,11 +64,17 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
         });
     }
 
-    async function handleGetProjects(){
+    async function handleGetProjects() {
+        
         let response = await getProject();
 
-        if(response){
+        if( response ){
+            
             setProjects(response.projects);
+
+        } else  {
+
+            console.log('Projects: No database');
         }
     }
 

@@ -1,5 +1,5 @@
-import {React, useState, useEffect} from 'react';
-import { useGlobalContext } from '@/app/Context/store';
+import { React, useState } from 'react';
+import { useGlobalContext } from '@/app/context/store';
 
 import Button from '@/components/Button';
 import Input  from '@/components/Input';
@@ -18,7 +18,7 @@ import './styles/Task.scss';
 
 export default function Task() {
 
-    const { selectedProject, setSelectedProject, projects, setProjects } = useGlobalContext();
+    const { selectedProject, projects, setProjects } = useGlobalContext();
 
     const [taskFormData, setTaskFormData] = useState({
         title: '',

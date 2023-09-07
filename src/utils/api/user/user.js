@@ -25,21 +25,18 @@ async function handleUser(token) {
           if(res.success) {
             
               return res;
-
           }
           else {
             
-              return {success:false};
+              return { success:false };
           }
 
       } else {
-
-          return {success:false};
+        return { connection:false };
       }
 
   } catch (error) {
-    
-    return {success:false};
+    return { connection:false };
   }
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { 
@@ -16,7 +16,7 @@ import Button from '@/components/Button';
 
 import handleLogin from '@/utils/api/user/login';
 
-import './styles/page.scss';
+import '@/app/login/styles/page.scss';
 
 export default function Login() {
 
@@ -73,54 +73,54 @@ export default function Login() {
     }
 
     return (
-    <>
-        <div className='header-box'>
-            <Header/>
-        </div>
+        <section className='login-page'>
 
-        <div className='main-box'>
-            <div className='content'>
+            <header className='header-box'>
+                <Header/>
+            </header>
 
-                <section className='box-container'>
-                    <form onSubmit={(e) => postFormData(e)}>
-                        <Input
-                            Type="text"
-                            Error={loginFormData.username.error}
-                            OnChange={(e) => setLoginFormData({
-                                ...loginFormData,
-                                username: {
-                                    ...loginFormData.username,
-                                    value: e.target.value,
-                                    error:false
-                                }
-                            })}
-                            Icon={<BiSolidUser/>}
-                        />
-                        <Input
-                            Type="password"
-                            Error={loginFormData.username.error}
-                            OnChange={(e) => setLoginFormData({
-                                ...loginFormData,
-                                password: {
-                                    ...loginFormData.password,
-                                    value: e.target.value,
-                                    error:false
-                                }
-                            })}
-                            Icon={<BiSolidLockAlt/>}
-                        />
-                        <div className='buttons'>
-                            <Button
-                                Type="submit"
-                                Title="Login"
+            <main className='main-box'>
+                <div className='content'>
+                    <section className='box-container'>
+                        <form onSubmit={(e) => postFormData(e)}>
+                            <Input
+                                Type="text"
+                                Error={loginFormData.username.error}
+                                OnChange={(e) => setLoginFormData({
+                                    ...loginFormData,
+                                    username: {
+                                        ...loginFormData.username,
+                                        value: e.target.value,
+                                        error:false
+                                    }
+                                })}
+                                Icon={<BiSolidUser/>}
                             />
-                        </div>
-                        <p>Don't have an account yet ? <Link href={'/register'}><b><u> Register </u></b></Link></p>
-                    </form>
-                </section>
+                            <Input
+                                Type="password"
+                                Error={loginFormData.username.error}
+                                OnChange={(e) => setLoginFormData({
+                                    ...loginFormData,
+                                    password: {
+                                        ...loginFormData.password,
+                                        value: e.target.value,
+                                        error:false
+                                    }
+                                })}
+                                Icon={<BiSolidLockAlt/>}
+                            />
+                            <div className='buttons'>
+                                <Button
+                                    Type="submit"
+                                    Title="Login"
+                                />
+                            </div>
+                            <p>Don't have an account yet ? <Link href={'/register'}><b><u> Register </u></b></Link></p>
+                        </form>
+                    </section>
+                </div>
+            </main>
 
-            </div>
-        </div>
-    </>
+        </section>
     )
 }

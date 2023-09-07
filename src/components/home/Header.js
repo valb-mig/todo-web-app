@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useGlobalContext } from '@/app/Context/store';
+import { useGlobalContext } from '@/app/context/store';
 
 import { 
   MdClose 

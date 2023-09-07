@@ -17,11 +17,15 @@ const GlobalContext = createContext({
 export const GlobalContextProvider = ({ children }) => {
 
     const [userData, setUserData] = useState({
-        username:'...',
+        username:'',
         logged:false
     });
     
-    const [projects, setProjects] = useState({});
+    const [projects, setProjects] = useState({
+        
+        'todo':[],
+        'kanban':[]
+    });
 
     const [selectedProject, setSelectedProject] = useState({
         id:    null,

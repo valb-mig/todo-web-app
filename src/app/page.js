@@ -1,7 +1,8 @@
 "use client";
 
 import { React, useState, useEffect } from 'react'
-import { useGlobalContext } from '@/app/Context/store';
+import { useGlobalContext } from '@/app/context/store';
+import { useRouter } from 'next/navigation';
 
 import Lottie     from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
@@ -11,11 +12,14 @@ import getToken   from '@/utils/functions/getToken';
 import Header  from '@/components/home/Header';
 import Sidebar from '@/components/home/Sidebar';
 import Task    from '@/components/home/Task';
-import { useRouter } from 'next/navigation';
+
+import Loading from '@/app/loading';
+
+import '@/app/styles/page.scss';
 
 function Home() {
 
-  const { selectedProject, setSelectedProject } = useGlobalContext();
+  const { selectedProject } = useGlobalContext();
 
   const [smallSidebar, setSmallSidebar] = useState(false);
   const [inHome, setUserInHome] = useState(true);
@@ -27,7 +31,7 @@ function Home() {
   }
 
   return (
-    <div className='Home'>
+    <section className='home-page'>
 
       <header className='header-box'>
         <Header/>
@@ -78,15 +82,14 @@ function Home() {
         ) : null}
 
       </main>
-    </div>
+    </section>
   )
 }
 
 export default function WrappedComponent() {
 
   const { userData, setUserData } = useGlobalContext();
-
-  const [loading, setLoading] = useState(true);
+  const [ loading, setLoading ]   = useState(true);
 
   const router = useRouter();
 
@@ -101,54 +104,40 @@ export default function WrappedComponent() {
     if(response) {
 
       try {
-        if (response?.success) {
-          setUserData({
-            username: response.user.name,
-            logged:   true
-          });
+
+        if(response.success !== null && response.success !== undefined) {
+
+          if (response?.success) {
+
+            setUserData({
+              username: response.user.name,
+              logged:   true
+            });
+          } else {
+            router.push('/login');
+          }
+
         } else {
-          router.push('/login');
+
+          setUserData({
+            username: "Fake Name",
+            logged:   false
+          });
         }
       } catch (error) {
-        setUserData({
-          username: 'Jhon Doe',
-          logged:   false
-        });
-
+        console.log("Error: "+error);
       } finally {
         setLoading(false);
       }
     }
     else {
-      router.push('/login');
+      console.log('Response Error');
     }
   }
 
   if (loading) {
 
-    return (
-
-      <div className='Home'>
-        <div className='header-box'>
-          <header className='header-bar'>
-            <div className='header-item'>
-              <div className='header-start'>
-                <div className='header-logo'/>
-              </div>
-              <div className='header-end'/>
-            </div>
-          </header>
-        </div>
-        <div className='main-box'>
-          <div className='sidebar-box'>
-            <div className='sidebar'>
-              <div className='sidebar-content'>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return ( <Loading/> );
   }
 
   return userData ? <Home/> : null;
