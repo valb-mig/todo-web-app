@@ -5,7 +5,7 @@ import './styles/Select.scss'
 const Select = ({Class, Label, Icon, Id, OnChange, Options}) => {
     return(
         <div className={"select-content "+Class}>
-            <label>{Label}</label>
+            <label><p>{Label}</p></label>
             <div className='select-group'>
                 <p>{Icon}</p>
                 <select className='input-select' id={Id} onChange={OnChange}>

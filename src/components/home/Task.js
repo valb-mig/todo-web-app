@@ -40,30 +40,78 @@ export default function Task() {
 
         let response = await addTask(selectedProject.id_project,taskFormData);
 
-        if(response) {
+        if(response.success !== null && response.success !== undefined)
+        {
+            if(response.success) {
 
-            setProjects({
-                ...projects,
-    
-                [selectedProject.type]:{
-    
-                    ...projects[selectedProject.type],
-    
-                    [selectedProject.id_project]:{
-    
-                        ...projects[selectedProject.type][selectedProject.id_project],
-                        tasks:[
-                            ...projects[selectedProject.type][selectedProject.id_project].tasks,
-                            response.task
-                        ],
+                setProjects({
+                    ...projects,
+        
+                    [selectedProject.type]:{
+        
+                        ...projects[selectedProject.type],
+        
+                        [selectedProject.id_project]:{
+        
+                            ...projects[selectedProject.type][selectedProject.id_project],
+                            tasks:[
+                                ...projects[selectedProject.type][selectedProject.id_project].tasks,
+                                response.task
+                            ],
+                        }
                     }
-                }
-            });
+                });
+    
+                clearFormData();
+            }
+            else {
+                setTaskFormData({...taskFormData,error:true});
+            }
 
-            clearFormData();
-        }
-        else {
-            setTaskFormData({...taskFormData,error:true})
+        } else {
+
+            if(taskFormData.title !== '' && taskFormData.desc !== '') {
+
+                let newTask = {
+
+                    task_id: projects[selectedProject.type][selectedProject.id_project].tasks.length + 1,
+                    user_id:'999',
+                    project_id:selectedProject.id_project,
+                    task_title:taskFormData.title,
+                    task_desc:taskFormData.desc,
+                    task_type:selectedProject.type,
+                    task_done:'N',
+                    task_status:'A'
+                }
+
+                let updatedProjectTasks = [
+
+                    ...projects[selectedProject.type][selectedProject.id_project].tasks,
+                    newTask
+                ]
+
+                setProjects({
+
+                    ...projects,
+    
+                    [selectedProject.type]:{
+    
+                        ...projects[selectedProject.type],
+    
+                        [selectedProject.id_project]:{
+    
+                            ...projects[selectedProject.type][selectedProject.id_project],
+                            tasks: updatedProjectTasks
+                        }
+                    }
+                });
+
+                clearFormData();
+
+            } else {
+
+                setTaskFormData({...taskFormData,error:true});
+            }
         }
     }
 
@@ -115,12 +163,12 @@ export default function Task() {
 const Todo = () => {
 
     const { selectedProject, projects, setProjects } = useGlobalContext();
+    
+    const project_type = selectedProject.type;
+    const id_project   = selectedProject.id_project;
 
     async function toggleTaskStatus(id_task, key, done) {
 
-        const project_type = selectedProject.type;
-        const id_project   = selectedProject.id_project;
-    
         const action = done ? "not-done" : "done";
 
         const updatedTasks = projects[project_type][id_project].tasks.map((task, index) => {
@@ -147,10 +195,17 @@ const Todo = () => {
 
         let response = await editTask(id_task, id_project, action);
     
-        if (response) {
-            setProjects(updatedProjects);
+        if(response.success !== null && response.success !== undefined){
+
+            if (response.success) {
+                setProjects(updatedProjects);
+            } else {
+                console.log('Error');
+            }
+
         } else {
-            console.log('Error');
+            
+            setProjects(updatedProjects);
         }
     }
 
@@ -180,20 +235,27 @@ const Todo = () => {
         };
 
         let response = await removeTask(id_task, id_project);
-    
-        if (response) {
-            setProjects(updatedProjects);
+
+        if(response.success !== null && response.success !== undefined){
+
+            if (response.success) {
+                setProjects(updatedProjects);
+            } else {
+                console.log('Error');
+            }
+
         } else {
-            console.log('Error');
+            
+            setProjects(updatedProjects);
         }
     }
 
-    if(projects[selectedProject.type][selectedProject.id_project].tasks.length > 0){
+    if(projects[project_type][id_project].tasks.length > 0){
 
         return (
             <div className='task-box-area'>
                 <div className='task-box'>
-                {projects[selectedProject.type][selectedProject.id_project].tasks.map((task, index) => (
+                {projects[project_type][id_project].tasks.map((task, index) => (
                     <Card
                         key={index}
                         Task={task}

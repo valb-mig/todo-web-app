@@ -42,7 +42,7 @@ async function addProject(project,type) {
 
     } catch (error) {
         
-        throw new Error('Error fetching data: ' + error);
+        return false;
     }
 }
   

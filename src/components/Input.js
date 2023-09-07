@@ -7,7 +7,7 @@ const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, Ico
     return(
         <div className={'input-bar '+(Error ? "error" : "")}>
             
-            <label>{Label}</label>
+            <label><p>{Label}</p></label>
 
             <div className='inner-input'>
                 {Icon}

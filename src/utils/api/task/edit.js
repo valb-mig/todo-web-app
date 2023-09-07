@@ -2,8 +2,6 @@ import getToken from "@/utils/functions/getToken";
 
 async function editTask(task_id, project_id, action) {
 
-    console.log('Edit',id_task,id_project,action);
-
     const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
 
     let token = getToken();
@@ -34,7 +32,7 @@ async function editTask(task_id, project_id, action) {
 
         if (response.ok) {
 
-            return true;
+            return { success: true };
 
         } else {
 
@@ -43,7 +41,7 @@ async function editTask(task_id, project_id, action) {
 
     } catch (error) {
         
-        throw new Error('Error fetching data: ' + error);
+        return false;
     }
 }
   

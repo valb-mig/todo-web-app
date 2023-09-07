@@ -1,12 +1,12 @@
-import { React, useState }  from 'react';
+import React, { useState }  from 'react';
 
-import { 
-    MdClose 
-} from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
+
 import { 
     FaFolderOpen, 
     FaListUl
 } from 'react-icons/fa';
+
 import { 
     AiFillCalendar,
     AiFillStar,
@@ -19,7 +19,7 @@ import Select from '@/components/Select';
 
 import './styles/Modal.scss';
 
-export default function Modal({Modal, ShowModal, SubmitModal}){
+export default function Modal({ Modal, ShowModal, SubmitModal }){
 
     const icons = [
         {

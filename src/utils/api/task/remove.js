@@ -31,7 +31,7 @@ async function removeTask(task_id, project_id) {
 
         if (response.ok) {
 
-            return true;
+            return { success: true };
 
         } else {
 
@@ -40,7 +40,7 @@ async function removeTask(task_id, project_id) {
 
     } catch (error) {
 
-        throw new Error('Error fetching data: ' + error);
+        return false;
     }
 }
   

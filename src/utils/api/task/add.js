@@ -40,16 +40,17 @@ async function addTask(project_id,task) {
             }
             else {
 
-                return false;
+                return { success:false };
             }
             
         } else {
             
-            return false        
+            return false;     
         }
 
     } catch (error) {
-        throw new Error('Error fetching data: ' + error);
+        
+        return false;
     }
 }
   

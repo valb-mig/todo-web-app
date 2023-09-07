@@ -78,22 +78,50 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
         }
     }
 
-    async function insertProject(data,type) {
-        let response = await addProject(data,type);
+    async function insertProject(data, type) {
+    
+        let response = await addProject(data, type);
+    
+        if (response) {
 
-        if(response){
             handleGetProjects();
+
+        } else {
+
+            console.log('Projects: No database');
+            console.log(projects[selectedProject.type]);
+
+            let newProject = {
+
+                title_project: data.title,
+                icon_name: 'list',
+                tasks:[]
+            }
+
+            let projectCount = Object.keys(projects[selectedProject.type]).length + 1;
+
+            setProjects({
+
+                ...projects,
+
+                [selectedProject.type]:{
+                    ...projects[selectedProject.type],
+                    [projectCount]:{
+                        ...newProject
+                    }
+                }
+            });
         }
     }
 
-    const handleSelectProject = (key,title,project,id) => {
+    const handleSelectProject = (key,project,id) => {
 
         setSelectedProject({
             ...selectedProject,
             id:key,
-            title:title,
+            title:project.title_project,
             icon:project.icon_name,
-            id_project:id,
+            id_project:id
         });
     }
 
@@ -174,7 +202,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
                                             <Button
                                                 Key={key}
                                                 Title={!smallSidebar ? project.title_project : ''}
-                                                OnClick={() => { handleSelectProject(key,project.title_project,project,index) }}
+                                                OnClick={() => { handleSelectProject(key,project,index) }}
                                                 Class={selectedProject.id == key ? "selected" : ""}
                                                 Icon={<FaListUl/>}
                                             />
