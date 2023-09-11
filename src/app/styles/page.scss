@@ -37,6 +37,19 @@
       padding: 68px 20px 0px 20px;
       width: 100%;
 
+      span {
+    
+        display: flex;
+        
+        .porject-type-tag {
+
+          display: flex;
+          align-items: center;
+          border-radius: $radius;
+          padding: 2px;
+        }
+      }
+
       .greetings {
 
         display: flex;
@@ -78,15 +91,49 @@
 
         display:         flex;
         justify-content: center;
-        flex-wrap:       nowrap;
+        flex-wrap:       wrap;
         gap:             10px;
 
-        section {
+        .dashboard {
+          
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 2.2em;
+          position: relative;
 
           width:  200px;
           min-width: 200px;
           height: 200px;
           border-radius: $radius;
+
+          overflow: hidden;
+
+          p {
+            display: flex;
+            position: absolute;
+          }
+
+          span {
+    
+            display: flex;
+            position: absolute;
+            top:  5px;
+            left: 5px;
+            
+            .porject-type-tag {
+    
+              font-size: 14px;
+              display: flex;
+              align-items: center;
+              border-radius: $radius;
+              padding: 2px;
+            }
+          }
+
+          img {
+            width: 100%;
+          }
         }
       }
     }
@@ -103,6 +150,16 @@ body.dark {
   
       .content {
   
+        span {
+    
+          .porject-type-tag {
+
+            color: $white;
+            background-color: $bg-d-3;
+            border: 1px solid $bg-d-2;
+          }
+        }
+
         .greetings {
   
           p {
@@ -120,10 +177,11 @@ body.dark {
   
         .task-info {
   
-          section {
+          .dashboard {
   
-            border: 1px solid $bg-d-4;
-            background-color: $bg-d-5;
+            color: $white;
+            border: 1px solid $bg-d-3;
+            background-color: $bg-d-4;
           }
         }
       }
@@ -140,6 +198,16 @@ body.light {
     .main-box {
   
       .content {
+
+        span {
+    
+          .porject-type-tag {
+
+              color: $white;
+              background-color: $bg-d-1;
+              border: 1px solid $fg-d-3;
+          }
+        }
   
         .greetings {
   

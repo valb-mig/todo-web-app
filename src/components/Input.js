@@ -2,7 +2,7 @@ import {React, useState } from 'react';
 
 import './styles/Input.scss'
 
-const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, Icon, children}) => {
+const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, Icon, Autofocus, children}) => {
 
     return(
         <div className={'input-bar '+(Error ? "error" : "")}>
@@ -16,7 +16,9 @@ const Input = ({Class, Error, Label, Id, Type, Placeholder, OnChange, Value, Ico
                    className={'input '+Class} 
                    placeholder={Placeholder} 
                    onChange={OnChange}
-                   value={Value}/>
+                   value={Value}
+                   {...(Autofocus ? { autoFocus: true } : {})} 
+                   />
             </div>
 
             {children}

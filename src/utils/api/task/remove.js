@@ -35,7 +35,7 @@ async function removeTask(task_id, project_id) {
 
         } else {
 
-            return false        
+            return { success: false }        
         }
 
     } catch (error) {

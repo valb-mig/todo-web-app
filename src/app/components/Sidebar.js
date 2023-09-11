@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { useGlobalContext } from '@/app/context/store';
+import { useGlobalContext } from '@/config/context/store';
 
 import addProject from '@/utils/api/project/add';
 import getProject from '@/utils/api/project/get';
@@ -14,7 +14,7 @@ import {
     FaListUl
 } from 'react-icons/fa';
 
-import Modal  from '@/components/home/Modal';
+import Modal  from '@/app/components/Modal';
 import Button from '@/components/Button';
 
 import './styles/Sidebar.scss';
@@ -38,7 +38,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
             type:  null,
             title: null,
             icon:  null,
-            id_project: null
+            project_id: null
         });
     }
 
@@ -60,7 +60,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
             type:  type,
             title: null,
             icon:  null,
-            id_project: null
+            project_id: null
         });
     }
 
@@ -82,20 +82,25 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
     
         let response = await addProject(data, type);
     
-        if (response) {
+        if (response && response.success != null && response.success != undefined) {
 
-            handleGetProjects();
+            if(response.success) {
+
+                handleGetProjects();
+            } else {
+
+                console.log("Database error!");
+            }
 
         } else {
 
             console.log('Projects: No database');
-            console.log(projects[selectedProject.type]);
 
             let newProject = {
 
-                title_project: data.title,
-                icon_name: 'list',
-                tasks:[]
+                project_title: data.title,
+                project_icon: 'list',
+                project_tasks:[]
             }
 
             let projectCount = Object.keys(projects[selectedProject.type]).length + 1;
@@ -116,13 +121,15 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
 
     const handleSelectProject = (key,project,id) => {
 
-        setSelectedProject({
+        let selectedObject = {
             ...selectedProject,
             id:key,
-            title:project.title_project,
-            icon:project.icon_name,
-            id_project:id
-        });
+            title:project.project_title,
+            icon:project.project_icon,
+            project_id:id
+        }
+
+        setSelectedProject(selectedObject);
     }
 
     useEffect(() => {
@@ -201,7 +208,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
                                         {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
                                             <Button
                                                 Key={key}
-                                                Title={!smallSidebar ? project.title_project : ''}
+                                                Title={!smallSidebar ? project.project_title : ''}
                                                 OnClick={() => { handleSelectProject(key,project,index) }}
                                                 Class={selectedProject.id == key ? "selected" : ""}
                                                 Icon={<FaListUl/>}
@@ -214,7 +221,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
                             <div className='add-button'>
                                 <Button
                                     Icon={<AiOutlinePlus/>}
-                                    OnClick={() => {showModal(!modal)}}
+                                    OnClick={ () => showModal(!modal) }
                                 />
                             </div>
                         </>

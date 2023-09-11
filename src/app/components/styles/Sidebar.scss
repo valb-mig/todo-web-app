@@ -298,7 +298,7 @@ body.dark {
     
                     background-color: $bg-d-1;
                     border:           1px solid $bg-d-2;
-                    border-bottom:    3px solid $bg-d-2;
+                    border-bottom:    3px solid $bg-d-3;
                     outline:          1px solid $fg-d-3;
                 }
     
@@ -306,8 +306,8 @@ body.dark {
     
                     background-color: $fg-d-3;
                     border:           1px solid $bg-d-1;
-                    border-bottom:    3px solid $bg-d-1;
-                    outline:          1px solid $fg-d-2;
+                    border-bottom:    3px solid $bg-d-2;
+                    outline:          1px solid $fg-d-1;
                 }
             }
             .projects-header {

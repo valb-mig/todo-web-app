@@ -1,6 +1,6 @@
 import getToken from "@/utils/functions/getToken";
 
-async function addProject(project,type) {
+async function addProject(project, type) {
 
     const API_URL_PROJECT_ADD = process.env.NEXT_PUBLIC_API_PROJECT_ADD;
 
@@ -33,11 +33,11 @@ async function addProject(project,type) {
 
         if (response.ok) {
 
-            return true;
+            return { success: true };
 
         } else {
 
-            return false        
+            return { success: false }        
         }
 
     } catch (error) {

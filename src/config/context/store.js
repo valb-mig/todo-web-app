@@ -32,7 +32,7 @@ export const GlobalContextProvider = ({ children }) => {
         title: null,
         type:  null,
         icon:  null,
-        id_project: null
+        project_id: null
     });
 
     return (

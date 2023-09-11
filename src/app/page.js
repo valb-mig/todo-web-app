@@ -1,7 +1,7 @@
 "use client";
 
 import { React, useState, useEffect } from 'react'
-import { useGlobalContext } from '@/app/context/store';
+import { useGlobalContext } from '@/config/context/store';
 import { useRouter } from 'next/navigation';
 
 import Lottie     from 'lottie-react';
@@ -9,17 +9,19 @@ import LottieData from '/public/assets/lottie/desktop-person.json';
 import handleUser from '@/utils/api/user/user';
 import getToken   from '@/utils/functions/getToken';
 
-import Header  from '@/components/home/Header';
-import Sidebar from '@/components/home/Sidebar';
-import Task    from '@/components/home/Task';
+import Header  from '@/app/components/Header';
+import Sidebar from '@/app/components/Sidebar';
+import Task    from '@/app/components/Task';
 
 import Loading from '@/app/loading';
+
+import { AiFillTag } from 'react-icons/ai';
 
 import '@/app/styles/page.scss';
 
 function Home() {
 
-  const { selectedProject } = useGlobalContext();
+  const { projects, selectedProject } = useGlobalContext();
 
   const [smallSidebar, setSmallSidebar] = useState(false);
   const [inHome, setUserInHome] = useState(true);
@@ -47,6 +49,7 @@ function Home() {
         </aside>
 
         { inHome && (
+
           <section className='content'>
             <div className='greetings'>
               <div className='center-image'>
@@ -58,19 +61,24 @@ function Home() {
               <p>Wellcome to your <u>homepage</u></p>
             </div>
 
-            <div className='info-title'>Your week status</div>
+            <div className='info-title'>Your tasks status</div>
 
             <div className='task-info'>
-              <section>
-                <p>Empty</p>
+
+              <section className='dashboard'>
+                <p>Done tasks</p>
               </section>
 
-              <section>
-                <p>Empty</p>
+              <section className='dashboard'>
+                <span>
+                  <div className='porject-type-tag'><AiFillTag/>Total tasks</div>
+                </span>
+                <p>{}</p>
+                <img src='/assets/img/waves.png'></img>
               </section>
 
-              <section>
-                <p>Empty</p>
+              <section className='dashboard'>
+                <p>Week dashboard</p>
               </section>
 
             </div>
@@ -78,8 +86,20 @@ function Home() {
         )}
 
         {selectedProject != null && selectedProject.id != null && !inHome ? (
+
           LoadTasks()
-        ) : null}
+        ) : (
+
+          selectedProject.type != '' && selectedProject.type != undefined ? (
+
+            <section className='content'>
+              <span>
+                <div className='porject-type-tag'><AiFillTag/>{selectedProject.type}</div>
+              </span>
+            </section>
+
+          ):null
+        )}
 
       </main>
     </section>

@@ -36,7 +36,7 @@ async function editTask(task_id, project_id, action) {
 
         } else {
 
-            return false;    
+            return { success: false };    
         }
 
     } catch (error) {

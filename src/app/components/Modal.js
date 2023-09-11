@@ -68,7 +68,9 @@ export default function Modal({ Modal, ShowModal, SubmitModal }){
         })
     }
 
-    const projectAdd = () => {
+    const projectAdd = (event) => {
+
+        event.preventDefault();
 
         if(modalFormData.title != '') {
 
@@ -89,7 +91,8 @@ export default function Modal({ Modal, ShowModal, SubmitModal }){
             <div className='modal-content'>                    
                 <div className='modal-area'>
                 <div className='close-modal' onClick={() => {ShowModal(!Modal) && cleanFormData()}}>{<MdClose/>}</div>
-                    <div className='modal-project'>
+                    
+                    <form className='modal-project' onSubmit={(e) => {projectAdd(e) && cleanFormData()}}>
                         <div className='title-input'>
                             <Input
                                 Label={'Name'}
@@ -97,6 +100,7 @@ export default function Modal({ Modal, ShowModal, SubmitModal }){
                                 Id='input-modal'
                                 Error={inputError.title.error ? 'error' : ''}
                                 OnChange={(e) => {setModalFormData({...modalFormData,title:e.target.value})}}
+                                Autofocus={true}
                             />
                             <div className='select-area'>
                                 <Select 
@@ -119,7 +123,7 @@ export default function Modal({ Modal, ShowModal, SubmitModal }){
                             <Button 
                                 Title='Add'
                                 Class='button-add'
-                                OnClick={() => {projectAdd() && cleanFormData()}}
+                                Type='submit'                                
                             />
                             <Button 
                                 Title='Cancel'
@@ -127,7 +131,8 @@ export default function Modal({ Modal, ShowModal, SubmitModal }){
                                 OnClick={() => {ShowModal(!Modal) && cleanFormData()}}
                             />
                         </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
         </div>

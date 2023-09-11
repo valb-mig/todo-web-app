@@ -14,15 +14,13 @@ import Header from '@/app/components/Header';
 import Input  from '@/components/Input';
 import Button from '@/components/Button'; 
 
-import handleLogin from '@/utils/api/user/login';
+import '@/app/register/styles/page.scss';
 
-import '@/app/login/styles/page.scss';
-
-export default function Login() {
+export default function Register() {
 
     const router = useRouter();
 
-    const [loginFormData, setLoginFormData] = useState({
+    const [registerFormData, setRegisterFormData] = useState({
         'username':{
             'value':'',
             'error':false
@@ -30,16 +28,24 @@ export default function Login() {
         'password':{
             'value':'',
             'error':false
+        },
+        'confirm_password':{
+            'value':'',
+            'error':false
         }
     })
 
     const cleanFormData = () => {
-        setLoginFormData({
+        setRegisterFormData({
             'username':{
                 'value':'',
                 'error':false
             },
             'password':{
+                'value':'',
+                'error':false
+            },
+            'confirm_password':{
                 'value':'',
                 'error':false
             }
@@ -50,26 +56,7 @@ export default function Login() {
         
         event.preventDefault();
 
-        let response = await handleLogin(loginFormData);
-
-        if (!response) {
-
-            setLoginFormData({
-                ...loginFormData,
-                username: {
-                    ...loginFormData.username,
-                    error: true
-                },
-                password: {
-                    ...loginFormData.password,
-                    error: true
-                }
-            })
-        }
-        else {
-            cleanFormData();
-            router.push("/");
-        }
+        /* [TODO] Insert user function */
     }
 
     return (
@@ -85,11 +72,11 @@ export default function Login() {
                         <form onSubmit={(e) => postFormData(e)}>
                             <Input
                                 Type="text"
-                                Error={loginFormData.username.error}
-                                OnChange={(e) => setLoginFormData({
-                                    ...loginFormData,
+                                Error={registerFormData.username.error}
+                                OnChange={(e) => setRegisterFormData({
+                                    ...registerFormData,
                                     username: {
-                                        ...loginFormData.username,
+                                        ...registerFormData.username,
                                         value: e.target.value,
                                         error:false
                                     }
@@ -98,11 +85,24 @@ export default function Login() {
                             />
                             <Input
                                 Type="password"
-                                Error={loginFormData.username.error}
-                                OnChange={(e) => setLoginFormData({
-                                    ...loginFormData,
+                                Error={registerFormData.username.error}
+                                OnChange={(e) => setRegisterFormData({
+                                    ...registerFormData,
                                     password: {
-                                        ...loginFormData.password,
+                                        ...registerFormData.password,
+                                        value: e.target.value,
+                                        error:false
+                                    }
+                                })}
+                                Icon={<BiSolidLockAlt/>}
+                            />
+                            <Input
+                                Type="password"
+                                Error={registerFormData.username.error}
+                                OnChange={(e) => setRegisterFormData({
+                                    ...registerFormData,
+                                    confirm_password: {
+                                        ...registerFormData.confirm_password,
                                         value: e.target.value,
                                         error:false
                                     }
@@ -112,10 +112,10 @@ export default function Login() {
                             <div className='buttons'>
                                 <Button
                                     Type="submit"
-                                    Title="Login"
+                                    Title="Register"
                                 />
                             </div>
-                            <p>Don't have an account yet ? <Link href={'/register'}><b><u> Register </u></b></Link></p>
+                            <p>You have a account <Link href={'/login'}><b><u> Login </u></b></Link></p>
                         </form>
                     </section>
                 </div>

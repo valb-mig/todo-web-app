@@ -159,9 +159,16 @@ body.dark {
                 .input-bar {
     
                     .inner-input {
+
+                        background-color: $bg-d-2;
+                        border: $bg-d-1;
     
                         input {
                             color: $white;
+                        }
+
+                        input::placeholder {
+                            color: $fg-d-1 !important;
                         }
                     }
                 }

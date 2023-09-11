@@ -10,7 +10,7 @@ import './styles/Card.scss';
 const Card = ({Task, Class, RemoveTask, SetStatus}) => {
 
     return(
-        <div id={Task.id_task} className={'task '+Class}>
+        <div id={Task.task_id} className={'task '+Class}>
             <div className='task-header'>
                 <div className='task-bottom'>
                     <div className='task-content'>

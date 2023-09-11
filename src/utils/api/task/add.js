@@ -35,12 +35,12 @@ async function addTask(project_id,task) {
 
             if(res.success) {
 
-                return res;
+                return { success: true, added_task: res.task };
 
             }
             else {
 
-                return { success:false };
+                return { success: false };
             }
             
         } else {
