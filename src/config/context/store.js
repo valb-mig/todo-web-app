@@ -17,7 +17,9 @@ const GlobalContext = createContext({
 export const GlobalContextProvider = ({ children }) => {
 
     const [userData, setUserData] = useState({
+
         username:'',
+        darkTheme:true, 
         logged:false
     });
     
@@ -28,6 +30,7 @@ export const GlobalContextProvider = ({ children }) => {
     });
 
     const [selectedProject, setSelectedProject] = useState({
+
         id:    null,
         title: null,
         type:  null,
@@ -47,7 +50,7 @@ export const GlobalContextProvider = ({ children }) => {
             selectedProject,
             setSelectedProject
         }}>
-            {children}
+            { children }
         </GlobalContext.Provider>
     )
 };

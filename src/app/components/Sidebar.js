@@ -15,7 +15,7 @@ import {
 } from 'react-icons/fa';
 
 import Modal  from '@/app/components/Modal';
-import Button from '@/components/Button';
+import Button from '@/app/components/Button';
 
 import './styles/Sidebar.scss';
 

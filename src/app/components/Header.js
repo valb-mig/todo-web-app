@@ -1,10 +1,10 @@
-import { React, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import { useGlobalContext } from '@/config/context/store';
+import changeTheme from '@/utils/functions/changeTheme';
 
-import { 
-  MdClose 
-} from 'react-icons/md';
+import Input  from '@/app/components/Input';
+import Button from '@/app/components/Button';
+import Popup  from '@/app/components/Popup';
 
 import { 
   AiOutlineMenu
@@ -15,74 +15,69 @@ import {
   BsFillMoonFill
 } from 'react-icons/bs';
 
-import Input   from '@/components/Input';
-import Button  from '@/components/Button'; 
-import Popup   from '@/components/Popup';
+import { 
+  MdClose 
+} from 'react-icons/md';
 
-import changeTheme from '@/utils/functions/changeTheme.js';
+import UserTag from '@/layout/UserTagLayout';
+import Layout  from '@/layout/HeaderLayout';
 
-import './styles/Header.scss';
+const Header = ({}) => {
 
-export default function Header() {
+    const { userData } = useGlobalContext();
 
-  const { userData } = useGlobalContext();
+    const [popup,     setPopup]     = useState(false);
+    const [darkTheme, setDarkTheme] = useState(true);
 
-  const [popup,     setPopup]     = useState(false);
-  const [darkTheme, setDarkTheme] = useState(true);
+    return(
+        <Layout.Root>
+            <Layout.Start>
+                <Input
+                    Id='search'
+                    Placeholder='Search'
+                />
+            </Layout.Start>
 
-  const router = useRouter();
+            <Layout.End>
 
-  return (
-    <div className='header-bar'>
-      <div className='header-item'>
+                { userData && userData.username != '' && userData.username != null ? (
 
-        <div className='header-start'>
+                    <UserTag.Root>
+                        <UserTag.Name
+                            Name={ userData.username }
+                        />
+                        <UserTag.Icon/>
+                    </UserTag.Root>
 
-          <div className='header-logo'>
-            <div className='site-title'><p>./Todo.sh</p><span className='title-cursor'>|</span>
-            </div>
-          </div>
+                ):null }
+                
+                <Button
+                    Icon={ darkTheme ? <BsFillSunFill/> : <BsFillMoonFill/> }
+                    OnClick={() => {changeTheme(setDarkTheme,darkTheme)}}
+                />
+                <Button
+                    Icon={popup ? <MdClose/> : <AiOutlineMenu/>}
+                    OnClick={() => {setPopup(!popup)}}
+                />
 
-          <Input
-              Id='search'
-              Placeholder='Search'
-          />
+                {popup ? (
 
-        </div>
+                    <Popup>
+                        <Button
+                            Title="Login"
+                            OnClick={() => {router.push("/login") && setPopup(!popup)}}
+                        />
+                        <Button
+                            Title="Register"
+                            OnClick={() => {router.push("/register") && setPopup(!popup)}}
+                        />
+                    </Popup>
 
-        <div className='header-end'>
-        
-          { userData && userData.username != '' && userData.username != null ? (
-              <div className='user-name'>{userData.username}</div>
-          ):null
-          }
-          
-          <Button
-              Class="switch-color"
-              Icon={ darkTheme ? <BsFillSunFill/> : <BsFillMoonFill/> }
-              OnClick={() => {changeTheme(setDarkTheme,darkTheme)}}
-          />
-          <Button
-              Class="header-account"
-              Icon={popup ? <MdClose/> : <AiOutlineMenu/>}
-              OnClick={() => {setPopup(!popup)}}
-          />
-          {popup ? (
-              <Popup>
-                  <Button
-                      Title="Login"
-                      OnClick={() => {router.push("/login") && setPopup(!popup)}}
-                  />
-                  <Button
-                      Title="Register"
-                      OnClick={() => {router.push("/register") && setPopup(!popup)}}
-                  />
-              </Popup>
-          ):(
-              <></>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+                ):null }
+            </Layout.End>
+
+        </Layout.Root>
+    );
 }
+
+export default Header;

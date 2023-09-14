@@ -1,27 +1,29 @@
 "use client";
 
-import { React, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useGlobalContext } from '@/config/context/store';
 import { useRouter } from 'next/navigation';
 
-import Lottie     from 'lottie-react';
-import LottieData from '/public/assets/lottie/desktop-person.json';
-import handleUser from '@/utils/api/user/user';
-import getToken   from '@/utils/functions/getToken';
-
+import Loading from '@/app/loading';
 import Header  from '@/app/components/Header';
 import Sidebar from '@/app/components/Sidebar';
 import Task    from '@/app/components/Task';
 
-import Loading from '@/app/loading';
+import Lottie     from 'lottie-react';
+import LottieData from '/public/assets/lottie/desktop-person.json';
 
-import { AiFillTag } from 'react-icons/ai';
+import handleUser from '@/utils/api/user/user';
+import getToken   from '@/utils/functions/getToken';
+
+import { 
+  AiFillTag,
+} from 'react-icons/ai';
 
 import '@/app/styles/page.scss';
 
 function Home() {
 
-  const { projects, selectedProject } = useGlobalContext();
+  const { selectedProject } = useGlobalContext();
 
   const [smallSidebar, setSmallSidebar] = useState(false);
   const [inHome, setUserInHome] = useState(true);
@@ -35,10 +37,8 @@ function Home() {
   return (
     <section className='home-page'>
 
-      <header className='header-box'>
-        <Header/>
-      </header>
-
+      <Header/>
+        
       <main className='main-box'>
 
         <aside className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
@@ -86,10 +86,8 @@ function Home() {
         )}
 
         {selectedProject != null && selectedProject.id != null && !inHome ? (
-
           LoadTasks()
         ) : (
-
           selectedProject.type != '' && selectedProject.type != undefined ? (
 
             <section className='content'>

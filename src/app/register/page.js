@@ -11,8 +11,8 @@ import {
 import Link from 'next/link';
 
 import Header from '@/app/components/Header'; 
-import Input  from '@/components/Input';
-import Button from '@/components/Button'; 
+import Input  from '@/app/components/Input';
+import Button from '@/app/components/Button'; 
 
 import '@/app/register/styles/page.scss';
 

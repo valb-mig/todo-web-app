@@ -1,7 +1,7 @@
 import { Varela_Round } from 'next/font/google'
 import { GlobalContextProvider } from '@/config/context/store';
 
-import Layout from '@/config/Layout';
+import Layout from '@/config/layout';
 
 import '@/app/styles/page.scss';
 

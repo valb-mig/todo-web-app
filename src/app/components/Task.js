@@ -1,9 +1,9 @@
 import { React, useState } from 'react';
 import { useGlobalContext } from '@/config/context/store';
 
-import Button from '@/components/Button';
-import Input  from '@/components/Input';
-import Card   from '@/components/Card';
+import Button from '@/app/components/Button';
+import Input  from '@/app/components/Input';
+import Card   from '@/app/components/Card';
 
 import addTask    from '@/utils/api/task/add';
 import editTask   from '@/utils/api/task/edit';
