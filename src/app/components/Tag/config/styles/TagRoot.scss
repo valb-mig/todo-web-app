@@ -3,7 +3,6 @@
 .tag {
 
     display: flex;
-    justify-content: center;
     align-items: center;
     padding: 5px;
     gap: 5px;
@@ -14,7 +13,7 @@
 body.dark {
 
     .tag {
-
+        
         color: $white;
 
         border: 1px solid $bg-d-1;

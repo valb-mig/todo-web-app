@@ -15,20 +15,19 @@
 
     overflow: hidden;
 
-    span {
+    .tag {
 
         display: flex;
         position: absolute;
+        align-items: center;
         top:  5px;
         left: 5px;
-        
-        .tag {
-    
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            border-radius: $radius;
-            padding: 2px;
+        border-radius: $radius;
+        font-size: 14px;
+        padding: 2px;
+
+        .tag-title {
+            padding-right: 2px;
         }
     }
 }
@@ -39,6 +38,7 @@ body.dark {
 
         color: $white;
         border: 1px solid $bg-d-3;
+        background: no-repeat center/100% url("/assets/img/waves-dark.png");
         background-color: $bg-d-4;
     }
 }
@@ -48,7 +48,13 @@ body.light {
     .dashboard {
 
         color: $black;
-        border: 1px solid $bg-l-3;
-        background-color: $bg-l-4;
+        border: 1px solid $bg-l-2;
+        background: no-repeat center/100% url("/assets/img/waves-light.png");
+        background-color: $bg-l-1;
+
+        .tag {
+            background-color: $bg-l-2;
+            border: 1px solid $bg-l-3;
+        }
     }
 }

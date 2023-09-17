@@ -1,6 +1,23 @@
 @import '/src/app/styles/global.scss';
 
-p {
+.dashboard-count {
+
     display: flex;
     position: absolute;
+
+    text-shadow: 0px 0px 5px $black;
+}
+
+body.dark {
+    
+    .dashboard-count {
+        color: $white;
+    }
+}
+
+body.light {
+
+    .dashboard-count {
+        color: $white;
+    }
 }

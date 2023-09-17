@@ -15,22 +15,30 @@ const HeaderEnd = ({ children }) => {
 
     const router = useRouter();
 
-    const { userData } = useGlobalContext();
-    const [ popup, showPopup ] = useState(false);
+     const { userData ,setUserData } = useGlobalContext();
+    const [ popup, showPopup ]       = useState(false);
 
     return(
         <div className='header-end'>
 
             { children }
 
-            <Button
+            <Button.Root OnClick={() => changeTheme(userData ,setUserData)}>
+                <Button.Icon Icon={ userData.darkTheme ? <Icons.Sun/> : <Icons.Moon/> }/>
+            </Button.Root>
+
+            <Button.Root OnClick={() => showPopup(!popup)}>
+                <Button.Icon Icon={popup ? <Icons.Close/> : <Icons.Grid/>}/>
+            </Button.Root>
+
+            {/* <Button
                 Icon={ userData.darkTheme ? <Icons.Sun/> : <Icons.Moon/> }
-                OnClick={() => { changeTheme() }}
+                OnClick={() => { changeTheme(userData ,setUserData) }}
             />
             <Button
                 Icon={popup ? <Icons.Close/> : <Icons.Grid/>}
                 OnClick={() => showPopup(!popup)}
-            />
+            /> */}
 
             {popup ? (
 

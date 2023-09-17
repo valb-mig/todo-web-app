@@ -6,9 +6,7 @@ export default function Loading(){
         <div className='header-box'>
           <header className='header-bar'>
             <div className='header-item'>
-              <div className='header-start'>
-                <div className='header-logo'/>
-              </div>
+              <div className='header-start'/>
               <div className='header-end'/>
             </div>
           </header>

@@ -77,7 +77,11 @@ function Home() {
             <div className='task-info'>
 
               <Dashboard.Root>
-                <p>Done tasks</p>
+                <Tag.Root>
+                  <Tag.Icon Icon={<Icons.Tag/>} />
+                  <Tag.Title Title="Done tasks" />
+                </Tag.Root>
+                <Dashboard.Count Value={0}/>
               </Dashboard.Root>
 
               <Dashboard.Root>
@@ -89,7 +93,11 @@ function Home() {
               </Dashboard.Root>
 
               <Dashboard.Root>
-                <p>Week dashboard</p>
+                <Tag.Root>
+                  <Tag.Icon Icon={<Icons.Tag/>} />
+                  <Tag.Title Title="Week dashboard" />
+                </Tag.Root>
+                <Dashboard.Count Value={0}/>
               </Dashboard.Root>
 
             </div>

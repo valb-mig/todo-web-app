@@ -68,6 +68,7 @@ body.dark {
 
             color: $white;
             background-color: $bg-d-2;
+            border: 1px solid $bg-d-1;
         }
     }
 }
@@ -80,6 +81,7 @@ body.light {
 
             color: $black;
             background-color: $bg-l-2;
+            border: 1px solid $bg-l-1;
         }
     }
 }

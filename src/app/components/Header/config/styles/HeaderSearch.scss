@@ -1,1 +1,9 @@
 @import '/src/app/styles/global.scss';
+
+.input-bar {
+
+   input {
+      display: flex;
+      min-width: none;
+   }
+}

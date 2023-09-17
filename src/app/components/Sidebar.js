@@ -156,15 +156,15 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
 
             <div className={smallSidebar ? 'sidebar-mini' : 'sidebar'}>
                 <div className='sidebar-content'>
-                    <Button
+                    {/* <Button
                         Key="home"
                         Title={!smallSidebar  ? 'Home' : ''}
                         Icon={!smallSidebar   ? '' : <FaHome/>}
                         Class={inHome ? 'todo-home home-selected' : 'todo-home'}
                         OnClick={() => {changeToHome(true)}}
-                    />
+                    /> */}
                     <div className='sidebar-buttons'>
-                        <Button
+                        {/* <Button
                             key="todo"
                             Title={!smallSidebar  ? 'To-do' : ''}
                             Icon={!smallSidebar   ? '' : <FaListUl/>}
@@ -177,7 +177,7 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
                             Icon={!smallSidebar   ? '' : <FaProjectDiagram/>}
                             Class={selectedProject.type == 'kanban' ? 'selected' : ''}
                             OnClick={() => {changeProjectType('kanban') && changeToHome(false)}}
-                        />
+                        /> */}
                     </div>
 
                     { !inHome && (
@@ -206,23 +206,24 @@ export default function Sidebar({ UserInHome, SmallSidebar }){
                                 { projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 && (
                                     <div className='projects'>
                                         {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
-                                            <Button
-                                                Key={key}
-                                                Title={!smallSidebar ? project.project_title : ''}
-                                                OnClick={() => { handleSelectProject(key,project,index) }}
-                                                Class={selectedProject.id == key ? "selected" : ""}
-                                                Icon={<FaListUl/>}
-                                            />
+                                            // <Button
+                                            //     Key={key}
+                                            //     Title={!smallSidebar ? project.project_title : ''}
+                                            //     OnClick={() => { handleSelectProject(key,project,index) }}
+                                            //     Class={selectedProject.id == key ? "selected" : ""}
+                                            //     Icon={<FaListUl/>}
+                                            // />
+                                            <></>
                                         ))}
                                     </div>
                                 )}
 
                             </div>
                             <div className='add-button'>
-                                <Button
+                                {/* <Button
                                     Icon={<AiOutlinePlus/>}
                                     OnClick={ () => showModal(!modal) }
-                                />
+                                /> */}
                             </div>
                         </>
                     )}
