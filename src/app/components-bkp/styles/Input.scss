@@ -1,0 +1,112 @@
+@import '/src/app/styles/global.scss';
+
+.input-bar {
+
+    display: flex;
+    
+    svg {
+
+        display:       flex;
+        align-items:   center;
+        align-self:    center;
+        align-content: center;
+        text-align:    center;
+        padding:       0 2px;
+        font-size:     .9em;
+    }
+
+    .inner-input {
+
+        display: flex;
+        border-radius: $radius;
+        padding: 10px;
+        font-size: .9em;
+
+        svg {
+
+            background-color: transparent;
+        }
+
+        input {
+
+            display: flex;
+            width: 100%;
+            background-color: transparent;
+            outline: none;
+            border:  none;
+            border-radius: $radius;
+        }
+    }
+}
+
+.error {
+
+    transition: all .2s;
+}
+
+input::placeholder
+{
+    opacity: 0.5;
+}
+
+body.dark {
+
+    .input-bar {
+
+        .inner-input {
+    
+            background-color: $bg-d-2;
+            border: 1px solid $bg-d-1;
+            color:  $white;
+        }
+    }
+    
+    .error {
+    
+        .inner-input {
+    
+            svg {
+                color: $light-red !important;
+            }
+    
+            background-color: $bg-red    !important;
+            border: 1px solid $light-red !important;
+        }
+    }
+    
+    input::placeholder {
+
+        color: $fg-d-3;
+    }
+}
+
+body.light {
+    
+    .input-bar {
+
+        .inner-input {
+    
+            background-color: $bg-l-2;
+            border: 1px solid $bg-l-1;
+            color:  $white;
+        }
+    }
+    
+    .error {
+    
+        .inner-input {
+    
+            svg {
+                color: $light-red !important;
+            }
+    
+            background-color: $bg-red    !important;
+            border: 1px solid $light-red !important;
+        }
+    }
+    
+    input::placeholder {
+
+        color: $fg-l-3;
+    }
+}

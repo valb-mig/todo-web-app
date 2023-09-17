@@ -1,0 +1,62 @@
+@import '/src/app/styles/global.scss';
+
+.popup-area {
+
+    position: fixed;
+    z-index:  9999;
+    left:     1;
+    top:      53px;
+    width:    100px;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .popup-content {
+
+        display:  flex;
+        flex-direction: column;
+        position: absolute;
+        gap:      5px;
+        padding:  10px;
+        z-index:  999;
+        top:      90;
+        border-radius: 5px;
+        animation: fadeInModal 0.2s ease-in-out forwards;
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .button {
+            font-size: .8em;
+            padding:   0 5px;
+        }
+    }
+}
+
+body.dark {
+
+    .popup-area {
+
+        .popup-content {
+    
+            background-color: $bg-d-4 !important;
+            border: 1px solid $bg-d-3;
+        }
+    }
+}
+
+body.light {
+
+    .popup-area {
+
+        .popup-content {
+    
+            background-color: $bg-l-4 !important;
+            border: 1px solid $bg-l-3;
+        }
+    }
+}

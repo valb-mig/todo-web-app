@@ -1,17 +1,23 @@
-const changeTheme = (setTheme,theme) => {
+import { useGlobalContext } from '@/config/context/store';
+
+const changeTheme = () => {
+
+  const { userData ,setUserData } = useGlobalContext();
 
   const element = document.body.classList;
 
   console.log("Change theme: "+ element);
 
-  if(theme){
+  let currentThemeDark = userData.darkTheme;
+
+  if(currentThemeDark){
     element.remove('dark')
     element.toggle('light')
-    setTheme(!theme)
+    setUserData({...userData, darkTheme:false})
   }else{
     element.remove('light')
     element.toggle('dark')
-    setTheme(!theme)
+    setUserData({...userData, darkTheme:true})
   }
 }
 

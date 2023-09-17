@@ -1,4 +1,8 @@
-async function handleUser(token) {
+import getToken from '@/utils/functions/getToken';
+
+async function handleUser() {
+
+  let token = getToken();
 
   const API_USER = process.env.NEXT_PUBLIC_API_USER;
 

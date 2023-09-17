@@ -1,0 +1,85 @@
+@import '/src/app/styles/global.scss';
+
+.header-start {
+
+    display: flex;
+    width: 100%;
+    padding-left: 10px;
+    justify-content: flex-start;
+    gap: 5px;
+
+    .header-logo {
+
+        display:       flex;
+        min-width:     100px;
+        border-radius: $radius;
+
+        .site-title {
+
+            display: flex;
+            margin: 0px 5px;
+        }
+
+        .site-title p {
+
+            display: flex; 
+            padding:0; 
+            margin:0; 
+            align-content: center;
+            align-self: center;
+            
+            animation: typing 2s steps(14, end);
+            overflow: hidden;
+        }
+
+        @keyframes typing {
+
+            0%{
+                width: 0;
+            }
+
+            50%{
+                width: 0;
+            }
+
+            100%{
+                width: 100%;
+            }
+        }
+
+        .title-cursor {
+            font-weight: bold;
+            animation: blink .6s infinite;
+        }
+
+        @keyframes blink {
+            to {
+                opacity: 0;
+            }
+        }
+    }
+}
+
+body.dark {
+
+    .header-start {
+    
+        .header-logo {
+
+            color: $white;
+            background-color: $bg-d-2;
+        }
+    }
+}
+
+body.light {
+
+    .header-start {
+    
+        .header-logo {
+
+            color: $black;
+            background-color: $bg-l-2;
+        }
+    }
+}

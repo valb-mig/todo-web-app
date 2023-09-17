@@ -1,0 +1,629 @@
+@import '/src/app/styles/global.scss';
+
+.sidebar {
+    
+    flex-direction:   column;
+    width:            220px;
+    height:           100%;
+    padding:          10px;
+
+    .sidebar-content {
+
+        display:     flex;
+        width:       100%;
+        padding-top: 48px;
+        gap:         5px;
+        justify-content: center;
+        flex-direction:  column;
+       
+        .todo-home { padding: 5px; }
+        .todo-home:hover { box-shadow: inset 0px 0px 2px black; }
+
+        .sidebar-buttons {
+
+            display: flex;
+            gap:     5px;
+            padding: 5px;
+            flex-direction: column;
+            text-align: center;
+            border-radius: $radius;
+        }
+
+        .projects-header {
+            
+            display: flex;
+            width:   100%;
+            padding: 5px;
+            justify-content: center;
+            align-items:     center;
+        }
+
+        .projects-content {
+
+            display:        flex;
+            overflow-y:     scroll;
+            flex-direction: column;
+            word-break:     break-all;
+            width:          100%;
+            max-height:     400px;
+            gap:            5px;
+            border-radius:  $radius;
+
+            span {
+
+                display: flex;
+                padding: 5px;
+                justify-content: flex-end;
+
+                .porject-type-tag {
+
+                    display: flex;
+                    font-size: .7em;
+                    padding: 2px;
+                    border-radius: $radius;
+                }
+            }
+
+            .projects {
+                
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                padding: 5px;
+
+                .button {
+                    
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                }
+            }
+
+            .empty-content {
+                
+                display: flex;
+                flex-direction:  column;
+                justify-content: center;
+
+                p {
+                    display: flex;
+                    font-weight: bold;
+                    width:   100%;
+                    opacity: 0.1;
+                    justify-content: center;
+                }
+
+                .not-found {
+
+                    display: flex;
+                    width:   100%;
+                    justify-content: center;
+
+                    img {
+
+                        width: 40%;
+                        margin-top: 20px;
+                        opacity: 0.1;
+                    }
+                }
+            }
+
+            button {
+
+                display: flex;
+                justify-content: flex-start;
+                gap: 5px;
+            }
+
+            ::-webkit-scrollbar {
+    
+                display: none;
+            }
+        }
+
+        .add-button {
+
+            display: flex;
+            width:   100%;
+            justify-content: center;
+
+            .button {
+
+                border-radius: $radius;
+                width:         30px;
+                height:        30px;
+                background-color: transparent;
+            }
+
+            .button:hover {
+
+                transform: scale(1.1);
+            }
+
+            svg {
+
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+.sidebar-mini {
+    
+    flex-direction:   column;
+    width:            60px;
+    height:           100%;
+    padding:          10px;
+
+    flex-direction:   column;
+    width:            220px;
+    height:           100%;
+    padding:          10px;
+
+    .sidebar-content {
+
+        display:     flex;
+        width:       100%;
+        padding-top: 48px;
+        gap:         5px;
+        justify-content: center;
+        flex-direction:  column;
+        
+        .todo-home {
+
+            padding: 5px;
+        }
+
+        .todo-home:hover {
+            
+            box-shadow: inset 0px 0px 2px black;
+        }
+
+        .sidebar-buttons {
+
+            display: flex;
+            gap:     5px;
+            padding: 5px;
+            flex-direction: column;
+            text-align: center;
+            border-radius: $radius;
+        }
+
+        .projects-header {
+            
+            display: flex;
+            width:   100%;
+            padding: 5px;
+            justify-content: center;
+            align-items:     center;
+            align-self:      center;
+            align-content:   center;
+            text-align:      center;
+        }
+
+        .projects-content {
+
+            display:         flex;
+            justify-content: center;
+            overflow-y:      scroll;
+            flex-direction:  column;
+            word-break:      break-all;
+            width:           100%;
+            max-height:      400px;
+            gap:             5px;
+            border-radius:   $radius;
+
+            button {
+
+                display: flex;
+                justify-content: flex-start;
+                gap: 5px;
+            }
+
+            .projects {
+
+                display: flex;
+                flex-direction: column;
+                padding: 5px;
+                gap: 5px;
+
+                button {
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                }
+            }
+        }
+        .add-button {
+
+            display: flex;
+            width:   100%;
+            justify-content: center;
+
+            .button {
+
+                border-radius: $radius;
+                width:         30px;
+                height:        30px;
+            }
+
+            .button:hover {
+
+                transform: scale(1.1);
+            }
+
+            svg {
+
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+body.dark {
+
+    .sidebar {
+    
+        border-right: 1px solid $bg-d-3;
+        background-color: $bg-d-4;
+    
+        .sidebar-content {
+    
+            .todo-home {
+    
+                border: 1px solid $bg-d-2;
+                background-color: $bg-d-3;
+            }
+    
+            .todo-home:hover {
+                
+                background-color: $dark-purple;
+                border: 1px solid $light-purple;
+            }
+    
+            .home-selected {
+    
+                background-color: $bg-d-3;
+                border: 1px solid $dark-purple;
+            }
+    
+            .sidebar-buttons {
+    
+                background-color: $bg-d-3;
+                border: 1px solid $bg-d-2;
+    
+                .button {
+    
+                    background-color: $bg-d-1;
+                    border:           1px solid $bg-d-2;
+                    border-bottom:    3px solid $bg-d-3;
+                    outline:          1px solid $fg-d-3;
+                }
+    
+                .selected {
+    
+                    background-color: $fg-d-3;
+                    border:           1px solid $bg-d-1;
+                    border-bottom:    3px solid $bg-d-2;
+                    outline:          1px solid $fg-d-1;
+                }
+            }
+            .projects-header {
+                
+                color: $white;
+            }
+    
+            .projects-content {
+    
+                border: 1px solid $bg-d-2;
+                background-color: $bg-d-3;
+    
+                span {
+    
+                    .porject-type-tag {
+
+                        color: $white;
+                        background-color: $bg-d-1;
+                        border: 1px solid $fg-d-3;
+                    }
+                }
+    
+                .projects {
+                    
+                    .button {
+    
+                        background-color: $fg-d-3;
+                        border:           1px solid $bg-d-3;
+                        border-bottom:    3px solid $bg-d-3;
+                        outline:          1px solid $fg-d-2;
+                    }
+                }
+    
+                .selected {
+    
+                    background-color: $fg-d-2 !important;
+                    border:           1px solid $bg-d-2 !important;
+                    border-bottom:    1px solid $bg-d-2 !important;
+                    outline:          1px solid $fg-d-1 !important;
+                }
+    
+                .empty-content {
+                    
+                    color: $white;
+                }
+    
+                button {
+    
+                    background-color: $bg-d-1;
+                    border:           1px solid $fg-d-3;
+                    border-bottom:    3px solid $fg-d-3;
+                    outline:          1px solid $fg-d-2;
+                }
+            }
+        }
+    }
+    
+    .sidebar-mini {
+        
+        border-right:     1px solid $bg-d-3;
+        background-color: $bg-d-4;
+    
+        .sidebar-content {
+    
+            .todo-home {
+    
+                background-color: $bg-d-3;
+                border: 1px solid $bg-d-2;
+            }
+    
+            .todo-home:hover {
+                
+                background-color: $dark-purple;
+                border: 1px solid $light-purple;
+            }
+    
+            .home-selected {
+    
+                background-color: $bg-d-3;
+                border: 1px solid $dark-purple;
+            }
+    
+            .sidebar-buttons {
+    
+                background-color: $bg-d-3;
+                border:     1px solid $bg-d-2;
+    
+                .button {
+    
+                    background-color: $bg-d-2;
+                    border:           1px solid $bg-d-1;
+                    border-bottom:    3px solid $bg-d-1;
+                    outline:          1px solid $fg-d-3;
+                }
+    
+                .selected {
+    
+                    background-color: $bg-d-1 !important;
+                    border:           1px solid $fg-d-3 !important; 
+                    border-bottom:    3px solid $fg-d-3 !important;
+                    outline:          1px solid $fg-d-2 !important;
+                }
+            }
+    
+            .projects-header {
+                
+                color: $white;
+            }
+    
+            .projects-content {
+    
+                border: 1px solid $bg-d-3;
+                background-color: $bg-d-4;
+    
+                button {
+    
+                    background-color: $bg-d-2;
+                    border:           1px solid $bg-d-1;
+                    border-bottom:    3px solid $bg-d-1;
+                    outline:          1px solid $fg-d-3;
+                }
+    
+                .projects {
+    
+                    .selected {
+    
+                        background-color: $bg-d-1 !important;
+                        border:           1px solid $fg-d-3 !important;
+                        border-bottom:    3px solid $fg-d-3 !important;
+                        outline:          1px solid $fg-d-2 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+body.light {
+
+    .sidebar {
+    
+        border-right:     1px solid $bg-l-3;
+        background-color: $bg-l-4;
+    
+        .sidebar-content {
+    
+            .todo-home {
+    
+                border: 1px solid $bg-l-2;
+                background-color: $bg-l-3;
+            }
+    
+            .todo-home:hover {
+                
+                background-color: $dark-purple;
+                border: 1px solid $light-purple;
+            }
+    
+            .home-selected {
+    
+                background-color: $bg-l-3;
+                border: 1px solid $dark-purple;
+            }
+    
+            .sidebar-buttons {
+    
+                background-color: $bg-l-3;
+                border:     1px solid $bg-l-2;
+    
+                .button {
+    
+                    background-color: $bg-l-2;
+                    border:           1px solid $bg-l-1;
+                    border-bottom:    3px solid $bg-l-1;
+                    outline:          1px solid $fg-l-3;
+                }
+    
+                .selected {
+    
+                    background-color: $bg-l-1 !important;
+                    border:           1px solid $fg-l-3 !important;
+                    border-bottom:    3px solid $fg-l-3 !important;
+                    outline:          1px solid $fg-l-2 !important;
+                }
+            }
+            .projects-header {
+                
+                color: $black;
+            }
+    
+            .projects-content {
+    
+                border: 1px solid $bg-l-3;
+                background-color: $bg-l-2;
+    
+                span {
+    
+                    .porject-type-tag {
+
+                        color: $black;
+                        background-color: $bg-l-3;
+                        border: 1px solid $bg-l-2
+                    }
+                }
+    
+                .projects {
+                    
+                    .button {
+    
+                        background-color: $fg-l-3;
+                        border:           1px solid $bg-l-3;
+                        border-bottom:    3px solid $bg-l-3;
+                        outline:          1px solid $fg-l-2;
+                    }
+                }
+    
+                .selected {
+    
+                    background-color: $fg-l-2 !important;
+                    border:           1px solid $bg-l-2 !important;
+                    border-bottom:    1px solid $bg-l-2 !important;
+                    outline:          1px solid $fg-l-1 !important;
+                }
+    
+                .empty-content {
+                    
+                    color: $black;
+                }
+    
+                button {
+    
+                    background-color: $bg-l-1;
+                    border:           1px solid $fg-l-3;
+                    border-bottom:    3px solid $fg-l-3;
+                    outline:          1px solid $fg-l-2;
+                }
+            }
+        }
+    }
+    
+    .sidebar-mini {
+        
+        border-right:     1px solid $bg-l-3;
+        background-color: $bg-l-4;
+    
+        .sidebar-content {
+    
+            .todo-home {
+    
+                background-color: $bg-l-3;
+                border: 1px solid $bg-l-2;
+            }
+    
+            .todo-home:hover {
+                
+                background-color: $dark-purple;
+                border: 1px solid $light-purple;
+            }
+    
+            .home-selected {
+    
+                background-color: $bg-l-3;
+                border: 1px solid $dark-purple;
+            }
+    
+            .sidebar-buttons {
+    
+                background-color: $bg-l-3;
+                border:     1px solid $bg-l-2;
+    
+                .button {
+    
+                    background-color: $bg-l-2;
+                    border:           1px solid $bg-l-1;
+                    border-bottom:    3px solid $bg-l-1;
+                    outline:          1px solid $fg-l-3;
+                }
+    
+                .selected {
+    
+                    background-color: $bg-l-1 !important;
+                    border:           1px solid $fg-l-3 !important; 
+                    border-bottom:    3px solid $fg-l-3 !important;
+                    outline:          1px solid $fg-l-2 !important;
+                }
+            }
+    
+            .projects-header {
+                
+                color: $black;
+            }
+    
+            .projects-content {
+    
+                border: 1px solid $bg-l-3;
+                background-color: $bg-l-4;
+    
+                button {
+    
+                    background-color: $bg-l-2;
+                    border:           1px solid $bg-l-1;
+                    border-bottom:    3px solid $bg-l-1;
+                    outline:          1px solid $fg-l-3;
+                }
+    
+                .projects {
+    
+                    .selected {
+    
+                        background-color: $bg-l-1 !important;
+                        border:           1px solid $fg-l-3 !important;
+                        border-bottom:    3px solid $fg-l-3 !important;
+                        outline:          1px solid $fg-l-2 !important;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -4,41 +4,52 @@ import React, { useState, useEffect } from 'react'
 import { useGlobalContext } from '@/config/context/store';
 import { useRouter } from 'next/navigation';
 
+import Icons from '@/config/icons';
+
 import Loading from '@/app/loading';
 import Header  from '@/app/components/Header';
 import Sidebar from '@/app/components/Sidebar';
 import Task    from '@/app/components/Task';
+import Dashboard from '@/app/components/Dashboard';
+import Tag from './components/Tag';
 
 import Lottie     from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
 
 import handleUser from '@/utils/api/user/user';
-import getToken   from '@/utils/functions/getToken';
-
-import { 
-  AiFillTag,
-} from 'react-icons/ai';
 
 import '@/app/styles/page.scss';
 
 function Home() {
 
-  const { selectedProject } = useGlobalContext();
+  const { userData, selectedProject } = useGlobalContext();
 
   const [smallSidebar, setSmallSidebar] = useState(false);
   const [inHome, setUserInHome] = useState(true);
 
-  const LoadTasks = () => {
-    return(
-      <Task/>
-    );
-  }
-
   return (
     <section className='home-page'>
 
-      <Header/>
+      <Header.Root>
         
+        <Header.Start>
+          <Header.Search/>
+        </Header.Start>
+
+        <Header.End>
+
+            { userData && userData.username != '' && userData.username != null ? (
+
+                <Tag.Root>
+                    <Tag.Title Title={ userData.username } />
+                    <Tag.Icon Icon={<Icons.User/>}/>
+                </Tag.Root>
+
+            ):null }
+
+        </Header.End>
+      </Header.Root>
+
       <main className='main-box'>
 
         <aside className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
@@ -48,9 +59,9 @@ function Home() {
           />
         </aside>
 
+        <section className='content'>
         { inHome && (
-
-          <section className='content'>
+          <>
             <div className='greetings'>
               <div className='center-image'>
                 <Lottie
@@ -61,44 +72,43 @@ function Home() {
               <p>Wellcome to your <u>homepage</u></p>
             </div>
 
-            <div className='info-title'>Your tasks status</div>
+            <p className='info-title'>Your tasks status</p>
 
             <div className='task-info'>
 
-              <section className='dashboard'>
+              <Dashboard.Root>
                 <p>Done tasks</p>
-              </section>
+              </Dashboard.Root>
 
-              <section className='dashboard'>
-                <span>
-                  <div className='porject-type-tag'><AiFillTag/>Total tasks</div>
-                </span>
-                <p>{}</p>
-                <img src='/assets/img/waves.png'></img>
-              </section>
+              <Dashboard.Root>
+                <Tag.Root>
+                  <Tag.Icon Icon={<Icons.Tag/>} />
+                  <Tag.Title Title="Total tasks" />
+                </Tag.Root>
+                <Dashboard.Count Value={0}/>
+              </Dashboard.Root>
 
-              <section className='dashboard'>
+              <Dashboard.Root>
                 <p>Week dashboard</p>
-              </section>
+              </Dashboard.Root>
 
             </div>
-          </section>
+          </>
         )}
 
         {selectedProject != null && selectedProject.id != null && !inHome ? (
-          LoadTasks()
+          <></>
         ) : (
           selectedProject.type != '' && selectedProject.type != undefined ? (
 
-            <section className='content'>
-              <span>
-                <div className='porject-type-tag'><AiFillTag/>{selectedProject.type}</div>
-              </span>
-            </section>
-
+            <Tag.Root>
+              <Tag.Title Title={ selectedProject.type } />
+              <Tag.Icon Icon={<Icons.Grid/>}/>
+            </Tag.Root>
+            
           ):null
         )}
-
+        </section>
       </main>
     </section>
   )
@@ -117,7 +127,7 @@ export default function WrappedComponent() {
 
   async function getData() {
 
-    const response = await handleUser(getToken());
+    const response = await handleUser();
 
     if(response) {
 

@@ -1,0 +1,356 @@
+@import '/src/app/styles/global.scss';
+
+.close-modal {
+
+  display:         flex;
+  justify-content: center;
+  align-items:     center;
+  width:           40px;
+  height:          40px;
+  border-radius:   100%;
+  font-size:        1.8em;
+  position:         absolute;
+  cursor:           pointer;
+  top:              0;
+  right:            0;
+  transition:       all 0.1s;
+  color:            $white;
+  background-color: $red;
+
+  i { margin: 0 !important; }
+}
+.close-modal:hover{transform: scale(1.2);}
+.close-modal:active{ background-color: $light-red;}
+
+.modal {
+
+  position: fixed;
+  z-index:  9999;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: fadeInModal 0.2s ease-in-out forwards;
+
+  @keyframes fadeInModal {
+
+    from {
+
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .modal-content {
+
+    display:         flex;
+    justify-content: center;
+    margin-top:      35vh;
+    width:           100%;
+
+    .modal-area {
+
+      display:         flex;
+      justify-content: center;
+      position:        relative;
+      padding:         10px;
+      width:           100%;
+      margin:          0 25%;
+
+      .modal-project {
+
+        padding:          10px;
+        width:            100%;
+        border-radius:    $radius;
+
+        .title-input {
+
+          display: flex;
+          width:   100%;
+          flex-direction: column;
+          gap: 5px;
+
+          .input-bar {
+
+            display: flex;
+            width:   100%;
+            flex-direction: column;
+            gap: 5px;
+
+            label{ 
+
+              display: flex;
+            
+              p {
+
+                font-size: 70%;
+                padding: 2px;
+                border-radius: $radius;
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        .select-area {
+
+          display:         flex;
+          align-items:     center;
+          align-content:   center;
+          justify-content: space-between;
+          width:           100%;
+          height:          100%;
+          gap:             5px;
+          margin-top:      10px;
+
+          .select-content {
+
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            width:  100%;
+            height: 100%;
+
+            label { 
+
+              display: flex;
+            
+              p {
+
+                font-size: 70%;
+                padding: 2px;
+                border-radius: $radius;
+                margin: 0;
+              }
+            }
+
+            p {
+
+              display:      flex;
+              margin-right: 5px;
+              border-radius: 5px;
+              
+              svg {
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                font-size: .1em;
+                height:    39px;
+                width:     39px;
+              }
+            }
+            
+            .input-select {
+
+              display: flex;
+              width:   100%;
+              height:  100%;
+              padding: 10px;
+            }
+          }
+        }
+
+        .buttons {
+
+          display:    flex;
+          width:      100%;
+          gap:        5px;
+          margin-top: 10px;
+          justify-content: flex-end;
+
+          .button-add, .button-cancel {
+
+            font-size: 1.2em;
+            padding:   0 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+body.dark {
+
+  .modal {
+
+    .modal-content {
+  
+      .modal-area {
+  
+        .modal-project {
+  
+          color:            $white;
+          border:           1px solid $bg-d-3;
+          background-color: $bg-d-4;
+  
+          .title-input {
+  
+            .input-bar {
+
+              label p{
+
+                background-color: $bg-d-3;
+                border: 1px solid $bg-d-2;
+              }
+
+              .inner-input {
+  
+                background-color: $bg-d-3;
+                border: 1px solid $bg-d-2;
+
+                input {
+                  
+                  color: $white;
+                }
+              }
+            }
+          }
+  
+          .select-area {
+  
+            .select-content {
+              
+              p {
+
+                background-color: $bg-d-2;
+                border: 1px solid $fg-d-3;
+              }
+
+              .select-group {
+
+                .input-select {
+
+                  background-color: $bg-d-3;
+                  border: 1px solid $bg-d-2;
+                }
+              }
+            }
+          }
+  
+          .buttons {
+  
+            .button-add {
+  
+              outline: 1px solid $fg-d-2;
+              border:  1px solid $bg-d-2;
+              border-bottom: 3px solid $bg-d-3;
+              background-color: $bg-d-1;
+            }
+  
+            .button-add:hover {
+  
+              outline: 1px solid $fg-d-1;
+              border:  1px solid $bg-d-1;
+              border-bottom: 3px solid $bg-d-2;
+              background-color: $fg-d-3;
+            }
+
+            .button-cancel {
+  
+              outline: 1px solid $bg-d-1;
+              border:  1px solid $bg-d-4;
+              border-bottom: 3px solid $bg-d-4;
+              background-color: $bg-d-3;
+            }
+    
+            .button-cancel:hover {
+  
+              outline: 1px solid $fg-d-3;
+              border:  1px solid $bg-d-3;
+              border-bottom: 3px solid $bg-d-4;
+              background-color: $bg-d-2;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+body.light {
+
+  .modal {
+
+    .modal-content {
+  
+      .modal-area {
+  
+        .modal-project {
+  
+          color:            $black;
+          border:           1px solid $bg-l-3;
+          background-color: $bg-l-4;
+  
+          .title-input {
+  
+            .input-bar {
+  
+              .inner-input {
+  
+                input {
+                  
+                  color: $black;
+                }
+              }
+            }
+          }
+  
+          .select-area {
+  
+            .select-content {
+  
+              p {
+
+                background-color: $bg-l-2;
+                border: 1px solid $fg-l-3;
+              }
+            }
+          }
+  
+          .buttons {
+  
+            .button-add, .button-cancel {
+  
+              border: 1px solid $bg-l-3;
+              border-bottom: 3px solid $bg-l-2;
+              outline: 1px solid $bg-l-1;
+            }
+  
+            .button-cancel {
+  
+              background-color: $bg-l-5;
+              border: 1px solid $bg-l-4;
+              border-bottom: 3px solid $bg-l-3;
+              outline: 1px solid $bg-l-2;
+            }
+  
+            .button-add:hover, .button-cancel:hover {
+  
+              border: 1px solid $bg-l-2;
+              border-bottom: 3px solid $bg-l-1;
+              outline: 1px solid $fg-l-3;
+            }
+  
+            .button-cancel:hover {
+  
+              border: 1px solid $bg-l-3;
+              border-bottom: 3px solid $bg-l-2;
+              outline: 1px solid $bg-l-1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@import '/src/app/styles/global.scss';
+
+.dashboard {
+        
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em;
+    position: relative;
+
+    width:  200px;
+    min-width: 200px;
+    height: 200px;
+    border-radius: $radius;
+
+    overflow: hidden;
+
+    span {
+
+        display: flex;
+        position: absolute;
+        top:  5px;
+        left: 5px;
+        
+        .tag {
+    
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            border-radius: $radius;
+            padding: 2px;
+        }
+    }
+}
+
+body.dark {
+
+    .dashboard {
+
+        color: $white;
+        border: 1px solid $bg-d-3;
+        background-color: $bg-d-4;
+    }
+}
+
+body.light {
+
+    .dashboard {
+
+        color: $black;
+        border: 1px solid $bg-l-3;
+        background-color: $bg-l-4;
+    }
+}

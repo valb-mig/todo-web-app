@@ -1,0 +1,54 @@
+@import '/src/app/styles/global.scss';
+
+.button
+{
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.2s;
+    border-radius: $radius;
+}
+
+body.dark {
+
+    .button
+    {
+        color: $white;
+        background-color: $bg-d-1;
+        border: 1px solid $bg-d-2;
+    
+        .selected
+        {
+            background-color: $fg-d-3;
+            border: 1px solid $bg-d-1;
+        }
+    }
+    
+    .button:hover
+    {
+        background-color: $fg-d-2;
+        border: 1px solid $fg-d-3;
+    }
+}
+
+body.light {
+
+    .button
+    {
+        color: $white;
+        background-color: $bg-l-1;
+        border: 1px solid $bg-l-2;
+    
+        .selected
+        {
+            background-color: $fg-l-3;
+            border: 1px solid $bg-l-1;
+        }
+    }
+    
+    .button:hover
+    {
+        background-color: $fg-l-2;
+        border: 1px solid $fg-l-3;
+    }
+}
