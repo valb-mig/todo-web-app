@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '@/config/context/store';
 
 import addProject from '@/utils/api/project/add';

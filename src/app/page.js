@@ -6,12 +6,15 @@ import { useRouter } from 'next/navigation';
 
 import Icons from '@/config/icons';
 
-import Loading from '@/app/loading';
-import Header  from '@/app/components/Header';
-import Sidebar from '@/app/components/Sidebar';
-import Task    from '@/app/components/Task';
+import Loading   from '@/app/loading';
+import Header    from '@/app/components/Header';
+import Sidebar   from '@/app/components/Sidebar';
 import Dashboard from '@/app/components/Dashboard';
-import Tag from './components/Tag';
+import Tag       from '@/app/components/Tag';
+import Modal     from '@/app/components/Modal';
+
+import Button    from '@/app/components/Button';
+import Input     from '@/app/components/Input';
 
 import Lottie     from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
@@ -20,47 +23,117 @@ import handleUser from '@/utils/api/user/user';
 
 import '@/app/styles/page.scss';
 
-function Home() {
+const Home = () => {
 
-  const { userData, selectedProject } = useGlobalContext();
+  const { userData, projects, selectedProject, path, setProjects, setSelectedProject, setScreenPath } = useGlobalContext();
 
-  const [smallSidebar, setSmallSidebar] = useState(false);
-  const [inHome, setUserInHome] = useState(true);
+  const [ showProjectModal, setShowProjectModal ] = useState(false);
+
+  const changeProjectType = (type) => {
+
+    setScreenPath({
+      current:{home:false},
+      breadcrumbs: [type]
+    });
+
+    setSelectedProject({
+      id:    null,
+      key:   null,
+      type:  type,
+      title: null,
+      icon:  null
+    });
+  }
 
   return (
-    <section className='home-page'>
+    <div className='home-page'>
+
+      {showProjectModal && (
+        <Modal.Root>
+
+            <Modal.Header>
+              <Button.Root OnClick={() => setShowProjectModal(false)} >
+                <Button.Icon Icon={<Icons.Close/>} />
+              </Button.Root>
+            </Modal.Header>
+
+            <Modal.Body>
+              <form onSubmit={() => setShowProjectModal(false)}>
+                
+                <Input.Root Placeholder="Project tile"/>
+
+                <div className='input-group'>
+                  <Input.Root Placeholder="Project tile"/>
+                  <Input.Root Placeholder="Project tile"/>
+                </div>
+
+                <Modal.Footer>
+                  <Button.Root OnClick={() => setShowProjectModal(false)} >
+                    <Button.Title Title="Cancel" />
+                  </Button.Root>
+                  <Button.Root Type="submit">
+                    <Button.Title Title="Add" />
+                  </Button.Root>
+                </Modal.Footer>
+              </form>
+            </Modal.Body>
+
+        </Modal.Root>
+      )}    
 
       <Header.Root>
-        
         <Header.Start>
           <Header.Search/>
         </Header.Start>
 
         <Header.End>
 
-            { userData && userData.username != '' && userData.username != null ? (
-
-                <Tag.Root>
-                    <Tag.Title Title={ userData.username } />
-                    <Tag.Icon Icon={<Icons.User/>}/>
-                </Tag.Root>
-
-            ):null }
+          { userData && userData.username !== '' && userData.username !== null && (
+            <Tag.Root>
+              <Tag.Title Title={ userData.username } />
+              <Tag.Icon Icon={<Icons.User/>}/>
+            </Tag.Root>
+          )}
 
         </Header.End>
       </Header.Root>
 
-      <main className='main-box'>
+      <section className='main-box'>
 
-        <aside className={smallSidebar ? 'sidebar-box-mini' : 'sidebar-box'}>
-          <Sidebar
-            UserInHome={setUserInHome}
-            SmallSidebar={(bool) => setSmallSidebar(bool)}
-          />
-        </aside>
+        <Sidebar.Root Type="normal">
+          <Sidebar.Start>
+            <Sidebar.Box>
+              <Button.Root OnClick={() => changeProjectType('todo')} >
+                <Button.Title Title="To-do" />
+              </Button.Root>
 
-        <section className='content'>
-        { inHome && (
+              <Button.Root OnClick={() => changeProjectType('kanban')} >
+                <Button.Title Title="Kanban" />
+              </Button.Root>
+            </Sidebar.Box>
+
+              { projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 && (
+                <Sidebar.Box>
+                  <div className='projects'>
+                    {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
+                        <Button.Root OnClick={() => { console.log(key,project,index) }} >
+                          <Button.Icon Icon={<Icons.Grid/>} />
+                          <Button.Title Title={project.project_title} />
+                        </Button.Root>
+                    ))}
+                  </div>
+                </Sidebar.Box>
+              )}
+
+            <Button.Root Class="button-add" OnClick={() => setShowProjectModal(true)}>
+              <Button.Icon Icon={<Icons.Plus/>} />
+            </Button.Root>
+          </Sidebar.Start>
+        </Sidebar.Root>
+
+        <main className='content'>
+
+        { path.current !== undefined && path.current.home && (
           <>
             <div className='greetings'>
               <div className='center-image'>
@@ -104,21 +177,22 @@ function Home() {
           </>
         )}
 
-        {selectedProject != null && selectedProject.id != null && !inHome ? (
+        {selectedProject != null && selectedProject.id != null && !path.current.home ? (
           <></>
         ) : (
-          selectedProject.type != '' && selectedProject.type != undefined ? (
+          selectedProject.type != '' && selectedProject.type != undefined && !path.current.home && (
 
-            <Tag.Root>
-              <Tag.Title Title={ selectedProject.type } />
-              <Tag.Icon Icon={<Icons.Grid/>}/>
-            </Tag.Root>
-            
-          ):null
+            <div className='home-tag'>
+              <Tag.Root>
+                <Tag.Icon Icon={<Icons.Grid/>}/>
+                <Tag.Title Title={ selectedProject.type } />
+              </Tag.Root>
+            </div>
+          )
         )}
-        </section>
-      </main>
-    </section>
+        </main>
+      </section>
+    </div>
   )
 }
 

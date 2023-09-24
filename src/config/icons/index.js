@@ -1,6 +1,7 @@
 import { 
     AiFillTag,
-    AiOutlineMenu
+    AiOutlineMenu,
+    AiFillHome
 } from 'react-icons/ai';
 
 import { 
@@ -20,6 +21,10 @@ import {
     FaMagnifyingGlass
 } from 'react-icons/fa6';
 
+import {
+    FaPlus
+} from 'react-icons/fa';
+
 const Icon = {
 
     Tag:    AiFillTag,
@@ -28,7 +33,9 @@ const Icon = {
     Close:  MdClose,
     Grid:   AiOutlineMenu,
     User:   BiSolidUserCircle,
-    Search: FaMagnifyingGlass
+    Search: FaMagnifyingGlass,
+    Home:   AiFillHome,
+    Plus:   FaPlus
 }
 
 export default Icon;

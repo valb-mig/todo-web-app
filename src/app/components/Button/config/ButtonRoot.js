@@ -1,6 +1,8 @@
-const ButtonRoot = ({ Id, Key, Type, OnClick, children }) => {
+import './styles/ButtonRoot.scss';
+
+const ButtonRoot = ({ Id, Key, Type, OnClick, Class, children }) => {
     return(
-        <button className="button" id={Id} key={Key} type={Type} onClick={OnClick}>
+        <button className={"button"+" "+Class} id={Id} key={Key} type={Type} onClick={OnClick}>
             { children }
         </button>
     );

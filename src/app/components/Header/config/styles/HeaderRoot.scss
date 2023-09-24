@@ -9,11 +9,7 @@
     height:    28px;
     padding:   10px 0;
 
-    button {
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .button {
 
         width:  28px;
         height: 100%;
@@ -26,6 +22,14 @@ body.dark {
 
         border-bottom: 1px solid $bg-d-2;
         background-color: $bg-d-3;
+
+        .button {
+
+            color: $white;
+
+            border: 1px solid $bg-d-1;
+            background-color: $bg-d-2;
+        }
     }
 }
 
@@ -35,5 +39,13 @@ body.light {
 
         border-bottom: 1px solid $bg-l-2;
         background-color: $bg-l-3;
+
+        .button {
+
+            color: $black;
+
+            border: 1px solid $bg-l-1;
+            background-color: $bg-l-2;
+        }
     }
 }
