@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '@/config/context/store';
-import changeTheme from '@/utils/functions/changeTheme';
+import changeTheme from '@/utils/func/changeTheme';
 
 import Input  from '@/app/components/Input';
 import Button from '@/app/components/Button';

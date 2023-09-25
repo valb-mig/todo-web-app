@@ -1,4 +1,4 @@
-import getToken from "@/utils/functions/getToken";
+import getToken from "@/utils/helpers/getToken";
 
 async function editTask(task_id, project_id, action) {
 

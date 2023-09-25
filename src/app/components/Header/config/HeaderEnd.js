@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/config/context/store';
 
-import changeTheme from '@/utils/functions/changeTheme';
+import changeTheme from '@/utils/helpers/changeTheme';
 
 import './styles/HeaderEnd.scss';
 
 import Icons from '@/config/icons';
 
 import Button from '@/app/components/Button';
-import Popup  from '@/app/components/Popup';
+// import Popup  from '@/app/components/Popup';
 
 const HeaderEnd = ({ children }) => {
 
@@ -31,7 +31,7 @@ const HeaderEnd = ({ children }) => {
                 <Button.Icon Icon={popup ? <Icons.Close/> : <Icons.Grid/>}/>
             </Button.Root>
 
-            {popup ? (
+            {/* {popup ? (
 
                 <Popup>
                     <Button
@@ -44,7 +44,7 @@ const HeaderEnd = ({ children }) => {
                     />
                 </Popup>
 
-            ):null }
+            ):null } */}
 
         </div>
     );

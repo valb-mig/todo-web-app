@@ -3,23 +3,26 @@
 import React, { useState, useEffect } from 'react'
 import { useGlobalContext } from '@/config/context/store';
 import { useRouter } from 'next/navigation';
-
 import Icons from '@/config/icons';
 
 import Loading   from '@/app/loading';
+
 import Header    from '@/app/components/Header';
 import Sidebar   from '@/app/components/Sidebar';
 import Dashboard from '@/app/components/Dashboard';
 import Tag       from '@/app/components/Tag';
 import Modal     from '@/app/components/Modal';
-
 import Button    from '@/app/components/Button';
 import Input     from '@/app/components/Input';
+import Select    from '@/app/components/Select';
 
 import Lottie     from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
 
-import handleUser from '@/utils/api/user/user';
+import handleUser      from '@/utils/api/user/user';
+import getProject      from '@/utils/api/project/get';
+import cleanObject     from '@/utils/helpers/cleanObject';
+import modalValidation from '@/utils/validators/home/modalValidation';
 
 import '@/app/styles/page.scss';
 
@@ -28,6 +31,12 @@ const Home = () => {
   const { userData, projects, selectedProject, path, setProjects, setSelectedProject, setScreenPath } = useGlobalContext();
 
   const [ showProjectModal, setShowProjectModal ] = useState(false);
+  const [ modalFormData, setModalFormData ] = useState({
+    title: '',
+    icon:  '',
+    days:  '',
+    error: false,
+  });
 
   const changeProjectType = (type) => {
 
@@ -45,6 +54,47 @@ const Home = () => {
     });
   }
 
+  async function handleGetProjects() {
+        
+    let response = await getProject();
+
+    if( response ){
+      setProjects(response.projects);
+    } else  {
+      console.log('Projects: No database');
+    }
+  }
+
+  async function submitModal() {
+
+    let response = await modalValidation(modalFormData, setModalFormData, selectedProject);
+
+    if(typeof response == "object") {
+
+      let projectCount = Object.keys(projects[selectedProject.type]).length + 1;
+      
+      setProjects({
+
+        ...projects,
+
+        [selectedProject.type]:{
+          ...projects[selectedProject.type],
+          [projectCount]:{
+            ...response
+          }
+        }
+      });
+
+    } else if(typeof response == "boolean") {
+
+      if(response) {
+        handleGetProjects();
+      } else {
+        console.log('Projects: Database error');
+      }
+    }
+  }
+
   return (
     <div className='home-page'>
 
@@ -52,23 +102,63 @@ const Home = () => {
         <Modal.Root>
 
             <Modal.Header>
-              <Button.Root OnClick={() => setShowProjectModal(false)} >
+              <Button.Root OnClick={() => {setShowProjectModal(false); setModalFormData(cleanObject(modalFormData))}} >
                 <Button.Icon Icon={<Icons.Close/>} />
               </Button.Root>
             </Modal.Header>
 
             <Modal.Body>
-              <form onSubmit={() => setShowProjectModal(false)}>
-                
-                <Input.Root Placeholder="Project tile"/>
+              <form onSubmit={() => { setShowProjectModal(false); submitModal()}}>
+
+                <Input.Root>
+                  <Input.Label Title="Title"/>
+                    <Input.Body  
+                      Type='text' 
+                      Placeholder='Project title...' 
+                      OnChange={(e) => setModalFormData({...modalFormData, title: e.target.value})}
+                      Value={modalFormData.title}
+                      Error={modalFormData.error}
+                    />
+                </Input.Root>
 
                 <div className='input-group'>
-                  <Input.Root Placeholder="Project tile"/>
-                  <Input.Root Placeholder="Project tile"/>
+                  <Select.Root>
+                    <Select.Label Title="Days" />
+                    <Select.Body 
+                      Placeholder="Project days..."
+                      OnChange={(e) => setModalFormData({...modalFormData, days: e.target.value})}
+                      Options={[
+                        {
+                          key: "foo",
+                          value: "bar"
+                        }
+                      ]}
+                      Value={modalFormData.days}
+                      Error={modalFormData.error}
+                    >
+                    </Select.Body>
+                  </Select.Root>
+
+                  <Select.Root>
+                    <Select.Label Title="Icon" />
+                    <Select.Body 
+                      Placeholder="Project icon..."
+                      OnChange={(e) => setModalFormData({...modalFormData, icon: e.target.value})}
+                      Options={[
+                        {
+                          key: "foo",
+                          value: "bar"
+                        }
+                      ]}
+                      Value={modalFormData.icon}
+                      Error={modalFormData.error}
+                    >
+                    </Select.Body>
+                  </Select.Root>
                 </div>
 
                 <Modal.Footer>
-                  <Button.Root OnClick={() => setShowProjectModal(false)} >
+                  <Button.Root OnClick={() => setModalFormData(cleanObject(modalFormData))} >
                     <Button.Title Title="Cancel" />
                   </Button.Root>
                   <Button.Root Type="submit">

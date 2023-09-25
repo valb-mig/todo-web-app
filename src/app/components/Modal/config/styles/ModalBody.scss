@@ -3,6 +3,7 @@
 .modal-body {
 
   width: 60vw;
+  max-width: 500px;
 
   form {
 
@@ -18,6 +19,12 @@
       padding: 10px; 
     }
   
+    .input-body {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
     .input-group {
   
       display: flex;

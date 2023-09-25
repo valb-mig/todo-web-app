@@ -1,8 +1,8 @@
 import './styles/ButtonIcon.scss';
 
-const ButtonIcon = ({ Icon }) => {
+const ButtonIcon = ({ Class, Icon }) => {
     return(
-        <span className="button-icon">{ Icon }</span>
+        <span className={"button-icon"+" "+(Class != undefined ? Class : '')}>{ Icon }</span>
     );
 }
 

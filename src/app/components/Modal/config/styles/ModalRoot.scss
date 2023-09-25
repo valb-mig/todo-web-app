@@ -10,6 +10,7 @@
     height:   100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     animation: fadeInModal 0.2s ease-in-out forwards;
 
     @keyframes fadeInModal {

@@ -1,0 +1,45 @@
+@import '/src/app/styles/global.scss';
+
+.select-body {
+
+    display: flex;
+    width:   100%;
+
+    select {
+
+        display: flex;
+        width:   100%;
+        outline: none;
+        padding: 10px;
+        border-radius: $radius;
+    }
+}
+
+
+body.dark {
+
+    .select-body {
+
+        select {
+            
+            color: $white;
+
+            border: 1px solid $bg-d-1;
+            background-color: $bg-d-2;
+        }
+    }
+}
+
+body.light {
+
+    .select-body {
+
+        select {
+
+            color: $black;
+
+            border: 1px solid $bg-l-1;
+            background-color: $bg-l-2;
+        }
+    }
+}

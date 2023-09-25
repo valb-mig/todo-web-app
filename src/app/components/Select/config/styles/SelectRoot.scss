@@ -1,0 +1,13 @@
+@import '/src/app/styles/global.scss';
+
+.select {
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+
+    select {
+        outline: none;
+    }
+}
