@@ -6,7 +6,8 @@ import {
 
 import { 
     BsFillSunFill,
-    BsFillMoonFill
+    BsFillMoonFill,
+    BsDot
 } from 'react-icons/bs';
 
 import { 
@@ -14,7 +15,8 @@ import {
 } from 'react-icons/md';
 
 import {
-    BiSolidUserCircle
+    BiSolidUserCircle,
+    BiSolidFolderOpen
 } from 'react-icons/bi';
 
 import {
@@ -35,7 +37,9 @@ const Icon = {
     User:   BiSolidUserCircle,
     Search: FaMagnifyingGlass,
     Home:   AiFillHome,
-    Plus:   FaPlus
+    Plus:   FaPlus,
+    Folder: BiSolidFolderOpen,
+    Dot:    BsDot  
 }
 
 export default Icon;

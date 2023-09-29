@@ -1,11 +1,14 @@
 import './styles/HeaderStart.scss';
 
 import { useGlobalContext } from '@/config/context/store';
+import { useRouter } from 'next/navigation';
 
 import Button from '@/app/components/Button';
 import Icons  from '@/config/icons';
 
 const HeaderStart = ({ children }) => {
+
+    const router = useRouter();
 
     const { path, setScreenPath } = useGlobalContext();
 
@@ -15,7 +18,7 @@ const HeaderStart = ({ children }) => {
             <Button.Root OnClick={() => {setScreenPath({
                 current:{home:true}, 
                 breadcrumbs:['home'] 
-            }) && console.log(path)}}>
+            })}}>
                 <Button.Icon Icon={<Icons.Home/>} />
             </Button.Root>
 

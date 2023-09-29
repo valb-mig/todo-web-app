@@ -11,6 +11,16 @@
     .button {
         p { margin: 0; }
     }
+
+    .projects {
+
+        .button {
+            
+            display: flex;
+            word-break: break-all;
+            margin: 5px;
+        }
+    }
 }
 
 body.dark {
@@ -27,6 +37,24 @@ body.dark {
             outline: 1px solid $fg-d-3;
             border-bottom: 2px solid $bg-d-3;
             background-color: $bg-d-2;
+
+            transition: all .2s;
+        }
+
+        .button-selected {
+            
+            border: none;
+
+            outline: 1px solid $light-purple;
+            border-bottom: 2px solid $bg-d-2;
+            background-color: $bg-d-1;
+        }
+
+        .projects {
+
+            .button {
+                color: $white;
+            }
         }
     }
 }
@@ -45,6 +73,24 @@ body.light {
             outline: 1px solid $fg-l-3;
             border-bottom: 2px solid $bg-l-3;
             background-color: $bg-l-2;
+
+            transition: all .2s;
+        }
+
+        .button-selected {
+            
+            border: none;
+
+            outline: 1px solid $light-purple;
+            border-bottom: 2px solid $bg-l-2;
+            background-color: $bg-l-1;
+        }
+
+        .projects {
+
+            .button {
+                color: $black;
+            }
         }
     }
 }

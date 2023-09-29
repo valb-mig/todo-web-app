@@ -17,7 +17,7 @@ async function addProject(project, type) {
 
             project_type:  type,
             project_title: project.title,
-            project_icon:  project.icon_name,
+            project_icon:  project.icon,
             project_days:  project.days
         };
 
