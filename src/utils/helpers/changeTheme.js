@@ -1,4 +1,4 @@
-const changeTheme = (userData ,setUserData) => {
+export default function changeTheme(userData ,setUserData){
 
   const element = document.body.classList;
 
@@ -7,5 +7,3 @@ const changeTheme = (userData ,setUserData) => {
 
   setUserData({...userData, darkTheme:!userData.darkTheme});
 }
-
-export default changeTheme;

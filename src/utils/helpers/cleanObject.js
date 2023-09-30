@@ -1,15 +1,28 @@
 export default function cleanObject(obj) {
-    const updatedObj = {};
-  
-    for (const key in obj) {
-      if (typeof obj[key] === 'string') {
+
+  const updatedObj = {};
+
+  for (const key in obj) {
+
+    switch (typeof obj[key]) {
+
+      case 'string':
         updatedObj[key] = '';
-      } else if (typeof obj[key] === 'boolean') {
+      break;
+      
+      case 'number':
+        updatedObj[key] = 0;
+      break;
+
+      case 'boolean':
         updatedObj[key] = false;
-      } else {
+      break;
+    
+      default:
         updatedObj[key] = null;
-      }
+      break;
     }
-  
-    return updatedObj;
   }
+
+  return updatedObj;
+}

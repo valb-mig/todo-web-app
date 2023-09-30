@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from 'react';
+'use client';
 
+import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '@/config/context/store';
-import { useRouter } from 'next/navigation';
+
 import Icons from '@/config/icons';
 
-import Loading   from '@/app/loading';
+import Header  from '@/app/components/Header';
+import Sidebar from '@/app/components/Sidebar';
+import Tag     from '@/app/components/Tag';
+import Modal   from '@/app/components/Modal';
+import Button  from '@/app/components/Button';
+import Input   from '@/app/components/Input';
+import Select  from '@/app/components/Select';
 
-import Header    from '@/app/components/Header';
-import Sidebar   from '@/app/components/Sidebar';
-import Tag       from '@/app/components/Tag';
-import Modal     from '@/app/components/Modal';
-import Button    from '@/app/components/Button';
-import Input     from '@/app/components/Input';
-import Select    from '@/app/components/Select';
-
-import handleUser      from '@/utils/api/user/user';
 import getProject      from '@/utils/api/project/get';
 import cleanObject     from '@/utils/helpers/cleanObject';
 import modalValidation from '@/utils/validators/home/modalValidation';
 
-import '@/app/styles/page.scss';
+import './style/Layout.scss';
 
-const HomeLayout = ({ children }) => {
+const Layout = ({ children }) => {
 
     const { userData, projects, selectedProject, path, setProjects, setSelectedProject, setScreenPath } = useGlobalContext();
 
@@ -29,7 +27,7 @@ const HomeLayout = ({ children }) => {
     const [ modalFormData, setModalFormData ] = useState({
         title: '',
         icon:  '',
-        days:  '',
+        days:  0,
         error: false,
     });
 
@@ -57,18 +55,18 @@ const HomeLayout = ({ children }) => {
 
         setScreenPath({
             current:{task:true},
-            breadcrumbs: [project.project_title]
+            breadcrumbs: [selectedProject.type, project.project_title]
         });
 
         setSelectedProject({
             id:    id,
             key:   key,
-            type:  project.project_type,
+            type:  selectedProject.type,
             title: project.project_title,
             icon:  project.project_icon
         });
 
-        console.log(selectedProject);
+        console.log(project);
         console.log(key);
     }
 
@@ -97,9 +95,9 @@ const HomeLayout = ({ children }) => {
 
                 [selectedProject.type]:{
                 ...projects[selectedProject.type],
-                [projectCount]:{
-                    ...response
-                }
+                    [projectCount]:{
+                        ...response
+                    }
                 }
             });
 
@@ -116,7 +114,7 @@ const HomeLayout = ({ children }) => {
     return (
         <div className='home-page'>
             
-            {showProjectModal && (
+            { showProjectModal && (
 
                 <Modal.Root>
                     <Modal.Header>
@@ -238,10 +236,12 @@ const HomeLayout = ({ children }) => {
                                 </div>
                             </Sidebar.Box>
                         )}
-
-                        <Button.Root Class="button-add" OnClick={() => setShowProjectModal(true)}>
-                            <Button.Icon Icon={<Icons.Plus/>} />
-                        </Button.Root>
+                        
+                        { selectedProject.type !== null && (
+                            <Button.Root Class="button-add" OnClick={() => setShowProjectModal(true)}>
+                                <Button.Icon Icon={<Icons.Plus/>} />
+                            </Button.Root>
+                        )}
 
                     </Sidebar.Start>
                 </Sidebar.Root>
@@ -254,60 +254,4 @@ const HomeLayout = ({ children }) => {
     )
 }
 
-export default function WrappedComponent({ children }) {
-
-  const { userData, setUserData } = useGlobalContext();
-  const [ loading, setLoading ]   = useState(true);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  async function getData() {
-
-    const response = await handleUser();
-
-    if(response) {
-
-      try {
-
-        if(response.success !== null && response.success !== undefined) {
-
-          if (response?.success) {
-
-            setUserData({
-              username: response.user.name,
-              logged:   true
-            });
-          } else {
-            router.push('/login');
-          }
-
-        } else {
-
-          setUserData({
-            username: "Fake Name",
-            logged:   false
-          });
-        }
-      } catch (error) {
-        console.error("Error: "+error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    else {
-      console.error('[Api]: Response Error');
-    }
-  }
-
-  if (loading) <Loading/>
-
-  return userData ? (
-    <HomeLayout>
-      { children }
-    </HomeLayout>
-  ) : null;
-}
+export default Layout;

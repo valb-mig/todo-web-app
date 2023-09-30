@@ -6,16 +6,15 @@ import { useGlobalContext } from '@/config/context/store';
 import Icons from '@/config/icons';
 import Tag   from '@/app/components/Tag';
 
+import Breadcrumbs from '@/app/components/Breadcrumbs';
+
 const Project = () => {
 
     const { selectedProject } = useGlobalContext();
 
     return(
         <div className='home-tag'>
-            <Tag.Root>
-                <Tag.Icon Icon={<Icons.Grid/>}/>
-                <Tag.Title Title={ selectedProject.type } />
-            </Tag.Root>
+            <Breadcrumbs/>
         </div>
     );
 }

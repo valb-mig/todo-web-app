@@ -1,5 +1,4 @@
-import { Varela_Round } from 'next/font/google'
-import '@/app/styles/page.scss';
+import { Varela_Round } from 'next/font/google';
 
 const varela_round = Varela_Round({ 
   weight:  '400',
@@ -13,6 +12,8 @@ export const metadata = {
     icon: '/static/favicon.ico',
   },
 }
+
+import '@/app/styles/page.scss';
 
 export default function RootLayout({ children }) {
 

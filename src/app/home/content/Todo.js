@@ -1,17 +1,24 @@
+'use client';
+
 import React, { useState }  from 'react';
 import { useGlobalContext } from '@/config/context/store';
 
-import Button from '@/app/components/Button';
-import Input  from '@/app/components/Input';
-import Card   from '@/app/components/Card';
+import Icons from '@/config/icons';
+
+import Button      from '@/app/components/Button';
+import Input       from '@/app/components/Input';
+import Tag         from '@/app/components/Tag';
+import Breadcrumbs from '@/app/components/Breadcrumbs';
 
 import addTask    from '@/utils/api/task/add';
 import editTask   from '@/utils/api/task/edit';
 import removeTask from '@/utils/api/task/remove';
 
+import '@/app/home/content/styles/Todo.scss';
+
 export default function Todo() {
 
-    const { selectedProject, projects, setProjects } = useGlobalContext();
+    const { selectedProject, projects, path, setProjects } = useGlobalContext();
 
     const [taskFormData, setTaskFormData] = useState({
         title: '',
@@ -40,9 +47,9 @@ export default function Todo() {
 
                 newTask = {
 
-                    task_id: projects[selectedProject.type][selectedProject.project_id].project_tasks.length + 1,
+                    task_id: projects[selectedProject.type][selectedProject.id].project_tasks.length + 1,
                     user_id:'999',
-                    project_id:selectedProject.project_id,
+                    project_id:selectedProject.id,
                     task_title:taskFormData.title,
                     task_desc:taskFormData.desc,
                     task_type:selectedProject.type,
@@ -58,11 +65,11 @@ export default function Todo() {
     
                     ...projects[selectedProject.type],
     
-                    [selectedProject.project_id]:{
+                    [selectedProject.id]:{
     
-                        ...projects[selectedProject.type][selectedProject.project_id],
+                        ...projects[selectedProject.type][selectedProject.id],
                         project_tasks:[
-                            ...projects[selectedProject.type][selectedProject.project_id].project_tasks,
+                            ...projects[selectedProject.type][selectedProject.id].project_tasks,
                             newTask
                         ],
                     }
@@ -160,59 +167,54 @@ export default function Todo() {
     }
 
     return(
+        <>
+            <Breadcrumbs/>
 
-        <section className='content'>
-            <div className='project-header'>
-                <div className='project-name'>
-                    <div className='icon-project-name'>
-                        <FaListUl/>
-                    </div>
-                    <p>{selectedProject.title}</p>
-                </div>
-            </div>
-            <form onSubmit={ (e) => submitTask(e) } className='input-bar'>
+            <form className='task-input-bar' onSubmit={(e) => submitTask(e)}>
                 <div className={'task-inputs ' + (taskFormData.error ? 'error-task-input' : '')}>
-                    <Input
-                        Id='add-task'
-                        Placeholder='Task name'
-                        OnChange={(e) => {setTaskFormData({...taskFormData,title:e.target.value})}}
-                        Value={taskFormData.title}
-                    />
-                    <Input
-                        Id='desc-task'
-                        Placeholder='Description'
-                        OnChange={(e) => {setTaskFormData({...taskFormData,desc:e.target.value})}}
-                        Value={taskFormData.desc}
-                    />
+
+                    <Input.Root>
+                        <Input.Body 
+                            Error={taskFormData.error} 
+                            OnChange={(e) => setTaskFormData({...taskFormData, title:e.target.value})} 
+                            Value={taskFormData.title}
+                            Placeholder='Task title...'
+                        />
+                    </Input.Root>
+
+                    <Input.Root>
+                        <Input.Body 
+                            Error={taskFormData.error} 
+                            OnChange={(e) => setTaskFormData({...taskFormData, desc:e.target.value})} 
+                            Value={taskFormData.desc}
+                            Placeholder='Task description...'
+                        />
+                    </Input.Root>
+
                 </div>
-                <Button
-                    Type="submit"
-                    Icon={<FaPlus/>}
-                />
+
+                <Button.Root Type='submit'>
+                    <Button.Icon Icon={<Icons.Plus/>} />
+                </Button.Root>
+
             </form>
-            
-            {projects[selectedProject.type][selectedProject.id].project_tasks.length > 0 ? (
-                <div className='task-box-area'>
+
+            <div className='task-box-area'>
+                {projects[selectedProject.type][selectedProject.id].project_tasks.length > 0 ? (
+
                     <div className='task-box'>
                     {projects[selectedProject.type][selectedProject.id].project_tasks.map((task, index) => (
-                        <Card
-                            key={index}
-                            Task={task}
-                            RemoveTask={() => handleTaskRemove(task.task_id, index)}
-                            SetStatus={()  => toggleTaskStatus(task.task_id, index, task.task_done === "Y")}
-                            Class={task.task_done === "Y" ? 'task-done' : 'not-done'} 
-                        />
+                        <div>{task.task_title}</div>
                     ))}
                     </div>
-                </div>
-            ) : (
-                <div className='empty-content'>
-                    <div className='not-found'>
-                        <img src='assets/img/not-found.png'/>
+                ) : (
+                    <div className='empty-content'>
+                        <div className='not-found'>
+                            <img src='assets/img/not-found.png'/>
+                        </div>
                     </div>
-                </div>
-            )}
-
-        </section>
+                )}
+            </div>
+        </>
     );
 }

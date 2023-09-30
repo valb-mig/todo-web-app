@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
 import React from 'react';
 import { useGlobalContext } from '@/config/context/store';
-import HomeLayout from '@/app/home/config/Layout';
+
+import Layout from '@/app/home/config/validate';
 
 import Greetings from '@/app/home/content/Greetings';
 import Project   from '@/app/home/content/Project';
@@ -14,7 +15,7 @@ const Home = () => {
     const { path } = useGlobalContext();
 
     return(
-        <HomeLayout>
+        <Layout>
             {path.current !== undefined && (
                 <>
                     { path.current.home    && <Greetings />}
@@ -22,7 +23,7 @@ const Home = () => {
                     { path.current.task    && <Todo /> }
                 </>
             )}
-        </HomeLayout>
+        </Layout>
     );
 }
 

@@ -1,0 +1,28 @@
+@import '/src/app/styles/global.scss';
+
+.breadcrumbs {
+        
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+body.dark {
+
+    .breadcrumbs {
+
+        .divider {
+          color: $fg-d-3;
+        }
+    }
+}
+
+body.light {
+
+    .breadcrumbs {
+
+        .divider {
+          color: $fg-l-3;
+        }
+    }
+}

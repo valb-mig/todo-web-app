@@ -12,7 +12,7 @@ const varela_round = Varela_Round({
 
 export const metadata = {
   title:       'Todo.sh',
-  description: 'Your todo management web page',
+  description: 'Homepage',
   icons: {
     icon: '/static/favicon.ico',
   },
