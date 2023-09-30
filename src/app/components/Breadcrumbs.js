@@ -20,7 +20,7 @@ const Breadcrumbs = () => {
                     )}
                     <Tag.Root>
                         {index === 0 && (
-                            <Tag.Icon Icon={<Icons.Grid/>}/>
+                            <Tag.Icon Icon={<Icons.Hash/>}/>
                         )}
                         <Tag.Title Title={ page } />
                     </Tag.Root>

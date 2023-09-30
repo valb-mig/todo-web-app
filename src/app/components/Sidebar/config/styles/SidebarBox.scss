@@ -1,59 +1,101 @@
 @import '/src/app/styles/global.scss';
 
-.sidebar-box {
+.box {
 
     display: flex;
     flex-direction: column;
-    padding: 5px;
     gap: 5px;
-    border-radius: $radius;
 
-    .button {
-        p { margin: 0; }
+    .box-title {
+
+        display: flex;
+        justify-content: center;
+        margin: 0;
     }
 
-    .projects {
+    .sidebar-box {
 
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        gap: 5px;
+        border-radius: $radius;
+    
         .button {
-            
-            display: flex;
-            word-break: break-all;
-            margin: 5px;
+            p { margin: 0; }
+        }
+    
+        .projects {
+    
+            position: relative;
+    
+            .tag {
+                position: absolute;
+                top:   0;
+                right: 0;
+                font-size: .7em;
+                padding: 2px;
+            }
+    
+            .button {
+                
+                display: flex;
+                word-break: break-all;
+                margin: 5px;
+            }
+    
+            .empty-content {
+    
+                display: flex;
+                justify-content: center;
+                padding: 20px;
+                
+                img {
+                    width: 100%;
+                    opacity: .08;
+                }
+            }
         }
     }
 }
 
+
 body.dark {
 
-    .sidebar-box {
+    .box {
 
-        border: 1px solid $bg-d-2;
-        background-color: $bg-d-3;
+        .box-title { color: $white; }
 
-        .button {
-            
-            border: none;
+        .sidebar-box {
 
-            outline: 1px solid $fg-d-3;
-            border-bottom: 2px solid $bg-d-3;
-            background-color: $bg-d-2;
-
-            transition: all .2s;
-        }
-
-        .button-selected {
-            
-            border: none;
-
-            outline: 1px solid $light-purple;
-            border-bottom: 2px solid $bg-d-2;
-            background-color: $bg-d-1;
-        }
-
-        .projects {
+            border: 1px solid $bg-d-2;
+            background-color: $bg-d-3;
 
             .button {
-                color: $white;
+                
+                border: none;
+
+                outline: 1px solid $fg-d-3;
+                border-bottom: 2px solid $bg-d-3;
+                background-color: $bg-d-2;
+
+                transition: all .2s;
+            }
+
+            .button-selected {
+                
+                border: none;
+
+                outline: 1px solid $light-purple;
+                border-bottom: 2px solid $bg-d-2;
+                background-color: $bg-d-1;
+            }
+
+            .projects {
+
+                .button {
+                    color: $white;
+                }
             }
         }
     }
@@ -61,35 +103,40 @@ body.dark {
 
 body.light {
 
-    .sidebar-box {
+    .box {
 
-        border: 1px solid $bg-l-2;
-        background-color: $bg-l-3;
+        .box-title { color: $black; }
 
-        .button {
-            
-            border: none;
+        .sidebar-box {
 
-            outline: 1px solid $fg-l-3;
-            border-bottom: 2px solid $bg-l-3;
-            background-color: $bg-l-2;
-
-            transition: all .2s;
-        }
-
-        .button-selected {
-            
-            border: none;
-
-            outline: 1px solid $light-purple;
-            border-bottom: 2px solid $bg-l-2;
-            background-color: $bg-l-1;
-        }
-
-        .projects {
+            border: 1px solid $bg-l-2;
+            background-color: $bg-l-3;
 
             .button {
-                color: $black;
+                
+                border: none;
+
+                outline: 1px solid $fg-l-3;
+                border-bottom: 2px solid $bg-l-3;
+                background-color: $bg-l-2;
+
+                transition: all .2s;
+            }
+
+            .button-selected {
+                
+                border: none;
+
+                outline: 1px solid $light-purple;
+                border-bottom: 2px solid $bg-l-2;
+                background-color: $bg-l-1;
+            }
+
+            .projects {
+
+                .button {
+                    color: $black;
+                }
             }
         }
     }

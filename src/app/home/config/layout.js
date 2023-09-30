@@ -17,7 +17,7 @@ import getProject      from '@/utils/api/project/get';
 import cleanObject     from '@/utils/helpers/cleanObject';
 import modalValidation from '@/utils/validators/home/modalValidation';
 
-import './style/Layout.scss';
+import './style/layout.scss';
 
 const Layout = ({ children }) => {
 
@@ -123,11 +123,13 @@ const Layout = ({ children }) => {
                         </Button.Root>
                     </Modal.Header>
 
-                    <Tag.Root>
-                        <Tag.Title Title={selectedProject.type}/>
-                    </Tag.Root>
-
                     <Modal.Body>
+
+                        <Modal.Title
+                            Title={selectedProject.type}
+                            Icon={<Icons.Hash/>}
+                        />
+                        
                         <form onSubmit={() => { setShowProjectModal(false); submitModal()}}>
 
                             <Input.Root>
@@ -199,8 +201,8 @@ const Layout = ({ children }) => {
 
                     { userData && userData.username !== '' && userData.username !== null && (
                         <Tag.Root>
-                        <Tag.Title Title={ userData.username } />
-                        <Tag.Icon  Icon={ <Icons.User/> } />
+                            <Tag.Title Title={ userData.username } />
+                            <Tag.Icon  Icon={ <Icons.User/> } />
                         </Tag.Root>
                     )}
 
@@ -221,26 +223,40 @@ const Layout = ({ children }) => {
                             </Button.Root>
                         </Sidebar.Box>
 
-                        { projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 && (
-                            <Sidebar.Box>
+                        { selectedProject.type !== null && (
+                        <>
+                            <Sidebar.Box Title='Projects' >
                                 <div className='projects'>
-                                    {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
-                                        <Button.Root 
-                                            Selected={selectedProject.key === key}
-                                            OnClick={() => selectProject(project, key, index)} 
-                                        >
-                                            <Button.Icon Icon={<Icons.Dot/>} />
-                                            <Button.Title Title={project.project_title} />
-                                        </Button.Root>
-                                    ))}
+                                    
+                                    <Tag.Root>
+                                        <Tag.Title Title={selectedProject.type} />
+                                    </Tag.Root>
+
+                                    {projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 ? (
+                                        <>
+                                            {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
+                                                <Button.Root 
+                                                    Selected={selectedProject.key === key}
+                                                    OnClick={() => selectProject(project, key, index)} 
+                                                >
+                                                    <Button.Icon Icon={<Icons.Dot/>} />
+                                                    <Button.Title Title={project.project_title} />
+                                                </Button.Root>
+                                            ))}
+                                        </>
+                                    ):(
+                                        <div className='empty-content'>
+                                            <img className='not-found' src='assets/img/not-found.png'/>
+                                        </div>
+                                    )}
+
                                 </div>
                             </Sidebar.Box>
-                        )}
-                        
-                        { selectedProject.type !== null && (
+
                             <Button.Root Class="button-add" OnClick={() => setShowProjectModal(true)}>
                                 <Button.Icon Icon={<Icons.Plus/>} />
                             </Button.Root>
+                        </>
                         )}
 
                     </Sidebar.Start>

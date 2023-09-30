@@ -29,6 +29,9 @@ const StartPage = () => {
 
       </section>
 
+      <footer>
+        <p className='version'>Todo.sh v1.0</p>
+      </footer>
     </div>
   )
 }

@@ -11,7 +11,8 @@ import {
 } from 'react-icons/bs';
 
 import { 
-    MdClose 
+    MdClose,
+    MdOutlineGrid3X3
 } from 'react-icons/md';
 
 import {
@@ -39,7 +40,8 @@ const Icon = {
     Home:   AiFillHome,
     Plus:   FaPlus,
     Folder: BiSolidFolderOpen,
-    Dot:    BsDot  
+    Dot:    BsDot,
+    Hash:   MdOutlineGrid3X3
 }
 
 export default Icon;
