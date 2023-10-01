@@ -5,9 +5,9 @@ export default async function editTask(task_id, project_id, done) {
     const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
 
     let token = getToken();
-    
+
     if (!token) {
-        return false;
+        return { token: false };
     }
 
     try {
@@ -41,6 +41,6 @@ export default async function editTask(task_id, project_id, done) {
     } catch (error) {
         
         console.error('[Api]: Error: '+error)
-        return true;
+        return false;
     }
 }
