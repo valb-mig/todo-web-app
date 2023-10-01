@@ -31,7 +31,6 @@ async function handleLogin(data) {
             if(res.success) {
 
                 localStorage.setItem('laravelSessionToken', res.session_token);
-                
                 return true;
             }
             else {

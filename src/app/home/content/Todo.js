@@ -53,8 +53,7 @@ export default function Todo() {
         
         if(typeof response == 'object') {
             setProjects(response);
-        }
-        else if(typeof response == 'boolean') {
+        } else if (typeof response == 'boolean') {
             console.error('[Database]: Change task error');
         }
     }

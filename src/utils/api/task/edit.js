@@ -1,13 +1,12 @@
 import getToken from "@/utils/helpers/getToken";
 
-async function editTask(task_id, project_id, done) {
+export default async function editTask(task_id, project_id, done) {
 
     const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
 
     let token = getToken();
     
     if (!token) {
-
         return false;
     }
 
@@ -31,13 +30,11 @@ async function editTask(task_id, project_id, done) {
         });
 
         if (response.ok) {
-
             
             return true;
 
         } else {
-            
-            console.log('Test: '+response);
+
             return false;    
         }
 
@@ -47,5 +44,3 @@ async function editTask(task_id, project_id, done) {
         return true;
     }
 }
-  
-export default editTask;

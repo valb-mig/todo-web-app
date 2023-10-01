@@ -26,11 +26,11 @@ export default async function editTask(selectedProject, projects, task_id, task_
 
     let response = await taskEdit(task_id, selectedProject.id, status);
 
-    console.log(response);
-
     if(response == true) {
         return updatedProjects;
     }
+
+    console.log('Error: '+response);
 
     return false;
 }
