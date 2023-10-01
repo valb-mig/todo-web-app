@@ -1,0 +1,15 @@
+@import '/src/app/styles/global.scss';
+
+body.dark {
+
+    .task-title {
+        color: $white;
+    }
+}
+
+body.light {
+
+    .task-title {
+        color: $black;
+    }   
+}

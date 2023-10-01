@@ -11,3 +11,29 @@
         outline: none;
     }
 }
+
+body.dark {
+
+    .error {
+
+        select {
+            
+            color: $d-red-1 !important;
+            border: 1px solid $d-red-1 !important;
+            background-color: $d-red-4 !important;
+        }
+    }
+}
+
+body.light {
+
+     .error {
+
+        select {
+            
+            color: $l-red-1 !important;
+            border: 1px solid $l-red-1 !important;
+            background-color: $l-red-4 !important;
+        }
+    }
+}

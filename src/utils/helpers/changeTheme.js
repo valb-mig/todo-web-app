@@ -1,9 +1,12 @@
 export default function changeTheme(userData ,setUserData){
 
-  const element = document.body.classList;
+  // [Todo]: Ajust white theme :D
+  /*
+    const element = document.body.classList;
 
-  element.toggle('dark');
-  element.toggle('light');
+    element.toggle('dark');
+    element.toggle('light');
 
-  setUserData({...userData, darkTheme:!userData.darkTheme});
+    setUserData({...userData, darkTheme:!userData.darkTheme});
+  */
 }

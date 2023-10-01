@@ -14,7 +14,7 @@ const Breadcrumbs = () => {
     return(
         <div className='breadcrumbs'>
             {path.breadcrumbs.map((page, index) => (
-                <>
+                <div key={index} className='path'>
                     {index > 0 && (
                         <span className='divider'>/</span>
                     )}
@@ -24,7 +24,7 @@ const Breadcrumbs = () => {
                         )}
                         <Tag.Title Title={ page } />
                     </Tag.Root>
-                </>
+                </div>
             ))}
         </div>
     );

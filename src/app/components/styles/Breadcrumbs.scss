@@ -4,15 +4,26 @@
         
     display: flex;
     align-items: center;
-    gap: 5px;
+
+    .path {
+        display: flex;
+        align-items: center;
+
+        .divider {
+            padding: 0 5px;
+        }
+    }
 }
 
 body.dark {
 
     .breadcrumbs {
 
-        .divider {
-          color: $fg-d-3;
+        .path {
+
+            .divider {
+                color: $fg-d-3;
+            }
         }
     }
 }
@@ -21,8 +32,11 @@ body.light {
 
     .breadcrumbs {
 
-        .divider {
-          color: $fg-l-3;
+        .path {
+
+            .divider {
+                color: $fg-l-3;
+            }
         }
     }
 }

@@ -10,6 +10,8 @@
 
         display: flex;
         align-items: center;
+        border-radius: $radius;
+        transition: all .2s;
     
         input {
 
@@ -22,6 +24,7 @@
             align-items: center;
             font-size: .8em;
             padding: 5px;
+            transition: all .2s;
         }
     }
 }
@@ -35,13 +38,8 @@ body.dark {
 
             border: 1px solid $bg-d-1;
             background-color: $bg-d-2;
-            border-radius:    $radius;
-            transition: all .2s;
             
-            .input-icon {
-                color: $bg-d-1;
-                transition: all .2s;
-            }
+            .input-icon { color: $bg-d-1; }
         
             input {
 
@@ -50,10 +48,7 @@ body.dark {
                 background-color: transparent;
             }
 
-            input::placeholder {
-
-                color: $fg-d-3;
-            }
+            input::placeholder { color: $fg-d-3; }
         }
         
         .input-bar {
@@ -66,6 +61,16 @@ body.dark {
                 .input-icon {
                     color: $light-purple;
                 }
+            }
+        }
+
+        .error {
+
+            border: 1px solid $d-red-1 !important;
+            background-color: $d-red-4 !important;
+
+            .input-icon {
+                color: $d-red-1 !important;
             }
         }
     }
@@ -79,14 +84,8 @@ body.light {
 
             border: 1px solid $bg-l-1;
             background-color: $bg-l-2;
-            border-radius:    $radius;
-            transition: all .2s;
             
-            .input-icon {
-
-                color: $bg-l-5;
-                transition: all .2s;
-            }
+            .input-icon { color: $bg-l-5; }
         
             input {
 
@@ -95,10 +94,7 @@ body.light {
                 background-color: transparent;
             }
 
-            input::placeholder {
-
-                color: $bg-l-5;
-            }
+            input::placeholder { color: $bg-l-5; }
         }
         
         .input-bar {
@@ -111,6 +107,16 @@ body.light {
                 .input-icon {
                     color: $light-purple;
                 }
+            }
+        }
+
+        .error {
+
+            border: 1px solid $l-red-1 !important;
+            background-color: $l-red-4 !important;
+
+            .input-icon {
+                color: $l-red-1 !important;
             }
         }
     }

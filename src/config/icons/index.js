@@ -1,7 +1,8 @@
 import { 
     AiFillTag,
     AiOutlineMenu,
-    AiFillHome
+    AiFillHome,
+    AiOutlineCheck
 } from 'react-icons/ai';
 
 import { 
@@ -21,7 +22,8 @@ import {
 } from 'react-icons/bi';
 
 import {
-    FaMagnifyingGlass
+    FaMagnifyingGlass,
+    FaTrash
 } from 'react-icons/fa6';
 
 import {
@@ -41,7 +43,9 @@ const Icon = {
     Plus:   FaPlus,
     Folder: BiSolidFolderOpen,
     Dot:    BsDot,
-    Hash:   MdOutlineGrid3X3
+    Hash:   MdOutlineGrid3X3,
+    Trash:  FaTrash,
+    Check:  AiOutlineCheck
 }
 
 export default Icon;

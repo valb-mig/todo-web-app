@@ -26,39 +26,63 @@
         }
     
         .projects {
+            
+            display: flex;
+            flex-direction: column;
+            width: 100%;
     
-            position: relative;
-    
-            .tag {
-                position: absolute;
-                top:   0;
-                right: 0;
-                font-size: .7em;
-                padding: 2px;
-            }
-    
-            .button {
+            .project-tag {
                 
                 display: flex;
-                word-break: break-all;
-                margin: 5px;
+                justify-content: flex-end;
+                margin-bottom: 5px;
+                width: 100%;
+
+                .tag {
+                    display: flex;
+                    font-size: .7em;
+                    padding: 2px;
+                }
+            }
+    
+            .button-group {
+
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                .button {
+                
+                    display: flex;
+                    width: 100%;
+                    word-break: break-all;
+                }
             }
     
             .empty-content {
     
                 display: flex;
                 justify-content: center;
-                padding: 20px;
+                flex-direction: column;
+                margin: 40px;
                 
                 img {
+                    display: flex;
+                    justify-content: center;
                     width: 100%;
                     opacity: .08;
+                }
+
+                p {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    margin: 0;
                 }
             }
         }
     }
 }
-
 
 body.dark {
 
@@ -87,14 +111,21 @@ body.dark {
                 border: none;
 
                 outline: 1px solid $light-purple;
-                border-bottom: 2px solid $bg-d-2;
                 background-color: $bg-d-1;
+                border-bottom: 0px;
             }
 
             .projects {
 
                 .button {
                     color: $white;
+                }
+
+                .empty-content {
+    
+                    p {
+                        color: $fg-d-3;
+                    }
                 }
             }
         }
@@ -128,14 +159,21 @@ body.light {
                 border: none;
 
                 outline: 1px solid $light-purple;
-                border-bottom: 2px solid $bg-l-2;
                 background-color: $bg-l-1;
+                border-bottom: 0px;
             }
 
             .projects {
 
                 .button {
                     color: $black;
+                }
+
+                .empty-content {
+    
+                    p {
+                        color: $bg-l-1;
+                    }
                 }
             }
         }

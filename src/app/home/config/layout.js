@@ -13,9 +13,9 @@ import Button  from '@/app/components/Button';
 import Input   from '@/app/components/Input';
 import Select  from '@/app/components/Select';
 
-import getProject      from '@/utils/api/project/get';
-import cleanObject     from '@/utils/helpers/cleanObject';
-import modalValidation from '@/utils/validators/home/modalValidation';
+import getProject  from '@/utils/api/project/get';
+import cleanObject from '@/utils/helpers/cleanObject';
+import modalSubmit from '@/utils/validators/home/modal/submit';
 
 import './style/layout.scss';
 
@@ -27,13 +27,24 @@ const Layout = ({ children }) => {
     const [ modalFormData, setModalFormData ] = useState({
         title: '',
         icon:  '',
-        days:  0,
+        days:  '',
         error: false,
     });
 
     useEffect(() => {
         handleGetProjects();
-    },[])
+    }, [])
+
+    async function handleGetProjects() {
+            
+        let response = await getProject();
+
+        if( response ){
+            setProjects(response.projects);
+        } else  {
+            console.warn('[Projects]: No database');
+        }
+    }
 
     const changeProjectType = (type) => {
 
@@ -65,25 +76,15 @@ const Layout = ({ children }) => {
             title: project.project_title,
             icon:  project.project_icon
         });
-
-        console.log(project);
-        console.log(key);
     }
 
-    async function handleGetProjects() {
-            
-        let response = await getProject();
+    async function submitModal(event) {
 
-        if( response ){
-            setProjects(response.projects);
-        } else  {
-            console.warn('[Projects]: No database');
-        }
-    }
+        event.preventDefault();
+        
+        setModalFormData({...modalFormData, error: false});
 
-    async function submitModal() {
-
-        let response = await modalValidation(modalFormData, setModalFormData, selectedProject);
+        let response = await modalSubmit(modalFormData, setModalFormData, selectedProject);
 
         if(typeof response == "object") {
 
@@ -106,7 +107,7 @@ const Layout = ({ children }) => {
             if(response) {
                 handleGetProjects();
             } else {
-                console.warn('[Projects]: Database error');
+                setModalFormData({...modalFormData, error: true});
             }
         }
     }
@@ -130,10 +131,10 @@ const Layout = ({ children }) => {
                             Icon={<Icons.Hash/>}
                         />
                         
-                        <form onSubmit={() => { setShowProjectModal(false); submitModal()}}>
+                        <form onSubmit={(e) => submitModal(e)}>
 
                             <Input.Root>
-                            <Input.Label Title="Title"/>
+                                <Input.Label Title="Title"/>
                                 <Input.Body  
                                     Type='text' 
                                     Placeholder='Project title...' 
@@ -149,12 +150,7 @@ const Layout = ({ children }) => {
                                     <Select.Body 
                                         Placeholder="Project days..."
                                         OnChange={(e) => setModalFormData({...modalFormData, days: e.target.value})}
-                                        Options={[
-                                            {
-                                            key: 0,
-                                            value: 1
-                                            }
-                                        ]}
+                                        Options={[{key: 0, value: 1}]}
                                         Value={modalFormData.days}
                                         Error={modalFormData.error}
                                     >
@@ -166,12 +162,7 @@ const Layout = ({ children }) => {
                                     <Select.Body 
                                         Placeholder="Project icon..."
                                         OnChange={(e) => setModalFormData({...modalFormData, icon: e.target.value})}
-                                        Options={[
-                                            {
-                                            key: "foo",
-                                            value: "bar"
-                                            }
-                                        ]}
+                                        Options={[{key: "foo", value: "folder"}]}
                                         Value={modalFormData.icon}
                                         Error={modalFormData.error}
                                     >
@@ -180,7 +171,7 @@ const Layout = ({ children }) => {
                             </div>
 
                             <Modal.Footer>
-                                <Button.Root OnClick={() => setModalFormData(cleanObject(modalFormData))} >
+                                <Button.Root OnClick={() => {setShowProjectModal(false); setModalFormData(cleanObject(modalFormData))}} >
                                     <Button.Title Title="Cancel" />
                                 </Button.Root>
                                 <Button.Root Type="submit">
@@ -199,7 +190,7 @@ const Layout = ({ children }) => {
 
                 <Header.End>
 
-                    { userData && userData.username !== '' && userData.username !== null && (
+                    { userData && userData.username !== '' && (
                         <Tag.Root>
                             <Tag.Title Title={ userData.username } />
                             <Tag.Icon  Icon={ <Icons.User/> } />
@@ -224,39 +215,42 @@ const Layout = ({ children }) => {
                         </Sidebar.Box>
 
                         { selectedProject.type !== null && (
-                        <>
-                            <Sidebar.Box Title='Projects' >
-                                <div className='projects'>
-                                    
-                                    <Tag.Root>
-                                        <Tag.Title Title={selectedProject.type} />
-                                    </Tag.Root>
-
-                                    {projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 ? (
-                                        <>
-                                            {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
-                                                <Button.Root 
-                                                    Selected={selectedProject.key === key}
-                                                    OnClick={() => selectProject(project, key, index)} 
-                                                >
-                                                    <Button.Icon Icon={<Icons.Dot/>} />
-                                                    <Button.Title Title={project.project_title} />
-                                                </Button.Root>
-                                            ))}
-                                        </>
-                                    ):(
-                                        <div className='empty-content'>
-                                            <img className='not-found' src='assets/img/not-found.png'/>
+                            <>
+                                <Sidebar.Box Title='Projects' >
+                                    <div className='projects'>
+                                        <div className='project-tag'>
+                                            <Tag.Root>
+                                                <Tag.Title Title={selectedProject.type} />
+                                            </Tag.Root>
                                         </div>
-                                    )}
 
-                                </div>
-                            </Sidebar.Box>
+                                        {projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 ? (
+                                            <div className='button-group'>
+                                                {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
+                                                    <Button.Root 
+                                                        key={index}
+                                                        Selected={selectedProject.key === key}
+                                                        OnClick={() => selectProject(project, key, index)} 
+                                                    >
+                                                        <Button.Icon Icon={<Icons.Dot/>} />
+                                                        <Button.Title Title={project.project_title} />
+                                                    </Button.Root>
+                                                ))}
+                                            </div>
+                                        ):(
+                                            <div className='empty-content'>
+                                                <img className='not-found' src='assets/img/not-found.png'/>
+                                                <p>Empty</p>
+                                            </div>
+                                        )}
 
-                            <Button.Root Class="button-add" OnClick={() => setShowProjectModal(true)}>
-                                <Button.Icon Icon={<Icons.Plus/>} />
-                            </Button.Root>
-                        </>
+                                    </div>
+                                </Sidebar.Box>
+
+                                <Button.Root Class="button-add" OnClick={() => setShowProjectModal(true)}>
+                                    <Button.Icon Icon={<Icons.Plus/>} />
+                                </Button.Root>
+                            </>
                         )}
 
                     </Sidebar.Start>

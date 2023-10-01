@@ -2,30 +2,40 @@
 
 body.dark {
     
-    .input-body {
+    .input-bar {
 
         color: $white;
         border: none;
         background-color: transparent;
+
+        input::placeholder {
+            color: $fg-d-3;
+        }
     }
+    .error { 
 
-    .input-body::placeholder {
-
-        color: $fg-d-3;
+        input::placeholder {
+            color: $d-red-1 !important;
+        }
     }
 }
 
 body.light {
     
-    .input-body {
+   .input-bar {
 
         color: $black;
         border: none;
         background-color: transparent;
+
+        input::placeholder {
+            color: $fg-l-3;
+        }
     }
-
-    .input-body::placeholder {
-
-        color: $fg-l-3;
+    .error { 
+        
+        input::placeholder {
+            color: $l-red-1 !important;
+        }
     }
 }

@@ -49,7 +49,7 @@ const Validate = ({ children }) => {
                     });
                 }
             } catch (error) {
-                console.error("Error: "+error);
+                console.error("[Error]: "+error);
             } finally {
                 setLoading(false);
             }
@@ -57,6 +57,8 @@ const Validate = ({ children }) => {
         else {
             console.error('[Api]: Response Error');
         }
+
+        console.clear();
     }
 
     if (loading) <Loading/>

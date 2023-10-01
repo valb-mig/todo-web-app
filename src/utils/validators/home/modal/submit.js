@@ -1,7 +1,7 @@
 import addProject  from '@/utils/api/project/add';
 import cleanObject from '@/utils/helpers/cleanObject';
 
-export default async function modalValidation(modalFormData, setModalFormData, selectedProject) {
+export default async function modalSubmit(modalFormData, setModalFormData, selectedProject) {
 
     if(modalFormData.title !== "" && modalFormData.icon !== "" && modalFormData.days !== ""){
 
@@ -33,7 +33,6 @@ export default async function modalValidation(modalFormData, setModalFormData, s
         }
     
     } else {
-        setModalFormData({...modalFormData, error: true})
         return false;
     }
 }

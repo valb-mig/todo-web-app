@@ -1,0 +1,25 @@
+@import '/src/app/styles/global.scss';
+
+.task-data-info {
+
+    display: flex;
+    flex-direction: column;
+    
+    .task-title {
+
+        p {
+            margin: 0;
+            word-break: break-all;
+        }
+    }
+
+    .task-desc {
+
+        p {
+            font-style: italic;
+            font-size: .8em;
+            margin: 0;
+            word-break: break-all;
+        }
+    }
+}

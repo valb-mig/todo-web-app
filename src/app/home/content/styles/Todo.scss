@@ -45,12 +45,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: $radius;
+        min-height: 0%;
         height: 100%;
+        border-radius: $radius;
+        padding: 5px;
 
-        .not-found img{
-            width: 100px;
-        }
+        .not-found img{ width: 100px; }
     }
 }
 
@@ -93,6 +93,10 @@ body.dark {
 
             border: 1px solid $bg-d-3;
             background-color: $bg-d-4;
+
+            .not-found img{
+                opacity: 0.1;
+            }
         }
     }
 }
@@ -130,6 +134,10 @@ body.light {
                 color: $l-green-2;
                 border: 1px solid $l-green-2;
             }
+
+            .not-found img{
+                opacity: 0.1;
+             }
         }
     }
 }

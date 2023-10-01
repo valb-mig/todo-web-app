@@ -1,15 +1,12 @@
 import getToken from "@/utils/helpers/getToken";
 
-async function addTask(project_id,task) {
+export default async function addTask(project_id,task) {
 
     const API_URL_TASK_ADD = process.env.NEXT_PUBLIC_API_TASK_ADD;
 
     let token = getToken();
     
-    if (!token || ( task.title === '' || task.desc === '' ) ) {
-
-        return false;
-    }
+    if (!token) { return false }
 
     try {
 
@@ -36,7 +33,6 @@ async function addTask(project_id,task) {
             if(res.success) {
 
                 return { success: true, added_task: res.task };
-
             }
             else {
 
@@ -53,5 +49,3 @@ async function addTask(project_id,task) {
         return false;
     }
 }
-  
-export default addTask;

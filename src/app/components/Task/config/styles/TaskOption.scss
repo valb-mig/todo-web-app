@@ -1,0 +1,107 @@
+@import '/src/app/styles/global.scss';
+
+.task-option {
+
+    display: flex;
+    padding: 2px;
+    height: 40px;
+    gap: 5px;
+
+    .button {
+        border: none;
+        width: 40px;
+        transition: all .1s;
+    }
+}
+
+body.dark {
+
+    .task-option {
+
+        .done, .remove {
+
+            color: $fg-d-3;
+            outline: 1px solid $bg-d-1;
+            border-bottom: 2px solid $bg-d-3;
+            background-color: $bg-d-2;
+        }
+
+        .done:hover {
+
+            color: $d-green-2;
+            outline: 1px solid $d-green-2;
+            border-bottom: 2px solid $d-green-4;
+            background-color: $d-green-3;
+        }
+
+        .done:active {
+
+            color: $d-green-1;
+            outline: 1px solid $d-green-1;
+            border-bottom: 0px;
+            background-color: $d-green-2;
+        }
+
+        .remove:hover {
+
+            color: $d-red-2;
+            outline: 1px solid $d-red-2;
+            border-bottom: 2px solid $d-red-4;
+            background-color: $d-red-3;
+        }
+
+        .remove:active {
+
+            color: $d-red-1;
+            outline: 1px solid $d-red-1;
+            border-bottom: 0px;
+            background-color: $d-red-2;
+        }
+    }
+}
+
+body.light {
+    
+    .task-option {
+
+        .done, .remove {
+
+            color: $fg-l-3;
+            outline: 1px solid $bg-l-1;
+            border-bottom: 2px solid $bg-l-3;
+            background-color: $bg-l-2;
+        }
+
+        .done:hover {
+
+            color: $l-green-2;
+            outline: 1px solid $l-green-2;
+            border-bottom: 2px solid $l-green-4;
+            background-color: $l-green-3;
+        }
+
+        .done:active {
+
+            color: $l-green-1;
+            outline: 1px solid $l-green-1;
+            border-bottom: 0px;
+            background-color: $l-green-2;
+        }
+
+        .remove:hover {
+
+            color: $l-red-2;
+            outline: 1px solid $l-red-2;
+            border-bottom: 2px solid $l-red-4;
+            background-color: $l-red-3;
+        }
+
+        .remove:active {
+
+            color: $l-red-1;
+            outline: 1px solid $l-red-1;
+            border-bottom: 0px;
+            background-color: $l-red-2;
+        }
+    }
+}
