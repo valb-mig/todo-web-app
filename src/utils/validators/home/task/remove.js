@@ -25,7 +25,7 @@ export default async function taskRemove(selectedProject, projects, task_id, tas
 
     let response = await removeTask(task_id, selectedProject.id);
 
-    if(response) {
+    if(response == true || response.token == false) {
         return updatedProjects;
     }
 

@@ -7,8 +7,7 @@ async function removeTask(task_id, project_id) {
     let token = getToken();
     
     if (!token) {
-
-        return false;
+        return { token: false };
     }
 
     try {
