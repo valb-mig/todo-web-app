@@ -1,240 +1,145 @@
 @import '/src/app/styles/global.scss';
 
-.home-page {
-  
-  display: flex;
-  width:  100%;
-  height: 100%;
-
-  .main-box {
+.start-page {
 
     display: flex;
-    width:   100%;
-    height:  100vh;
-    max-height: 100vh;
-    overflow: hidden;
+    justify-content: space-between;
+    flex-direction: column;
+    width:  100%;
+    height: 100vh;
 
-    .sidebar-box {
+    .center-box {
 
-      display:   flex;
-      width:     220px;
-      min-width: 220px;
-      overflow:  hidden;
-    }
-
-    .sidebar-box-mini {
-
-      display:   flex;
-      width:     60px;
-      min-width: 60px;
-      overflow:  hidden;
-    }
-    
-    .content {
-
-      display: flex;
-      flex-direction: column;
-      padding: 68px 20px 0px 20px;
-      width: 100%;
-
-      span {
-    
         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+
+        font-size: 2.4em;
         
-        .porject-type-tag {
+        .greetings {
 
-          display: flex;
-          align-items: center;
-          border-radius: $radius;
-          padding: 2px;
-        }
-      }
-
-      .greetings {
-
-        display: flex;
-        justify-content: center;
-        flex-direction:  column;
-        width: 100%;
-
-        .center-image {
-
-          display: flex;
-          justify-content: center;
-          width:   100%;
-
-          >div {
-            width: 200px;
-          }
-        }
-
-        p {
-          text-align: center;
-          word-break: break-all;
-          margin-bottom: 0;
-
-          u {
-            font-weight: bold;
-          }
-        }
-      }
-
-      .info-title {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        font-size: .8em;
-        margin-bottom: 10px;
-      }
-
-      .task-info {
-
-        display:         flex;
-        justify-content: center;
-        flex-wrap:       wrap;
-        gap:             10px;
-
-        .dashboard {
-          
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-size: 2.2em;
-          position: relative;
-
-          width:  200px;
-          min-width: 200px;
-          height: 200px;
-          border-radius: $radius;
-
-          overflow: hidden;
-
-          p {
             display: flex;
-            position: absolute;
-          }
 
-          span {
-    
-            display: flex;
-            position: absolute;
-            top:  5px;
-            left: 5px;
+            .logo {
+
+                display:       flex;
+                min-width:     100px;
+                border-radius: $radius;
             
-            .porject-type-tag {
-    
-              font-size: 14px;
-              display: flex;
-              align-items: center;
-              border-radius: $radius;
-              padding: 2px;
-            }
-          }
+                .site-title {
+            
+                    display: flex;
+                    margin: 0px 5px;
+                }
+            
+                .site-title p {
+            
+                    display: flex; 
+                    padding:0; 
+                    margin:0; 
+                    align-content: center;
+                    align-self: center;
+                    
+                    animation: typing 2s steps(14, end);
+                    overflow: hidden;
+                }
+            
+                @keyframes typing {
+            
+                    0%{
+                        width: 0;
+                    }
+            
+                    50%{
+                        width: 0;
+                    }
+            
+                    100%{
+                        width: 100%;
+                    }
+                }
+            
+                .title-cursor {
 
-          img {
-            width: 100%;
-          }
-        }
-      }
+                    display: flex;
+                    align-items: center;
+
+                    font-weight: bold;
+                    animation: blink .6s infinite;
+                }
+            
+                @keyframes blink {
+                    to {
+                        opacity: 0;
+                    }
+                }
+            }
+        } 
     }
-  }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+    }
 }
 
 body.dark {
 
-  .home-page {
-  
-    background-color: $black;
-  
-    .main-box {
-  
-      .content {
-  
-        span {
-    
-          .porject-type-tag {
+    .start-page {
+
+        background-color: $bg-d-5;
+
+        .greetings {
 
             color: $white;
+
+            .logo {
+
+                .site-title p {
+                    color: $light-purple;
+                }
+            }            
+        }  
+
+        .button {
+
+            border: none;
             background-color: $bg-d-3;
-            border: 1px solid $bg-d-2;
-          }
-        }
+            border-bottom: 2px solid $bg-d-4;
+            outline: 1px solid $bg-d-2;
+            transition: all .1s;
 
-        .greetings {
-  
-          p {
-            color: $white;
-  
-            u {
-              color: $light-purple;
+            .button-title {
+
+                margin:  0px;
+                padding: 5px;
             }
-          }
         }
-  
-        .info-title {
-          color: $white;
+
+        .button:hover {
+
+            background-color: $bg-d-2;
+            border-bottom: 2px solid $bg-d-4;
+            outline: 1px solid $bg-d-2;
         }
-  
-        .task-info {
-  
-          .dashboard {
-  
-            color: $white;
-            border: 1px solid $bg-d-3;
-            background-color: $bg-d-4;
-          }
+
+        .button:active {
+
+            background-color: $bg-d-2;
+            outline: 1px solid $bg-d-1;
+            border-bottom: 0px;
         }
-      }
-    }
-  }
-}
 
-body.light {
+        footer {
 
-  .home-page {
-  
-    background-color: $bg-l-5;
-  
-    .main-box {
-  
-      .content {
-
-        span {
-    
-          .porject-type-tag {
-
-              color: $white;
-              background-color: $bg-d-1;
-              border: 1px solid $fg-d-3;
-          }
-        }
-  
-        .greetings {
-  
-          p {
-
-            color: $black;
-
-            u {
-              color: $light-purple;
+            .version {
+                color: $fg-d-3;
             }
-          }
         }
-  
-        .info-title {
-
-          color: $black;
-        }
-  
-        .task-info {
-  
-          section {
-  
-            border: 1px solid $bg-l-4;
-            background-color: $bg-l-5;
-          }
-        }
-      }
     }
-  }
 }

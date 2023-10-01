@@ -1,0 +1,42 @@
+@import '/src/app/styles/global.scss';
+
+.modal-footer {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+
+    .button {
+
+        padding: 10px;
+
+        p { margin: 0; }
+    }
+}
+
+body.dark {
+
+    .modal-footer {
+
+        .button {
+            
+            color: $white;
+            background-color: $bg-d-3;
+            border: 1px solid $bg-d-2;
+        }
+    }
+}
+
+body.light {
+
+    .modal-footer {
+
+        .button {
+
+            color: $white;
+            background-color: $bg-l-3;
+            border: 1px solid $bg-l-2;
+        }
+    }
+}

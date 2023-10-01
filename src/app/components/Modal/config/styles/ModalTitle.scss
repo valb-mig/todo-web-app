@@ -1,0 +1,27 @@
+@import '/src/app/styles/global.scss';
+
+.moda-title {
+
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 1.6em;
+
+    p { margin: 0; }
+}
+
+body.dark {
+
+    .moda-title {
+         
+        color: $white;
+    }
+}
+
+body.light {
+
+    .moda-title {
+
+        color: $black;
+    }
+}

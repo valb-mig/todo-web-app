@@ -1,4 +1,4 @@
-import getToken from "@/utils/functions/getToken";
+import getToken from "@/utils/helpers/getToken";
 
 async function removeTask(task_id, project_id) {
 
@@ -31,16 +31,17 @@ async function removeTask(task_id, project_id) {
 
         if (response.ok) {
 
-            return { success: true };
+            return true;
 
         } else {
 
-            return { success: false }        
+            return false;        
         }
 
     } catch (error) {
 
-        return false;
+        console.error('[Api]: Error: '+error)
+        return true;
     }
 }
   

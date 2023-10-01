@@ -1,9 +1,4 @@
-import { Varela_Round } from 'next/font/google'
-import { GlobalContextProvider } from '@/config/context/store';
-
-import Layout from '@/config/layout';
-
-import '@/app/styles/page.scss';
+import { Varela_Round } from 'next/font/google';
 
 const varela_round = Varela_Round({ 
   weight:  '400',
@@ -18,17 +13,16 @@ export const metadata = {
   },
 }
 
+import '@/app/styles/page.scss';
+
 export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
       <body className="dark">
-        <Layout
-          Font={varela_round}
-          Context={GlobalContextProvider}
-        >
+        <div className={varela_round.className}>
           { children }
-        </Layout>
+        </div>
       </body>
     </html>
   );

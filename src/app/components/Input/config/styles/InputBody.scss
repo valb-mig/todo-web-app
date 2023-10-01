@@ -1,0 +1,41 @@
+@import '/src/app/styles/global.scss';
+
+body.dark {
+    
+    .input-bar {
+
+        color: $white;
+        border: none;
+        background-color: transparent;
+
+        input::placeholder {
+            color: $fg-d-3;
+        }
+    }
+    .error { 
+
+        input::placeholder {
+            color: $d-red-1 !important;
+        }
+    }
+}
+
+body.light {
+    
+   .input-bar {
+
+        color: $black;
+        border: none;
+        background-color: transparent;
+
+        input::placeholder {
+            color: $fg-l-3;
+        }
+    }
+    .error { 
+        
+        input::placeholder {
+            color: $l-red-1 !important;
+        }
+    }
+}

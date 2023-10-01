@@ -1,0 +1,42 @@
+@import '/src/app/styles/global.scss';
+
+.modal-background {
+
+    position: fixed;
+    z-index:  9999;
+    left:     0;
+    top:      0;
+    width:    100%;
+    height:   100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    animation: fadeInModal 0.2s ease-in-out forwards;
+
+    @keyframes fadeInModal {
+
+        from {
+
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        to {
+
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    .modal {
+        
+        display: flex;
+        justify-content: center;
+        margin-top: 30vh;
+        width:  100%;
+        height: 100%;
+
+        .modal-area {
+            position: relative;
+        }
+    }
+}

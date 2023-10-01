@@ -7,6 +7,9 @@ const GlobalContext = createContext({
     userData: {},
     setUserData: () => {},
 
+    path: {},
+    setScreenPath: () => {},
+
     projects: {},
     setProjects: () => {},
 
@@ -20,9 +23,14 @@ export const GlobalContextProvider = ({ children }) => {
 
         username:'',
         darkTheme:true, 
-        logged:false
+        logged:false,
     });
     
+    const [path, setScreenPath] = useState({
+        current: {home:true},
+        breadcrumbs: ['home']
+    });
+
     const [projects, setProjects] = useState({
         
         'todo':[],
@@ -32,10 +40,10 @@ export const GlobalContextProvider = ({ children }) => {
     const [selectedProject, setSelectedProject] = useState({
 
         id:    null,
+        key:   null,
         title: null,
         type:  null,
-        icon:  null,
-        project_id: null
+        icon:  null
     });
 
     return (
@@ -43,6 +51,9 @@ export const GlobalContextProvider = ({ children }) => {
             
             userData, 
             setUserData, 
+
+            path,
+            setScreenPath,
 
             projects, 
             setProjects,

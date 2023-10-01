@@ -1,0 +1,83 @@
+@import '/src/app/styles/global.scss';
+
+.task {
+
+    display: flex;
+    border-radius: $radius;
+    padding: 10px;
+    transition: all .1s;
+
+    .task-data-info {
+        display: flex;
+        width: 100%;
+    }
+}
+
+body.dark {
+
+    .task {
+        background-color: $bg-d-3;
+        border: 1px solid $bg-d-2;
+    }
+
+    .task-done {
+
+        background-color: $d-green-4 !important;
+        border: 1px solid $d-green-2 !important;
+
+        .task-data-info {
+
+            .task-title p{
+
+                text-decoration: line-through;
+            }
+
+            .task-desc p{
+                color: $white;
+                text-decoration: line-through;
+            }
+        }
+
+        .task-option .button{
+            
+            color: $d-green-2;
+            outline: 1px solid $d-green-2;
+            border-bottom: 2px solid $d-green-4;
+            background-color: $d-green-3;
+        }
+    }
+}
+
+body.light {
+    
+    .task {
+        background-color: $bg-l-3;
+        border: 1px solid $bg-l-2;
+    }
+
+    .task-done {
+
+        background-color: $l-green-4 !important;
+        border: 1px solid $l-green-2 !important;
+
+        .task-data-info {
+
+            .task-title p{
+                text-decoration: line-through;
+            }
+
+            .task-desc p{
+                color: $black;
+                text-decoration: line-through;
+            }
+        }
+
+        .task-option .button{
+            
+            color: $l-green-2;
+            outline: 1px solid $l-green-2;
+            border-bottom: 2px solid $l-green-4;
+            background-color: $l-green-3;
+        }
+    }
+}

@@ -1,0 +1,181 @@
+@import '/src/app/styles/global.scss';
+
+.box {
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .box-title {
+
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .sidebar-box {
+
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        gap: 5px;
+        border-radius: $radius;
+    
+        .button {
+            p { margin: 0; }
+        }
+    
+        .projects {
+            
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+    
+            .project-tag {
+                
+                display: flex;
+                justify-content: flex-end;
+                margin-bottom: 5px;
+                width: 100%;
+
+                .tag {
+                    display: flex;
+                    font-size: .7em;
+                    padding: 2px;
+                }
+            }
+    
+            .button-group {
+
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                .button {
+                
+                    display: flex;
+                    width: 100%;
+                    word-break: break-all;
+                }
+            }
+    
+            .empty-content {
+    
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin: 40px;
+                
+                img {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    opacity: .08;
+                }
+
+                p {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+body.dark {
+
+    .box {
+
+        .box-title { color: $white; }
+
+        .sidebar-box {
+
+            border: 1px solid $bg-d-2;
+            background-color: $bg-d-3;
+
+            .button {
+                
+                border: none;
+
+                outline: 1px solid $fg-d-3;
+                border-bottom: 2px solid $bg-d-3;
+                background-color: $bg-d-2;
+
+                transition: all .2s;
+            }
+
+            .button-selected {
+                
+                border: none;
+
+                outline: 1px solid $light-purple;
+                background-color: $bg-d-1;
+                border-bottom: 0px;
+            }
+
+            .projects {
+
+                .button {
+                    color: $white;
+                }
+
+                .empty-content {
+    
+                    p {
+                        color: $fg-d-3;
+                    }
+                }
+            }
+        }
+    }
+}
+
+body.light {
+
+    .box {
+
+        .box-title { color: $black; }
+
+        .sidebar-box {
+
+            border: 1px solid $bg-l-2;
+            background-color: $bg-l-3;
+
+            .button {
+                
+                border: none;
+
+                outline: 1px solid $fg-l-3;
+                border-bottom: 2px solid $bg-l-3;
+                background-color: $bg-l-2;
+
+                transition: all .2s;
+            }
+
+            .button-selected {
+                
+                border: none;
+
+                outline: 1px solid $light-purple;
+                background-color: $bg-l-1;
+                border-bottom: 0px;
+            }
+
+            .projects {
+
+                .button {
+                    color: $black;
+                }
+
+                .empty-content {
+    
+                    p {
+                        color: $bg-l-1;
+                    }
+                }
+            }
+        }
+    }
+}

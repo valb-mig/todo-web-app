@@ -1,0 +1,12 @@
+@import '/src/app/styles/global.scss';
+
+.task-column {
+
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    max-height: 100%;
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+}

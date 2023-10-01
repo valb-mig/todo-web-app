@@ -1,0 +1,27 @@
+@import '/src/app/styles/global.scss';
+
+.sidebar-normal {
+    
+    flex-direction:   column;
+    width:            220px;
+    height:           100%;
+    padding:          10px;
+}
+
+body.dark {
+
+    .sidebar-normal {
+    
+        border-right: 1px solid $bg-d-3;
+        background-color: $bg-d-4;
+    }
+}
+
+body.light {
+
+    .sidebar-normal {
+    
+        border-right: 1px solid $bg-d-3;
+        background-color: $bg-d-4;
+    }
+}

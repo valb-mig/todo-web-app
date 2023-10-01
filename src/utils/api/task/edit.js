@@ -1,6 +1,6 @@
-import getToken from "@/utils/functions/getToken";
+import getToken from "@/utils/helpers/getToken";
 
-async function editTask(task_id, project_id, action) {
+async function editTask(task_id, project_id, done) {
 
     const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
 
@@ -17,7 +17,7 @@ async function editTask(task_id, project_id, action) {
 
             project_id: project_id,
             task_id:    task_id,
-            action:     action
+            status:     done
         };
 
         const response = await fetch(API_URL_TASK_EDIT, {
@@ -32,16 +32,17 @@ async function editTask(task_id, project_id, action) {
 
         if (response.ok) {
 
-            return { success: true };
+            return true;
 
         } else {
 
-            return { success: false };    
+            return false;    
         }
 
     } catch (error) {
         
-        return false;
+        console.error('[Api]: Error: '+error)
+        return true;
     }
 }
   

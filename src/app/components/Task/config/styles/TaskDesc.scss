@@ -1,0 +1,15 @@
+@import '/src/app/styles/global.scss';
+
+body.dark {
+
+    .task-desc {
+        color: $fg-d-1;
+    }
+}
+
+body.light {
+
+    .task-desc {
+        color: $fg-l-1;
+    }  
+}

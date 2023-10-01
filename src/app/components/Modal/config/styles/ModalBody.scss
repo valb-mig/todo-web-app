@@ -1,0 +1,72 @@
+@import '/src/app/styles/global.scss';
+
+.modal-body {
+
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  max-width: 500px;
+  gap: 5px;
+
+  form {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+  
+    input {
+  
+      display: flex;
+      width: 100%;
+      padding: 10px; 
+    }
+  
+    .input-body {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .input-group {
+  
+      display: flex;
+      width:   100%;
+      gap:     5px;
+  
+      .input-bar {
+  
+        width: 100%;
+  
+        input {
+  
+          display: flex;
+          width: 100%;
+          padding: 10px; 
+        }
+      }
+    }
+  }
+}
+
+body.dark {
+
+  .modal-body {
+
+    background-color: $bg-d-4;
+    border: 1px solid $bg-d-3;
+    border-radius: $radius;
+    padding: 10px;
+  }
+}
+
+body.light {
+
+  .modal-body {
+
+    background-color: $bg-l-4;
+    border: 1px solid $bg-l-3;
+    border-radius: $radius;
+    padding: 10px;
+  }
+}

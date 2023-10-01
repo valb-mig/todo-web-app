@@ -1,0 +1,13 @@
+@import '/src/app/styles/global.scss';
+
+body.dark {
+    .button-title {
+        color: $white;
+    }
+}
+
+body.light {
+    .button-title {
+        color: $black;
+    }
+}

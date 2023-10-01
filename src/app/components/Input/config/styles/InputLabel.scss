@@ -1,0 +1,49 @@
+@import '/src/app/styles/global.scss';
+
+.input-label-area {
+
+    display: flex;
+
+    .input-label {
+
+        padding: 2px;
+        border-radius: $radius;
+
+        p {
+            font-size: .5em;
+            margin: 0;
+        }
+    }
+}
+
+body.dark {
+
+    .input-label-area {
+
+        .input-label {
+
+            background-color: $bg-d-2;
+            border: 1px solid $bg-d-1;
+
+            p {
+                color: $white;
+            }
+        }
+    }
+}
+
+body.light {
+
+    .input-label-area {
+
+        .input-label {
+
+            background-color: $bg-l-2;
+            border: 1px solid $bg-l-1;
+
+            p {
+                color: $black;
+            }
+        }
+    }
+}

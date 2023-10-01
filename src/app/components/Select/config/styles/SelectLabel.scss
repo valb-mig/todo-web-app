@@ -1,0 +1,47 @@
+@import '/src/app/styles/global.scss';
+
+.select-label-area {
+
+    display: flex;
+    
+    .select-label {
+
+        padding: 2px;
+        border-radius: $radius;
+    
+        p {
+            font-size: .5em;
+            margin: 0;
+        }
+    }
+}
+
+body.dark {
+
+    .select-label-area {
+        .select-label {
+
+            background-color: $bg-d-2;
+            border: 1px solid $bg-d-1;
+
+            p {
+                color: $white;
+            }
+        }
+    }
+}
+
+body.light {
+
+    .select-label-area {
+        .select-label {
+
+            background-color: $bg-d-2;
+            border: 1px solid $bg-d-1;
+
+            p {
+                color: $black;
+            }
+        }
+    }
+}
