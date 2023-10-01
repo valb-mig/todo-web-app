@@ -44,9 +44,11 @@ const Validate = ({ children }) => {
                 } else {
 
                     setUserData({
-                        username: "Fake Name",
-                        logged:   false
+                        username: "Jhon doe",
+                        logged: false
                     });
+
+                    localStorage.setItem('laravelSessionToken', 'test-token');
                 }
             } catch (error) {
                 console.error("[Error]: "+error);
