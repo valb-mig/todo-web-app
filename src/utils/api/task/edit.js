@@ -1,46 +1,52 @@
 import getToken from "@/utils/helpers/getToken";
 
-export default async function editTask(task_id, project_id, done) {
+export default async function editTask(task_id, project_id, done, ambient) {
 
-    const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
+    if(ambient === 'PRODUCTION') {
 
-    let token = getToken();
+        const API_URL_TASK_EDIT = process.env.NEXT_PUBLIC_API_TASK_EDIT;
 
-    if (!token) {
-        return { token: false };
-    }
-
-    try {
-
-        const requestBody = { 
-
-            project_id: project_id,
-            task_id:    task_id,
-            status:     done
-        };
-
-        const response = await fetch(API_URL_TASK_EDIT, {
+        let token = getToken();
+        if (!token) { return false; }
+    
+        try {
+    
+            const requestBody = { 
+    
+                project_id: project_id,
+                task_id:    task_id,
+                status:     done
+            };
+    
+            const response = await fetch(API_URL_TASK_EDIT, {
+                
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(requestBody)
+            });
+    
+            if (response.ok) {
+                
+                return true;
+    
+            } else {
+    
+                console.error('(error)(Api/Project/Remove): Bad request')
+                return false;     
+            }
+    
+        } catch (error) {
             
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': token
-            },
-            body: JSON.stringify(requestBody)
-        });
-
-        if (response.ok) {
-            
-            return true;
-
-        } else {
-
-            return false;    
+            console.error('(error)(Api/Project/Remove): Error: '+error)
+            return false; 
         }
 
-    } catch (error) {
-        
-        console.error('[Api]: Error: '+error)
-        return false;
+    } else if(ambient === 'DEVELOPMENT') {
+
+        console.info('(success)(Api/Project/Remove): No database version')
+        return true;  
     }
 }

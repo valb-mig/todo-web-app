@@ -23,7 +23,7 @@ const Validate = ({ children }) => {
 
     async function getData() {
 
-        const response = await handleUser();
+        const response = await handleUser(userData.data.ambient);
 
         if(response) {
 
@@ -35,8 +35,12 @@ const Validate = ({ children }) => {
 
                         setUserData({
                             username: response.user.name,
-                            logged:   true
+                            data: {
+                                logged: true,
+                                ambient: 'PRODUCTION'
+                            }
                         });
+
                     } else {
                         router.push('/login');
                     }
@@ -44,28 +48,30 @@ const Validate = ({ children }) => {
                 } else {
 
                     setUserData({
-                        username: "Jhon doe",
-                        logged: false
+                        username: 'Jhon Doe',
+                        data: {
+                            logged: false,
+                            ambient: 'DEVELOPMENT'
+                        }
                     });
                 }
+
             } catch (error) {
-                console.error("[Error]: "+error);
+                console.error("(error)(getData): Error: "+error);
             } finally {
                 setLoading(false);
             }
-        }
-        else {
-            console.error('[Api]: Response Error');
-        }
 
-        console.clear();
+        } else {
+            console.error('(error)(getData): Response Error');
+        }
     }
 
     if (loading) <Loading/>
 
     return userData ? (
         <Layout>
-        { children }
+            { children }
         </Layout>
     ) : null;
 }

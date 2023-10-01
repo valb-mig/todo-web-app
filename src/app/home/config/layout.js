@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '@/config/context/store';
+import useLayout  from '@/app/home/hooks/useLayout';
 
 import Icons from '@/config/icons';
 
@@ -13,17 +14,16 @@ import Button  from '@/app/components/Button';
 import Input   from '@/app/components/Input';
 import Select  from '@/app/components/Select';
 
-import getProject  from '@/utils/api/project/get';
 import cleanObject from '@/utils/helpers/cleanObject';
-import modalSubmit from '@/utils/validators/home/modal/submit';
 
 import './style/layout.scss';
 
 const Layout = ({ children }) => {
 
-    const { userData, projects, selectedProject, path, setProjects, setSelectedProject, setScreenPath } = useGlobalContext();
-
+    const { handleGetProjects, changeProjectType, selectProject, submitModal } = useLayout();
     const [ showProjectModal, setShowProjectModal ] = useState(false);
+    const { userData, projects, selectedProject } = useGlobalContext();
+    
     const [ modalFormData, setModalFormData ] = useState({
         title: '',
         icon:  '',
@@ -34,83 +34,6 @@ const Layout = ({ children }) => {
     useEffect(() => {
         handleGetProjects();
     }, [])
-
-    async function handleGetProjects() {
-            
-        let response = await getProject();
-
-        if( response ){
-            setProjects(response.projects);
-        } else  {
-            console.warn('[Projects]: No database');
-        }
-    }
-
-    const changeProjectType = (type) => {
-
-        setScreenPath({
-            current:{project:true},
-            breadcrumbs: [type]
-        });
-
-        setSelectedProject({
-            id:    null,
-            key:   null,
-            type:  type,
-            title: null,
-            icon:  null
-        });
-    }
-
-    const selectProject = (project, key, id) => {
-
-        setScreenPath({
-            current:{task:true},
-            breadcrumbs: [selectedProject.type, project.project_title]
-        });
-
-        setSelectedProject({
-            id:    id,
-            key:   key,
-            type:  selectedProject.type,
-            title: project.project_title,
-            icon:  project.project_icon
-        });
-    }
-
-    async function submitModal(event) {
-
-        event.preventDefault();
-        
-        setModalFormData({...modalFormData, error: false});
-
-        let response = await modalSubmit(modalFormData, setModalFormData, selectedProject);
-
-        if(typeof response == "object") {
-
-            let projectCount = Object.keys(projects[selectedProject.type]).length + 1;
-            
-            setProjects({
-
-                ...projects,
-
-                [selectedProject.type]:{
-                ...projects[selectedProject.type],
-                    [projectCount]:{
-                        ...response
-                    }
-                }
-            });
-
-        } else if(typeof response == "boolean") {
-
-            if(response) {
-                handleGetProjects();
-            } else {
-                setModalFormData({...modalFormData, error: true});
-            }
-        }
-    }
 
     return (
         <div className='home-page'>
@@ -131,7 +54,7 @@ const Layout = ({ children }) => {
                             Icon={<Icons.Hash/>}
                         />
                         
-                        <form onSubmit={(e) => submitModal(e)}>
+                        <form onSubmit={(e) => submitModal(e, setModalFormData, modalFormData)}>
 
                             <Input.Root>
                                 <Input.Label Title="Title"/>
@@ -214,7 +137,7 @@ const Layout = ({ children }) => {
                             </Button.Root>
                         </Sidebar.Box>
 
-                        { selectedProject.type !== null && (
+                        {['todo','kanban'].includes(selectedProject.type) && (
                             <>
                                 <Sidebar.Box Title='Projects' >
                                     <div className='projects'>
@@ -228,7 +151,7 @@ const Layout = ({ children }) => {
                                             <div className='button-group'>
                                                 {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
                                                     <Button.Root 
-                                                        key={index}
+                                                        key={project.project_id}
                                                         Selected={selectedProject.key === key}
                                                         OnClick={() => selectProject(project, key, index)} 
                                                     >

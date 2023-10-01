@@ -20,10 +20,13 @@ const GlobalContext = createContext({
 export const GlobalContextProvider = ({ children }) => {
 
     const [userData, setUserData] = useState({
-
+        
         username:'',
-        darkTheme:true, 
-        logged:false,
+        data: {
+            darkTheme:true, 
+            logged:false,
+            ambient:'DEVELOPMENT'
+        }
     });
     
     const [path, setScreenPath] = useState({
@@ -32,9 +35,8 @@ export const GlobalContextProvider = ({ children }) => {
     });
 
     const [projects, setProjects] = useState({
-        
-        'todo':[],
-        'kanban':[]
+        todo:[],
+        kanban:[]
     });
 
     const [selectedProject, setSelectedProject] = useState({

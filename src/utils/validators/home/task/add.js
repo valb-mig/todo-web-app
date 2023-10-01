@@ -1,39 +1,37 @@
 import addTask from '@/utils/api/task/add';
 
-export default async function taskAdd(selectedProject, taskFormData, projects) {
+export default async function taskAdd(selectedProject, taskFormData, projects, ambient) {
 
     if(taskFormData.title !== "" && taskFormData.desc !== ""){
 
-        let response = await addTask(selectedProject.id, taskFormData);
+        let response = await addTask(selectedProject.id, taskFormData, ambient);
     
         let newTask = {};
 
-        if (response) {
+        if (typeof response === 'boolean') {
 
-            if(response.success) {
-                newTask = response.added_task;
+            if(response) {
+
+                newTask = {
+
+                    task_id: projects[selectedProject.type][selectedProject.id].project_tasks.length + 1,
+                    user_id:'999',
+                    project_id:selectedProject.id,
+                    task_title:taskFormData.title,
+                    task_desc:taskFormData.desc,
+                    task_type:selectedProject.type,
+                    task_done:false,
+                    task_status:'A'
+                }
+                
             } else {
-                console.error("[Database]: Error");
                 return false;
             }
 
-        } else {
-
-            console.warn('[Projects]: No database');
-
-            newTask = {
-
-                task_id: projects[selectedProject.type][selectedProject.id].project_tasks.length + 1,
-                user_id:'999',
-                project_id:selectedProject.id,
-                task_title:taskFormData.title,
-                task_desc:taskFormData.desc,
-                task_type:selectedProject.type,
-                task_done:false,
-                task_status:'A'
-            }
+        } else if (typeof response === 'object') {
+            newTask = response.added_task;
         }
-    
+
         return {
             ...projects,
     

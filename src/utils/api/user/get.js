@@ -1,47 +1,56 @@
 import getToken from '@/utils/helpers/getToken';
 
-async function handleUser() {
+async function handleUser(ambient = 'PRODUCTION') {
 
-  let token = getToken();
+    if(ambient === 'PRODUCTION') {
 
-  const API_USER = process.env.NEXT_PUBLIC_API_USER;
+        const API_USER = process.env.NEXT_PUBLIC_API_USER;
 
-  if (token === '') {
+        let token = getToken();
 
-      return false;
-  }
+        if (!token) { return false; }
 
-  try {
+        try {
+            const response = await fetch(API_USER, {
 
-      const response = await fetch(API_USER, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                }
+            });
 
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': token
-          }
-      });
+            if (response.ok) {
 
-      if (response.ok) {
+                let res = await response.json();
 
-          let res = await response.json();
+                if(res.success) {
+                
+                    return res;
+                }
+                else {
 
-          if(res.success) {
-            
-              return res;
-          }
-          else {
-            
-              return { success:false };
-          }
+                    console.error('(error)(Api/User): Bad request')
+                    return false;
+                }
 
-      } else {
-        return { connection:false };
-      }
+            } else {
 
-  } catch (error) {
-    return { connection:false };
-  }
+                console.error('(error)(Api/User): No connection')
+                return false;
+            }
+
+        } catch (error) {
+
+            console.error('(error)(Api/User): Error: '+error)
+            return false;
+        }
+        
+    } else if (ambient === 'DEVELOPMENT') {
+
+        console.info('(success)(Api/User): No database version')
+        return true;
+    }
 }
 
 export default handleUser;

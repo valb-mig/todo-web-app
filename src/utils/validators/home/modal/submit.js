@@ -1,38 +1,31 @@
 import addProject  from '@/utils/api/project/add';
 import cleanObject from '@/utils/helpers/cleanObject';
 
-export default async function modalSubmit(modalFormData, setModalFormData, selectedProject) {
+export default async function modalSubmit(modalFormData, setModalFormData, selectedProject, userData) {
 
-    if(modalFormData.title !== "" && modalFormData.icon !== "" && modalFormData.days !== ""){
+    if(modalFormData.title !== "" && modalFormData.icon !== "" && modalFormData.days !== "") {
 
-        let response = await addProject(modalFormData, selectedProject.type);
-    
-        if (response && response.success != null && response.success != undefined) {
+        let response = await addProject(modalFormData, selectedProject.type, userData.data.ambient);
 
-            if(response.success) {
+        if(typeof response === 'boolean') {
+
+            if(response) {
+
                 setModalFormData(cleanObject(modalFormData));
                 return true;
+
             } else {
-                console.error("[Database]: Error");
                 return false;
             }
 
-        } else {
-
-            console.warn('[Projects]: No database');
-
-            let newProject = {
-
-                project_title: modalFormData.title,
-                project_icon: 'list',
-                project_tasks:[]
-            }
+        } else if (typeof response === 'object') {
 
             setModalFormData(cleanObject(modalFormData));
-            return newProject;
+            return response;
         }
-    
+
     } else {
+
         return false;
     }
 }

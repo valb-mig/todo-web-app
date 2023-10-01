@@ -1,51 +1,62 @@
 import getToken from "@/utils/helpers/getToken";
 
-export default async function addTask(project_id,task) {
+export default async function addTask(project_id, task, ambient = 'PRODUCTION') {
 
-    const API_URL_TASK_ADD = process.env.NEXT_PUBLIC_API_TASK_ADD;
+    if(ambient === 'PRODUCTION') {
 
-    let token = getToken();
-    
-    if (!token) { return false }
+        const API_URL_TASK_ADD = process.env.NEXT_PUBLIC_API_TASK_ADD;
 
-    try {
+        let token = getToken();
+        
+        if (!token) { return false }
 
-        const requestBody = { 
+        try {
 
-            project_id: project_id,
-            task_title: task.title,
-            task_desc:  task.desc
-        };
+            const requestBody = { 
 
-        const response = await fetch(API_URL_TASK_ADD, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': token
-            },
-            body: JSON.stringify(requestBody)
-        });
+                project_id: project_id,
+                task_title: task.title,
+                task_desc:  task.desc
+            };
 
-        if (response.ok) {
+            const response = await fetch(API_URL_TASK_ADD, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(requestBody)
+            });
 
-            let res = await response.json();
+            if (response.ok) {
 
-            if(res.success) {
+                let res = await response.json();
 
-                return { success: true, added_task: res.task };
+                if(res.success) {
+
+                    return res.task;
+                }
+                else {
+
+                    console.error('(error)(Api/Project/Add): Response error');
+                    return false;
+                }
+                
+            } else {
+                
+                console.error('(error)(Api/Project/Add): Bad request');
+                return false;     
             }
-            else {
 
-                return { success: false };
-            }
+        } catch (error) {
             
-        } else {
-            
-            return false;     
+            console.error('(error)(Api/Project/Add): Error: '+error);
+            return false;
         }
 
-    } catch (error) {
-        
-        return false;
+    } else if (ambient === 'DEVELOPMENT') {
+
+        console.info('(success)(Api/Project/Add): No database version');
+        return true;      
     }
 }

@@ -1,6 +1,6 @@
 import taskEdit from '@/utils/api/task/edit';
 
-export default async function editTask(selectedProject, projects, task_id, task_key, status) {
+export default async function editTask(selectedProject, projects, task_id, task_key, status, ambient) {
 
     const updatedTasks = projects[selectedProject.type][selectedProject.id].project_tasks.map((task, index) => {
         if (index === task_key) {
@@ -24,9 +24,9 @@ export default async function editTask(selectedProject, projects, task_id, task_
         [selectedProject.type]: updatedProjectType,
     };
 
-    let response = await taskEdit(task_id, selectedProject.id, status);
+    let response = await taskEdit(task_id, selectedProject.id, status, ambient);
 
-    if(response == true || response.token == false) {
+    if(response == true) {
         return updatedProjects;
     }
 

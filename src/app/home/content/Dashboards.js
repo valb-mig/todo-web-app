@@ -5,9 +5,7 @@ import { useGlobalContext } from '@/config/context/store';
 
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 
-const Project = () => {
-
-    const { selectedProject } = useGlobalContext();
+const Dashboards = () => {
 
     return(
         <div className='home-tag'>
@@ -16,4 +14,4 @@ const Project = () => {
     );
 }
 
-export default Project;
+export default Dashboards;

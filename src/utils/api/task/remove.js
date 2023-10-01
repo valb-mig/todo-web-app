@@ -1,46 +1,52 @@
 import getToken from "@/utils/helpers/getToken";
 
-async function removeTask(task_id, project_id) {
+async function removeTask(task_id, project_id, ambient) {
 
-    const API_URL_TASK_REMOVE = process.env.NEXT_PUBLIC_API_TASK_REMOVE;
+    if(ambient === 'PRODUCTION') {
 
-    let token = getToken();
-    
-    if (!token) {
-        return { token: false };
-    }
+        const API_URL_TASK_REMOVE = process.env.NEXT_PUBLIC_API_TASK_REMOVE;
 
-    try {
+        let token = getToken();
+        if (!token) { return false; }
 
-        const requestBody = { 
+        try {
 
-            project_id: project_id,
-            task_id:    task_id
-        };
+            const requestBody = { 
 
-        const response = await fetch(API_URL_TASK_REMOVE, {
+                project_id: project_id,
+                task_id:    task_id
+            };
 
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': token
-            },
-            body: JSON.stringify(requestBody)
-        });
+            const response = await fetch(API_URL_TASK_REMOVE, {
 
-        if (response.ok) {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(requestBody)
+            });
 
-            return true;
+            if (response.ok) {
 
-        } else {
+                return true;
 
-            return false;        
+            } else {
+
+                console.error('(error)(Api/Project/Remove): Response error')
+                return false;        
+            }
+
+        } catch (error) {
+
+            console.error('(error)(Api/Project/Remove): Error: '+error)
+            return false;
         }
 
-    } catch (error) {
+    } else if (ambient === 'DEVELOPMENT') {
 
-        console.error('[Api]: Error: '+error)
-        return true;
+        console.info('(success)(Api/Project/Remove): No database version')
+        return true;  
     }
 }
   

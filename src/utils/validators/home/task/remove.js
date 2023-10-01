@@ -1,6 +1,6 @@
 import removeTask from '@/utils/api/task/remove';
 
-export default async function taskRemove(selectedProject, projects, task_id, task_key) {
+export default async function taskRemove(selectedProject, projects, task_id, task_key, ambient) {
 
     const tasks = projects[selectedProject.type][selectedProject.id].project_tasks;
 
@@ -23,9 +23,9 @@ export default async function taskRemove(selectedProject, projects, task_id, tas
         [selectedProject.type]: updatedProjectType,
     };
 
-    let response = await removeTask(task_id, selectedProject.id);
+    let response = await removeTask(task_id, selectedProject.id, ambient);
 
-    if(response == true || response.token == false) {
+    if(response == true) {
         return updatedProjects;
     }
 

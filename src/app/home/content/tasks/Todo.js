@@ -2,6 +2,7 @@
 
 import React, { useState }  from 'react';
 import { useGlobalContext } from '@/config/context/store';
+import useTodo from './hooks/useTodo';
 
 import Icons from '@/config/icons';
 
@@ -11,70 +12,24 @@ import Input       from '@/app/components/Input';
 import Task        from '@/app/components/Task';
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 
-import taskAdd    from '@/utils/validators/home/task/add';
-import taskEdit   from '@/utils/validators/home/task/edit';
-import taskRemove from '@/utils/validators/home/task/remove';
-
-import cleanObject from '@/utils/helpers/cleanObject';
-
-import '@/app/home/content/styles/Todo.scss';
+import './styles/Todo.scss';
 
 export default function Todo() {
 
-    const { selectedProject, projects, path, setProjects } = useGlobalContext();
-
+    const { selectedProject, projects } = useGlobalContext();
+    const { submitTask, handleEditTask, handleRemoveTask } = useTodo();
+    
     const [taskFormData, setTaskFormData] = useState({
         title: '',
         desc:  '',
         error: false
     });
 
-    async function submitTask(event) {
-
-        event.preventDefault();
-
-        let response = await taskAdd(selectedProject, taskFormData, projects);
-
-        if(typeof response == "object") {
-
-            setProjects(response);      
-            setTaskFormData(cleanObject(taskFormData));
-
-        } else if(typeof response == "boolean") {
-           
-            setTaskFormData({...taskFormData, error: true});
-            console.error('[Database]: error');
-        }
-    } 
-
-    async function handleEditTask(task_id, task_key, status) {
-
-        let response = await taskEdit(selectedProject, projects, task_id, task_key, status);
-        
-        if(typeof response == 'object') {
-            setProjects(response);
-        } else if (typeof response == 'boolean') {
-            console.error('[Database]: Change task error');
-        }
-    }
-
-    async function handleRemoveTask(task_id, task_key) {
-
-        let response = await taskRemove(selectedProject, projects, task_id, task_key);
-        
-        if(typeof response == 'object') {
-            setProjects(response);
-        }
-        else if(typeof response == 'boolean') {
-            console.error('[Database]: Change task error');
-        }
-    }
-
     return(
         <>
             <Breadcrumbs/>
 
-            <form className='task-input-bar' onSubmit={(e) => submitTask(e)}>
+            <form className='task-input-bar' onSubmit={(e) => submitTask(e, taskFormData, setTaskFormData)}>
                 <div className={'task-inputs ' + (taskFormData.error ? 'error-task-input' : '')}>
 
                     <Input.Root>
@@ -107,7 +62,7 @@ export default function Todo() {
                 {projects[selectedProject.type][selectedProject.id].project_tasks.length > 0 ? (
                     <Column.Root>
                         {projects[selectedProject.type][selectedProject.id].project_tasks.map((task, index) => (
-                            <Task.Root key={index} Done={task.task_done}>
+                            <Task.Root key={task.task_id} Done={task.task_done}>
 
                                 <Task.Info>
                                     <Task.Title Title={task.task_title} />
