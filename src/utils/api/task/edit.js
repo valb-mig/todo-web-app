@@ -32,10 +32,12 @@ async function editTask(task_id, project_id, done) {
 
         if (response.ok) {
 
+            
             return true;
 
         } else {
-
+            
+            console.log('Test: '+response);
             return false;    
         }
 
