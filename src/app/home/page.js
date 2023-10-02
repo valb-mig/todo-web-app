@@ -8,8 +8,8 @@ import Layout from '@/app/home/config/validate';
 import Greetings  from '@/app/home/content/Greetings';
 import Dashboards from '@/app/home/content/Dashboards';
 
-import Todo      from '@/app/home/content/tasks/Todo';
-import Kanban    from '@/app/home/content/tasks/Kanban';
+import Todo   from '@/app/home/content/tasks/Todo';
+import Kanban from '@/app/home/content/tasks/Kanban';
 
 /*--------------------------------------------------*/
 /* [Note]: Render specifici content screen on /home */

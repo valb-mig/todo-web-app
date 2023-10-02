@@ -1,16 +1,12 @@
+'use client';
 
-// { path.current !== undefined && path.current.task && (
+import React, { useState }  from 'react';
 
-//   <></>
+import './styles/Kanban.scss';
 
-// )}
-
-// { path.current !== undefined && path.current.dashboard && (
-
-//   <div className='home-tag'>
-//     <Tag.Root>
-//       <Tag.Icon Icon={<Icons.Grid/>}/>
-//       <Tag.Title Title={ selectedProject.type } />
-//     </Tag.Root>
-//   </div>
-// )}
+export default function Kanban() {
+    
+    return(
+        <p>🚧 In Construction 🚧</p>
+    );
+}

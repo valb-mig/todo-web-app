@@ -8,7 +8,7 @@ import cleanObject from '@/utils/helpers/cleanObject';
 
 const useTodo = () => {
    
-    const { projects, selectedProject, userData, setProjects} = useGlobalContext();
+    const { projects, selectedProject, userData, setProjects } = useGlobalContext();
     const ambient = userData.data.ambient;
 
     const submitTask = async (event, taskFormData, setTaskFormData) => {
