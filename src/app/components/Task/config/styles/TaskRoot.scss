@@ -6,6 +6,7 @@
     border-radius: $radius;
     padding: 10px;
     transition: all .1s;
+    cursor: grab;
 
     .task-data-info {
         display: flex;
