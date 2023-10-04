@@ -69,7 +69,7 @@ export default function Todo() {
             <Column.Root>
                 <Column.Body Count={tasks.length}>
                     <DragDropContext onDragEnd={(e) => handleDragEnd(e)}>
-                        <Droppable droppableId='ROOT' type='group'>
+                        <Droppable droppableId='ROOT' type='todo_column'>
                         
                             {tasks.length > 0 && (
 
@@ -92,7 +92,7 @@ export default function Todo() {
                                                         {...provided.draggableProps} 
                                                         ref={provided.innerRef}
                                                     >
-                                                        <Task.Root  key={task.task_id} Done={task.task_done}>
+                                                        <Task.Root key={task.task_id} Done={task.task_done}>
                                                             <Task.Info>
                                                                 <Task.Title Title={task.task_title} />
                                                                 <Task.Desc Desc={task.task_desc} />

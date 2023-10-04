@@ -12,6 +12,7 @@
         outline: none;
         padding: 10px;
         border-radius: $radius;
+        transition: all .2s;
     }
 }
 
@@ -26,6 +27,12 @@ body.dark {
 
             border: 1px solid $bg-d-1;
             background-color: $bg-d-2;
+        }
+
+        select:focus {
+
+            border: 1px solid $light-purple;
+            outline: 2px solid $light-purple-t;
         }
     }
 }

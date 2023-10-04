@@ -13,7 +13,8 @@ import {
 
 import { 
     MdClose,
-    MdOutlineGrid3X3
+    MdOutlineGrid3X3,
+    MdDragIndicator
 } from 'react-icons/md';
 
 import {
@@ -45,7 +46,8 @@ const Icon = {
     Dot:    BsDot,
     Hash:   MdOutlineGrid3X3,
     Trash:  FaTrash,
-    Check:  AiOutlineCheck
+    Check:  AiOutlineCheck,
+    Drag:   MdDragIndicator
 }
 
 export default Icon;
