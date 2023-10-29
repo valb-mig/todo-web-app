@@ -1,8 +1,8 @@
 import { useGlobalContext } from '@/config/context/store';
 
-import taskAdd    from '@/utils/validators/home/task/add';
-import taskEdit   from '@/utils/validators/home/task/edit';
-import taskRemove from '@/utils/validators/home/task/remove';
+import taskAdd    from '@/utils/validators/home/task/addController';
+import taskEdit   from '@/utils/validators/home/task/editController';
+import taskRemove from '@/utils/validators/home/task/removeController';
 
 import cleanObject from '@/utils/helpers/cleanObject';
 
@@ -27,11 +27,12 @@ const useTodo = () => {
         }
     } 
 
-    const handleEditTask = async (task_id, task_key, status) => {
+    const handleEditTask = async (task_id, task_key, edit) => {
 
-        let response = await taskEdit(selectedProject, projects, task_id, task_key, status, ambient);
+        let response = await taskEdit(selectedProject, projects, task_id, task_key, edit, ambient);
         
         if(typeof response == 'object') {
+
             setProjects(response);
         }
     }

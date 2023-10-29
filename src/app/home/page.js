@@ -12,7 +12,7 @@ import Todo   from '@/app/home/content/tasks/Todo';
 import Kanban from '@/app/home/content/tasks/Kanban';
 
 /*--------------------------------------------------*/
-/* [Note]: Render specifici content screen on /home */
+/* [Note]: Render specific content screen on /home  */
 /*--------------------------------------------------*/
 
 const Home = () => {

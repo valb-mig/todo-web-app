@@ -1,7 +1,7 @@
 import { useGlobalContext } from '@/config/context/store';
 
 import getProject  from '@/utils/api/project/get';
-import modalSubmit from '@/utils/validators/home/modal/submit';
+import modalSubmit from '@/utils/validators/home/modal/submitController';
 
 const useLayout = () => {
    

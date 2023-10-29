@@ -76,7 +76,18 @@
                     }
                 }
             }
-        } 
+        }
+        
+        .todo-button {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .button {
+                position: absolute;
+            }
+        }
     }
 
     footer {

@@ -23,9 +23,11 @@ const StartPage = () => {
           </div>
         </span>
 
-        <Button.Root OnClick={() => router.push('/home')} >
-          <Button.Title Title="Start to doing" />
-        </Button.Root>
+        <div className='todo-button'>
+          <Button.Root OnClick={() => router.push('/home')} >
+            <Button.Title Title="Start to doing" />
+          </Button.Root>
+        </div>
 
       </section>
 

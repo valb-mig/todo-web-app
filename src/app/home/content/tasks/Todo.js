@@ -67,55 +67,55 @@ export default function Todo() {
             </form>
 
             <Column.Root>
-                <Column.Body Count={tasks.length}>
+                <Column.Body>
                     <DragDropContext onDragEnd={(e) => handleDragEnd(e)}>
                         <Droppable droppableId='ROOT' type='todo_column'>
-                        
-                            {tasks.length > 0 && (
+                            {(provided) => (
+                                <div 
+                                    {...provided.droppableProps} 
+                                    ref={provided.innerRef} 
+                                    className='drop-column'
+                                >
+                                    {Object.values(tasks).map((task, index) => (
 
-                                (provided) => (
+                                        <Draggable 
+                                            draggableId={task.task_id.toString()} 
+                                            key={task.task_id} 
+                                            index={task.task_order_key}
+                                        >
+                                            
+                                            {(provided) => (
 
-                                    <div {...provided.droppableProps} ref={provided.innerRef}>
+                                                <div
+                                                    {...provided.dragHandleProps} 
+                                                    {...provided.draggableProps} 
+                                                    ref={provided.innerRef}
+                                                >
+                                                    <Task.Root key={task.task_id} Done={task.task_done === "Y"}>
+                                                        <Task.Info>
+                                                            <Task.Title Title={task.task_title} />
+                                                            <Task.Desc Desc={task.task_desc} />
+                                                        </Task.Info>
+            
+                                                        <Task.Option>
+                                                            <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, index, {action:'status', value:!(task.task_done === "Y")})}>
+                                                                <Button.Icon Icon={<Icons.Check/>} />
+                                                            </Button.Root>
+                                                            <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, index)} >
+                                                                <Button.Icon Icon={<Icons.Trash/>} />
+                                                            </Button.Root>
+                                                        </Task.Option>
+                                                    </Task.Root>
+                                                </div>
+                                            )}
 
-                                        {tasks.map((task, index) => (
+                                        </Draggable>
+                                    ))}
 
-                                            <Draggable 
-                                                draggableId={task.task_id.toString()} 
-                                                key={task.task_id} 
-                                                index={index}
-                                            >
-                                                
-                                                {(provided) => (
+                                    {provided.placeholder}
 
-                                                    <div
-                                                        {...provided.dragHandleProps} 
-                                                        {...provided.draggableProps} 
-                                                        ref={provided.innerRef}
-                                                    >
-                                                        <Task.Root key={task.task_id} Done={task.task_done}>
-                                                            <Task.Info>
-                                                                <Task.Title Title={task.task_title} />
-                                                                <Task.Desc Desc={task.task_desc} />
-                                                            </Task.Info>
-                
-                                                            <Task.Option>
-                                                                <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, index, !task.task_done)}>
-                                                                    <Button.Icon Icon={<Icons.Check/>} />
-                                                                </Button.Root>
-                                                                <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, index)} >
-                                                                    <Button.Icon Icon={<Icons.Trash/>} />
-                                                                </Button.Root>
-                                                            </Task.Option>
-                                                        </Task.Root>
-                                                    </div>
-                                                )}
+                                </div>
 
-                                            </Draggable>
-                                        ))}
-
-                                    </div>
-
-                                )
                             )}
                         </Droppable>
                     </DragDropContext>

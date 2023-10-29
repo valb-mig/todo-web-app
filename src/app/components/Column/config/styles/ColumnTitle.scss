@@ -1,1 +1,29 @@
 @import '/src/app/styles/global.scss';
+
+.column-title {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $radius;
+}
+
+body.dark {
+
+    .column-title {
+
+        color: $white;
+        background-color: $bg-d-4;
+        border: 1px solid $bg-d-3;
+    }
+}
+
+body.light {
+    
+    .column-title {
+        
+        color: $black;
+        background-color: $bg-l-4;
+        border: 1px solid $bg-l-3;
+    }
+}
