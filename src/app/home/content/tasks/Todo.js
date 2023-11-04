@@ -91,14 +91,14 @@ export default function Todo() {
                                                     {...provided.draggableProps} 
                                                     ref={provided.innerRef}
                                                 >
-                                                    <Task.Root key={task.task_id} Done={task.task_done === "Y"}>
+                                                    <Task.Root key={task.task_id} Done={task.task_done === true}>
                                                         <Task.Info>
                                                             <Task.Title Title={task.task_title} />
                                                             <Task.Desc Desc={task.task_desc} />
                                                         </Task.Info>
             
                                                         <Task.Option>
-                                                            <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, index, {action:'status', value:!(task.task_done === "Y")})}>
+                                                            <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, index, task.task_column, {action:'status', value:!(task.task_done === "Y")})}>
                                                                 <Button.Icon Icon={<Icons.Check/>} />
                                                             </Button.Root>
                                                             <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, index)} >

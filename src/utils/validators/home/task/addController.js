@@ -36,6 +36,8 @@ export default async function taskAdd(selectedProject, taskFormData, projects, a
             newTask = response;
         }
 
+        console.log(projects);
+
         return {
             ...projects,
     

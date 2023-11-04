@@ -3,7 +3,7 @@ import { useGlobalContext } from '@/config/context/store';
 import editTask from '@/utils/api/task/edit';
 
 const useDragDrop = () => {
-   
+  
     const { userData, selectedProject, projects, setProjects } = useGlobalContext();
     const { type, id } = selectedProject;
 
@@ -12,44 +12,14 @@ const useDragDrop = () => {
     const handleDragEnd = async (drop) => {
 
         const tasks = projects[type][id].project_tasks;
-
         const { source, destination } = drop;
 
         if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) return;
         
-        const updatedProject = {
-            ...projects,
-                [type]: {
-                    ...projects[type],
-                    [id]: {
-                        ...projects[type][id],
-                        project_tasks: moveOrder(tasks, source, destination)
-                    },
-                },
-        };
-
-        console.log(updatedProject);
-
-        // setProjects(updatedProject);
-
-        // let edit_object = { source_data:{task_id: updatedTask.task_id, destination: destination.index}};
-
-        // let response = await editTask(edit_object.source_data.task_id, id, {
-        //     action: "order",
-        //     value: edit_object
-        // }, ambient);
-
-        // if(typeof response === 'boolean'){
-
-        //     if(response) {
-        //         console.info('(success)(DropTask): Task dropped');
-        //     } else {
-        //         console.error('(error)(DropTask): Cought an error');
-        //     }
-        // }
+        moveTask(tasks, source, destination);
     }
 
-    const moveOrder = (tasks, current, destination) => {
+    const moveTask = (tasks, current, destination) => {
 
         if(type === 'todo') {
 
@@ -91,8 +61,6 @@ const useDragDrop = () => {
               })
             }
         }
-
-        console.log(tasks);
 
         return tasks;
     }

@@ -1,41 +1,39 @@
 import taskEdit from '@/utils/api/task/edit';
 
-export default async function editTask(selectedProject, projects, task_id, task_key, task_column, edit, ambient) {
+export default async function editTask(selectedProject, projects, task_info, edit, ambient) {
 
-    const tasks = projects[selectedProject.type][selectedProject.id].project_tasks;
+    const {type, id} = selectedProject;
 
-    console.info(task_id, task_key, task_column);
+    const tasks = projects[type][id].project_tasks;
 
-    const updatedTasks = Object.values(tasks).map((task, index) => {
+    const updatedTasks = Object.values(tasks).map((task) => {
 
-        console.log(index, task.task_id, task.task_column);
-
-        if (index === task_key && task.task_id == task_id && task.task_column == task_column) {
-            
-            console.log(task);
+        if (task.task_order_key === task_info.order && task.task_id === task_info.id && task.task_column === task_info.column) {
+            task.task_done = !task.task_done;
         }
 
         return task;
     });
 
     const updatedProject = {
-        ...projects[selectedProject.type][selectedProject.id],
+        ...projects[type][id],
         project_tasks: updatedTasks,
     };
 
     const updatedProjectType = {
-        ...projects[selectedProject.type],
-        [selectedProject.id]: updatedProject,
+        ...projects[type],
+        [id]: updatedProject,
     };
 
     const updatedProjects = {
         ...projects,
-        [selectedProject.type]: updatedProjectType,
+        [type]: updatedProjectType,
     };
 
-    let response = await taskEdit(task_id, selectedProject.id, edit, ambient); //[Todo] - Pass task column to API
+    let response = await taskEdit(task_info.id, id, edit, ambient);
 
     if(response == true) {
+
         return updatedProjects;
     }
 

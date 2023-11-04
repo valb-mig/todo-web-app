@@ -2,10 +2,12 @@
 
 .sidebar-normal {
     
-    flex-direction:   column;
-    width:            220px;
-    height:           100%;
-    padding:          10px;
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    min-width: 100px;
+    height: 100%;
+    padding: 10px;
 }
 
 body.dark {

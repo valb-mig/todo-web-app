@@ -1,29 +1,44 @@
 @import '/src/app/styles/global.scss';
 
-.column-title {
+.column {
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: $radius;
+    .column-title {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: $radius;
+    }
+
+    .column-title p {
+        font-size: 1.2em;
+        padding: 5px;
+        margin: 0;
+    }
 }
 
 body.dark {
 
-    .column-title {
+    .column {
 
-        color: $white;
-        background-color: $bg-d-4;
-        border: 1px solid $bg-d-3;
+        .column-title {
+
+            color: $white;
+            background-color: $bg-d-4;
+            border: 1px solid $bg-d-3;
+        }
     }
 }
 
 body.light {
     
-    .column-title {
-        
-        color: $black;
-        background-color: $bg-l-4;
-        border: 1px solid $bg-l-3;
+    .column {
+
+        .column-title {
+            
+            color: $black;
+            background-color: $bg-l-4;
+            border: 1px solid $bg-l-3;
+        }
     }
 }

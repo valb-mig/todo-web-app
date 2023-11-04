@@ -27,12 +27,11 @@ const useTodo = () => {
         }
     } 
 
-    const handleEditTask = async (task_id, task_key, edit) => {
+    const handleEditTask = async (task_id, task_key, task_column, edit) => {
 
-        let response = await taskEdit(selectedProject, projects, task_id, task_key, edit, ambient);
+        let response = await taskEdit(selectedProject, projects, {id: task_id, order: task_key, column: task_column }, edit, ambient);
         
-        if(typeof response == 'object') {
-
+        if(typeof response === 'object') {
             setProjects(response);
         }
     }

@@ -1,22 +1,36 @@
 import './styles/HeaderStart.scss';
 
 import { useGlobalContext } from '@/config/context/store';
-import { useRouter } from 'next/navigation';
 
 import Button from '@/app/components/Button';
 import Icons  from '@/config/icons';
 
 const HeaderStart = ({ children }) => {
 
-    const { setScreenPath } = useGlobalContext();
+    const { path, setScreenPath, setSelectedProject } = useGlobalContext();
+
+    const goHome = () => {
+
+        setScreenPath({
+            current:{home:true}, 
+            breadcrumbs:['home'] 
+        });
+
+        setSelectedProject({
+            id:    null,
+            key:   null,
+            type:  null,
+            title: null,
+            icon:  null,
+        });
+    }
 
     return(
         <div className='header-start'>
 
-            <Button.Root OnClick={() => setScreenPath({
-                current:{home:true}, 
-                breadcrumbs:['home'] 
-            })}>
+            <Button.Root 
+            Selected={path.current.home}
+            OnClick={() => goHome()}>
                 <Button.Icon Icon={<Icons.Home/>} />
             </Button.Root>
 
