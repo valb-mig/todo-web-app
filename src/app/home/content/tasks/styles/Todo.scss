@@ -38,19 +38,24 @@
             transition: all .2s;
             width: 50px;
         }
-    }
+    }    
 
-    .task-box-area {
+    .column {
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 0%;
-        height: 100%;
-        border-radius: $radius;
-        padding: 5px;
+        .column-body {
 
-        .not-found img{ width: 100px; }
+            padding: 0 !important;
+            width: auto !important;
+
+            .drop-column {
+                
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                padding: 5px;
+                height:  100%;
+            }
+        }
     }
 }
 
@@ -86,16 +91,6 @@ body.dark {
                 background-color: $d-green-4;
                 color: $d-green-2;
                 border: 1px solid $d-green-2;
-            }
-        }
-
-        .task-box-area {
-
-            border: 1px solid $bg-d-3;
-            background-color: $bg-d-4;
-
-            .not-found img{
-                opacity: 0.1;
             }
         }
     }

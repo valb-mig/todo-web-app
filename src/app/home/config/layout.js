@@ -139,7 +139,7 @@ const Layout = ({ children }) => {
 
                         {['todo','kanban'].includes(selectedProject.type) && (
                             <>
-                                <Sidebar.Box Title='Projects' >
+                                <Sidebar.Box Title='Projects'>
                                     <div className='projects'>
                                         <div className='project-tag'>
                                             <Tag.Root>
@@ -147,25 +147,27 @@ const Layout = ({ children }) => {
                                             </Tag.Root>
                                         </div>
 
-                                        {projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 ? (
-                                            <div className='button-group'>
-                                                {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
-                                                    <Button.Root 
-                                                        key={project.project_id}
-                                                        Selected={selectedProject.key === key}
-                                                        OnClick={() => selectProject(project, key, index)} 
-                                                    >
-                                                        <Button.Icon Icon={<Icons.Dot/>} />
-                                                        <Button.Title Title={project.project_title} />
-                                                    </Button.Root>
-                                                ))}
-                                            </div>
-                                        ):(
-                                            <div className='empty-content'>
-                                                <img className='not-found' src='assets/img/not-found.png'/>
-                                                <p>Empty</p>
-                                            </div>
-                                        )}
+                                        <>
+                                            {projects[selectedProject.type] && Object.values(projects[selectedProject.type]).length > 0 ? (
+                                                <div className='button-group' key='projects'>
+                                                    {Object.entries(projects[selectedProject.type]).map(([index, project], key) => (                                    
+                                                        <Button.Root 
+                                                            key={key}
+                                                            Selected={selectedProject.key === key}
+                                                            OnClick={() => selectProject(project, key, index)} 
+                                                        >
+                                                            <Button.Icon Icon={<Icons.Dot/>} />
+                                                            <Button.Title Title={project.project_title} />
+                                                        </Button.Root>
+                                                    ))}
+                                                </div>
+                                            ):(
+                                                <div className='empty-content' key='empty'>
+                                                    <img className='not-found' src='assets/img/not-found.png'/>
+                                                    <p>Empty</p>
+                                                </div>
+                                            )}
+                                        </>
 
                                     </div>
                                 </Sidebar.Box>

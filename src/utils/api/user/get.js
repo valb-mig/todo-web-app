@@ -4,13 +4,14 @@ async function handleUser(ambient = 'PRODUCTION') {
 
     if(ambient === 'PRODUCTION') {
 
-        const API_USER = process.env.NEXT_PUBLIC_API_USER;
+        const API_USER = `${process.env.NEXT_PUBLIC_API_USER}`;
 
         let token = getToken();
 
-        if (!token) { return false; }
+        if (!token) return false;
 
         try {
+            
             const response = await fetch(API_USER, {
 
                 method: 'POST',
@@ -20,29 +21,19 @@ async function handleUser(ambient = 'PRODUCTION') {
                 }
             });
 
-            if (response.ok) {
+            if (!response.ok) throw new Error(`Bad request: ${response.status}`);
 
-                let res = await response.json();
-
-                if(res.success) {
-                
-                    return res;
-                }
-                else {
-
-                    console.error('(error)(Api/User): Bad request')
-                    return false;
-                }
-
+            const res = await response.json();
+    
+            if (res.success) {
+                return res;
             } else {
-
-                console.error('(error)(Api/User): No connection')
-                return false;
+                throw new Error('(error)(Api/User): Unsuccessful response');
             }
 
         } catch (error) {
 
-            console.error('(error)(Api/User): Error: '+error)
+            console.error(`(error)(Api/User): ${error}`)
             return false;
         }
         
@@ -50,6 +41,11 @@ async function handleUser(ambient = 'PRODUCTION') {
 
         console.info('(success)(Api/User): No database version')
         return true;
+    
+    } else {
+
+        console.error(`(error)(Api/User): Invalid environment: ${ambient}`);
+        return false;
     }
 }
 

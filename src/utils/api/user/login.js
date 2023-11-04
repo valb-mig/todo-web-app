@@ -1,51 +1,53 @@
-async function handleLogin(data) {
+async function handleLogin(data, ambient = 'PRODUCTION') {
 
-    const API = process.env.NEXT_PUBLIC_API_LOGIN;
+    if(ambient === 'PRODUCTION') {
 
-    if (data.username.value === '' || data.password.value === '') {
+        const API_LOGIN = `${process.env.NEXT_PUBLIC_API_LOGIN}`;
 
-        return false;
-    }
+        try {
+    
+            const requestBody = { 
+    
+                username: data.username.value, 
+                password: data.password.value 
+            };
+    
+            const response = await fetch(API_LOGIN, {
+    
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(requestBody),
+            });
+    
+            if (!response.ok) throw new Error(`Bad request: ${response.status}`);
 
-    try {
-
-        const requestBody = { 
-
-            username: data.username.value, 
-            password: data.password.value 
-        };
-
-        const response = await fetch(API, {
-
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' 
-            },
-            body: JSON.stringify(requestBody),
-        });
-
-        if (response.ok) {
-
-            let res =  await response.json();
+            const res = await response.json();
 
             if(res.success) {
 
-                localStorage.setItem('laravelSessionToken', res.session_token);
+                localStorage.setItem('laravelSessionToken', res.remember_token);
                 return true;
             }
             else {
-
-                return false;
+                throw new Error('(error)(Api/User/Login): Unsuccessful response');
             }
-
-        } else {
-
-            throw new Error('Error: ' + response.status);
+    
+        } catch (error) {
+            
+            throw new Error('Error fetching data: ' + error);
         }
-
-    } catch (error) {
         
-        throw new Error('Error fetching data: ' + error);
+    } else if(ambient === 'DEVELOPMENT') {
+
+        console.info('(success)(Api/User/Login): No database version')
+        return true;
+
+    } else {
+
+        console.error(`(error)(Api/User/Login): Invalid environment: ${ambient}`);
+        return false;
     }
 }
 

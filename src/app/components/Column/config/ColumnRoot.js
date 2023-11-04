@@ -2,9 +2,9 @@ import './styles/ColumnRoot.scss';
 
 const ColumnRoot = ({ children }) => {
     return(
-        <section className='task-column'>
+        <div className='column'>
             { children }
-        </section>
+        </div>
     );
 }
 

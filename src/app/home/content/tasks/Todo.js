@@ -2,7 +2,11 @@
 
 import React, { useState }  from 'react';
 import { useGlobalContext } from '@/config/context/store';
-import useTodo from './hooks/useTodo';
+
+import useTodo     from './hooks/useTodo';
+import useDragDrop from './hooks/dragDrop/useDragDrop';
+
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import Icons from '@/config/icons';
 
@@ -18,12 +22,16 @@ export default function Todo() {
 
     const { selectedProject, projects } = useGlobalContext();
     const { submitTask, handleEditTask, handleRemoveTask } = useTodo();
+
+    const { handleDragEnd } = useDragDrop();
     
     const [taskFormData, setTaskFormData] = useState({
         title: '',
         desc:  '',
         error: false
     });
+
+    const tasks = projects[selectedProject.type][selectedProject.id].project_tasks;
 
     return(
         <>
@@ -58,36 +66,61 @@ export default function Todo() {
 
             </form>
 
-            <div className='task-box-area'>
-                {projects[selectedProject.type][selectedProject.id].project_tasks.length > 0 ? (
-                    <Column.Root>
-                        {projects[selectedProject.type][selectedProject.id].project_tasks.map((task, index) => (
-                            <Task.Root key={task.task_id} Done={task.task_done}>
+            <Column.Root>
+                <Column.Body>
+                    <DragDropContext onDragEnd={(e) => handleDragEnd(e)}>
+                        <Droppable droppableId='ROOT' type='todo_column'>
+                            {(provided) => (
+                                <div 
+                                    {...provided.droppableProps} 
+                                    ref={provided.innerRef} 
+                                    className='drop-column'
+                                >
+                                    {Object.values(tasks).map((task, index) => (
 
-                                <Task.Info>
-                                    <Task.Title Title={task.task_title} />
-                                    <Task.Desc Desc={task.task_desc} />
-                                </Task.Info>
+                                        <Draggable 
+                                            draggableId={task.task_id.toString()} 
+                                            key={task.task_id} 
+                                            index={task.task_order_key}
+                                        >
+                                            
+                                            {(provided) => (
 
-                                <Task.Option>
-                                    <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, index, !task.task_done)}>
-                                        <Button.Icon Icon={<Icons.Check/>} />
-                                    </Button.Root>
-                                    <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, index)} >
-                                        <Button.Icon Icon={<Icons.Trash/>} />
-                                    </Button.Root>
-                                </Task.Option>
-                            </Task.Root>
-                        ))}
-                    </Column.Root>
-                ) : (
-                    <div className='empty-content' key='empty'>
-                        <div className='not-found'>
-                            <img src='assets/img/not-found.png'/>
-                        </div>
-                    </div>
-                )}
-            </div>
+                                                <div
+                                                    {...provided.dragHandleProps} 
+                                                    {...provided.draggableProps} 
+                                                    ref={provided.innerRef}
+                                                >
+                                                    <Task.Root key={task.task_id} Done={task.task_done === true}>
+                                                        <Task.Info>
+                                                            <Task.Title Title={task.task_title} />
+                                                            <Task.Desc Desc={task.task_desc} />
+                                                        </Task.Info>
+            
+                                                        <Task.Option>
+                                                            <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, index, task.task_column, {action:'status', value:!(task.task_done === "Y")})}>
+                                                                <Button.Icon Icon={<Icons.Check/>} />
+                                                            </Button.Root>
+                                                            <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, index)} >
+                                                                <Button.Icon Icon={<Icons.Trash/>} />
+                                                            </Button.Root>
+                                                        </Task.Option>
+                                                    </Task.Root>
+                                                </div>
+                                            )}
+
+                                        </Draggable>
+                                    ))}
+
+                                    {provided.placeholder}
+
+                                </div>
+
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                </Column.Body>
+            </Column.Root>
         </>
     );
 }

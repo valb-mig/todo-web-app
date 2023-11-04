@@ -5,6 +5,8 @@ import { useGlobalContext } from '@/config/context/store';
 
 import Breadcrumbs from '@/app/components/Breadcrumbs';
 
+import './styles/Dashboards.scss';
+
 const Dashboards = () => {
 
     return(

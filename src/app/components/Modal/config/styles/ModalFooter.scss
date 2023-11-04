@@ -10,6 +10,7 @@
     .button {
 
         padding: 10px;
+        transition: all .1s;
 
         p { margin: 0; }
     }
@@ -22,8 +23,23 @@ body.dark {
         .button {
             
             color: $white;
+            border: 0;
             background-color: $bg-d-3;
-            border: 1px solid $bg-d-2;
+            outline: 1px solid $bg-d-2;
+            border-bottom: 2px solid $bg-d-4;
+        }
+
+        .button:hover {
+
+            background-color: $bg-d-2;
+            outline: 1px solid $bg-d-1;
+        }
+
+        .button:active {
+
+            background-color: $bg-d-1;
+            outline: 1px solid $fg-d-1;
+            border-bottom: 0px;
         }
     }
 }
@@ -33,10 +49,25 @@ body.light {
     .modal-footer {
 
         .button {
-
+            
             color: $white;
+            border: 0;
             background-color: $bg-l-3;
-            border: 1px solid $bg-l-2;
+            outline: 1px solid $bg-l-2;
+            border-bottom: 2px solid $bg-l-4;
+        }
+
+        .button:hover {
+
+            background-color: $bg-l-2;
+            outline: 1px solid $bg-l-1;
+        }
+
+        .button:active {
+
+            background-color: $bg-l-1;
+            outline: 1px solid $fg-l-1;
+            border-bottom: 0px;
         }
     }
 }

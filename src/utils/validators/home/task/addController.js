@@ -21,16 +21,22 @@ export default async function taskAdd(selectedProject, taskFormData, projects, a
                     task_desc:taskFormData.desc,
                     task_type:selectedProject.type,
                     task_done:false,
+                    task_order_key: projects[selectedProject.type][selectedProject.id].project_tasks.length,
                     task_status:'A'
                 }
+
+                if(selectedProject.type === 'kanban') { newTask.task_column = 0 }
                 
             } else {
                 return false;
             }
 
         } else if (typeof response === 'object') {
-            newTask = response.added_task;
+
+            newTask = response;
         }
+
+        console.log(projects);
 
         return {
             ...projects,

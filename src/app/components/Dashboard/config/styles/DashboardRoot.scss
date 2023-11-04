@@ -40,6 +40,11 @@ body.dark {
         border: 1px solid $bg-d-3;
         background: no-repeat center/100% url("/assets/img/waves-dark.png");
         background-color: $bg-d-4;
+
+        .tag {
+            background-color: $bg-d-3 !important;
+            border: 1px solid $bg-d-2 !important;
+        }
     }
 }
 

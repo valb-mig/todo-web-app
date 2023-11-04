@@ -34,7 +34,7 @@ export default async function addTask(project_id, task, ambient = 'PRODUCTION') 
 
                 if(res.success) {
 
-                    return res.task;
+                    return res.added_task;
                 }
                 else {
 
