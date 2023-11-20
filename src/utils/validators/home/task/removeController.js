@@ -1,15 +1,20 @@
 import removeTask from '@/utils/api/task/remove';
 
-export default async function taskRemove(selectedProject, projects, task_id, task_key, ambient) {
+export default async function taskRemove(selectedProject, projects, task_info, ambient) {
 
     const {type, id} = selectedProject;
 
     const tasks = projects[type][id].project_tasks;
 
-    const updatedTasks = Object.values(tasks).filter((task, index) => {
-        return index !== task_key && task.task_id !== task_id;
+    const updatedTasks = Object.values(tasks).filter((task) => {
+
+        if(task.task_order_key !== task_info.order && task.task_id !== task_info.id){
+            return task;
+        } else {
+            console.warn(`Task removida: ${task.task_title}`);
+        }
     });
-    
+
     const updatedProject = {
         ...projects[type][id],
         project_tasks: updatedTasks,
@@ -25,7 +30,7 @@ export default async function taskRemove(selectedProject, projects, task_id, tas
         [type]: updatedProjectType,
     };
 
-    let response = await removeTask(task_id, id, ambient);
+    let response = await removeTask(task_info.task_id, id, ambient);
 
     if(response == true) {
         return updatedProjects;
@@ -33,5 +38,3 @@ export default async function taskRemove(selectedProject, projects, task_id, tas
 
     return false;
 }
-
-

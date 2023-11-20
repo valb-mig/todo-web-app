@@ -101,7 +101,7 @@ export default function Kanban() {
                                                                     <Button.Root Class="done" OnClick={() => handleEditTask(task.task_id, task.task_order_key, task.task_column, { action: 'status', value: !(task.task_done === "Y") })}>
                                                                         <Button.Icon Icon={<Icons.Check />} />
                                                                     </Button.Root>
-                                                                    <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, index)}>
+                                                                    <Button.Root Class="remove" OnClick={() => handleRemoveTask(task.task_id, task.task_order_key, task.task_column)}>
                                                                         <Button.Icon Icon={<Icons.Trash />} />
                                                                     </Button.Root>
                                                                 </Task.Option>

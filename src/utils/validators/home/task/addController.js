@@ -14,7 +14,7 @@ export default async function taskAdd(selectedProject, taskFormData, projects, a
 
                 newTask = {
 
-                    task_id: projects[selectedProject.type][selectedProject.id].project_tasks.length + 1,
+                    task_id: Math.random() * 100000,
                     user_id:'999',
                     project_id:selectedProject.id,
                     task_title:taskFormData.title,
@@ -35,8 +35,6 @@ export default async function taskAdd(selectedProject, taskFormData, projects, a
 
             newTask = response;
         }
-
-        console.log(projects);
 
         return {
             ...projects,

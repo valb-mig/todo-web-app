@@ -36,9 +36,9 @@ const useKanban = () => {
         }
     }
 
-    const handleRemoveTask = async (task_id, task_key) => {
+    const handleRemoveTask = async (task_id, task_key, task_column) => {
 
-        let response = await taskRemove(selectedProject, projects, task_id, task_key, ambient);
+        let response = await taskRemove(selectedProject, projects, {id: task_id, order: task_key, column: task_column }, ambient);
         
         if(typeof response == 'object') {
             setProjects(response);
