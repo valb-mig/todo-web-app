@@ -9,7 +9,11 @@ import Dashboard from '@/app/components/Dashboard';
 import Lottie     from 'lottie-react';
 import LottieData from '/public/assets/lottie/desktop-person.json';
 
+import useGreetings from '@/app/home/content/hooks/useGreetings';
+
 const Greetings = () => {
+
+    const { countTotalTasks, countDoneTotalTasks } = useGreetings();
 
     return(
         <>
@@ -32,7 +36,7 @@ const Greetings = () => {
                     <Tag.Icon Icon={<Icons.Tag/>} />
                     <Tag.Title Title="Done tasks" />
                     </Tag.Root>
-                    <Dashboard.Count Value={0}/>
+                    <Dashboard.Count Value={countDoneTotalTasks()}/>
                 </Dashboard.Root>
 
                 <Dashboard.Root>
@@ -40,7 +44,7 @@ const Greetings = () => {
                     <Tag.Icon Icon={<Icons.Tag/>} />
                     <Tag.Title Title="Total tasks" />
                     </Tag.Root>
-                    <Dashboard.Count Value={0}/>
+                    <Dashboard.Count Value={countTotalTasks()}/>
                 </Dashboard.Root>
 
                 <Dashboard.Root>
@@ -48,7 +52,7 @@ const Greetings = () => {
                     <Tag.Icon Icon={<Icons.Tag/>} />
                     <Tag.Title Title="Week dashboard" />
                     </Tag.Root>
-                    <Dashboard.Count Value={0}/>
+                    <Dashboard.Count Value={countTotalTasks()}/>
                 </Dashboard.Root>
             </div> 
         </>
