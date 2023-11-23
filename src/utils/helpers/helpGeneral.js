@@ -1,4 +1,8 @@
+import { useGlobalContext } from '@/config/context/store';
+
 const helpGeneral = () => {
+
+    const { userData, setUserData } = useGlobalContext();
 
     const getToken = () => {
 

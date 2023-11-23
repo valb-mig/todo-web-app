@@ -64,8 +64,8 @@ body.dark {
 body.light {
     
     .task {
-        background-color: $bg-l-3;
-        border: 1px solid $bg-l-2;
+        background-color: $fg-l-3;
+        border: 1px solid $bg-l-1;
     }
 
     .task-done {
@@ -80,7 +80,7 @@ body.light {
             }
 
             .task-desc p{
-                color: $black;
+                color: $fg-d-1;
                 text-decoration: line-through;
             }
         }

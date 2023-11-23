@@ -41,3 +41,19 @@ body.dark {
         }
     }
 }
+
+body.light {
+
+    .column-body {
+
+        border: 1px solid $fg-l-3;
+        background-color: $fg-l-2;
+
+        .empty-content {
+
+            .not-found img{
+                opacity: 0.1;
+            }
+        }
+    }
+}

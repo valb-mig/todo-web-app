@@ -7,38 +7,105 @@ body {
   -webkit-font-smoothing: antialiased !important;
 }
 
+/**********/
 /* Colors */
+/**********/
 
-$d-green-1:        #32e9a6;
-$d-green-2:        #17c283;
-$d-green-3:        #07915e;
-$d-green-4:        #046642;
+/* Dark */
 
-$d-red-1:        #d65b5b;
-$d-red-2:        #bc4747;
-$d-red-3:        #9f3535;
-$d-red-4:        #8d2929;
+$d-red-1:#d65b5b;
+$d-red-2:#bc4747;
+$d-red-3:#9f3535;
+$d-red-4:#8d2929;
 
-$l-green-1:        #32e9a6;
-$l-green-2:        #17c283;
-$l-green-3:        #07915e;
-$l-green-4:        #046642;
+$d-t-red-1:#d65b5b7e;
+$d-t-red-2:#bc47477e;
+$d-t-red-3:#9f35357e;
+$d-t-red-4:#8d29297e;
 
-$l-red-1:        #d65b5b;
-$l-red-2:        #bc4747;
-$l-red-3:        #9f3535;
-$l-red-4:        #8d2929;
+$d-orange-1:#f18241;
+$d-orange-2:#e66f40;
+$d-orange-3:#df6641;
+$d-orange-4:#df6141;
 
-$light-red:    #d65b5b;
-$red:          #ac2c2c;
-$bg-red:       #ac2c2c85;
+$d-t-orange-1:#f182417e;
+$d-t-orange-2:#e66f407e;
+$d-t-orange-3:#df66417e;
+$d-t-orange-4:#df61417e;
 
-$orange:       #fabb46;
-$dark-purple:  #605bc2;
-$light-purple: #8670D3;
-$light-purple-t: #8570d345;
+$d-yellow-1:#f7c483;
+$d-yellow-2:#ebaf77;
+$d-yellow-3:#db9e6c;
+$d-yellow-4:#cc8b60;
 
-$black: #101010;
+$d-t-yellow-1:#f7c4837e;
+$d-t-yellow-2:#ebaf777e;
+$d-t-yellow-3:#db9e6c7e;
+$d-t-yellow-4:#cc8b607e;
+
+$d-green-1:#32e9a6;
+$d-green-2:#17c283;
+$d-green-3:#07915e;
+$d-green-4:#046642;
+
+$d-purple-1:#8670D3;
+$d-purple-2:#7a65c5;
+$d-purple-3:#6955b4;
+$d-purple-4:#5c48a7;
+
+$d-t-purple-1:#8570d37e;
+$d-t-purple-2:#7a65c57e;
+$d-t-purple-3:#6955b47e;
+$d-t-purple-4:#5c48a77e;
+
+/* Light */
+
+$l-red-1:#ffbebe;
+$l-red-2:#f1a2a2;
+$l-red-3:#e48282;
+$l-red-4:#d65b5b;
+
+$l-t-red-1:#d65b5b7e;
+$l-t-red-2:#bc47477e;
+$l-t-red-3:#9f35357e;
+$l-t-red-4:#8d29297e;
+
+$l-orange-1:#f18241;
+$l-orange-2:#e66f40;
+$l-orange-3:#df6641;
+$l-orange-4:#df6141;
+
+$l-t-orange-1:#f182417e;
+$l-t-orange-2:#e66f407e;
+$l-t-orange-3:#df66417e;
+$l-t-orange-4:#df61417e;
+
+$l-yellow-1:#f7c483;
+$l-yellow-2:#ebaf77;
+$l-yellow-3:#db9e6c;
+$l-yellow-4:#cc8b60;
+
+$l-t-yellow-1:#f7c4837e;
+$l-t-yellow-2:#ebaf777e;
+$l-t-yellow-3:#db9e6c7e;
+$l-t-yellow-4:#cc8b607e;
+
+$l-green-1:#cdeee2;
+$l-green-2:#a8ddca;
+$l-green-3:#90c7b3;
+$l-green-4:#70b199;
+
+$l-purple-1:#f8b660;
+$l-purple-2:#e66f40;
+$l-purple-3:#df6641;
+$l-purple-4:#df6141;
+
+$l-t-purple-1:#f182417a;
+$l-t-purple-2:#e66f4070;
+$l-t-purple-3:#df66416e;
+$l-t-purple-4:#df614175;
+
+$black: #0f0f0f;
 $white: #ffffff;
 
 /* Dark */
@@ -58,12 +125,22 @@ $bg-d-5: #101010;
 $fg-l-1: #ffffff;
 $fg-l-2: #f2f2f2;
 $fg-l-3: #e5e5e5;
+
 $bg-l-1: #d8d8d8;
 $bg-l-2: #c9c9c9;
 $bg-l-3: #bfbfbf;
 $bg-l-4: #b4b4b4;
 $bg-l-5: #a6a6a6;
 
-/* Radius */
+/* Other */
 
 $radius: 5px;
+
+$light-red:#d65b5b;
+$red:      #ac2c2c;
+$bg-red:   #ac2c2c85;
+
+$orange:       #fabb46;
+$dark-purple:  #605bc2;
+$light-purple: #8670D3;
+$light-purple-t: #8570d345;

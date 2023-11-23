@@ -8,3 +8,22 @@
     width:  100%;
     gap:    5px;
 }
+
+.header-end {
+
+    .sun-icon, .moon-icon {
+        transition: all .2s;
+    }
+
+    .sun-icon:hover {
+        color: $l-yellow-1 !important;
+        border: 1px solid $l-t-yellow-4 !important;
+        background-color: $l-t-yellow-4 !important;
+    }
+
+    .moon-icon:hover {
+        color: $d-purple-1 !important;
+        border: 1px solid $d-t-purple-4 !important;
+        background-color: $d-t-purple-4 !important;
+    }
+}

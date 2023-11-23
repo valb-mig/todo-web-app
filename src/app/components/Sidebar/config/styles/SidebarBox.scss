@@ -71,7 +71,6 @@
                     display: flex;
                     justify-content: center;
                     width: 100%;
-                    opacity: .08;
                 }
 
                 p {
@@ -127,6 +126,10 @@ body.dark {
                     p {
                         color: $fg-d-3;
                     }
+
+                    img {
+                        opacity: .08;
+                    }
                 }
             }
         }
@@ -141,16 +144,16 @@ body.light {
 
         .sidebar-box {
 
-            border: 1px solid $bg-l-2;
-            background-color: $bg-l-3;
+            border: 1px solid $bg-l-1;
+            background-color: $fg-l-3;
 
             .button {
                 
                 border: none;
 
-                outline: 1px solid $fg-l-3;
-                border-bottom: 2px solid $bg-l-3;
-                background-color: $bg-l-2;
+                outline: 1px solid $bg-l-3;
+                border-bottom: 2px solid $bg-l-2;
+                background-color: $bg-l-1;
 
                 transition: all .2s;
             }
@@ -174,6 +177,12 @@ body.light {
     
                     p {
                         color: $bg-l-1;
+                    }
+
+                    img {
+                        -webkit-filter: invert(1);
+                        filter: invert(1);
+                        opacity: .08;
                     }
                 }
             }

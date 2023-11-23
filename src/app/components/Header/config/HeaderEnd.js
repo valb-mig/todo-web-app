@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/config/context/store';
 
-import changeTheme from '@/utils/helpers/changeTheme';
+import helpGeneral from '@/utils/helpers/helpGeneral';
 
 import './styles/HeaderEnd.scss';
 
@@ -15,7 +15,9 @@ const HeaderEnd = ({ children }) => {
 
     const router = useRouter();
 
-     const { userData ,setUserData } = useGlobalContext();
+    const { userData ,setUserData } = useGlobalContext();
+    const { changeTheme } = helpGeneral();
+
     const [ popup, showPopup ] = useState(false);
 
     return(
@@ -23,7 +25,7 @@ const HeaderEnd = ({ children }) => {
 
             { children }
 
-            <Button.Root OnClick={() => changeTheme(userData ,setUserData)}>
+            <Button.Root OnClick={() => changeTheme(userData ,setUserData)} Class={userData.darkTheme ? "sun-icon" : "moon-icon"}>
                 <Button.Icon Icon={ userData.darkTheme ? <Icons.Sun/> : <Icons.Moon/> }/>
             </Button.Root>
 
